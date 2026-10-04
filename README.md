@@ -6,6 +6,7 @@ Páginas web, tiendas online y sistemas a medida para negocios locales (Lima, Pe
 - `/landing/` La Marea: página para restaurante
 - `/tienda/` Cumbre Café: tienda online
 - `/ferremax/` FerreMax: tienda hecha en React (versión compilada)
+- `/spa/` Áurea Spa & Estética: chatbot de citas 24/7
 - `/crm/` Hilo CRM: sistema de clientes
 
 **© 2026 Carlo Andre Chiuyare Guillen. Todos los derechos reservados.** Ver [LICENSE](LICENSE).
