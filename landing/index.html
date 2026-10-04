@@ -75,7 +75,8 @@ header.sc{background:rgba(4,20,26,.72);backdrop-filter:blur(14px)}
 @media(min-width:1000px){.scroll{display:block}}
 
 /* marquee */
-.marq{overflow:hidden;background:var(--lime);color:#04141A;border-block:1px solid #04141A;transform:rotate(-1.2deg) scale(1.04);margin:2.5rem 0 1rem;position:relative;z-index:2}
+.marqw{overflow:clip;padding:2.2rem 0 1.4rem}
+.marq{overflow:hidden;background:var(--lime);color:#04141A;border-block:1px solid #04141A;transform:rotate(-1.2deg) scale(1.04);position:relative;z-index:2}
 .marq div{display:flex;width:max-content;animation:mq 30s linear infinite}
 .marq span{font-family:var(--f-d);font-size:clamp(1.6rem,4vw,2.8rem);text-transform:uppercase;padding:.7rem 1.4rem;display:flex;align-items:center;gap:2.8rem;white-space:nowrap}
 .marq span::after{content:"✦";font-size:.7em}
@@ -207,10 +208,10 @@ footer a{color:var(--lime)}
     <span class="scroll" aria-hidden="true">DESLIZA</span>
   </section>
 
-  <div class="marq" aria-hidden="true"><div>
+  <div class="marqw"><div class="marq" aria-hidden="true"><div>
     <span>Pesca del día</span><span>Leche de tigre</span><span>Miraflores</span><span>Reserva por WhatsApp</span><span>Pescado de hoy</span><span>Ají limo</span>
     <span>Pesca del día</span><span>Leche de tigre</span><span>Miraflores</span><span>Reserva por WhatsApp</span><span>Pescado de hoy</span><span>Ají limo</span>
-  </div></div>
+  </div></div></div>
 
   <section class="s hist" id="historia">
     <div class="wrap grid">
