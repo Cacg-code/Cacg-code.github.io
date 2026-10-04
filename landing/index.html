@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Marea · Cevichería en Miraflores, Lima</title>
+<meta name="description" content="Ceviche con pescado del día en Miraflores. Mira la carta, revisa si estamos abiertos y pide por WhatsApp en un toque.">
+<meta property="og:title" content="La Marea · Cevichería en Miraflores">
+<meta property="og:description" content="Pescado del día, carta y pedidos por WhatsApp.">
+<meta name="theme-color" content="#12303A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312303A'/%3E%3Cpath d='M4 19c4-6 8 6 12 0s8 6 12 0' stroke='%23F5D547' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"La Marea","servesCuisine":"Peruana, cevichería","telephone":"+51999999999","address":{"@type":"PostalAddress","streetAddress":"Av. Mariscal La Mar 1234","addressLocality":"Miraflores","addressRegion":"Lima","addressCountry":"PE"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Sunday"],"opens":"12:00","closes":"17:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"12:00","closes":"18:00"}]}
+</script>
+<style>
+:root{
+  --ink:#12303A; --ink-2:#2B4A55; --paper:#F7FBFA; --sand:#E8E1CF; --aji:#C2410C; --aji-dark:#9A3412;
+  --sol:#F5D547; --sea:#0E4A57; --line:#CFDAD7;
+  --f-display:"Bricolage Grotesque",system-ui,sans-serif; --f-body:"Figtree",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);font-size:1.0625rem;line-height:1.55;color:var(--ink);background:var(--paper)}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--aji);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1120px,100% - 2rem);margin-inline:auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.05;letter-spacing:-.02em}
+h2{font-size:clamp(2rem,5vw,3.25rem);font-weight:800}
+p{max-width:62ch}
+
+/* cabecera */
+header{position:sticky;top:0;z-index:10;background:rgba(247,251,250,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:64px}
+.logo{font-family:var(--f-display);font-weight:800;font-size:1.4rem;text-decoration:none;display:flex;align-items:center;gap:.5rem}
+.logo svg{width:28px;height:28px}
+.nav ul{display:flex;gap:1.5rem;list-style:none;padding:0}
+.nav ul a{text-decoration:none;font-weight:500;padding:.5rem 0}
+.nav ul a:hover{text-decoration:underline;text-underline-offset:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.75rem 1.4rem;border-radius:999px;background:var(--aji);color:#fff;font-weight:700;text-decoration:none;border:0;font:inherit;font-weight:700;cursor:pointer;transition:background .15s,transform .15s}
+.btn:hover{background:var(--aji-dark)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+@media(max-width:720px){.nav ul{display:none}.nav>.btn{display:none}}
+
+/* hero */
+.hero{padding:clamp(2.5rem,7vw,5.5rem) 0 clamp(3rem,8vw,6rem);overflow:hidden}
+.hero .wrap{display:grid;gap:2.5rem;grid-template-columns:1.15fr .85fr;align-items:center}
+.estado{display:inline-flex;align-items:center;gap:.6rem;padding:.4rem .9rem;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:500;font-size:.95rem;margin-bottom:1.25rem}
+.estado i{width:10px;height:10px;border-radius:50%;background:#7a8b8f}
+.estado.abierto i{background:#15803D;box-shadow:0 0 0 4px #15803d33}
+.hero h1{font-size:clamp(2.75rem,8vw,5.5rem);font-weight:800}
+.hero h1 span{display:block;color:var(--sea)}
+.hero p.lead{font-size:1.25rem;margin:1.25rem 0 2rem;color:var(--ink-2)}
+.acciones{display:flex;flex-wrap:wrap;gap:.75rem}
+.pizarra{background:var(--ink);color:#EAF3F1;border-radius:20px;padding:1.75rem;position:relative;transform:rotate(1.5deg);box-shadow:0 20px 40px -20px #12303Aaa}
+.pizarra::before{content:"";position:absolute;inset:10px;border:2px dashed #ffffff30;border-radius:14px;pointer-events:none}
+.pizarra h2{font-size:1.1rem;font-weight:500;color:var(--sol);margin-bottom:.15rem;letter-spacing:0}
+.pizarra .fecha{font-size:.9rem;opacity:.75;margin-bottom:1rem}
+.pizarra ul{list-style:none;padding:0;display:grid;gap:.9rem}
+.pizarra li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;border-bottom:1px dotted #ffffff40;padding-bottom:.6rem}
+.pizarra li b{font-family:var(--f-display);font-size:1.45rem;font-weight:800}
+.pizarra li small{display:block;font-size:.85rem;opacity:.75;font-weight:400}
+.pizarra .precio{font-variant-numeric:tabular-nums;font-weight:700;color:var(--sol);white-space:nowrap}
+.pizarra .pie{margin-top:1rem;font-size:.85rem;opacity:.75}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.pizarra{transform:none}}
+
+.ola{height:36px;background:
+  radial-gradient(circle at 18px 0,var(--paper) 17px,transparent 18px) 0 0/36px 36px repeat-x,var(--sea)}
+
+/* carta */
+section{padding:clamp(3rem,8vw,6rem) 0}
+.carta{background:var(--sea);color:#EAF3F1}
+.carta h2{margin-bottom:.5rem}
+.carta .sub{opacity:.85;margin-bottom:2rem}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.75rem}
+.tab{min-height:44px;padding:.5rem 1.1rem;border-radius:999px;border:2px solid #ffffff55;background:transparent;color:inherit;font:inherit;font-weight:500;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--sol);border-color:var(--sol);color:var(--ink);font-weight:700}
+.platos{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:0 3rem}
+.plato{display:grid;grid-template-columns:1fr auto;gap:.25rem 1rem;padding:1.1rem 0;border-bottom:1px solid #ffffff2a;align-items:start}
+.plato h3{font-size:1.35rem;font-weight:800}
+.plato p{grid-column:1;opacity:.85;font-size:1rem}
+.plato .precio{font-weight:700;color:var(--sol);font-variant-numeric:tabular-nums;font-size:1.15rem}
+.plato a{grid-column:2;grid-row:2;font-size:.95rem;font-weight:700;color:var(--sol);padding:.4rem 0;text-align:right}
+@media(max-width:760px){.platos{grid-template-columns:1fr}}
+
+/* reseñas */
+.resenas .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem}
+.resenas blockquote{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.5rem}
+.resenas blockquote:nth-child(2){margin-top:1.5rem}
+.resenas q{display:block;quotes:none;font-size:1.1rem;margin-bottom:1rem}
+.resenas cite{font-style:normal;font-weight:700}
+.resenas cite small{display:block;font-weight:400;color:var(--ink-2)}
+.estrellas{color:var(--aji);letter-spacing:2px;font-size:1.1rem;margin-bottom:.5rem}
+@media(max-width:860px){.resenas .grid{grid-template-columns:1fr}.resenas blockquote:nth-child(2){margin-top:0}}
+
+/* ubicación */
+.donde{background:var(--sand)}
+.donde .wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.horarios{width:100%;border-collapse:collapse;margin:1.25rem 0}
+.horarios th,.horarios td{text-align:left;padding:.6rem 0;border-bottom:1px solid #12303a33;font-weight:400}
+.horarios td{text-align:right;font-variant-numeric:tabular-nums}
+.horarios tr.hoy th,.horarios tr.hoy td{font-weight:700}
+.datos{font-style:normal;margin:1rem 0 1.5rem}
+.mapa{aspect-ratio:4/3;border:0;width:100%;border-radius:16px;background:#d6d0bd}
+@media(max-width:860px){.donde .wrap{grid-template-columns:1fr}}
+
+/* contacto */
+.contacto .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem}
+form{display:grid;gap:1rem}
+label{font-weight:700;display:grid;gap:.35rem}
+input,textarea,select{font:inherit;padding:.75rem .9rem;border:2px solid var(--ink-2);border-radius:10px;background:#fff;color:var(--ink);min-height:48px}
+textarea{min-height:110px;resize:vertical}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.nota{font-size:.9rem;color:var(--ink-2)}
+@media(max-width:860px){.contacto .wrap{grid-template-columns:1fr}.fila{grid-template-columns:1fr}}
+
+footer{background:var(--ink);color:#EAF3F1;padding:2rem 0 6rem;font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+footer a{color:var(--sol)}
+
+/* barra móvil */
+.flotante{position:fixed;inset:auto 0 0 0;display:none;gap:.5rem;padding:.6rem 1rem;background:var(--paper);border-top:1px solid var(--line);z-index:20}
+.flotante .btn{flex:1}
+@media(max-width:720px){.flotante{display:flex}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="La Marea, inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#12303A"/><path d="M4 19c4-6 8 6 12 0s8 6 12 0" stroke="#F5D547" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      La Marea
+    </a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="#carta">Carta</a></li>
+        <li><a href="#resenas">Reseñas</a></li>
+        <li><a href="#donde">Dónde estamos</a></li>
+        <li><a href="#contacto">Reservar</a></li>
+      </ul>
+    </nav>
+    <a class="btn" href="https://wa.me/51999999999?text=Hola%20La%20Marea%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" style="padding-top:clamp(2.5rem,7vw,5.5rem)">
+    <div class="wrap">
+      <div>
+        <p class="estado" id="estado" role="status"><i></i><span>Comprobando horario…</span></p>
+        <h1>Ceviche hecho al momento <span>con la pesca de hoy.</span></h1>
+        <p class="lead">Cevichería en Miraflores. Entramos al mercado a las 5 a. m. y lo que sale a tu mesa es lo que trajo el mar esa mañana.</p>
+        <div class="acciones">
+          <a class="btn" href="#contacto">Reservar mesa</a>
+          <a class="btn ghost" href="#carta">Ver la carta</a>
+        </div>
+      </div>
+      <aside class="pizarra" aria-labelledby="pz-t">
+        <h2 id="pz-t">La pizarra de hoy</h2>
+        <p class="fecha" id="fecha"></p>
+        <ul>
+          <li><span><b>Lenguado</b><small>Leche de tigre clásica, camote y choclo</small></span><span class="precio">S/ 42</span></li>
+          <li><span><b>Corvina</b><small>Ají amarillo, cancha y cebolla morada</small></span><span class="precio">S/ 38</span></li>
+          <li><span><b>Pulpo al olivo</b><small>Solo hoy, hasta que se acabe</small></span><span class="precio">S/ 46</span></li>
+        </ul>
+        <p class="pie">Precios en soles, IGV incluido.</p>
+      </aside>
+    </div>
+  </section>
+  <div class="ola" aria-hidden="true"></div>
+
+  <section class="carta" id="carta" style="padding-top:clamp(3rem,8vw,5rem)">
+    <div class="wrap">
+      <h2>La carta</h2>
+      <p class="sub">Toca un plato para pedirlo por WhatsApp con el mensaje ya escrito.</p>
+      <div class="tabs" role="tablist" aria-label="Categorías de la carta" id="tabs"></div>
+      <ul class="platos" id="platos" role="tabpanel" aria-live="polite"></ul>
+    </div>
+  </section>
+
+  <section class="resenas" id="resenas">
+    <div class="wrap">
+      <h2>Lo que dicen quienes ya vinieron</h2>
+      <div class="grid">
+        <blockquote><div class="estrellas" aria-label="5 de 5 estrellas">★★★★★</div><q>El pescado se nota fresco desde el primer bocado. La leche de tigre sola ya vale la visita.</q><cite>Rosa M.<small>Reseña en Google, hace 2 semanas</small></cite></blockquote>
+        <blockquote><div class="estrellas" aria-label="5 de 5 estrellas">★★★★★</div><q>Reservamos por WhatsApp y nos respondieron en minutos. Mesa lista, sin esperas.</q><cite>Julio P.<small>Reseña en Google, hace 1 mes</small></cite></blockquote>
+        <blockquote><div class="estrellas" aria-label="4 de 5 estrellas">★★★★☆</div><q>Porciones generosas y buen precio para Miraflores. Ir temprano, se llena a la 1.</q><cite>Andrea C.<small>Reseña en Google, hace 3 meses</small></cite></blockquote>
+      </div>
+      <p class="nota" style="margin-top:1.5rem">Reseñas de ejemplo para esta demo.</p>
+    </div>
+  </section>
+
+  <section class="donde" id="donde">
+    <div class="wrap">
+      <div>
+        <h2>Dónde estamos</h2>
+        <address class="datos">Av. Mariscal La Mar 1234, Miraflores, Lima<br>A 3 cuadras del Parque Kennedy</address>
+        <table class="horarios" id="horarios">
+          <caption class="nota" style="text-align:left">Horario de atención</caption>
+          <tbody>
+            <tr data-d="1"><th scope="row">Lunes</th><td>Cerrado</td></tr>
+            <tr data-d="2"><th scope="row">Martes</th><td>12:00 – 17:00</td></tr>
+            <tr data-d="3"><th scope="row">Miércoles</th><td>12:00 – 17:00</td></tr>
+            <tr data-d="4"><th scope="row">Jueves</th><td>12:00 – 17:00</td></tr>
+            <tr data-d="5"><th scope="row">Viernes</th><td>12:00 – 18:00</td></tr>
+            <tr data-d="6"><th scope="row">Sábado</th><td>12:00 – 18:00</td></tr>
+            <tr data-d="0"><th scope="row">Domingo</th><td>12:00 – 17:00</td></tr>
+          </tbody>
+        </table>
+        <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Miraflores+Lima+cevicheria" target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
+      <iframe class="mapa" title="Mapa de Miraflores, Lima" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-77.0420%2C-12.1300%2C-77.0200%2C-12.1130&layer=mapnik"></iframe>
+    </div>
+  </section>
+
+  <section class="contacto" id="contacto">
+    <div class="wrap">
+      <div>
+        <h2>Reserva tu mesa</h2>
+        <p style="margin-top:1rem">Cuéntanos cuándo vienes y cuántos son. Te confirmamos por WhatsApp en menos de 15 minutos dentro del horario de atención.</p>
+        <p style="margin-top:1rem"><a href="tel:+51999999999"><strong>Llamar al 999 999 999</strong></a></p>
+      </div>
+      <form id="form" novalidate>
+        <label>Nombre<input name="nombre" autocomplete="name" required></label>
+        <div class="fila">
+          <label>Fecha<input name="fecha" type="date" required></label>
+          <label>Personas
+            <select name="personas"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option><option>7 o más</option></select>
+          </label>
+        </div>
+        <label>Comentario (opcional)<textarea name="msg" placeholder="Ej.: alergia al ají, cumpleaños, silla para niño"></textarea></label>
+        <button class="btn" type="submit">Enviar reserva por WhatsApp</button>
+        <p class="nota" id="err" role="alert"></p>
+        <p class="nota">Al enviar se abre WhatsApp con tu reserva escrita. No guardamos tus datos en esta página.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© La Marea · Av. Mariscal La Mar 1234, Miraflores</span>
+    <span>Demo de diseño web por <a href="../">Cacg-code</a> (volver al portafolio). Negocio y datos ficticios.</span>
+  </div>
+</footer>
+
+<div class="flotante">
+  <a class="btn ghost" href="tel:+51999999999">Llamar</a>
+  <a class="btn" href="https://wa.me/51999999999?text=Hola%20La%20Marea%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<script>
+const WA = "51999999999";
+const carta = {
+  "Ceviches":[
+    ["Ceviche clásico","Pescado del día, limón, ají limo, camote y choclo",38],
+    ["Ceviche mixto","Pescado, pulpo, calamar y langostino",46],
+    ["Ceviche de conchas negras","Con su leche de tigre espesa, solo con reserva",52]],
+  "Tiraditos":[
+    ["Tiradito al ají amarillo","Láminas de pescado con crema de ají",36],
+    ["Tiradito nikkei","Salsa de soya, sésamo y rocoto",40]],
+  "Para compartir":[
+    ["Jalea mixta","Frito crocante con yuca y salsa criolla (2 personas)",64],
+    ["Arroz con mariscos","Arroz meloso al ají panca",48],
+    ["Chicharrón de pescado","Con tártara de la casa",34]],
+  "Bebidas":[
+    ["Chicha morada","Jarra de 1 litro",16],
+    ["Limonada frozen","Vaso grande",12],
+    ["Pisco sour","Clásico, con huevo",24]]
+};
+const tabs = document.getElementById("tabs"), lista = document.getElementById("platos");
+const cats = Object.keys(carta);
+function pintar(cat){
+  [...tabs.children].forEach(b=>b.setAttribute("aria-selected", b.dataset.cat===cat));
+  lista.innerHTML = carta[cat].map(([n,d,p])=>{
+    const t = encodeURIComponent(`Hola La Marea, quiero pedir: ${n} (S/ ${p})`);
+    return `<li class="plato"><h3>${n}</h3><span class="precio">S/ ${p}</span><p>${d}</p><a href="https://wa.me/${WA}?text=${t}" target="_blank" rel="noopener" aria-label="Pedir ${n} por WhatsApp">Pedir</a></li>`;
+  }).join("");
+}
+cats.forEach((c,i)=>{
+  const b=document.createElement("button");
+  b.className="tab"; b.role="tab"; b.dataset.cat=c; b.textContent=c;
+  b.addEventListener("click",()=>pintar(c));
+  tabs.appendChild(b);
+});
+pintar(cats[0]);
+
+// hora de Lima
+const horas = {0:[12,17],1:null,2:[12,17],3:[12,17],4:[12,17],5:[12,18],6:[12,18]};
+function ahoraLima(){
+  const p = new Intl.DateTimeFormat("en-US",{timeZone:"America/Lima",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
+  const g = t=>p.find(x=>x.type===t).value;
+  const dias = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+  return {d:dias[g("weekday")], h:(+g("hour"))%24 + (+g("minute"))/60};
+}
+function estado(){
+  const {d,h}=ahoraLima(), el=document.getElementById("estado"), txt=el.querySelector("span");
+  const hoy=horas[d];
+  document.querySelectorAll("#horarios tr").forEach(tr=>tr.classList.toggle("hoy",+tr.dataset.d===d));
+  if(hoy && h>=hoy[0] && h<hoy[1]){
+    const falta=hoy[1]-h, hh=Math.floor(falta), mm=Math.round((falta-hh)*60);
+    el.classList.add("abierto");
+    txt.textContent=`Abierto ahora · cierra en ${hh?hh+" h ":""}${mm} min`;
+  }else{
+    el.classList.remove("abierto");
+    let sig=null;
+    for(let i=0;i<=7;i++){
+      const dd=(d+i)%7, hr=horas[dd];
+      if(hr && (i>0 || h<hr[0])){sig=[i,dd,hr[0]];break;}
+    }
+    const nom=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+    txt.textContent = sig ? `Cerrado ahora · abrimos ${sig[0]===0?"hoy":sig[0]===1?"mañana":"el "+nom[sig[1]]} a las ${sig[2]}:00` : "Cerrado ahora";
+  }
+}
+estado(); setInterval(estado,60000);
+document.getElementById("fecha").textContent = new Intl.DateTimeFormat("es-PE",{timeZone:"America/Lima",weekday:"long",day:"numeric",month:"long"}).format(new Date());
+
+// formulario → WhatsApp
+const f=document.getElementById("form"), err=document.getElementById("err");
+f.fecha.min=new Date().toISOString().slice(0,10);
+f.addEventListener("submit",e=>{
+  e.preventDefault();
+  if(!f.nombre.value.trim()||!f.fecha.value){err.textContent="Escribe tu nombre y elige la fecha para continuar.";return;}
+  err.textContent="";
+  const [y,m,d]=f.fecha.value.split("-");
+  const t=`Hola La Marea, soy ${f.nombre.value.trim()}. Quiero reservar para ${f.personas.value} persona(s) el ${d}/${m}/${y}.${f.msg.value.trim()?" Nota: "+f.msg.value.trim():""}`;
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(t)}`,"_blank","noopener");
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cacg-code · Páginas web para negocios locales</title>
+<meta name="description" content="Diseño páginas web, tiendas online y sistemas a medida para negocios locales. Prueba tres demos reales aquí mismo y pide tu cotización por WhatsApp.">
+<meta property="og:title" content="Cacg-code · Páginas web para negocios locales">
+<meta property="og:description" content="Landing, tienda online y CRM. Pruébalos en vivo.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0B1020">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230B1020'/%3E%3Cpath d='M12 11l-5 5 5 5M20 11l5 5-5 5' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Cacg-code","description":"Diseño y desarrollo de páginas web, tiendas online y sistemas a medida para negocios locales.","areaServed":"Lima, Perú","url":"https://cacg-code.github.io/"}
+</script>
+<style>
+:root{
+  --ink:#0B1020; --ink-2:#4B5367; --paper:#F5F6F8; --white:#fff; --line:#DDE0E8;
+  --acc:#5B3DF5; --acc-d:#4528D6; --acc-soft:#E9E4FF;
+  --f:"Schibsted Grotesk",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);font-size:1.0625rem;line-height:1.55;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+a{color:inherit} img,svg,iframe{display:block;max-width:100%}
+:focus-visible{outline:3px solid var(--acc);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1200px,100% - 2rem);margin-inline:auto}
+h1,h2,h3{line-height:1.02;letter-spacing:-.035em;font-weight:800}
+h2{font-size:clamp(2rem,5vw,3.5rem)}
+p{max-width:60ch}
+
+header{position:sticky;top:0;z-index:30;background:rgba(245,246,248,.85);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:68px}
+.logo{display:flex;align-items:center;gap:.6rem;font-weight:800;text-decoration:none;letter-spacing:-.02em;font-size:1.15rem}
+.logo svg{width:32px;height:32px}
+.nav ul{display:flex;gap:1.75rem;list-style:none;padding:0}
+.nav ul a{text-decoration:none;font-weight:500;color:var(--ink-2);padding:.5rem 0}
+.nav ul a:hover{color:var(--ink)}
+@media(max-width:760px){.nav ul{display:none}.nav>.btn{display:none}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.7rem 1.4rem;border-radius:14px;font:inherit;font-weight:700;text-decoration:none;border:2px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;transition:transform .15s,background .15s,box-shadow .15s}
+.btn:hover{background:var(--acc);border-color:var(--acc);box-shadow:0 10px 24px -10px var(--acc)}
+.btn:active{transform:scale(.98)}
+.btn.sec{background:transparent;color:var(--ink)}
+.btn.sec:hover{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:none}
+.btn.sm{min-height:44px;padding:.45rem 1rem;border-radius:12px;font-size:.95rem}
+
+/* hero */
+.hero{padding:clamp(2.5rem,7vw,5.5rem) 0 1.5rem}
+.hero h1{font-size:clamp(2.9rem,9.5vw,7.5rem);font-weight:900;letter-spacing:-.05em;max-width:14ch}
+.hero h1 .tachado{position:relative;white-space:nowrap}
+.hero h1 .tachado::after{content:"";position:absolute;left:-.05em;right:-.05em;bottom:.06em;height:.16em;background:var(--acc);border-radius:99px;transform-origin:left;animation:trazo .9s .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes trazo{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero .fila{display:flex;flex-wrap:wrap;gap:1.5rem 3rem;justify-content:space-between;align-items:end;margin-top:2rem}
+.hero .lead{font-size:clamp(1.1rem,2vw,1.35rem);color:var(--ink-2);max-width:44ch}
+.acciones{display:flex;flex-wrap:wrap;gap:.75rem}
+
+/* visor */
+.visor{padding:1.5rem 0 clamp(3rem,7vw,6rem)}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
+.tab{min-height:48px;padding:.5rem 1.2rem;border-radius:99px;border:2px solid var(--line);background:var(--white);font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem;transition:border-color .15s}
+.tab:hover{border-color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tab i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.disp{margin-left:auto;display:inline-flex;border:2px solid var(--line);border-radius:99px;background:var(--white);padding:3px}
+.disp button{min-height:40px;padding:.3rem 1rem;border-radius:99px;border:0;background:none;font:inherit;font-weight:700;cursor:pointer;color:var(--ink-2)}
+.disp button[aria-pressed="true"]{background:var(--acc-soft);color:var(--acc-d)}
+@media(max-width:700px){.disp{margin-left:0}}
+.escena{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:1.5rem;align-items:start}
+@media(max-width:1020px){.escena{grid-template-columns:1fr}}
+.marco{background:#1A2036;border-radius:18px;padding:0;box-shadow:0 40px 80px -40px #0B1020aa,0 0 0 1px #0B102022;overflow:hidden}
+.barra{display:flex;align-items:center;gap:.5rem;padding:.7rem 1rem;background:#1A2036}
+.barra span{width:11px;height:11px;border-radius:50%;background:#FF6B6B}
+.barra span:nth-child(2){background:#FFD166}.barra span:nth-child(3){background:#4ADE80}
+.url{flex:1;margin-left:.75rem;background:#262E4A;color:#B8C0DA;border-radius:8px;padding:.3rem .8rem;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lienzo{position:relative;background:#fff;display:grid;place-items:start center;overflow:hidden;height:var(--h,520px)}
+.lienzo iframe{max-width:none;position:absolute;top:0;left:0;border:0;background:#fff;transform-origin:top left}
+.cubre{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(#0B102000,#0B102066);border:0;cursor:pointer;color:#fff;font:inherit;font-weight:700;font-size:1.05rem;transition:opacity .2s}
+.cubre span{background:var(--ink);padding:.7rem 1.3rem;border-radius:99px;box-shadow:0 10px 30px -8px #000a}
+.lienzo.activo .cubre{opacity:0;pointer-events:none}
+.marco.movil{width:min(400px,100%);margin-inline:auto}
+.info{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.5rem;display:grid;gap:1rem}
+.info h3{font-size:1.8rem}
+.info .tipo{color:var(--acc-d);font-weight:700;font-size:.95rem}
+.info ul{list-style:none;padding:0;display:grid;gap:.5rem}
+.info li{display:flex;gap:.6rem;align-items:flex-start}
+.info li::before{content:"";flex:none;width:18px;height:18px;margin-top:.2rem;border-radius:6px;background:var(--acc-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.5l2.6 2.6L13 6.7' stroke='%234528D6' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.info .btns{display:flex;flex-wrap:wrap;gap:.5rem}
+
+/* servicios */
+section.s{padding:clamp(3rem,8vw,6rem) 0}
+.cab{display:flex;flex-wrap:wrap;gap:1rem 3rem;justify-content:space-between;align-items:end;margin-bottom:2.5rem}
+.cab p{color:var(--ink-2);font-size:1.15rem}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.bento article{background:var(--white);border:1px solid var(--line);border-radius:22px;padding:1.75rem;display:flex;flex-direction:column;gap:.75rem;min-height:260px;transition:transform .2s,box-shadow .2s}
+.bento article:hover{transform:translateY(-4px);box-shadow:0 24px 40px -28px #0B102066}
+.bento article:nth-child(1){grid-column:span 3}
+.bento article:nth-child(2){grid-column:span 3;background:var(--ink);color:#fff;border-color:var(--ink)}
+.bento article:nth-child(3){grid-column:span 2}
+.bento article:nth-child(4){grid-column:span 2}
+.bento article:nth-child(5){grid-column:span 2;background:var(--acc);color:#fff;border-color:var(--acc)}
+.bento h3{font-size:1.7rem}
+.bento p{color:inherit;opacity:.82}
+.bento .dato{margin-top:auto;font-weight:700;font-size:.95rem}
+.bento .ico{width:44px;height:44px;border-radius:14px;background:var(--acc-soft);display:grid;place-items:center}
+.bento .ico svg{width:24px;height:24px}
+.bento article:nth-child(2) .ico{background:#ffffff1f}
+.bento article:nth-child(5) .ico{background:#ffffff2a}
+@media(max-width:900px){.bento{grid-template-columns:1fr 1fr}.bento article:nth-child(n){grid-column:span 1}.bento article:nth-child(5){grid-column:span 2}}
+@media(max-width:600px){.bento{grid-template-columns:1fr}.bento article:nth-child(n){grid-column:span 1}}
+
+/* proceso */
+.pasos{list-style:none;padding:0;counter-reset:p;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;border-top:2px solid var(--ink)}
+.pasos li{counter-increment:p;padding-top:1.25rem}
+.pasos li::before{content:counter(p);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;font-weight:800;margin-bottom:1rem;margin-top:-2.7rem;border:4px solid var(--paper);box-sizing:content-box}
+.pasos h3{font-size:1.35rem;margin-bottom:.4rem}
+.pasos p{color:var(--ink-2)}
+@media(max-width:860px){.pasos{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pasos{grid-template-columns:1fr}}
+
+/* contacto */
+.contacto{background:var(--ink);color:#fff;border-radius:32px;padding:clamp(1.75rem,5vw,4rem);display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;margin-bottom:clamp(2rem,5vw,4rem)}
+.contacto>*{min-width:0}
+.contacto h2{font-size:clamp(2rem,6vw,4.25rem);overflow-wrap:anywhere}
+.contacto p{color:#C4CADB;margin-top:1rem}
+.contacto .directo{margin-top:1.5rem;display:grid;gap:.4rem;font-weight:500}
+.contacto .directo a{color:#fff}
+.contacto form{background:var(--white);color:var(--ink);border-radius:22px;padding:1.5rem;display:grid;gap:1rem}
+label{display:grid;gap:.35rem;font-weight:700;font-size:.95rem}
+input,select,textarea{font:inherit;min-height:48px;padding:.65rem .9rem;border:2px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-weight:400}
+input:focus,select:focus,textarea:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 4px var(--acc-soft)}
+textarea{min-height:96px;resize:vertical}
+.err{color:#B3261E;font-size:.9rem;min-height:1.2em}
+.nota{font-size:.88rem;color:var(--ink-2)}
+@media(max-width:860px){.contacto{grid-template-columns:1fr;border-radius:24px}}
+
+footer{padding:0 0 2rem;color:var(--ink-2);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;border-top:1px solid var(--line);padding-top:1.5rem}
+footer a{color:var(--ink)}
+
+.flota{position:fixed;right:1rem;bottom:1rem;z-index:40;display:none}
+@media(max-width:760px){.flota{display:block}}
+.flota .btn{box-shadow:0 14px 30px -10px #0B1020aa}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Cacg-code, inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0B1020"/><path d="M12 11l-5 5 5 5M20 11l5 5-5 5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span data-c="nombre">Cacg-code</span>
+    </a>
+    <nav aria-label="Principal"><ul>
+      <li><a href="#demos">Demos</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#proceso">Cómo trabajo</a></li><li><a href="#contacto">Contacto</a></li>
+    </ul></nav>
+    <a class="btn sm" data-wa href="#contacto" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1>Webs que hacen sonar el <span class="tachado">teléfono</span> de tu negocio.</h1>
+      <div class="fila">
+        <p class="lead">Diseño páginas, tiendas online y sistemas a medida para negocios locales. Prueba tres demos reales aquí abajo, tal como las vería tu cliente.</p>
+        <div class="acciones">
+          <a class="btn" href="#demos">Probar las demos</a>
+          <a class="btn sec" href="#contacto">Pedir cotización</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="visor" id="demos" aria-label="Demos en vivo">
+    <div class="wrap">
+      <div class="tabs" role="tablist" aria-label="Elige una demo" id="tabs"></div>
+      <div class="escena">
+        <div class="marco" id="marco">
+          <div class="barra" aria-hidden="true"><span></span><span></span><span></span><div class="url" id="url"></div></div>
+          <div class="lienzo" id="lienzo">
+            <iframe id="frame" title="Vista previa de la demo" loading="lazy"></iframe>
+            <button class="cubre" id="cubre" aria-label="Activar la demo para usarla"><span>Toca para probarla</span></button>
+          </div>
+        </div>
+        <aside class="info" id="info" aria-live="polite"></aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="servicios">
+    <div class="wrap">
+      <div class="cab">
+        <h2>Lo que puedo hacer por tu negocio</h2>
+        <p>Cada proyecto empieza con una conversación corta y una cotización por escrito.</p>
+      </div>
+      <div class="bento">
+        <article>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#4528D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18"/></svg></div>
+          <h3>Página para tu negocio</h3>
+          <p>Para que te encuentren en Google y te escriban por WhatsApp. Servicios, horarios, mapa y reservas en una sola página que carga rápido en el celular.</p>
+          <span class="dato">Ejemplo: La Marea, cevichería</span>
+        </article>
+        <article>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h14l-1.5 9H8z"/><path d="M6 7 5 3H2"/><circle cx="9" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg></div>
+          <h3>Tienda online</h3>
+          <p>Catálogo con filtros, carrito y pedido directo a tu WhatsApp. Cobras con Yape o transferencia, sin comisiones por venta.</p>
+          <span class="dato">Ejemplo: Cumbre Café</span>
+        </article>
+        <article>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#4528D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div>
+          <h3>Sistema a medida</h3>
+          <p>Seguimiento de clientes, pedidos o citas, hecho para cómo trabaja tu negocio.</p>
+          <span class="dato">Ejemplo: Hilo CRM</span>
+        </article>
+        <article>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#4528D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg></div>
+          <h3>Mejorar tu web actual</h3>
+          <p>Reviso lo que ya tienes y te digo qué arreglar primero para que convierta más visitas en clientes.</p>
+          <span class="dato">Revisión inicial gratis</span>
+        </article>
+        <article>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4.1A8 8 0 1 1 20 12z"/></svg></div>
+          <h3>Cotización gratis</h3>
+          <p>Cuéntame qué vendes y te respondo con una propuesta clara: qué incluye, cuánto cuesta y en cuánto tiempo.</p>
+          <span class="dato">Respuesta por WhatsApp</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="proceso" style="padding-top:0">
+    <div class="wrap">
+      <div class="cab"><h2>Así trabajamos</h2><p>Cuatro pasos, sin sorpresas.</p></div>
+      <ol class="pasos">
+        <li><h3>Conversamos</h3><p>Me cuentas qué vendes, a quién y qué quieres lograr.</p></li>
+        <li><h3>Te propongo</h3><p>Recibes una cotización y un plazo por escrito. Pagas el 50% para empezar.</p></li>
+        <li><h3>Construyo</h3><p>Ves avances y pides cambios antes de la entrega.</p></li>
+        <li><h3>Publicamos</h3><p>Dejo la página en línea, te explico cómo cambiar lo básico y sigo disponible.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap">
+      <div class="contacto">
+        <div>
+          <h2>Cuéntame de tu negocio</h2>
+          <p>Escribe tres líneas sobre qué vendes y qué necesitas. Te respondo por WhatsApp con ideas y una cotización.</p>
+          <div class="directo">
+            <a data-wa href="#" target="_blank" rel="noopener"><span data-c="waTexto"></span></a>
+            <a data-mail href="#"><span data-c="correo"></span></a>
+            <span data-c="ciudad"></span>
+          </div>
+        </div>
+        <form id="form" novalidate>
+          <label>Tu nombre<input name="nombre" autocomplete="name"></label>
+          <label>Tipo de negocio<input name="negocio" placeholder="Ej.: barbería, restaurante, clínica"></label>
+          <label>¿Qué necesitas?
+            <select name="need"><option>Una página para mi negocio</option><option>Una tienda online</option><option>Un sistema de clientes o pedidos</option><option>Mejorar mi web actual</option><option>Aún no lo sé</option></select>
+          </label>
+          <label>Mensaje (opcional)<textarea name="msg"></textarea></label>
+          <p class="err" id="err" role="alert"></p>
+          <button class="btn" type="submit">Enviar por WhatsApp</button>
+          <p class="nota">Se abre WhatsApp con tu mensaje escrito. Esta página no guarda tus datos.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span data-c="nombre">Cacg-code</span> · Páginas web para negocios locales</span>
+    <span><a href="https://github.com/Cacg-code" target="_blank" rel="noopener">GitHub</a> · Las demos usan datos ficticios.</span>
+  </div>
+</footer>
+<div class="flota"><a class="btn" data-wa href="#" target="_blank" rel="noopener">WhatsApp</a></div>
+
+<script>
+/* ===== Edita aquí tus datos ===== */
+const CONTACTO = {
+  nombre: "Cacg-code",
+  whatsapp: "51999999999",       // con código de país, sin + ni espacios
+  waTexto: "WhatsApp: 999 999 999",
+  correo: "tu@correo.com",
+  ciudad: "Lima, Perú"
+};
+/* ================================== */
+const DEMOS = [
+  {id:"landing", nombre:"La Marea", tipo:"Página para restaurante", c:"#C2410C", url:"landing/", ruta:"cacg-code.github.io/landing",
+   lista:["Dice si el local está abierto ahora","Carta con pedido por WhatsApp","Reserva que llega ya escrita al celular","Pensada primero para el móvil"]},
+  {id:"tienda", nombre:"Cumbre Café", tipo:"Tienda online", c:"#2438E6", url:"tienda/", ruta:"cacg-code.github.io/tienda",
+   lista:["Búsqueda, filtros y orden","Carrito que recuerda lo elegido","Envío gratis con barra de progreso","Pedido directo a WhatsApp con Yape"]},
+  {id:"crm", nombre:"Hilo CRM", tipo:"Sistema de clientes", c:"#0B5D4B", url:"crm/", ruta:"cacg-code.github.io/crm",
+   lista:["Tablero de ventas que se arrastra","Lista de clientes con búsqueda","Seguimientos con aviso de vencidos","Datos guardados en tu navegador"]}
+];
+const $=s=>document.querySelector(s);
+const wa=t=>`https://wa.me/${CONTACTO.whatsapp}${t?"?text="+encodeURIComponent(t):""}`;
+document.querySelectorAll("[data-c]").forEach(e=>e.textContent=CONTACTO[e.dataset.c]);
+document.querySelectorAll("[data-wa]").forEach(a=>a.href=wa("Hola, vi tu portafolio y quiero una cotización"));
+document.querySelector("[data-mail]").href="mailto:"+CONTACTO.correo;
+
+let actual=0, movil=innerWidth<760;
+const tabs=$("#tabs");
+DEMOS.forEach((d,i)=>{
+  const b=document.createElement("button");b.className="tab";b.role="tab";b.style.setProperty("--c",d.c);
+  b.innerHTML=`<i></i>${d.tipo.split(" ")[0]==="Página"?"Landing":d.tipo.split(" ")[0]==="Tienda"?"Tienda":"CRM"}`;
+  b.onclick=()=>{actual=i;mostrar()};tabs.appendChild(b);
+});
+const disp=document.createElement("div");disp.className="disp";disp.setAttribute("role","group");disp.setAttribute("aria-label","Tamaño de pantalla");
+disp.innerHTML=`<button data-m="0" aria-pressed="true">Escritorio</button><button data-m="1" aria-pressed="false">Móvil</button>`;
+disp.onclick=e=>{const b=e.target.closest("button");if(!b)return;movil=b.dataset.m==="1";mostrar()};
+tabs.appendChild(disp);
+
+const lienzo=$("#lienzo"), frame=$("#frame"), marco=$("#marco");
+function escalar(){
+  const base=movil?390:1280, alto=800, k=lienzo.clientWidth/base;
+  Object.assign(frame.style,{width:base+"px",height:alto+"px",left:"0",transform:`scale(${k})`});
+  lienzo.style.setProperty("--h",Math.round(alto*k)+"px");
+}
+function mostrar(){
+  const d=DEMOS[actual];
+  [...tabs.querySelectorAll(".tab")].forEach((b,i)=>b.setAttribute("aria-selected",i===actual));
+  disp.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",(b.dataset.m==="1")===movil));
+  marco.classList.toggle("movil",movil);
+  lienzo.classList.remove("activo");
+  $("#url").textContent=d.ruta;
+  if(!frame.src.endsWith(d.url))frame.src=d.url;
+  $("#info").innerHTML=`<span class="tipo">${d.tipo}</span><h3>${d.nombre}</h3><ul>${d.lista.map(x=>`<li>${x}</li>`).join("")}</ul>
+   <div class="btns"><a class="btn sm" href="${d.url}" target="_blank" rel="noopener">Abrir completa</a><a class="btn sm sec" href="https://github.com/Cacg-code/Cacg-code.github.io/blob/main/${d.id}/index.html" target="_blank" rel="noopener">Ver código</a></div>`;
+  escalar();
+}
+$("#cubre").onclick=()=>lienzo.classList.add("activo");
+new ResizeObserver(escalar).observe(lienzo);
+mostrar();
+
+// formulario → WhatsApp
+const f=$("#form");
+f.addEventListener("submit",e=>{
+  e.preventDefault();
+  if(!f.nombre.value.trim()){$("#err").textContent="Escribe tu nombre para poder responderte.";f.nombre.focus();return}
+  $("#err").textContent="";
+  const t=`Hola, soy ${f.nombre.value.trim()}${f.negocio.value.trim()?" ("+f.negocio.value.trim()+")":""}. Necesito: ${f.need.value}.${f.msg.value.trim()?" "+f.msg.value.trim():""}`;
+  window.open(wa(t),"_blank","noopener");
+});
+</script>
+</body>
+</html>
