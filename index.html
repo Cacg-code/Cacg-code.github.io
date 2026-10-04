@@ -252,6 +252,33 @@ footer a{color:var(--ink)}
 .chat-f button svg{width:20px;height:20px}
 .chat-n{font-size:.74rem;color:var(--mute);text-align:center;padding:0 1rem .6rem}
 @media(max-width:520px){.chat{right:.75rem;bottom:.75rem;border-radius:22px}}
+
+.movil .lienzo{pointer-events:none}
+.movil .cubre{display:none}
+input,select,textarea{width:100%;min-width:0}
+@media(max-width:700px){
+  .hero{min-height:auto;padding:6.5rem 0 2.2rem}
+  .hero .fila{margin-top:1.6rem}
+  .acciones .btn{flex:1 1 auto}
+  .abanico{height:clamp(190px,58vw,300px);margin-top:2rem;margin-bottom:0}
+  .marq{margin-top:1.5rem}
+  section.s{padding:3.5rem 0}
+  .cab{margin-bottom:1.8rem}
+  .pr{padding:1.1rem;border-radius:24px;gap:1.2rem}
+  .pr h3{font-size:2.3rem;margin:.5rem 0 .7rem}
+  .pr .btns .btn{min-height:46px;padding:.5rem 1.1rem;font-size:.95rem}
+  .pr .marco{display:none}
+  .movil,.pr:nth-child(even) .movil{display:block;position:relative;right:auto;left:auto;bottom:auto;width:min(290px,100%);margin:0 auto;transform:none;border-width:6px;border-radius:30px}
+  .pr:hover .movil{transform:none}
+  .movil .lienzo{pointer-events:auto}
+  .movil .cubre{display:grid}
+  .bx{min-height:0;padding:1.4rem}
+  .cifras div{padding:1.4rem .9rem}
+  .pasos li{padding:1.1rem}
+  .pasos li::before{font-size:2.2rem;margin-bottom:.4rem}
+  .contacto{padding:1.4rem;gap:1.8rem}
+  .contacto form{padding:1.1rem}
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.hero h1 .l span{transform:none}}
 </style>
 </head>
@@ -395,7 +422,7 @@ const $=s=>document.querySelector(s);
 const wa=t=>`https://wa.me/${CONTACTO.whatsapp}${t?"?text="+encodeURIComponent(t):""}`;
 document.querySelectorAll("[data-c]").forEach(e=>e.textContent=CONTACTO[e.dataset.c]);
 const FIRMA="_Enviado desde cacg-code.github.io_";
-const SALUDO="Hola Carlo 👋";
+const SALUDO="Hola Carlo,";
 document.querySelectorAll("[data-wa]").forEach(a=>a.href=wa([SALUDO,"Vi tu portafolio y me gustaría cotizar una página web. ¿Podemos conversar?","",FIRMA].join("\n")));
 $("[data-mail]").href="mailto:"+CONTACTO.correo;
 
@@ -407,7 +434,7 @@ $("#proy").innerHTML=DEMOS.map((d,i)=>`<article class="pr rv" id="p-${d.id}" sty
   <div class="vis">
    <div class="marco"><div class="bar" aria-hidden="true"><span></span><span></span><span></span><em>${d.ruta}</em></div>
     <div class="lienzo" data-w="1280" data-h="800"><iframe title="Vista previa de ${d.nombre}" src="${d.url}" loading="lazy" tabindex="-1"></iframe><button class="cubre" aria-label="Activar la demo ${d.nombre} para usarla"><span>Toca para probarla</span></button></div></div>
-   <div class="movil" aria-hidden="true"><div class="lienzo" data-w="390" data-h="800" style="pointer-events:none"><iframe title="" src="${d.url}" loading="lazy" tabindex="-1"></iframe></div></div>
+   <div class="movil"><div class="lienzo" data-w="390" data-h="800"><iframe title="Vista móvil de ${d.nombre}" src="${d.url}" loading="lazy" tabindex="-1"></iframe><button class="cubre" aria-label="Activar la vista móvil de ${d.nombre} para usarla"><span>Toca para probarla</span></button></div></div>
   </div></article>`).join("");
 function escalar(){
   document.querySelectorAll(".lienzo[data-w]").forEach(l=>{
@@ -503,7 +530,7 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
     chips([["Enviar a Carlo por WhatsApp",enviar,"wa"],["Empezar de nuevo",()=>{Object.keys(lead).forEach(k=>lead[k]="");inicioCot()}]])}
   function textoLead(){return [SALUDO,"Escribí desde el asistente de tu portafolio.","",
     lead.nombre?"*Nombre:* "+lead.nombre:null,lead.negocio?"*Negocio:* "+lead.negocio:null,lead.need?"*Necesito:* "+lead.need:null,lead.cuando?"*Para cuándo:* "+lead.cuando:null,lead.msg?"*Detalle:* "+lead.msg:null,
-    "","Quedo atento a tu cotización 🙌",FIRMA].filter(x=>x!==null).join("\n")}
+    "","Quedo atento a tu cotización.",FIRMA].filter(x=>x!==null).join("\n")}
   function enviar(){window.open(wa(textoLead()),"_blank","noopener");bot("Abrí WhatsApp en otra pestaña. ¡Gracias por escribir! 🙌",300).then(()=>chips([["Otra duda",menu]]))}
   function handoff(){window.open(wa([SALUDO,"Quería hablar contigo directamente.","",FIRMA].join("\n")),"_blank","noopener")}
 
@@ -551,7 +578,7 @@ f.addEventListener("submit",e=>{
     f.negocio.value.trim()?`*Negocio:* ${f.negocio.value.trim()}`:null,
     `*Necesito:* ${f.need.value}`,
     f.msg.value.trim()?`*Detalle:* ${f.msg.value.trim()}`:null,
-    "","Quedo atento a tu respuesta 🙌",FIRMA].filter(x=>x!==null).join("\n");
+    "","Quedo atento a tu respuesta.",FIRMA].filter(x=>x!==null).join("\n");
   window.open(wa(t),"_blank","noopener");
 });
 </script>

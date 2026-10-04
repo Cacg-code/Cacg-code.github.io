@@ -93,7 +93,7 @@ main{padding:clamp(3.5rem,8vw,7rem) 0}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;list-style:none;padding:0}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:780px){.grid{grid-template-columns:repeat(2,1fr);gap:.8rem}}
-@media(max-width:430px){.grid{grid-template-columns:1fr}}
+@media(max-width:430px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}.card{border-radius:18px}.card .info{padding:.75rem}.card h3{font-size:1rem}.card .meta,.card .notas{font-size:.8rem}.card .fila{flex-direction:column;align-items:stretch;gap:.5rem;padding-top:.5rem}.card .fila .btn{width:100%}.precio{font-size:1rem}.card .ver{display:none}.tag{font-size:.68rem;top:.5rem;left:.5rem}}
 .card{display:flex;flex-direction:column;border-radius:26px;overflow:hidden;background:#fff;height:100%;border:1px solid var(--line);transition:transform .3s,box-shadow .3s}
 .card:hover{transform:translateY(-6px);box-shadow:0 30px 50px -30px #0D103088}
 .card .img{position:relative;aspect-ratio:1/1.05;display:grid;place-items:center;cursor:pointer;border:0;width:100%;overflow:hidden}
@@ -415,7 +415,7 @@ $("#form").addEventListener("submit",e=>{
   if(!f.nombre.value.trim()||!f.distrito.value.trim()){$("#err").textContent="Escribe tu nombre y distrito para enviar el pedido.";return}
   $("#err").textContent="";const{sub,env,tot}=totales();
   const items=cart.map(l=>{const p=P.find(x=>x.id===l.id);return `• ${l.q} × *${p.n}* · ${l.g} (${fmt(p.p*l.q)})`}).join("\n");
-  const t=["Hola Cumbre Café 👋","Quiero hacer este pedido:","",items,"",`*Subtotal:* ${fmt(sub)}`,`*Envío:* ${env?fmt(env):"Gratis"}`,`*Total:* ${fmt(tot)}`,"",`*Nombre:* ${f.nombre.value.trim()}`,`*Distrito:* ${f.distrito.value.trim()}`,`*Pago:* ${f.pago.value}`,"","_Pedido desde la web_"].join("\n");
+  const t=["Hola Cumbre Café,","Quiero hacer este pedido:","",items,"",`*Subtotal:* ${fmt(sub)}`,`*Envío:* ${env?fmt(env):"Gratis"}`,`*Total:* ${fmt(tot)}`,"",`*Nombre:* ${f.nombre.value.trim()}`,`*Distrito:* ${f.distrito.value.trim()}`,`*Pago:* ${f.pago.value}`,"","_Pedido desde la web_"].join("\n");
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(t)}`,"_blank","noopener");
 });
 
