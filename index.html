@@ -89,16 +89,17 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;padding:.8rem 0;pointer-events
 
 /* abanico */
 .abanico{position:relative;height:clamp(250px,42vw,560px);margin-top:clamp(2rem,5vw,4rem);margin-bottom:2rem;perspective:1600px}
-.abanico a{position:absolute;left:50%;top:0;width:min(58%,720px);border-radius:16px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 50px 90px -30px #000,0 0 0 1px #0006;transition:transform .6s cubic-bezier(.2,.8,.2,1),z-index 0s .15s;background:#111}
+.abanico a{position:absolute;left:50%;top:0;width:min(58%,720px);border-radius:16px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 50px 90px -30px #000,0 0 0 1px #0006;background:#111}
 .abanico a img{width:100%;height:auto;aspect-ratio:1100/688;object-fit:cover}
 .abanico a::before{content:"";display:block;height:22px;background:#15151f;border-bottom:1px solid var(--line)}
 .abanico a::after{content:"";position:absolute;left:10px;top:7px;width:8px;height:8px;border-radius:50%;background:#ff6b6b;box-shadow:14px 0 #ffd166,28px 0 #4ade80}
-.abanico a:nth-child(1){transform:translateX(-120%) translateY(8%) rotateY(18deg) rotateZ(-4deg)}
-.abanico a:nth-child(2){transform:translateX(-50%) translateY(-2%);z-index:2}
-.abanico a:nth-child(3){transform:translateX(20%) translateY(8%) rotateY(-18deg) rotateZ(4deg)}
-.abanico:hover a:nth-child(1){transform:translateX(-128%) translateY(4%) rotateY(14deg) rotateZ(-5deg)}
-.abanico:hover a:nth-child(3){transform:translateX(28%) translateY(4%) rotateY(-14deg) rotateZ(5deg)}
-.abanico a:hover{z-index:5;transform:translateX(-50%) translateY(-6%) scale(1.04)!important}
+.abanico a{--px:0;--py:0;will-change:transform;transition:filter .4s,border-color .4s}
+.abanico a:nth-child(1){transform:translateX(-120%) translateY(8%) translate3d(calc(var(--px)*-16px),calc(var(--py)*-8px),0) rotateY(calc(18deg + var(--px)*7deg)) rotateX(calc(var(--py)*-4deg)) rotateZ(-4deg)}
+.abanico a:nth-child(2){transform:translateX(-50%) translateY(-2%) translate3d(calc(var(--px)*10px),calc(var(--py)*-8px),0) rotateY(calc(var(--px)*6deg)) rotateX(calc(var(--py)*-5deg));z-index:2}
+.abanico a:nth-child(3){transform:translateX(20%) translateY(8%) translate3d(calc(var(--px)*-16px),calc(var(--py)*-8px),0) rotateY(calc(-18deg + var(--px)*7deg)) rotateX(calc(var(--py)*-4deg)) rotateZ(4deg)}
+.abanico a:not(:hover){filter:brightness(.92)}
+.abanico:not(:hover) a{filter:none}
+.abanico a:hover{border-color:#a78bfa99;filter:brightness(1.06)}
 @media(max-width:700px){.abanico a{width:74%}.abanico a:nth-child(1){transform:translateX(-95%) translateY(10%) rotateZ(-5deg)}.abanico a:nth-child(3){transform:translateX(-5%) translateY(10%) rotateZ(5deg)}}
 
 /* marquee */
@@ -374,6 +375,24 @@ function cuenta(c){const m=+c.dataset.n,s=c.dataset.s||"",t=1200,t0=performance.
 const fo=$("#fondo");
 addEventListener("pointermove",e=>{fo.style.setProperty("--mx",e.clientX+"px");fo.style.setProperty("--my",e.clientY+"px")},{passive:true});
 document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>{const r=b.getBoundingClientRect();b.style.setProperty("--x",e.clientX-r.left+"px");b.style.setProperty("--y",e.clientY-r.top+"px")}));
+
+
+/* abanico: seguimiento suave del mouse */
+(function(){
+  const ab=document.querySelector(".abanico");
+  if(!ab||!matchMedia("(hover:hover) and (pointer:fine)").matches||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  const cards=[...ab.querySelectorAll("a")];
+  let tx=0,ty=0,x=0,y=0,run=false;
+  const loop=()=>{x+=(tx-x)*.08;y+=(ty-y)*.08;
+    cards.forEach(c=>{c.style.setProperty("--px",x.toFixed(3));c.style.setProperty("--py",y.toFixed(3))});
+    if(Math.abs(tx-x)>.002||Math.abs(ty-y)>.002)requestAnimationFrame(loop);else run=false};
+  const go=()=>{if(!run){run=true;requestAnimationFrame(loop)}};
+  const zona=ab.parentElement;
+  zona.addEventListener("pointermove",e=>{const r=ab.getBoundingClientRect();
+    tx=Math.max(-1,Math.min(1,(e.clientX-(r.left+r.width/2))/(r.width/2)));
+    ty=Math.max(-1,Math.min(1,(e.clientY-(r.top+r.height/2))/(r.height/2)));go()});
+  zona.addEventListener("pointerleave",()=>{tx=0;ty=0;go()});
+})();
 
 /* formulario → WhatsApp */
 const f=$("#form");
