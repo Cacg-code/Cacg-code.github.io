@@ -414,8 +414,8 @@ $("#form").addEventListener("submit",e=>{
   e.preventDefault();const f=e.target;
   if(!f.nombre.value.trim()||!f.distrito.value.trim()){$("#err").textContent="Escribe tu nombre y distrito para enviar el pedido.";return}
   $("#err").textContent="";const{sub,env,tot}=totales();
-  const items=cart.map(l=>{const p=P.find(x=>x.id===l.id);return `• ${l.q} × ${p.n} · ${l.g} (${fmt(p.p*l.q)})`}).join("\n");
-  const t=`Hola Cumbre Café, soy ${f.nombre.value.trim()} (${f.distrito.value.trim()}).\nQuiero:\n${items}\nSubtotal: ${fmt(sub)}\nEnvío: ${env?fmt(env):"Gratis"}\nTotal: ${fmt(tot)}\nPago: ${f.pago.value}`;
+  const items=cart.map(l=>{const p=P.find(x=>x.id===l.id);return `• ${l.q} × *${p.n}* · ${l.g} (${fmt(p.p*l.q)})`}).join("\n");
+  const t=["Hola Cumbre Café 👋","Quiero hacer este pedido:","",items,"",`*Subtotal:* ${fmt(sub)}`,`*Envío:* ${env?fmt(env):"Gratis"}`,`*Total:* ${fmt(tot)}`,"",`*Nombre:* ${f.nombre.value.trim()}`,`*Distrito:* ${f.distrito.value.trim()}`,`*Pago:* ${f.pago.value}`,"","_Pedido desde la web_"].join("\n");
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(t)}`,"_blank","noopener");
 });
 

@@ -326,7 +326,11 @@ visor.innerHTML=cats.map((c,i)=>`<img src="${IMG(carta[c].img)}" alt="" loading=
 function pintar(cat){
   [...tabs.children].forEach(b=>b.setAttribute("aria-selected",b.dataset.cat===cat));
   lista.innerHTML=carta[cat].items.map(([n,d,p])=>{
-    const t=encodeURIComponent(`Hola La Marea, quiero pedir: ${n} (S/ ${p})`);
+    const t=encodeURIComponent(`Hola La Marea 👋
+Quiero pedir:
+*${n}* (S/ ${p})
+
+_Pedido desde la web_`);
     return `<li class="plato"><h3>${n}</h3><span class="pr">S/ ${p}</span><p>${d}</p><a href="https://wa.me/${WA}?text=${t}" target="_blank" rel="noopener" aria-label="Pedir ${n} por WhatsApp">Pedir →</a></li>`;
   }).join("");
   visor.querySelectorAll("img").forEach(i=>i.classList.toggle("on",i.dataset.c===cat));
@@ -377,7 +381,7 @@ const f=$("#form"),err=$("#err");f.fecha.min=new Date().toISOString().slice(0,10
 f.addEventListener("submit",e=>{e.preventDefault();
   if(!f.nombre.value.trim()||!f.fecha.value){err.textContent="Escribe tu nombre y elige la fecha para continuar.";return}
   err.textContent="";const[y,m,d]=f.fecha.value.split("-");
-  const t=`Hola La Marea, soy ${f.nombre.value.trim()}. Quiero reservar para ${f.personas.value} persona(s) el ${d}/${m}/${y}.${f.msg.value.trim()?" Nota: "+f.msg.value.trim():""}`;
+  const t=["Hola La Marea 👋","Quiero reservar una mesa.","",`*Nombre:* ${f.nombre.value.trim()}`,`*Fecha:* ${d}/${m}/${y}`,`*Personas:* ${f.personas.value}`,f.msg.value.trim()?`*Nota:* ${f.msg.value.trim()}`:null,"","_Reserva desde la web_"].filter(x=>x!==null).join("\n");
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(t)}`,"_blank","noopener")});
 </script>
 </body>

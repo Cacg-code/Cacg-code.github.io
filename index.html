@@ -208,8 +208,50 @@ textarea{min-height:96px;resize:vertical}
 footer{padding:2.5rem 0 6rem;color:var(--mute);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem;border-top:1px solid var(--line);padding-top:1.6rem}
 footer a{color:var(--ink)}
-.flota{position:fixed;right:1rem;bottom:1rem;z-index:40;display:none}
-@media(max-width:760px){.flota{display:block}}
+
+/* chat */
+.chat-l{position:fixed;right:1.1rem;bottom:1.1rem;z-index:70;width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--v2),var(--p));box-shadow:0 14px 34px -8px #7c5cffaa,0 0 0 1px #ffffff30 inset;display:grid;place-items:center;transition:transform .25s}
+.chat-l:hover{transform:scale(1.08) rotate(-4deg)}
+.chat-l svg{width:28px;height:28px}
+.chat-l i{position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#4ade80;border:2px solid var(--bg);animation:pulso 2.2s infinite}
+@keyframes pulso{70%{box-shadow:0 0 0 10px #4ade8000}100%{box-shadow:0 0 0 0 #4ade8000}}
+.chat-t{position:fixed;right:1.1rem;bottom:5.4rem;z-index:70;max-width:min(270px,calc(100% - 2.2rem));background:var(--ink);color:#0A0A12;border-radius:18px 18px 4px 18px;padding:.8rem 1rem;font-weight:600;font-size:.95rem;box-shadow:0 20px 40px -14px #000;opacity:0;transform:translateY(10px) scale(.96);pointer-events:none;transition:.35s;cursor:pointer}
+.chat-t.on{opacity:1;transform:none;pointer-events:auto}
+.chat-t button{position:absolute;right:-8px;top:-8px;width:26px;height:26px;border-radius:50%;border:0;background:#0A0A12;color:#fff;cursor:pointer;font-size:.9rem}
+.chat{position:fixed;right:1.1rem;bottom:1.1rem;z-index:80;width:min(390px,calc(100% - 1.5rem));height:min(600px,calc(100svh - 2.2rem));display:flex;flex-direction:column;border-radius:26px;border:1px solid var(--line2);background:rgba(13,13,23,.94);backdrop-filter:blur(22px);box-shadow:0 40px 90px -20px #000;overflow:hidden;opacity:0;transform:translateY(24px) scale(.97);transform-origin:bottom right;pointer-events:none;visibility:hidden;transition:opacity .3s,transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s .35s}
+.chat.on{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition:opacity .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.chat-h{display:flex;align-items:center;gap:.7rem;padding:.9rem 1rem;border-bottom:1px solid var(--line);background:linear-gradient(120deg,#7c5cff33,#f472b622)}
+.chat-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-d);font-weight:800;background:linear-gradient(135deg,var(--v2),var(--p));flex:none}
+.chat-h b{display:block;line-height:1.2}
+.chat-h small{color:var(--mute);font-size:.8rem}
+.chat-h .x{margin-left:auto;display:flex;gap:.3rem}
+.chat-h button{width:40px;height:40px;border-radius:50%;border:0;background:#ffffff14;color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.chat-h button:hover{background:#ffffff26}
+.chat-h button svg{width:18px;height:18px}
+.chat-m{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.7rem;scroll-behavior:smooth}
+.cm{max-width:86%;padding:.65rem .9rem;border-radius:16px;font-size:.96rem;line-height:1.45;animation:cin .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes cin{from{opacity:0;transform:translateY(8px)}}
+.cm.b{background:#ffffff12;border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start}
+.cm.u{background:linear-gradient(135deg,var(--v2),#9b6bff);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.cm a{color:var(--c)}
+.cm.tip{display:flex;gap:.3rem;padding:.8rem .9rem}
+.cm.tip i{width:7px;height:7px;border-radius:50%;background:var(--mute);animation:pt 1s infinite}
+.cm.tip i:nth-child(2){animation-delay:.15s}.cm.tip i:nth-child(3){animation-delay:.3s}
+@keyframes pt{50%{transform:translateY(-4px);background:var(--ink)}}
+.resumen{align-self:stretch;border:1px solid var(--line2);border-radius:16px;background:#0A0A12;padding:.9rem 1rem;display:grid;gap:.35rem;font-size:.93rem}
+.resumen b{color:var(--v)}
+.chat-q{display:flex;flex-wrap:wrap;gap:.4rem;padding:.2rem 1rem .6rem;max-height:34%;overflow-y:auto}
+.chat-q button{min-height:40px;padding:.4rem .9rem;border-radius:99px;border:1px solid var(--v);background:transparent;color:var(--ink);font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .2s}
+.chat-q button:hover{background:#a78bfa33}
+.chat-q button.wa{background:#25D366;border-color:#25D366;color:#06210f}
+.chat-q button.wa:hover{background:#3be07c}
+.chat-f{display:flex;gap:.5rem;padding:.7rem;border-top:1px solid var(--line)}
+.chat-f input{flex:1;min-width:0;min-height:46px;padding:.5rem .9rem;border-radius:99px;border:1px solid var(--line2);background:#ffffff08;color:var(--ink);font:inherit}
+.chat-f input:focus{border-color:var(--v);outline:none}
+.chat-f button{width:46px;height:46px;border-radius:50%;border:0;background:var(--ink);color:#0A0A12;cursor:pointer;display:grid;place-items:center;flex:none}
+.chat-f button svg{width:20px;height:20px}
+.chat-n{font-size:.74rem;color:var(--mute);text-align:center;padding:0 1rem .6rem}
+@media(max-width:520px){.chat{right:.75rem;bottom:.75rem;border-radius:22px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.hero h1 .l span{transform:none}}
 </style>
 </head>
@@ -229,7 +271,7 @@ footer a{color:var(--ink)}
 <main id="top">
   <section class="hero">
     <div class="wrap">
-      <p class="pill"><b>Nuevo</b>Tres demos listas para probar</p>
+      <p class="pill"><b>Nuevo</b>Cuatro demos listas para probar</p>
       <h1 aria-label="Webs que venden de verdad"><span class="l"><span>Webs que</span></span><span class="l"><span class="grad"><span class="cambia" id="cambia"><b>venden</b></span></span></span><span class="l"><span>de verdad.</span></span></h1>
       <div class="fila">
         <p class="lead">Diseño páginas, tiendas online y sistemas a medida para negocios locales. Rápidas en el celular, fáciles de contactar y pensadas para convertir visitas en clientes.</p>
@@ -250,7 +292,7 @@ footer a{color:var(--ink)}
 
   <section class="s" id="proyectos">
     <div class="wrap">
-      <div class="cab rv"><h2>Pruébalas<br><span class="grad">tú mismo</span></h2><p>Tres proyectos de ejemplo, funcionando. Toca la pantalla para usarlos como lo haría tu cliente.</p></div>
+      <div class="cab rv"><h2>Pruébalas<br><span class="grad">tú mismo</span></h2><p>Cuatro proyectos de ejemplo, funcionando. Toca la pantalla para usarlos como lo haría tu cliente.</p></div>
       <div class="proy" id="proy"></div>
     </div>
   </section>
@@ -270,7 +312,7 @@ footer a{color:var(--ink)}
 
   <div class="wrap rv">
     <div class="cifras">
-      <div><b class="grad" data-n="3">0</b><span>demos funcionando</span></div>
+      <div><b class="grad" data-n="4">0</b><span>demos funcionando</span></div>
       <div><b class="grad" data-n="360">0</b><span>px: diseño pensado para el celular</span></div>
       <div><b class="grad" data-n="0">0</b><span>comisiones por venta</span></div>
       <div><b class="grad" data-n="50" data-s="%">0</b><span>de adelanto para empezar</span></div>
@@ -312,7 +354,17 @@ footer a{color:var(--ink)}
 </main>
 
 <footer><div class="wrap"><span>© 2026 <strong>Carlo Andre Chiuyare Guillen</strong> (Carlo · Dev). Todos los derechos reservados. Prohibida la copia o reutilización sin autorización escrita.</span><span>Diseño y desarrollo con apoyo de IA (Claude), bajo mi dirección y revisión. Las demos usan datos ficticios. Fotos: Unsplash. · <a href="https://github.com/Cacg-code" target="_blank" rel="noopener">GitHub</a></span></div></footer>
-<div class="flota"><a class="btn v" data-wa href="#" target="_blank" rel="noopener">WhatsApp</a></div>
+
+<button class="chat-l" id="chatL" aria-label="Abrir el asistente de Carlo" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg><i aria-hidden="true"></i></button>
+<div class="chat-t" id="chatT" role="status"><span>¿Quieres cotizar tu web? Te ayudo en 1 minuto 👋</span><button aria-label="Cerrar aviso" id="chatTx">×</button></div>
+<section class="chat" id="chat" role="dialog" aria-label="Asistente virtual de Carlo · Dev" aria-modal="false">
+  <div class="chat-h"><div class="chat-av" aria-hidden="true">C</div><div><b>Asistente de Carlo</b><small>Asistente virtual · en línea</small></div>
+    <div class="x"><button id="chatWa" aria-label="Hablar directo con Carlo por WhatsApp" title="Hablar con Carlo por WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4.1A8 8 0 1 1 20 12z"/></svg></button><button id="chatX" aria-label="Cerrar el asistente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div>
+  <div class="chat-m" id="chatM" aria-live="polite"></div>
+  <div class="chat-q" id="chatQ"></div>
+  <form class="chat-f" id="chatF"><label for="chatI" style="position:absolute;left:-9999px">Escribe tu mensaje</label><input id="chatI" placeholder="Escribe aquí…" autocomplete="off" maxlength="300"><button aria-label="Enviar mensaje"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>
+  <p class="chat-n">Soy un asistente automático. Lo que escribas se queda en tu navegador hasta que envíes a Carlo por WhatsApp.</p>
+</section>
 
 <script>
 /* ===== Edita aquí tus datos ===== */
@@ -332,6 +384,9 @@ const DEMOS=[
  {id:"tienda",nombre:"Cumbre Café",tipo:"Tienda online",g:"#6366F1",url:"tienda/",ruta:"cacg-code.github.io/tienda",
   txt:"Una tienda de café con filtros, detalle de producto, carrito que recuerda lo elegido y pedido directo a WhatsApp con pago por Yape.",
   tags:["Filtros y búsqueda","Detalle de producto","Carrito con envío gratis","Pedido por WhatsApp"]},
+ {id:"ferremax",nombre:"FerreMax",tipo:"Tienda hecha en React",g:"#FB7A1C",url:"ferremax/",ruta:"cacg-code.github.io/ferremax",codigo:"https://github.com/carloAndr3-dev/ferremax-ecommerce",
+  txt:"Una ferretería online construida con React: catálogo por categorías con filtros y orden, carrito y un pedido de prueba de principio a fin.",
+  tags:["Hecho con React","Categorías y filtros","Carrito","Pedido de prueba"]},
  {id:"crm",nombre:"Hilo CRM",tipo:"Sistema de clientes",g:"#10B981",url:"crm/",ruta:"cacg-code.github.io/crm",
   txt:"Un panel para no perder ningún cliente: tablero que se arrastra, seguimientos con aviso de vencidos, buscador por teclado y tema oscuro o claro.",
   tags:["Tablero arrastrable","Buscador Ctrl K","Seguimientos","Tema claro y oscuro"]}
@@ -339,14 +394,16 @@ const DEMOS=[
 const $=s=>document.querySelector(s);
 const wa=t=>`https://wa.me/${CONTACTO.whatsapp}${t?"?text="+encodeURIComponent(t):""}`;
 document.querySelectorAll("[data-c]").forEach(e=>e.textContent=CONTACTO[e.dataset.c]);
-document.querySelectorAll("[data-wa]").forEach(a=>a.href=wa("Hola, vi tu portafolio y quiero una cotización"));
+const FIRMA="_Enviado desde cacg-code.github.io_";
+const SALUDO="Hola Carlo 👋";
+document.querySelectorAll("[data-wa]").forEach(a=>a.href=wa([SALUDO,"Vi tu portafolio y me gustaría cotizar una página web. ¿Podemos conversar?","",FIRMA].join("\n")));
 $("[data-mail]").href="mailto:"+CONTACTO.correo;
 
 /* proyectos */
 $("#proy").innerHTML=DEMOS.map((d,i)=>`<article class="pr rv" id="p-${d.id}" style="--g:${d.g}">
   <div class="txt"><span class="tipo">${d.tipo}</span><h3>${d.nombre}</h3><p>${d.txt}</p>
    <ul>${d.tags.map(t=>`<li>${t}</li>`).join("")}</ul>
-   <div class="btns"><a class="btn" href="${d.url}" target="_blank" rel="noopener">Abrir completa</a><a class="btn o" href="https://github.com/Cacg-code/Cacg-code.github.io/blob/main/${d.id}/index.html" target="_blank" rel="noopener">Ver código</a></div></div>
+   <div class="btns"><a class="btn" href="${d.url}" target="_blank" rel="noopener">Abrir completa</a><a class="btn o" href="${d.codigo||`https://github.com/Cacg-code/Cacg-code.github.io/blob/main/${d.id}/index.html`}" target="_blank" rel="noopener">Ver código</a></div></div>
   <div class="vis">
    <div class="marco"><div class="bar" aria-hidden="true"><span></span><span></span><span></span><em>${d.ruta}</em></div>
     <div class="lienzo" data-w="1280" data-h="800"><iframe title="Vista previa de ${d.nombre}" src="${d.url}" loading="lazy" tabindex="-1"></iframe><button class="cubre" aria-label="Activar la demo ${d.nombre} para usarla"><span>Toca para probarla</span></button></div></div>
@@ -398,13 +455,103 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
   zona.addEventListener("pointerleave",()=>{tx=0;ty=0;go()});
 })();
 
+
+/* ===== Asistente (chat guiado) ===== */
+(function(){
+  const CHAT_AI_ENDPOINT=""; // opcional: URL de un servidor propio que responda {reply}. Vacío = solo respuestas guiadas.
+  const L=$("#chatL"),T=$("#chatT"),C=$("#chat"),M=$("#chatM"),Q=$("#chatQ"),F=$("#chatF"),I=$("#chatI");
+  const lead={need:"",negocio:"",nombre:"",cuando:"",msg:""};
+  let paso="menu",abierto=false,iniciado=false,hist=[];
+  const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const fmtB=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
+  const pausa=ms=>new Promise(r=>setTimeout(r,matchMedia("(prefers-reduced-motion:reduce)").matches?0:ms));
+  function add(cls,html){const d=document.createElement("div");d.className="cm "+cls;d.innerHTML=html;M.appendChild(d);M.scrollTop=M.scrollHeight;return d}
+  async function bot(txt,ms=550){const t=add("b tip","<i></i><i></i><i></i>");await pausa(ms);t.className="cm b";t.innerHTML=txt.startsWith("<")?txt:fmtB(txt);M.scrollTop=M.scrollHeight;hist.push({r:"bot",t:txt})}
+  function chips(arr){Q.innerHTML="";arr.forEach(([t,fn,cls])=>{const b=document.createElement("button");b.type="button";b.textContent=t;if(cls)b.className=cls;b.onclick=()=>{Q.innerHTML="";if(fn==="__user")yo(t);else fn()};Q.appendChild(b)})}
+  function yo(t){add("u",esc(t));hist.push({r:"yo",t});procesa(t)}
+  const NEEDS=["Una página para mi negocio","Una tienda online","Un sistema de clientes o pedidos","Mejorar mi web actual","Aún no lo sé"];
+
+  function menu(){paso="menu";chips([["Quiero cotizar",inicioCot],["Ver las demos",demos],["¿Cuánto cuesta?",precios],["¿Cómo trabajas?",proceso],["¿Usas IA?",ia]])}
+  async function saludo(){
+    await bot("¡Hola! 👋 Soy el asistente de **Carlo · Dev**. Puedo mostrarte las demos, resolver dudas rápidas o dejar lista tu cotización para que Carlo te responda por WhatsApp.");
+    await bot("¿Qué te gustaría hacer?",450);menu()}
+  async function demos(){add("u","Ver las demos");
+    await bot('<a href="#proyectos" data-ir="1">Mira las 4 demos aquí</a>: <strong>La Marea</strong> (página), <strong>Cumbre Café</strong> y <strong>FerreMax</strong> (tiendas) e <strong>Hilo CRM</strong> (sistema). Puedes usarlas como lo haría tu cliente.');
+    chips([["Quiero algo así",inicioCot],["Otra duda",menu]])}
+  async function precios(){add("u","¿Cuánto cuesta?");
+    await bot("Depende de lo que necesites: una página sencilla no cuesta lo mismo que una tienda con carrito. Carlo te responde con **precio y plazo por escrito** en tu cotización, sin costo. Para empezar se paga el **50%** y el resto al entregar.");
+    chips([["Quiero mi cotización",inicioCot],["Otra duda",menu]])}
+  async function proceso(){add("u","¿Cómo trabajas?");
+    await bot("Cuatro pasos: **1)** conversamos sobre tu negocio, **2)** recibes cotización y plazo por escrito, **3)** construyo y ves avances, **4)** publicamos y te explico cómo cambiar lo básico.");
+    chips([["Quiero cotizar",inicioCot],["Otra duda",menu]])}
+  async function ia(){add("u","¿Usas IA?");
+    await bot("Sí, desarrollo con apoyo de IA y reviso cada detalle yo mismo, por eso puedo avanzar rápido. El resultado y la responsabilidad son de Carlo. Y este chat es un asistente automático: si prefieres una persona, te paso a WhatsApp.");
+    chips([["Hablar con Carlo",handoff,"wa"],["Otra duda",menu]])}
+
+  async function inicioCot(){paso="need";await bot("¡Perfecto! Te hago 4 preguntas rápidas. **¿Qué necesitas?**");chips(NEEDS.map(n=>[n,"__user"]))}
+  async function procesa(t){
+    if(paso==="need"){lead.need=t;paso="negocio";await bot("Anotado. **¿De qué es tu negocio?** (ej.: barbería, restaurante, clínica)");return}
+    if(paso==="negocio"){lead.negocio=t;paso="nombre";await bot("Genial. **¿Cómo te llamas?**");return}
+    if(paso==="nombre"){lead.nombre=t;paso="cuando";await bot("Mucho gusto, "+t+". **¿Para cuándo lo necesitas?**");chips(["Lo antes posible","En 1 mes","Sin apuro"].map(n=>[n,"__user"]));return}
+    if(paso==="cuando"){lead.cuando=t;paso="msg";await bot("Última: ¿quieres contarle algo más a Carlo? Escríbelo aquí o toca **Listo**.");chips([["Listo, no hay más",()=>{add("u","Listo, no hay más");resumen()}]]);return}
+    if(paso==="msg"){lead.msg=t;resumen();return}
+    await libre(t)}
+  async function resumen(){paso="fin";
+    await bot("¡Listo! Este es tu resumen:",400);
+    add("resumen","<div><b>Nombre:</b> "+esc(lead.nombre)+"</div><div><b>Negocio:</b> "+esc(lead.negocio)+"</div><div><b>Necesito:</b> "+esc(lead.need)+"</div><div><b>Para cuándo:</b> "+esc(lead.cuando)+"</div>"+(lead.msg?"<div><b>Detalle:</b> "+esc(lead.msg)+"</div>":""));
+    await bot("Toca el botón y se abre WhatsApp con todo escrito. Carlo te responde con tu cotización.",450);
+    chips([["Enviar a Carlo por WhatsApp",enviar,"wa"],["Empezar de nuevo",()=>{Object.keys(lead).forEach(k=>lead[k]="");inicioCot()}]])}
+  function textoLead(){return [SALUDO,"Escribí desde el asistente de tu portafolio.","",
+    lead.nombre?"*Nombre:* "+lead.nombre:null,lead.negocio?"*Negocio:* "+lead.negocio:null,lead.need?"*Necesito:* "+lead.need:null,lead.cuando?"*Para cuándo:* "+lead.cuando:null,lead.msg?"*Detalle:* "+lead.msg:null,
+    "","Quedo atento a tu cotización 🙌",FIRMA].filter(x=>x!==null).join("\n")}
+  function enviar(){window.open(wa(textoLead()),"_blank","noopener");bot("Abrí WhatsApp en otra pestaña. ¡Gracias por escribir! 🙌",300).then(()=>chips([["Otra duda",menu]]))}
+  function handoff(){window.open(wa([SALUDO,"Quería hablar contigo directamente.","",FIRMA].join("\n")),"_blank","noopener")}
+
+  const INT=[
+    [/\b(hola|buenas|buenos d|hey|qué tal)/i,async()=>{await bot("¡Hola! 😊 ¿En qué te ayudo?");menu()}],
+    [/(plazo|tiempo|demora|tarda|cu[aá]ndo.*(listo|entrega))/i,async()=>{await bot("El plazo depende del alcance. Carlo lo confirma **por escrito en la cotización**, antes de que pagues nada.");chips([["Quiero mi cotización",inicioCot],["Otra duda",menu]])}],
+    [/(precio|costo|cuesta|cu[aá]nto|tarifa|cobras)/i,()=>precios()],
+    [/(demo|ejemplo|portafolio|trabajos|proyectos)/i,()=>demos()],
+    [/(pago|pagar|adelanto|yape|transferencia|factura)/i,async()=>{await bot("Se paga el **50% para empezar** y el resto al entregar. Los medios de pago se coordinan por WhatsApp.");chips([["Quiero cotizar",inicioCot],["Otra duda",menu]])}],
+    [/(dominio|hosting|publicar|alojamiento)/i,async()=>{await bot("Sí, te dejo la página publicada y te explico lo del dominio y el hosting. Los costos se detallan en la cotización.");chips([["Quiero cotizar",inicioCot],["Otra duda",menu]])}],
+    [/(mantenimiento|cambios|actualiz|soporte)/i,async()=>{await bot("Después de entregar sigo disponible para cambios y mejoras. Se acuerda según lo que necesites.");chips([["Quiero cotizar",inicioCot],["Otra duda",menu]])}],
+    [/(\bia\b|inteligencia|robot|\bbot\b|chatgpt|claude)/i,()=>ia()],
+    [/(cotiz|presupuesto|quiero una|necesito|contratar)/i,()=>inicioCot()],
+    [/(whatsapp|contacto|hablar|llamar|persona|carlo)/i,async()=>{await bot("Claro, te paso con Carlo.");chips([["Abrir WhatsApp",handoff,"wa"],["Seguir aquí",menu]])}],
+    [/(gracias|\bok\b|listo|perfecto|genial)/i,async()=>{await bot("¡A ti! Si quieres, dejo lista tu cotización.");chips([["Quiero cotizar",inicioCot],["Hablar con Carlo",handoff,"wa"]])}]
+  ];
+  async function libre(t){
+    for(const[re,fn]of INT){if(re.test(t)){await fn();return}}
+    if(CHAT_AI_ENDPOINT){
+      try{const t0=add("b tip","<i></i><i></i><i></i>");const r=await fetch(CHAT_AI_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:t,history:hist.slice(-8)})});const d=await r.json();t0.className="cm b";t0.innerHTML=fmtB(d.reply||"No pude responder eso.");chips([["Quiero cotizar",inicioCot],["Hablar con Carlo",handoff,"wa"]]);return}catch(e){}
+    }
+    await bot("No estoy seguro de haber entendido 🤔. Puedo ayudarte con precios, plazos, pagos o dejar lista tu cotización. Si prefieres, hablas directo con Carlo.");
+    chips([["Quiero cotizar",inicioCot],["Hablar con Carlo",handoff,"wa"],["Ver opciones",menu]])}
+
+  function abrir(){abierto=true;C.classList.add("on");L.style.display="none";T.classList.remove("on");try{sessionStorage.setItem("chat-visto","1")}catch(e){}
+    if(!iniciado){iniciado=true;saludo()}setTimeout(()=>I.focus(),350)}
+  function cerrar(){abierto=false;C.classList.remove("on");L.style.display="";L.focus()}
+  L.onclick=abrir;$("#chatX").onclick=cerrar;$("#chatWa").onclick=handoff;
+  T.onclick=e=>{if(e.target.id==="chatTx"){T.classList.remove("on");try{sessionStorage.setItem("chat-visto","1")}catch(_){}return}abrir()};
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&abierto)cerrar()});
+  M.addEventListener("click",e=>{const a=e.target.closest("[data-ir]");if(a&&matchMedia("(max-width:520px)").matches)cerrar()});
+  F.addEventListener("submit",e=>{e.preventDefault();const t=I.value.trim();if(!t)return;I.value="";Q.innerHTML="";yo(t)});
+  let visto=false;try{visto=!!sessionStorage.getItem("chat-visto")}catch(e){}
+  if(!visto)setTimeout(()=>{if(!abierto)T.classList.add("on")},18000);
+})();
+
 /* formulario → WhatsApp */
 const f=$("#form");
 f.addEventListener("submit",e=>{
   e.preventDefault();
   if(!f.nombre.value.trim()){$("#err").textContent="Escribe tu nombre para poder responderte.";f.nombre.focus();return}
   $("#err").textContent="";
-  const t=`Hola, soy ${f.nombre.value.trim()}${f.negocio.value.trim()?" ("+f.negocio.value.trim()+")":""}. Necesito: ${f.need.value}.${f.msg.value.trim()?" "+f.msg.value.trim():""}`;
+  const t=[SALUDO,"Vi tu portafolio y quiero cotizar un proyecto.","",
+    `*Nombre:* ${f.nombre.value.trim()}`,
+    f.negocio.value.trim()?`*Negocio:* ${f.negocio.value.trim()}`:null,
+    `*Necesito:* ${f.need.value}`,
+    f.msg.value.trim()?`*Detalle:* ${f.msg.value.trim()}`:null,
+    "","Quedo atento a tu respuesta 🙌",FIRMA].filter(x=>x!==null).join("\n");
   window.open(wa(t),"_blank","noopener");
 });
 </script>
