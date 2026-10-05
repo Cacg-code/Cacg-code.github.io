@@ -6,10 +6,10 @@
 <meta name="author" content="Carlo Andre Chiuyare Guillen (Carlo · Dev)">
 <meta name="copyright" content="© 2026 Carlo Andre Chiuyare Guillen. Todos los derechos reservados.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Carlo · Dev — Páginas web para negocios locales</title>
-<meta name="description" content="Diseño páginas web, tiendas online y sistemas a medida para negocios locales. Prueba tres demos reales y pide tu cotización por WhatsApp.">
-<meta property="og:title" content="Carlo · Dev — Páginas web para negocios locales">
-<meta property="og:description" content="Landing, tienda online y CRM. Pruébalos en vivo.">
+<title>Carlo · Dev — Vende más con tienda online, chatbot y sistema para tu negocio</title>
+<meta name="description" content="Si tu negocio no vende por internet, estás perdiendo clientes. Tiendas online, chatbots y sistemas a medida que traen más clientes e ingresos. Agenda una llamada gratis.">
+<meta property="og:title" content="Carlo · Dev — Vende más con tienda online, chatbot y sistema para tu negocio">
+<meta property="og:description" content="Deja de perder clientes por no estar online. Mira las demos en vivo.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://cacg-code.github.io/assets/landing.jpg">
 <meta name="theme-color" content="#07070D">
@@ -90,20 +90,45 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;padding:.8rem 0;pointer-events
 .hero .lead{font-size:clamp(1.1rem,2vw,1.4rem);color:var(--mute);max-width:40ch}
 .acciones{display:flex;flex-wrap:wrap;gap:.75rem}
 
-/* abanico */
-.abanico{position:relative;height:clamp(250px,42vw,560px);margin-top:clamp(2rem,5vw,4rem);margin-bottom:2rem;perspective:1600px}
-.abanico a{position:absolute;left:50%;top:0;width:min(58%,720px);border-radius:16px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 50px 90px -30px #000,0 0 0 1px #0006;background:#111}
-.abanico a img{width:100%;height:auto;aspect-ratio:1100/688;object-fit:cover}
-.abanico a::before{content:"";display:block;height:22px;background:#15151f;border-bottom:1px solid var(--line)}
-.abanico a::after{content:"";position:absolute;left:10px;top:7px;width:8px;height:8px;border-radius:50%;background:#ff6b6b;box-shadow:14px 0 #ffd166,28px 0 #4ade80}
-.abanico a{--px:0;--py:0;will-change:transform;transition:filter .4s,border-color .4s}
-.abanico a:nth-child(1){transform:translateX(-120%) translateY(8%) translate3d(calc(var(--px)*-16px),calc(var(--py)*-8px),0) rotateY(calc(18deg + var(--px)*7deg)) rotateX(calc(var(--py)*-4deg)) rotateZ(-4deg)}
-.abanico a:nth-child(2){transform:translateX(-50%) translateY(-2%) translate3d(calc(var(--px)*10px),calc(var(--py)*-8px),0) rotateY(calc(var(--px)*6deg)) rotateX(calc(var(--py)*-5deg));z-index:2}
-.abanico a:nth-child(3){transform:translateX(20%) translateY(8%) translate3d(calc(var(--px)*-16px),calc(var(--py)*-8px),0) rotateY(calc(-18deg + var(--px)*7deg)) rotateX(calc(var(--py)*-4deg)) rotateZ(4deg)}
-.abanico a:not(:hover){filter:brightness(.92)}
-.abanico:not(:hover) a{filter:none}
-.abanico a:hover{border-color:#a78bfa99;filter:brightness(1.06)}
-@media(max-width:700px){.abanico a{width:74%}.abanico a:nth-child(1){transform:translateX(-95%) translateY(10%) rotateZ(-5deg)}.abanico a:nth-child(3){transform:translateX(-5%) translateY(10%) rotateZ(5deg)}}
+/* escena de dispositivos */
+.escena{position:relative;margin:clamp(2rem,5vw,4rem) auto 1rem;max-width:1040px;--g:#A78BFA;--px:0;--py:0}
+.escena .halo{position:absolute;inset:6% 4% 14%;border-radius:50%;background:var(--g);filter:blur(110px);opacity:.34;transition:background 1s,opacity 1s;animation:late 7s ease-in-out infinite}
+@keyframes late{50%{opacity:.5;transform:scale(1.08)}}
+.escena .cuadro{position:relative;aspect-ratio:16/9.6;perspective:1800px}
+.escena .pila{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateY(calc(var(--px)*5deg)) rotateX(calc(var(--py)*-3deg));transition:transform .25s ease-out}
+.escena .flota{position:absolute;inset:0;animation:flota 7s ease-in-out infinite}
+@keyframes flota{50%{transform:translateY(-12px)}}
+.dm{position:absolute;inset:0;display:block;text-decoration:none;pointer-events:none}
+.dm.on{pointer-events:auto}
+.lap,.tel{position:absolute;margin:0;overflow:hidden;background:#0b0b13;border:1px solid var(--line2);box-shadow:0 50px 100px -30px #000,0 0 0 1px #0007,0 0 60px -20px var(--g);transition:transform 1.1s cubic-bezier(.2,.8,.2,1),opacity .8s,filter .8s}
+.lap{left:2%;top:2%;width:80%;aspect-ratio:1180/770;border-radius:16px;opacity:0;transform:translate3d(14%,6%,-260px) rotateY(-28deg) scale(.9);filter:blur(8px)}
+.tel{right:1%;bottom:0;width:23%;aspect-ratio:9/19;border-radius:26px;border:3px solid #26263a;opacity:0;transform:translate3d(30%,26%,60px) rotate(8deg);filter:blur(6px);transition-delay:.12s}
+.dm.on .lap{opacity:1;transform:translate3d(0,0,0);filter:none}
+.dm.on .tel{opacity:1;transform:translate3d(0,0,70px);filter:none}
+.dm.out .lap{opacity:0;transform:translate3d(-16%,-4%,-200px) rotateY(24deg) scale(.92);filter:blur(8px)}
+.dm.out .tel{opacity:0;transform:translate3d(-60%,10%,40px) rotate(-8deg);filter:blur(6px)}
+.lap .bar{height:clamp(14px,2.2vw,24px);background:#15151f;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 10px}
+.lap .bar i{width:8px;height:8px;border-radius:50%;background:#ff6b6b}.lap .bar i:nth-child(2){background:#ffd166}.lap .bar i:nth-child(3){background:#4ade80}
+.lap .bar em{margin-left:10px;font:500 clamp(9px,1.1vw,12px)/1 var(--f-b);color:var(--mute);font-style:normal;background:#ffffff0d;padding:3px 12px;border-radius:99px}
+.lap .pant{height:calc(100% - clamp(14px,2.2vw,24px));overflow:hidden}
+.tel .pant{position:absolute;inset:0;border-radius:22px;overflow:hidden}
+.tel::before{content:"";position:absolute;z-index:2;left:50%;top:7px;width:30%;height:5px;border-radius:9px;background:#0b0b13;transform:translateX(-50%)}
+.pant img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.dm.on .lap .pant img{animation:baja 9s cubic-bezier(.45,0,.55,1) .9s infinite alternate}
+.dm.on .tel .pant img{animation:baja 8s cubic-bezier(.45,0,.55,1) 1.4s infinite alternate}
+@keyframes baja{to{object-position:50% 100%}}
+.dm .ver{position:absolute;z-index:3;left:2%;bottom:3%;display:inline-flex;gap:.5rem;align-items:center;font-weight:700;font-size:.9rem;color:#06060c;background:var(--g);padding:.55rem 1rem;border-radius:99px;opacity:0;transform:translateY(10px);transition:.4s;box-shadow:0 10px 30px -8px var(--g)}
+.dm.on:hover .ver,.dm.on:focus-visible .ver{opacity:1;transform:none}
+.tabs{position:relative;display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+.tabs button{position:relative;overflow:hidden;font:inherit;font-weight:600;font-size:.9rem;color:var(--mute);background:#ffffff08;border:1px solid var(--line);border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;transition:color .3s,border-color .3s,background .3s}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected=true]{color:var(--ink);border-color:var(--g);background:#ffffff12}
+.tabs button::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--g);transform:scaleX(0);transform-origin:left}
+.tabs button[aria-selected=true]::after{animation:prog var(--t,7s) linear forwards}
+.escena.pausa .tabs button[aria-selected=true]::after{animation-play-state:paused}
+@keyframes prog{to{transform:scaleX(1)}}
+@media(max-width:700px){.escena .cuadro{aspect-ratio:1/.9}.lap{width:92%;left:0;top:6%}.tel{width:34%;right:0}.escena .halo{inset:10% 0 20%}.tabs button{font-size:.82rem;padding:.5rem .85rem}}
+@media(prefers-reduced-motion:reduce){.escena .halo,.escena .flota,.dm.on .pant img{animation:none!important}}
 
 /* marquee */
 .marq{overflow:hidden;border-block:1px solid var(--line);margin:clamp(3rem,7vw,6rem) 0 0;background:#ffffff05}
@@ -129,6 +154,10 @@ section.s{padding:clamp(5rem,12vw,10rem) 0}
 .pr .txt p{color:var(--mute);margin-bottom:1.2rem}
 .pr ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.5rem}
 .pr li{padding:.3rem .8rem;border:1px solid var(--line2);border-radius:99px;font-size:.88rem;color:#d6d6ea;background:#ffffff08}
+.pr .tech{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:-.5rem 0 1.5rem}
+.pr .tech span{font-size:.78rem;color:var(--mute);text-transform:uppercase;letter-spacing:.08em;margin-right:.2rem}
+.pr .tech b{display:inline-flex;align-items:center;gap:.4rem;padding:.28rem .7rem .28rem .55rem;border-radius:10px;background:#ffffff0d;border:1px solid var(--line);font-size:.82rem;font-weight:600;color:#e6e6f5}
+.pr .tech img{display:block}
 .pr .btns{display:flex;flex-wrap:wrap;gap:.6rem}
 .vis{position:relative;border-radius:18px;overflow:visible}
 .marco{border-radius:16px;overflow:hidden;border:1px solid var(--line2);background:#14141f;box-shadow:0 40px 80px -30px #000}
@@ -186,15 +215,6 @@ section.s{padding:clamp(5rem,12vw,10rem) 0}
 @media(max-width:900px){.pasos{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.pasos{grid-template-columns:1fr}}
 
-/* contacto */
-.contacto{position:relative;border-radius:36px;border:1px solid var(--line2);background:linear-gradient(160deg,#ffffff10,#ffffff04);padding:clamp(1.75rem,5vw,4.5rem);display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;overflow:hidden}
-.contacto::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;background:#7C5CFF;filter:blur(130px);opacity:.3;left:-160px;bottom:-260px;pointer-events:none}
-.contacto>*{position:relative;min-width:0}
-.contacto h2{font-size:clamp(2.4rem,6.4vw,5.4rem);overflow-wrap:anywhere}
-.contacto p{color:var(--mute);margin-top:1.2rem}
-.directo{margin-top:1.6rem;display:grid;gap:.35rem;font-weight:500}
-.directo a{text-decoration:none}
-.directo a:hover{color:var(--c)}
 form{display:grid;gap:1rem;background:#0A0A12cc;border:1px solid var(--line);border-radius:24px;padding:1.5rem;backdrop-filter:blur(14px)}
 label{display:grid;gap:.4rem;font-weight:600;font-size:.92rem}
 input,select,textarea{font:inherit;min-height:50px;padding:.65rem .95rem;border:1px solid var(--line2);border-radius:14px;background:#ffffff08;color:var(--ink);font-weight:400}
@@ -203,7 +223,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--v);outline:none;box-s
 textarea{min-height:96px;resize:vertical}
 .err{color:#fda4af;font-size:.9rem;min-height:1.2em}
 .nota{font-size:.85rem;color:var(--mute)}
-@media(max-width:860px){.contacto{grid-template-columns:1fr;border-radius:28px}}
 
 footer{padding:2.5rem 0 6rem;color:var(--mute);font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem;border-top:1px solid var(--line);padding-top:1.6rem}
@@ -242,6 +261,9 @@ footer a{color:var(--ink)}
 .resumen b{color:var(--v)}
 .chat-q{display:flex;flex-wrap:wrap;gap:.4rem;padding:.2rem 1rem .6rem;max-height:34%;overflow-y:auto}
 .chat-q button{min-height:40px;padding:.4rem .9rem;border-radius:99px;border:1px solid var(--v);background:transparent;color:var(--ink);font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .2s}
+.chat-q a{display:inline-flex;align-items:center;min-height:40px;padding:.4rem .9rem;border-radius:99px;border:1px solid var(--v);color:var(--ink);font-size:.9rem;font-weight:600;text-decoration:none}
+.chat-q a.wa{background:#25D366;border-color:#25D366;color:#06210f}
+.chat-q a.wa:hover{background:#3be07c}
 .chat-q button:hover{background:#a78bfa33}
 .chat-q button.wa{background:#25D366;border-color:#25D366;color:#06210f}
 .chat-q button.wa:hover{background:#3be07c}
@@ -260,7 +282,6 @@ input,select,textarea{width:100%;min-width:0}
   .hero{min-height:auto;padding:6.5rem 0 2.2rem}
   .hero .fila{margin-top:1.6rem}
   .acciones .btn{flex:1 1 auto}
-  .abanico{height:clamp(190px,58vw,300px);margin-top:2rem;margin-bottom:0}
   .marq{margin-top:1.5rem}
   section.s{padding:3.5rem 0}
   .cab{margin-bottom:1.8rem}
@@ -276,8 +297,6 @@ input,select,textarea{width:100%;min-width:0}
   .cifras div{padding:1.4rem .9rem}
   .pasos li{padding:1.1rem}
   .pasos li::before{font-size:2.2rem;margin-bottom:.4rem}
-  .contacto{padding:1.4rem;gap:1.8rem}
-  .contacto form{padding:1.1rem}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.hero h1 .l span{transform:none}}
 </style>
@@ -290,8 +309,8 @@ input,select,textarea{width:100%;min-width:0}
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#14142a" stroke="#ffffff30"/><path d="M12 11l-5 5 5 5M20 11l5 5-5 5" stroke="#A78BFA" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span data-c="nombre">Carlo · Dev</span>
     </a>
-    <nav aria-label="Principal"><ul><li><a href="#proyectos">Proyectos</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#proceso">Proceso</a></li><li><a href="#contacto">Contacto</a></li></ul></nav>
-    <a class="btn sm" data-wa href="#contacto" target="_blank" rel="noopener">Cotizar</a>
+    <nav aria-label="Principal"><ul><li><a href="#proyectos">Proyectos</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#proceso">Proceso</a></li></ul></nav>
+    <a class="btn sm" data-chat href="#">Cotizar</a>
   </div>
 </header>
 
@@ -299,15 +318,21 @@ input,select,textarea{width:100%;min-width:0}
   <section class="hero">
     <div class="wrap">
       <p class="pill"><b>Nuevo</b>Cinco demos listas para probar</p>
-      <h1 aria-label="Webs que venden de verdad"><span class="l"><span>Webs que</span></span><span class="l"><span class="grad"><span class="cambia" id="cambia"><b>venden</b></span></span></span><span class="l"><span>de verdad.</span></span></h1>
+      <h1 aria-label="Deja de perder clientes por no estar online"><span class="l"><span>Deja de perder</span></span><span class="l"><span class="grad"><span class="cambia" id="cambia"><b>clientes</b></span></span></span><span class="l"><span>por no estar online.</span></span></h1>
       <div class="fila">
-        <p class="lead">Diseño páginas, tiendas online y sistemas a medida para negocios locales. Rápidas en el celular, fáciles de contactar y pensadas para convertir visitas en clientes.</p>
-        <div class="acciones"><a class="btn" href="#proyectos">Ver los proyectos</a><a class="btn o" href="#contacto">Pedir cotización</a></div>
+        <p class="lead">Convierto tu negocio en una máquina de ventas online: tienda, chatbot que atiende 24/7 y sistema de clientes. Más gente que te encuentra, más pedidos, más ingresos.</p>
+        <div class="acciones"><a class="btn" href="#proyectos">Ver los proyectos</a><a class="btn o" data-chat href="#">Pedir cotización</a></div>
       </div>
-      <div class="abanico" aria-label="Capturas de las tres demos">
-        <a href="#p-landing" aria-label="Ir a la demo La Marea"><img src="assets/landing.jpg" alt="Página de La Marea, cevichería" width="1100" height="688"></a>
-        <a href="#p-tienda" aria-label="Ir a la demo Cumbre Café"><img src="assets/tienda.jpg" alt="Tienda online Cumbre Café" width="1100" height="688"></a>
-        <a href="#p-crm" aria-label="Ir a la demo Hilo CRM"><img src="assets/crm.jpg" alt="Panel de clientes Hilo CRM" width="1100" height="688"></a>
+      <div class="escena" id="escena" aria-label="Las cinco demos en computadora y en celular">
+        <div class="halo" aria-hidden="true"></div>
+        <div class="cuadro"><div class="pila"><div class="flota">
+          <a class="dm" href="#p-landing" data-g="#FB923C" data-n="La Marea" aria-label="Ver la demo La Marea" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/landing</em></div><div class="pant"><img src="assets/landing-d.jpg" alt="La Marea en computadora" width="1180" height="740" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/landing-m.jpg" alt="La Marea en celular" width="390" height="844" decoding="async"></div></figure><span class="ver">Ver La Marea →</span></a>
+          <a class="dm" href="#p-tienda" data-g="#6366F1" data-n="Cumbre Café" aria-label="Ver la demo Cumbre Café" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/tienda</em></div><div class="pant"><img src="assets/tienda-d.jpg" alt="Cumbre Café en computadora" width="1180" height="740" loading="lazy" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/tienda-m.jpg" alt="Cumbre Café en celular" width="390" height="844" loading="lazy" decoding="async"></div></figure><span class="ver">Ver Cumbre Café →</span></a>
+          <a class="dm" href="#p-ferremax" data-g="#FB7A1C" data-n="FerreMax" aria-label="Ver la demo FerreMax" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/ferremax</em></div><div class="pant"><img src="assets/ferremax-d.jpg" alt="FerreMax en computadora" width="1180" height="740" loading="lazy" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/ferremax-m.jpg" alt="FerreMax en celular" width="390" height="844" loading="lazy" decoding="async"></div></figure><span class="ver">Ver FerreMax →</span></a>
+          <a class="dm" href="#p-spa" data-g="#D946A8" data-n="Áurea Spa" aria-label="Ver la demo Áurea Spa" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/spa</em></div><div class="pant"><img src="assets/spa-d.jpg" alt="Áurea Spa en computadora" width="1180" height="740" loading="lazy" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/spa-m.jpg" alt="Áurea Spa en celular" width="390" height="844" loading="lazy" decoding="async"></div></figure><span class="ver">Ver Áurea Spa →</span></a>
+          <a class="dm" href="#p-crm" data-g="#10B981" data-n="Hilo CRM" aria-label="Ver la demo Hilo CRM" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/crm</em></div><div class="pant"><img src="assets/crm-d.jpg" alt="Hilo CRM en computadora" width="1180" height="740" loading="lazy" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/crm-m.jpg" alt="Hilo CRM en celular" width="390" height="844" loading="lazy" decoding="async"></div></figure><span class="ver">Ver Hilo CRM →</span></a>
+        </div></div></div>
+        <div class="tabs" role="tablist" aria-label="Elegir demo"><button type="button" role="tab" aria-selected="true">La Marea</button><button type="button" role="tab" aria-selected="false">Cumbre Café</button><button type="button" role="tab" aria-selected="false">FerreMax</button><button type="button" role="tab" aria-selected="false">Áurea Spa</button><button type="button" role="tab" aria-selected="false">Hilo CRM</button></div>
       </div>
     </div>
   </section>
@@ -358,26 +383,6 @@ input,select,textarea{width:100%;min-width:0}
     </div>
   </section>
 
-  <section id="contacto" style="padding-bottom:clamp(3rem,6vw,5rem)">
-    <div class="wrap">
-      <div class="contacto rv">
-        <div>
-          <h2>Cuéntame de <span class="grad">tu negocio</span></h2>
-          <p>Escribe tres líneas sobre qué vendes y qué necesitas. Te respondo por WhatsApp con ideas y una cotización.</p>
-          <div class="directo"><a data-wa href="#" target="_blank" rel="noopener"><span data-c="waTexto"></span></a><a data-mail href="#"><span data-c="correo"></span></a><span data-c="ciudad"></span></div>
-        </div>
-        <form id="form" novalidate>
-          <label>Tu nombre<input name="nombre" autocomplete="name"></label>
-          <label>Tipo de negocio<input name="negocio" placeholder="Ej.: barbería, restaurante, clínica"></label>
-          <label>¿Qué necesitas?<select name="need"><option>Una página para mi negocio</option><option>Una tienda online</option><option>Un sistema de clientes o pedidos</option><option>Mejorar mi web actual</option><option>Aún no lo sé</option></select></label>
-          <label>Mensaje (opcional)<textarea name="msg"></textarea></label>
-          <p class="err" id="err" role="alert"></p>
-          <button class="btn v" type="submit">Enviar por WhatsApp</button>
-          <p class="nota">Se abre WhatsApp con tu mensaje escrito. Esta página no guarda tus datos.</p>
-        </form>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer><div class="wrap"><span>© 2026 <strong>Carlo Andre Chiuyare Guillen</strong> (Carlo · Dev). Todos los derechos reservados. Prohibida la copia o reutilización sin autorización escrita.</span><span>Diseño y desarrollo con apoyo de IA (Claude), bajo mi dirección y revisión. Las demos usan datos ficticios. Fotos: Unsplash. · <a href="https://github.com/Cacg-code" target="_blank" rel="noopener">GitHub</a></span></div></footer>
@@ -404,35 +409,41 @@ const CONTACTO={
   ciudad:"Lima, Perú"
 };
 /* ================================== */
+const TECH={"html": ["HTML5", "html5", "E34F26"], "css": ["CSS3", "css", "4D9CF0"], "js": ["JavaScript", "javascript", "F7DF1E"], "react": ["React", "react", "61DAFB"], "vite": ["Vite", "vite", "A78BFA"], "wa": ["WhatsApp", "whatsapp", "25D366"]};
 const DEMOS=[
  {id:"landing",nombre:"La Marea",tipo:"Página para restaurante",g:"#FB923C",url:"landing/",ruta:"cacg-code.github.io/landing",
   txt:"Una cevichería que se ve tan bien como sabe. Dice si está abierta ahora, muestra la carta con fotos y recibe reservas por WhatsApp.",
+  tech:["html", "css", "js", "wa"],
   tags:["Abierto ahora en vivo","Carta con fotos","Reserva por WhatsApp","Móvil primero"]},
  {id:"tienda",nombre:"Cumbre Café",tipo:"Tienda online",g:"#6366F1",url:"tienda/",ruta:"cacg-code.github.io/tienda",
   txt:"Una tienda de café con filtros, detalle de producto, carrito que recuerda lo elegido y pedido directo a WhatsApp con pago por Yape.",
+  tech:["html", "css", "js", "wa"],
   tags:["Filtros y búsqueda","Detalle de producto","Carrito con envío gratis","Pedido por WhatsApp"]},
  {id:"ferremax",nombre:"FerreMax",tipo:"Tienda hecha en React",g:"#FB7A1C",url:"ferremax/",ruta:"cacg-code.github.io/ferremax",codigo:"https://github.com/carloAndr3-dev/ferremax-ecommerce",
   txt:"Una ferretería online hecha con React: categorías con foto, filtros, detalle de producto, carrito con envío gratis y un pedido de prueba de principio a fin.",
+  tech:["react", "vite", "js", "css"],
   tags:["Hecho con React","Detalle de producto","Carrito con envío gratis","Pedido de prueba"]},
  {id:"spa",nombre:"Áurea Spa",tipo:"Chatbot 24/7 para spa y estética",g:"#D946A8",url:"spa/",ruta:"cacg-code.github.io/spa",
   txt:"Un asistente que atiende las 24 horas en un salón de belleza: responde precios y horarios, ofrece solo las horas libres, agenda la cita y avisa al salón por WhatsApp.",
+  tech:["html", "css", "js", "wa"],
   tags:["Agenda con horarios libres","Responde 24/7","Aviso por WhatsApp","Panel del salón"]},
  {id:"crm",nombre:"Hilo CRM",tipo:"Sistema de clientes",g:"#10B981",url:"crm/",ruta:"cacg-code.github.io/crm",
   txt:"Un panel para no perder ningún cliente: tablero que se arrastra, seguimientos con aviso de vencidos, buscador por teclado y tema oscuro o claro.",
+  tech:["html", "css", "js"],
   tags:["Tablero arrastrable","Buscador Ctrl K","Seguimientos","Tema claro y oscuro"]}
 ];
 const $=s=>document.querySelector(s);
 const wa=t=>`https://wa.me/${CONTACTO.whatsapp}${t?"?text="+encodeURIComponent(t):""}`;
 document.querySelectorAll("[data-c]").forEach(e=>e.textContent=CONTACTO[e.dataset.c]);
-const FIRMA="_Enviado desde cacg-code.github.io_";
 const SALUDO="Hola Carlo,";
-document.querySelectorAll("[data-wa]").forEach(a=>a.href=wa([SALUDO,"Vi tu portafolio y me gustaría cotizar una página web. ¿Podemos conversar?","",FIRMA].join("\n")));
-$("[data-mail]").href="mailto:"+CONTACTO.correo;
+
+document.querySelectorAll("[data-chat]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();window.abrirChat&&window.abrirChat()}));
 
 /* proyectos */
 $("#proy").innerHTML=DEMOS.map((d,i)=>`<article class="pr rv" id="p-${d.id}" style="--g:${d.g}">
   <div class="txt"><span class="tipo">${d.tipo}</span><h3>${d.nombre}</h3><p>${d.txt}</p>
    <ul>${d.tags.map(t=>`<li>${t}</li>`).join("")}</ul>
+   <div class="tech" aria-label="Tecnologías"><span>Hecho con</span>${d.tech.map(k=>`<b title="${TECH[k][0]}"><img src="https://cdn.simpleicons.org/${TECH[k][1]}/${TECH[k][2]}" alt="" width="16" height="16" loading="lazy">${TECH[k][0]}</b>`).join("")}</div>
    <div class="btns"><a class="btn" href="${d.url}" target="_blank" rel="noopener">Abrir completa</a><a class="btn o" href="${d.codigo||`https://github.com/Cacg-code/Cacg-code.github.io/blob/main/${d.id}/index.html`}" target="_blank" rel="noopener">Ver código</a></div></div>
   <div class="vis">
    <div class="marco"><div class="bar" aria-hidden="true"><span></span><span></span><span></span><em>${d.ruta}</em></div>
@@ -451,7 +462,7 @@ document.querySelectorAll(".cubre").forEach(b=>b.addEventListener("click",()=>b.
 escalar();
 
 /* palabra que cambia */
-const pal=["venden","atraen","convierten","se notan"];let pi=0;
+const pal=["clientes","ventas","reservas","dinero"];let pi=0;
 const cb=$("#cambia");
 if(!matchMedia("(prefers-reduced-motion:reduce)").matches){
   setInterval(()=>{const b=cb.firstElementChild;b.classList.add("sal");setTimeout(()=>{pi=(pi+1)%pal.length;b.textContent=pal[pi];b.classList.remove("sal");b.classList.add("ent");void b.offsetWidth;b.classList.remove("ent")},400)},2600);
@@ -468,21 +479,41 @@ addEventListener("pointermove",e=>{fo.style.setProperty("--mx",e.clientX+"px");f
 document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>{const r=b.getBoundingClientRect();b.style.setProperty("--x",e.clientX-r.left+"px");b.style.setProperty("--y",e.clientY-r.top+"px")}));
 
 
-/* abanico: seguimiento suave del mouse */
+/* escena de dispositivos: rota las demos, parallax con el mouse, pausa al pasar encima */
 (function(){
-  const ab=document.querySelector(".abanico");
-  if(!ab||!matchMedia("(hover:hover) and (pointer:fine)").matches||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
-  const cards=[...ab.querySelectorAll("a")];
-  let tx=0,ty=0,x=0,y=0,run=false;
-  const loop=()=>{x+=(tx-x)*.08;y+=(ty-y)*.08;
-    cards.forEach(c=>{c.style.setProperty("--px",x.toFixed(3));c.style.setProperty("--py",y.toFixed(3))});
-    if(Math.abs(tx-x)>.002||Math.abs(ty-y)>.002)requestAnimationFrame(loop);else run=false};
-  const go=()=>{if(!run){run=true;requestAnimationFrame(loop)}};
-  const zona=ab.parentElement;
-  zona.addEventListener("pointermove",e=>{const r=ab.getBoundingClientRect();
-    tx=Math.max(-1,Math.min(1,(e.clientX-(r.left+r.width/2))/(r.width/2)));
-    ty=Math.max(-1,Math.min(1,(e.clientY-(r.top+r.height/2))/(r.height/2)));go()});
-  zona.addEventListener("pointerleave",()=>{tx=0;ty=0;go()});
+  const es=document.getElementById("escena");if(!es)return;
+  const dms=[...es.querySelectorAll(".dm")],tabs=[...es.querySelectorAll(".tabs button")],T=7000;
+  let i=0,timer=null,pausado=false;
+  const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  function ir(n){
+    const prev=dms[i];i=(n+dms.length)%dms.length;
+    dms.forEach((d,k)=>{d.classList.remove("on");if(d!==prev||k===i)d.classList.remove("out")});
+    if(prev&&prev!==dms[i])prev.classList.add("out");
+    dms[i].classList.remove("out");dms[i].classList.add("on");dms[i].tabIndex=0;
+    dms.forEach((d,k)=>{if(k!==i)d.tabIndex=-1});
+    es.style.setProperty("--g",dms[i].dataset.g);
+    tabs.forEach((t,k)=>{t.setAttribute("aria-selected",k===i);if(k===i){t.style.animation="none";void t.offsetWidth;t.style.animation=""}});
+    const nx=dms[(i+1)%dms.length].querySelectorAll("img");nx.forEach(im=>{im.loading="eager"});
+    agenda()}
+  function agenda(){clearTimeout(timer);if(reduce||pausado)return;timer=setTimeout(()=>ir(i+1),T)}
+  tabs.forEach((t,k)=>t.addEventListener("click",()=>ir(k)));
+  es.style.setProperty("--t",T+"ms");
+  ir(0);
+  /* pausa al pasar el mouse o tocar */
+  const pausa=v=>{pausado=v;es.classList.toggle("pausa",v);if(v)clearTimeout(timer);else ir(i)};
+  es.addEventListener("pointerenter",e=>{if(e.pointerType==="mouse")pausa(true)});
+  es.addEventListener("pointerleave",e=>{if(e.pointerType==="mouse")pausa(false)});
+  /* parallax */
+  if(matchMedia("(hover:hover) and (pointer:fine)").matches&&!reduce){
+    es.addEventListener("pointermove",e=>{const r=es.getBoundingClientRect();
+      es.style.setProperty("--px",Math.max(-1,Math.min(1,(e.clientX-(r.left+r.width/2))/(r.width/2))).toFixed(3));
+      es.style.setProperty("--py",Math.max(-1,Math.min(1,(e.clientY-(r.top+r.height/2))/(r.height/2))).toFixed(3))});
+    es.addEventListener("pointerleave",()=>{es.style.setProperty("--px",0);es.style.setProperty("--py",0)});
+  }
+  /* deslizar en el celular */
+  let x0=null;
+  es.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
+  es.addEventListener("touchend",e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>50)ir(i+(dx<0?1:-1))});
 })();
 
 
@@ -490,14 +521,14 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
 (function(){
   const CHAT_AI_ENDPOINT=""; // opcional: URL de un servidor propio que responda {reply}. Vacío = solo respuestas guiadas.
   const L=$("#chatL"),T=$("#chatT"),C=$("#chat"),M=$("#chatM"),Q=$("#chatQ"),F=$("#chatF"),I=$("#chatI");
-  const lead={need:"",negocio:"",nombre:"",cuando:"",msg:""};
+  const lead={need:"",negocio:"",nombre:"",cuando:"",msg:"",email:"",tel:"",slot:"",ts:""};
   let paso="menu",abierto=false,iniciado=false,hist=[];
   const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const fmtB=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
   const pausa=ms=>new Promise(r=>setTimeout(r,matchMedia("(prefers-reduced-motion:reduce)").matches?0:ms));
   function add(cls,html){const d=document.createElement("div");d.className="cm "+cls;d.innerHTML=html;M.appendChild(d);M.scrollTop=M.scrollHeight;return d}
   async function bot(txt,ms=550){const t=add("b tip","<i></i><i></i><i></i>");await pausa(ms);t.className="cm b";t.innerHTML=txt.startsWith("<")?txt:fmtB(txt);M.scrollTop=M.scrollHeight;hist.push({r:"bot",t:txt})}
-  function chips(arr){Q.innerHTML="";arr.forEach(([t,fn,cls])=>{const b=document.createElement("button");b.type="button";b.textContent=t;if(cls)b.className=cls;b.onclick=()=>{Q.innerHTML="";if(fn==="__user")yo(t);else fn()};Q.appendChild(b)})}
+  function chips(arr){Q.innerHTML="";arr.forEach(([t,fn,cls,href])=>{const b=document.createElement(href?"a":"button");if(href){b.href=href;b.target="_blank";b.rel="noopener";b.onclick=()=>{if(fn)setTimeout(fn,300)}}else{b.type="button";b.onclick=()=>{Q.innerHTML="";if(fn==="__user")yo(t);else fn()}}b.textContent=t;if(cls)b.className=cls;Q.appendChild(b)})}
   function yo(t){add("u",esc(t));hist.push({r:"yo",t});procesa(t)}
   const NEEDS=["Una página para mi negocio","Una tienda online","Un sistema de clientes o pedidos","Mejorar mi web actual","Aún no lo sé"];
 
@@ -523,19 +554,46 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
     if(paso==="need"){lead.need=t;paso="negocio";await bot("Anotado. **¿De qué es tu negocio?** (ej.: barbería, restaurante, clínica)");return}
     if(paso==="negocio"){lead.negocio=t;paso="nombre";await bot("Genial. **¿Cómo te llamas?**");return}
     if(paso==="nombre"){lead.nombre=t;paso="cuando";await bot("Mucho gusto, "+t+". **¿Para cuándo lo necesitas?**");chips(["Lo antes posible","En 1 mes","Sin apuro"].map(n=>[n,"__user"]));return}
-    if(paso==="cuando"){lead.cuando=t;paso="msg";await bot("Última: ¿quieres contarle algo más a Carlo? Escríbelo aquí o toca **Listo**.");chips([["Listo, no hay más",()=>{add("u","Listo, no hay más");resumen()}]]);return}
-    if(paso==="msg"){lead.msg=t;resumen();return}
+    if(paso==="cuando"){lead.cuando=t;paso="msg";await bot("¿Quieres contarle algo más a Carlo? Escríbelo aquí o toca **Listo**.");chips([["Listo, no hay más",()=>{add("u","Listo, no hay más");pideEmail()}]]);return}
+    if(paso==="msg"){lead.msg=t;pideEmail();return}
+    if(paso==="email"){if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(t)){await bot("Ese correo no parece válido. Revisa que tenga la forma **nombre@correo.com**.",350);return}
+      lead.email=t;pideTel();return}
+    if(paso==="tel"){const d=t.replace(/[^\d]/g,"").replace(/^51(?=9\d{8}$)/,"");if(!/^9\d{8}$/.test(d)){await bot("Escribe tu celular de 9 dígitos, por ejemplo **987654321**.",350);return}
+      lead.tel=d;pideHora();return}
     await libre(t)}
-  async function resumen(){paso="fin";
+  async function pideEmail(){paso="email";await bot("Para agendar tu llamada necesito tus datos de contacto. **¿Cuál es tu correo?**")}
+  async function pideTel(){paso="tel";await bot("Gracias. **¿Cuál es tu número de celular?** (9 dígitos, el mismo de WhatsApp si puedes)")}
+  const DIAS=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+  const CITAS_ENDPOINT="https://script.google.com/macros/s/AKfycbxuJrCzDGFOmy2BxNSJbmhveuo_Qty5yyV7gjGetjouv8D5yHxN5UCGcKgw_2TwoArMiA/exec"; // URL del Apps Script (ver portafolio-citas/LEEME.md). Vacío = las citas solo llegan por WhatsApp.
+  let ocupados=[];
+  async function cargaOcupados(){if(!CITAS_ENDPOINT)return;try{const r=await fetch(CITAS_ENDPOINT);const j=await r.json();ocupados=(j.busy||[]).map(Number)}catch(e){ocupados=[]}}
+  function guardaCita(){if(!CITAS_ENDPOINT)return;try{fetch(CITAS_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({nombre:lead.nombre,negocio:lead.negocio,need:lead.need,cuando:lead.cuando,msg:lead.msg,email:lead.email,tel:lead.tel,slot:lead.slot,ts:lead.ts})})}catch(e){}}
+  function horarios(){ // próximas 6 horas libres, Lun-Sáb 9:00-18:00, hora de Lima (UTC-5, sin horario de verano)
+    const OFF=5*3600e3,ahora=Date.now(),out=[];
+    let h=Math.ceil((ahora-OFF+30*60e3)/3600e3)*3600e3; // al menos 30 min de margen, hora entera
+    while(out.length<6){const d=new Date(h),hr=d.getUTCHours(),dw=d.getUTCDay();
+      if(dw!==0&&hr>=9&&hr<18&&!ocupados.includes(h+OFF))out.push(h+OFF);
+      h+=3600e3}
+    return out}
+  function etiqueta(ts){const OFF=5*3600e3,d=new Date(ts-OFF),hoy=new Date(Date.now()-OFF),
+      dia=Math.round((Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())-Date.UTC(hoy.getUTCFullYear(),hoy.getUTCMonth(),hoy.getUTCDate()))/864e5),
+      nom=dia===0?"Hoy":dia===1?"Mañana":DIAS[d.getUTCDay()]+" "+d.getUTCDate(),
+      h=d.getUTCHours(),h12=h%12||12;
+    return nom+" "+h12+":00 "+(h<12?"am":"pm")}
+  async function pideHora(){paso="slot";
+    await cargaOcupados();const hs=horarios();
+    await bot("Perfecto. Elige el **primer horario disponible** que te acomode para una llamada corta con Carlo (hora de Lima):");
+    chips(hs.map(ts=>[etiqueta(ts),()=>{add("u",etiqueta(ts));lead.ts=ts;lead.slot=etiqueta(ts);resumen()}]))}
+  async function resumen(){paso="fin";guardaCita();
     await bot("¡Listo! Este es tu resumen:",400);
-    add("resumen","<div><b>Nombre:</b> "+esc(lead.nombre)+"</div><div><b>Negocio:</b> "+esc(lead.negocio)+"</div><div><b>Necesito:</b> "+esc(lead.need)+"</div><div><b>Para cuándo:</b> "+esc(lead.cuando)+"</div>"+(lead.msg?"<div><b>Detalle:</b> "+esc(lead.msg)+"</div>":""));
-    await bot("Toca el botón y se abre WhatsApp con todo escrito. Carlo te responde con tu cotización.",450);
-    chips([["Enviar a Carlo por WhatsApp",enviar,"wa"],["Empezar de nuevo",()=>{Object.keys(lead).forEach(k=>lead[k]="");inicioCot()}]])}
-  function textoLead(){return [SALUDO,"Escribí desde el asistente de tu portafolio.","",
-    lead.nombre?"*Nombre:* "+lead.nombre:null,lead.negocio?"*Negocio:* "+lead.negocio:null,lead.need?"*Necesito:* "+lead.need:null,lead.cuando?"*Para cuándo:* "+lead.cuando:null,lead.msg?"*Detalle:* "+lead.msg:null,
-    "","Quedo atento a tu cotización.",FIRMA].filter(x=>x!==null).join("\n")}
-  function enviar(){window.open(wa(textoLead()),"_blank","noopener");bot("Abrí WhatsApp en otra pestaña. ¡Gracias por escribir! 🙌",300).then(()=>chips([["Otra duda",menu]]))}
-  function handoff(){window.open(wa([SALUDO,"Quería hablar contigo directamente.","",FIRMA].join("\n")),"_blank","noopener")}
+    add("resumen","<div><b>Nombre:</b> "+esc(lead.nombre)+"</div><div><b>Negocio:</b> "+esc(lead.negocio)+"</div><div><b>Necesito:</b> "+esc(lead.need)+"</div><div><b>Para cuándo:</b> "+esc(lead.cuando)+"</div><div><b>Correo:</b> "+esc(lead.email)+"</div><div><b>Celular:</b> "+esc(lead.tel)+"</div><div><b>Llamada:</b> "+esc(lead.slot)+" (hora de Lima)</div>"+(lead.msg?"<div><b>Detalle:</b> "+esc(lead.msg)+"</div>":""));
+    await bot("Tu llamada queda **reservada para "+lead.slot+"**. Toca el botón para confirmarla con Carlo por WhatsApp (ya va todo escrito).",450);
+    chips([["Confirmar por WhatsApp",enviado,"wa",wa(textoLead())],["Empezar de nuevo",()=>{Object.keys(lead).forEach(k=>lead[k]="");inicioCot()}]])}
+  function textoLead(){return [SALUDO,"Quiero cotizar una página web para mi negocio.","",
+    lead.nombre?"*Nombre:* "+lead.nombre:null,lead.negocio?"*Negocio:* "+lead.negocio:null,lead.need?"*Necesito:* "+lead.need:null,lead.cuando?"*Para cuándo:* "+lead.cuando:null,"*Correo:* "+lead.email,"*Celular:* "+lead.tel,"*Llamada que elegí:* "+lead.slot+" (hora de Lima)",lead.msg?"*Detalle:* "+lead.msg:null,
+    "","Quedo atento a tu cotización."].filter(x=>x!==null).join("\n")}
+  function enviado(){bot("Se abrió WhatsApp en otra pestaña. Envía el mensaje para dejar confirmada tu llamada. ¡Gracias por escribir! 🙌",300).then(()=>chips([["Otra duda",menu]]))}
+  function handoff(){window.open(wa([SALUDO,"Quería hablar contigo directamente."].join("\n")),"_blank","noopener")}
 
   const INT=[
     [/\b(hola|buenas|buenos d|hey|qué tal)/i,async()=>{await bot("¡Hola! 😊 ¿En qué te ayudo?");menu()}],
@@ -561,7 +619,7 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
   function abrir(){abierto=true;C.classList.add("on");L.style.display="none";T.classList.remove("on");try{sessionStorage.setItem("chat-visto","1")}catch(e){}
     if(!iniciado){iniciado=true;saludo()}setTimeout(()=>I.focus(),350)}
   function cerrar(){abierto=false;C.classList.remove("on");L.style.display="";L.focus()}
-  L.onclick=abrir;$("#chatX").onclick=cerrar;$("#chatWa").onclick=handoff;
+  window.abrirChat=abrir;L.onclick=abrir;$("#chatX").onclick=cerrar;$("#chatWa").onclick=handoff;
   T.onclick=e=>{if(e.target.id==="chatTx"){T.classList.remove("on");try{sessionStorage.setItem("chat-visto","1")}catch(_){}return}abrir()};
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&abierto)cerrar()});
   M.addEventListener("click",e=>{const a=e.target.closest("[data-ir]");if(a&&matchMedia("(max-width:520px)").matches)cerrar()});
@@ -570,20 +628,6 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
   if(!visto)setTimeout(()=>{if(!abierto)T.classList.add("on")},18000);
 })();
 
-/* formulario → WhatsApp */
-const f=$("#form");
-f.addEventListener("submit",e=>{
-  e.preventDefault();
-  if(!f.nombre.value.trim()){$("#err").textContent="Escribe tu nombre para poder responderte.";f.nombre.focus();return}
-  $("#err").textContent="";
-  const t=[SALUDO,"Vi tu portafolio y quiero cotizar un proyecto.","",
-    `*Nombre:* ${f.nombre.value.trim()}`,
-    f.negocio.value.trim()?`*Negocio:* ${f.negocio.value.trim()}`:null,
-    `*Necesito:* ${f.need.value}`,
-    f.msg.value.trim()?`*Detalle:* ${f.msg.value.trim()}`:null,
-    "","Quedo atento a tu respuesta.",FIRMA].filter(x=>x!==null).join("\n");
-  window.open(wa(t),"_blank","noopener");
-});
 </script>
 </body>
 </html>
