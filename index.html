@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="author" content="Carlo Andre Chiuyare Guillen (Carlo · Dev)">
 <meta name="copyright" content="© 2026 Carlo Andre Chiuyare Guillen. Todos los derechos reservados.">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
 <title>Carlo · Dev — Vende más con tienda online, chatbot y sistema para tu negocio</title>
 <meta name="description" content="Si tu negocio no vende por internet, estás perdiendo clientes. Tiendas online, chatbots y sistemas a medida que traen más clientes e ingresos. Agenda una llamada gratis.">
 <meta property="og:title" content="Carlo · Dev — Vende más con tienda online, chatbot y sistema para tu negocio">
@@ -279,7 +279,12 @@ footer a{color:var(--ink)}
 .chat-f button{width:46px;height:46px;border-radius:50%;border:0;background:var(--ink);color:#0A0A12;cursor:pointer;display:grid;place-items:center;flex:none}
 .chat-f button svg{width:20px;height:20px}
 .chat-n{font-size:.74rem;color:var(--mute);text-align:center;padding:0 1rem .6rem}
-@media(max-width:520px){.chat{right:.75rem;bottom:.75rem;border-radius:22px}}
+@media(max-width:520px){
+  .chat{left:0;right:0;bottom:auto;top:var(--vvt,0px);width:100%;height:var(--vvh,100dvh);border-radius:0;border-width:0}
+  .chat-f input{font-size:16px}
+}
+html.chat-open,html.chat-open body{overflow:hidden;overscroll-behavior:none}
+.chat-m{overscroll-behavior:contain}
 
 .movil .lienzo{pointer-events:none}
 .movil .cubre{display:none}
@@ -622,9 +627,19 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
     await bot("No estoy seguro de haber entendido 🤔. Puedo ayudarte con precios, plazos, pagos o dejar lista tu cotización. Si prefieres, hablas directo con Carlo.");
     chips([["Quiero cotizar",inicioCot],["Hablar con Carlo",handoff,"wa"],["Ver opciones",menu]])}
 
-  function abrir(){abierto=true;C.classList.add("on");L.style.display="none";T.classList.remove("on");try{sessionStorage.setItem("chat-visto","1")}catch(e){}
-    if(!iniciado){iniciado=true;saludo()}setTimeout(()=>I.focus(),350)}
-  function cerrar(){abierto=false;C.classList.remove("on");L.style.display="";L.focus()}
+  const vv=window.visualViewport,movil=()=>matchMedia("(max-width:520px)").matches;
+  function ajusta(){
+    if(!abierto)return;
+    if(movil()&&vv){C.style.setProperty("--vvh",Math.round(vv.height)+"px");C.style.setProperty("--vvt",Math.round(vv.offsetTop)+"px");M.scrollTop=M.scrollHeight}
+    else{C.style.removeProperty("--vvh");C.style.removeProperty("--vvt")}
+  }
+  if(vv){vv.addEventListener("resize",ajusta);vv.addEventListener("scroll",ajusta)}
+  addEventListener("orientationchange",()=>setTimeout(ajusta,250));
+  function abrir(){abierto=true;document.documentElement.classList.add("chat-open");C.classList.add("on");L.style.display="none";T.classList.remove("on");try{sessionStorage.setItem("chat-visto","1")}catch(e){}
+    ajusta();
+    if(!iniciado){iniciado=true;saludo()}
+    if(matchMedia("(pointer:fine)").matches)setTimeout(()=>I.focus(),350)} // en celular no abrimos el teclado solos
+  function cerrar(){abierto=false;document.documentElement.classList.remove("chat-open");C.classList.remove("on");C.style.removeProperty("--vvh");C.style.removeProperty("--vvt");L.style.display="";if(matchMedia("(pointer:fine)").matches)L.focus()}
   window.abrirChat=abrir;L.onclick=abrir;$("#chatX").onclick=cerrar;$("#chatWa").onclick=handoff;
   T.onclick=e=>{if(e.target.id==="chatTx"){T.classList.remove("on");try{sessionStorage.setItem("chat-visto","1")}catch(_){}return}abrir()};
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&abierto)cerrar()});
