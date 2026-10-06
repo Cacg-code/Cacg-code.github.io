@@ -23,7 +23,7 @@
       ["Eventos reservados", r.por.reservado, `${r.por.realizado} ya realizados`, "var(--menta)"],
       ["Ventas firmadas", J.soles(r.ingresos), `${J.soles(r.pipeline)} en negociación`, "var(--oro)"]
     ].map(([t, v, s, c]) => `<div class="kpi" style="--c:${c}"><small>${t}</small><b>${v}</b><span>${s}</span></div>`).join("");
-    $("#tabs").innerHTML = [["sol", "Solicitudes", r.por.nuevo], ["cal", "Calendario", 0], ["ev", "Eventos", r.por.reservado]].map(([id, n, c]) => `<button role="tab" data-v="${id}" class="${S.vista === id ? "on" : ""}" aria-selected="${S.vista === id}">${n}${c ? `<i>${c}</i>` : ""}</button>`).join("") + `<a class="btn sm suave dem" style="color:var(--ink);align-self:center" href="index.html#cotiza">+ Probar el cotizador</a>`;
+    $("#tabs").innerHTML = [["sol", "Solicitudes", r.por.nuevo], ["cal", "Calendario", 0], ["ev", "Eventos", r.por.reservado], ["pag", "Pagos", sols.filter(s => FIRMADO(s) && J.cobranza(s, hoy).estado === "vencido").length]].map(([id, n, c]) => `<button role="tab" data-v="${id}" class="${S.vista === id ? "on" : ""}" aria-selected="${S.vista === id}">${n}${c ? `<i>${c}</i>` : ""}</button>`).join("") + `<a class="btn sm suave dem" style="color:var(--ink);align-self:center" href="index.html#cotiza">+ Probar el cotizador</a>`;
     $$("#tabs button").forEach(b => b.onclick = () => { S.vista = b.dataset.v; pinta(); });
   }
 
@@ -38,7 +38,7 @@
       return `<article class="sol" data-id="${s.id}"><div class="q"><span class="em">${t.emoji}</span><div><b>${esc(s.nombre)}</b><small>${s.id} · ${t.n} · ${J.fechaCorta(s.fecha)}</small><small>${s.invitados} invitados · ${esc(s.cel)}</small></div></div>
         <div><span class="m">${J.soles(s.total)}</span><small>Adelanto ${J.soles(s.adelanto)}</small><span class="pag ${s.pago ? "s" : s.aviso ? "a" : "n"}">${s.pago ? "Adelanto pagado" : s.aviso ? "Avisó que pagó" : "Sin pago"}</span></div>
         <div><span class="est ${s.estado}">${J.ESTADO_N[s.estado]}</span><br><label class="sr" style="font-size:.74rem;color:var(--mut)">Cambiar a <select data-est aria-label="Estado de ${esc(s.nombre)}">${J.ESTADOS.map(e => `<option value="${e}" ${e === s.estado ? "selected" : ""}>${J.ESTADO_N[e]}</option>`).join("")}</select></label></div>
-        <div class="ac">${!s.pago && s.estado !== "realizado" ? `<button class="pri" data-a="paga">Confirmar adelanto</button>` : ""}<a target="_blank" rel="noopener" href="${celWa(s)}">WhatsApp</a><button data-a="del">Eliminar</button></div></article>`; }).join("")
+        <div class="ac">${!s.pago && s.estado !== "realizado" ? `<button class="pri" data-a="paga">Confirmar adelanto</button>` : ""}<a target="_blank" rel="noopener" href="${celWa(s)}">WhatsApp</a><a target="_blank" rel="noopener" href="presupuesto.html?id=${s.id}">Presupuesto PDF</a><button data-a="del">Eliminar</button></div></article>`; }).join("")
       : `<div class="vacio-p">No hay solicitudes en este estado todavía.</div>`;
     $$("#lista .sol").forEach(el => { const s = sols.find(x => x.id === el.dataset.id);
       $("[data-est]", el).onchange = e => cambia(s, e.target.value);
@@ -74,6 +74,26 @@
     el.innerHTML = `<h3>${J.fechaLarga(f)}</h3>${ev.length ? ev.map(s => `<p style="margin-bottom:.9rem"><b style="color:var(--ink)">${J.TIPOS[s.tipo].emoji} ${esc(s.nombre)}</b> <span class="est ${s.estado}">${J.ESTADO_N[s.estado]}</span><br>${s.id} · ${s.invitados} invitados · ${J.soles(s.total)}</p>`).join("") : bl ? "<p>Ocupado por otro cliente (sin detalle en la demo).</p>" : `<p>Día libre. ${r.pct ? `Se cotiza con recargo de ${r.pct} % (${r.motivos.join(" + ")}).` : "Sin recargo: buen día para ofrecer descuento."}</p>`}`;
   }
 
+
+  /* Pagos y cobranza */
+  const PAG_E = { vencido: ["Vencido", "ven"], pronto: ["Vence pronto", "pro"], aldia: ["Al día", "ok"], pagado: ["Pagado", "ok"] };
+  function pintaPag() {
+    const cs = sols.filter(FIRMADO).map(s => [s, J.cobranza(s, hoy)]);
+    const suma = (f, k) => cs.filter(f).reduce((t, [, c]) => t + c[k], 0);
+    const cobrado = suma(() => true, "cobrado"), pend = suma(() => true, "pendiente");
+    const venc = suma(([, c]) => c.estado === "vencido", "pendiente"), sem = suma(([, c]) => c.estado === "pronto", "pendiente");
+    const meses = {}; cs.forEach(([s, c]) => { const m = meses[s.fecha.slice(0, 7)] || (meses[s.fecha.slice(0, 7)] = { c: 0, p: 0 }); m.c += c.cobrado; m.p += c.pendiente; });
+    const ks = Object.keys(meses).sort(), max = Math.max(1, ...ks.map(k => meses[k].c + meses[k].p));
+    const por = cs.filter(([, c]) => c.estado !== "pagado").sort((a, b) => a[1].vence.localeCompare(b[1].vence)), hechos = cs.filter(([, c]) => c.estado === "pagado");
+    const cuando = d => d < 0 ? `venció hace ${-d} ${-d === 1 ? "día" : "días"}` : d === 0 ? "vence hoy" : `vence en ${d} ${d === 1 ? "día" : "días"}`;
+    $("#pag").innerHTML = `<div class="pg-res"><div><small>Cobrado</small><b style="color:#1f7a55">${J.soles(cobrado)}</b></div><div><small>Por cobrar</small><b>${J.soles(pend)}</b></div><div class="${venc ? "alerta" : ""}"><small>Vencido</small><b>${J.soles(venc)}</b></div><div><small>Vence en 14 días</small><b>${J.soles(sem)}</b></div></div>
+      <div class="pg-grid"><section class="pg-box"><h3>Ingresos por mes del evento</h3><div class="pg-bar">${ks.map(k => { const m = meses[k], [y, mo] = k.split("-"); return `<div class="col"><span class="v">${J.soles(m.c + m.p)}</span><div class="pila" style="height:${Math.max(6, (m.c + m.p) * 80 / max)}%"><i class="pe" style="flex:${m.p}"></i><i class="co" style="flex:${m.c}"></i></div><small>${J.MESES[Number(mo) - 1].slice(0, 3)} ${y.slice(2)}</small></div>`; }).join("")}</div><div class="leyenda" style="margin-top:.8rem;color:var(--mut)"><span><i class="dot" style="background:var(--menta)"></i>Cobrado</span><span><i class="dot" style="background:#FFB4A4"></i>Por cobrar</span></div></section>
+      <section class="pg-box"><h3>Por cobrar</h3>${por.length ? por.map(([s, c]) => `<article class="pg-fila" data-id="${s.id}"><div><b>${J.TIPOS[s.tipo].emoji} ${esc(s.nombre)}</b><small>Evento ${J.fechaCorta(s.fecha)} · saldo ${cuando(c.dias)} (${J.fechaCorta(c.vence)})</small></div><div class="r"><b>${J.soles(c.pendiente)}</b><span class="etq pg-${PAG_E[c.estado][1]}">${PAG_E[c.estado][0]}</span></div><div class="ac"><a target="_blank" rel="noopener" href="https://wa.me/51${s.cel}?text=${encodeURIComponent(J.waCobro(s, hoy))}">💬 Recordar por WhatsApp</a><button data-saldo>Marcar saldo pagado</button></div></article>`).join("") : `<div class="vacio-p" style="padding:1.6rem">Todo cobrado 🎉 No hay saldos pendientes.</div>`}
+        ${hechos.length ? `<details class="hechas"><summary>${hechos.length} evento${hechos.length > 1 ? "s" : ""} ya cobrado${hechos.length > 1 ? "s" : ""} por completo</summary>${hechos.map(([s]) => `<div class="pg-fila ok"><div><b>${J.TIPOS[s.tipo].emoji} ${esc(s.nombre)}</b><small>${J.fechaCorta(s.fecha)}</small></div><div class="r"><b>${J.soles(s.total)}</b><span class="etq pg-ok">Pagado</span></div></div>`).join("")}</details>` : ""}</section></div>`;
+    $$("#pag .pg-fila[data-id]").forEach(el => { const s = sols.find(x => x.id === el.dataset.id);
+      $("[data-saldo]", el).onclick = () => { s.pago = true; s.aviso = true; s.saldoOk = true; guardaSols(); pinta(); toast(`Saldo de ${s.nombre.split(" ")[0]} marcado como pagado ✅`); }; });
+  }
+
   /* Eventos reservados */
   const C = 2 * Math.PI * 52;
   function aro(p) { return `<div class="aro"><svg viewBox="0 0 130 130" aria-hidden="true"><circle class="f" cx="65" cy="65" r="52"/><circle class="p" cx="65" cy="65" r="52" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C * (1 - p / 100)).toFixed(1)}"/></svg><b>${p}%</b></div>`; }
@@ -88,7 +108,7 @@
       const fila = ([x, i]) => `<label><input type="checkbox" data-i="${i}" ${x.ok ? "checked" : ""}><span>${esc(x.t)}</span></label>`;
       return `<article class="ev${op ? " abre" : ""}" data-id="${s.id}">
         <button class="ev-cab" type="button" aria-expanded="${op}">${aro(p)}<span class="ev-tit"><h3>${t.emoji} ${esc(s.nombre)}</h3><span class="meta">${J.fechaCorta ? J.fechaCorta(s.fecha) : J.fechaLarga(s.fecha)} · ${cuando} · ${s.invitados} invitados</span></span>
-          <span class="ev-est"><span class="chip ${s.pago ? "ok" : "pen"}">${s.pago ? "Adelanto ✅" : "Adelanto ⏳"}</span><span class="ev-mas">${op ? "Ocultar" : "Ver detalle"} <i>⌄</i></span></span></button>
+          <span class="ev-est"><span class="etq ${s.pago ? "ok" : "pen"}">${s.pago ? "Adelanto ✅" : "Adelanto ⏳"}</span><span class="ev-mas">${op ? "Ocultar" : "Ver detalle"} <i>⌄</i></span></span></button>
         <div class="ev-sig">${sig ? `<span>Siguiente paso</span><b>${esc(sig.t)}</b>` : `<span>Todo listo</span><b>Solo falta marcar el evento como realizado 🎉</b>`}<em>${hechas}/${l.length}</em></div>
         <div class="ev-cuerpo"><div class="din"><span>Total <b>${J.soles(s.total)}</b></span><span>Adelanto <b>${J.soles(s.adelanto)}</b></span><span>Saldo <b>${J.soles(s.total - s.adelanto)}</b></span></div>
           <div class="chk">${pend.map(fila).join("")}</div>
@@ -106,7 +126,7 @@
 
   function pinta() {
     cabecera(); $$(".vista").forEach(v => v.classList.toggle("on", v.id === "v-" + S.vista));
-    if (S.vista === "sol") pintaSol(); else if (S.vista === "cal") pintaCal(); else pintaEv();
+    if (S.vista === "sol") pintaSol(); else if (S.vista === "cal") pintaCal(); else if (S.vista === "pag") pintaPag(); else pintaEv();
   }
   $("#csv").onclick = () => { const b = new Blob([J.csv(sols)], { type: "text/csv;charset=utf-8" }), a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = "solicitudes-jolgorio.csv"; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1500); };
   let armaB = 0; $("#borra").onclick = e => { if (!armaB) { armaB = 1; e.target.textContent = "¿Seguro? Toca otra vez"; return void setTimeout(() => { armaB = 0; e.target.textContent = "Restaurar datos de la demo"; }, 3000); }

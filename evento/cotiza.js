@@ -118,13 +118,23 @@
     return { id: "JOL-" + num, creada: ahora.toISOString(), nombre: d.nombre.trim(), cel: limpiaCel(d.cel), tipo: d.tipo, invitados: p.invitados, fecha: d.fecha, extras: p.extras, total: p.total, adelanto: p.adelanto, estado: "nuevo", pago: false, aviso: false, nota: d.nota || "" };
   }
 
+  /* Cobranza: el saldo vence 7 días antes del evento; en eventos realizados se da por pagado. */
+  const saldoPagado = s => s.estado === "realizado" || !!s.saldoOk;
+  function cobranza(s, hoy = new Date()) {
+    const saldo = s.total - s.adelanto, ok = saldoPagado(s), cobrado = (s.pago ? s.adelanto : 0) + (ok ? saldo : 0);
+    const vence = isoDe(new Date(aFecha(s.fecha).getTime() - 7 * 86400000)), dias = Math.round((aFecha(vence) - new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate())) / 86400000);
+    return { saldo, cobrado, pendiente: s.total - cobrado, vence, dias, saldoOk: ok, estado: ok && s.pago ? "pagado" : dias < 0 ? "vencido" : dias <= 14 ? "pronto" : "aldia" };
+  }
+  const waCobro = (s, hoy, yape = "999 888 777") => { const c = cobranza(s, hoy), pide = !s.pago ? c.pendiente : c.saldo;
+    return `Hola ${s.nombre.split(" ")[0]} 👋 Te escribe Jolgorio. Te recordamos que ${!s.pago ? "falta el adelanto" : "el saldo"} de ${soles(pide)} de tu ${TIPOS[s.tipo].n.toLowerCase()} del ${fechaLarga(s.fecha)} ${c.dias < 0 ? "ya venció" : "vence el " + fechaLarga(c.vence)}. Puedes pagarlo por Yape/Plin al ${yape}. ¡Gracias! 🎉`; };
+
   function resumenPanel(sols) {
     const por = {}; ESTADOS.forEach(e => { por[e] = sols.filter(s => s.estado === e).length; });
     const firmados = sols.filter(s => s.estado === "reservado" || s.estado === "realizado");
     return {
       por, total: sols.length,
       ingresos: firmados.reduce((t, s) => t + s.total, 0),
-      cobrado: firmados.filter(s => s.pago).reduce((t, s) => t + s.adelanto, 0) + sols.filter(s => s.estado === "realizado").reduce((t, s) => t + (s.total - s.adelanto), 0),
+      cobrado: firmados.reduce((t, s) => t + (s.pago ? s.adelanto : 0) + (saldoPagado(s) ? s.total - s.adelanto : 0), 0),
       aCobrar: sols.filter(s => s.aviso && !s.pago && s.estado !== "realizado").length,
       pipeline: sols.filter(s => s.estado === "nuevo" || s.estado === "cotizado").reduce((t, s) => t + s.total, 0)
     };
@@ -169,6 +179,6 @@
     ];
   }
 
-  const API = { TIPOS, EXTRAS, PAQUETES, ESTADOS, ESTADO_N, ADELANTO, BLOQUEOS, esc, soles, aFecha, isoDe, MESES, fechaLarga, fechaCorta, extrasValidos, recargoFecha, paqueteAplicable, presupuesto, estaOcupada, celularValido, limpiaCel, valida, validaContacto, mes, ocupadasDe, nuevaSolicitud, resumenPanel, checklistInicial, avance, waCliente, waEmpresa, ics, csv, semilla };
+  const API = { TIPOS, EXTRAS, PAQUETES, ESTADOS, ESTADO_N, ADELANTO, BLOQUEOS, esc, soles, aFecha, isoDe, MESES, fechaLarga, fechaCorta, extrasValidos, recargoFecha, paqueteAplicable, presupuesto, estaOcupada, celularValido, limpiaCel, valida, validaContacto, mes, ocupadasDe, nuevaSolicitud, resumenPanel, saldoPagado, cobranza, waCobro, checklistInicial, avance, waCliente, waEmpresa, ics, csv, semilla };
   if (typeof module !== "undefined" && module.exports) module.exports = API; else g.JOL = API;
 })(typeof window !== "undefined" ? window : globalThis);

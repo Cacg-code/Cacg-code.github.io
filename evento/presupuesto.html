@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!-- © Carlo · Dev — Presupuesto imprimible de Jolgorio (demo). Se arma con los datos guardados en este navegador. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Presupuesto · Jolgorio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#17112B;--coral:#FF5A3C;--oro:#FFC53D;--viol:#6B3FE0;--mut:#6F6684;--linea:#E7DFEF}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',system-ui,sans-serif;color:var(--ink);background:#EDE7F5;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.barra{position:sticky;top:0;z-index:5;display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;padding:.8rem 1rem;background:var(--ink)}
+.barra button,.barra a{border:0;border-radius:99px;padding:.65rem 1.2rem;font:700 .92rem 'Outfit',sans-serif;cursor:pointer;text-decoration:none;background:var(--coral);color:#fff}
+.barra a{background:transparent;color:#fff;border:1.5px solid #ffffff55}
+.hoja{width:min(794px,100%);margin:1.5rem auto;background:#fff;padding:2.6rem;border-radius:6px;box-shadow:0 20px 60px #17112b22}
+.cab{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;padding-bottom:1.4rem;border-bottom:4px solid transparent;border-image:linear-gradient(90deg,var(--coral),var(--oro),var(--viol)) 1}
+.logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:2rem;letter-spacing:-.03em}.logo span{color:var(--coral)}
+.logo small{display:block;font:500 .8rem 'Outfit',sans-serif;letter-spacing:0;color:var(--mut)}
+.cab .d{text-align:right;font-size:.85rem;color:var(--mut)}.cab .d b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;color:var(--ink)}
+h1{font-family:'Bricolage Grotesque',sans-serif;font-size:1.7rem;margin:1.6rem 0 .2rem}
+.sub{color:var(--mut);margin-bottom:1.3rem}
+.dat{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin-bottom:1.5rem}
+.dat div{background:#FAF6FF;border-radius:12px;padding:.7rem .9rem}.dat small{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}.dat b{font-size:.98rem}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);padding:.5rem 0;border-bottom:2px solid var(--ink)}th:last-child,td:last-child{text-align:right}
+td{padding:.65rem 0;border-bottom:1px solid var(--linea);vertical-align:top}td small{display:block;color:var(--mut);font-size:.8rem}
+td.inc{color:#1f7a55;font-weight:600}
+.tot{display:flex;justify-content:space-between;align-items:baseline;padding:1rem 0 .3rem;font-family:'Bricolage Grotesque',sans-serif}.tot span{font-size:1.1rem}.tot b{font-size:2rem}
+.ad{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.8rem 0 1.4rem}
+.ad div{border:1.5px solid var(--linea);border-radius:14px;padding:.8rem 1rem}.ad div:first-child{background:#FFF3E0;border-color:var(--oro)}.ad small{display:block;color:var(--mut);font-size:.78rem}.ad b{font-size:1.25rem}
+.cond{font-size:.82rem;color:var(--mut);padding-left:1.1rem;margin-bottom:1.4rem}.cond li{margin-bottom:.25rem}
+.pie{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--mut);border-top:1px solid var(--linea);padding-top:1rem}
+.vacio{max-width:520px;margin:4rem auto;background:#fff;padding:2rem;border-radius:16px;text-align:center}
+@media(max-width:560px){.hoja{padding:1.3rem;margin:.7rem auto}.cab .d{text-align:left}.ad{grid-template-columns:1fr}}
+@media print{body{background:#fff}.barra{display:none}.hoja{margin:0;box-shadow:none;border-radius:0;width:100%;padding:0}@page{size:A4;margin:16mm}}
+</style>
+</head>
+<body>
+<div class="barra" id="barra"><button type="button" id="imp">⬇ Descargar PDF</button><a href="index.html#cotiza">← Volver a Jolgorio</a></div>
+<main id="doc"></main>
+<script src="cotiza.js"></script>
+<script>
+(function () {
+  const J = window.JOL, esc = J.esc, $ = s => document.querySelector(s);
+  let sols = []; try { sols = JSON.parse(localStorage.getItem("jol_sol")) || []; } catch (e) {}
+  const id = new URLSearchParams(location.search).get("id"), s = Array.isArray(sols) ? sols.find(x => x.id === id) : null;
+  if (!s) { $("#barra").style.display = "none"; $("#doc").innerHTML = '<div class="vacio"><h2>No encontramos ese presupuesto</h2><p style="margin:.6rem 0 1.2rem;color:#6F6684">Los datos de la demo se guardan en este navegador. Arma una cotización y descárgalo al terminar.</p><a href="index.html#cotiza">Ir al cotizador</a></div>'; return; }
+  const p = J.presupuesto({ tipo: s.tipo, invitados: s.invitados, fecha: s.fecha, extras: s.extras }), t = J.TIPOS[s.tipo];
+  const creada = new Date(s.creada), vale = new Date(Math.max(creada.getTime(), Date.now()) + 7 * 86400000), iso = d => J.isoDe(d), ven = J.cobranza(s).vence;
+  document.title = "Presupuesto " + s.id + " · Jolgorio";
+  $("#doc").innerHTML = `<article class="hoja"><div class="cab"><div class="logo">jol<span>g</span>orio<small>Organizadora de eventos · Huaral y Lima</small></div><div class="d">Presupuesto<b>${esc(s.id)}</b>Emitido el ${J.fechaCorta(iso(creada))}<br>Válido hasta el ${J.fechaCorta(iso(vale))}</div></div>
+    <h1>${t.emoji} ${t.n} de ${esc(s.nombre)}</h1><p class="sub">${J.fechaLarga(s.fecha)} · ${s.invitados} invitados</p>
+    <div class="dat"><div><small>Cliente</small><b>${esc(s.nombre)}</b></div><div><small>Celular</small><b>${esc(s.cel)}</b></div><div><small>Fecha del evento</small><b>${J.fechaCorta(s.fecha)}</b></div><div><small>Invitados</small><b>${s.invitados}</b></div></div>
+    <table><thead><tr><th>Concepto</th><th>Monto</th></tr></thead><tbody>
+    ${p.lineas.map(l => `<tr><td>${esc(l.n)}<small>${esc(l.det)}</small></td><td class="${l.incluido ? "inc" : ""}">${l.incluido ? "Incluida" : J.soles(l.monto)}</td></tr>`).join("")}
+    ${p.descuento ? `<tr><td>Descuento paquete ${esc(p.paqueteN)}<small>−${J.PAQUETES[p.paquete].dto} % por combo</small></td><td>−${J.soles(p.descuento)}</td></tr>` : ""}
+    ${p.recargo ? `<tr><td>Recargo por fecha<small>${esc(p.recargoMotivo)} (+${p.recargoPct} %)</small></td><td>${J.soles(p.recargo)}</td></tr>` : ""}</tbody></table>
+    <div class="tot"><span>Total</span><b>${J.soles(p.total)}</b></div>
+    <div class="ad"><div><small>Adelanto para reservar (30 %)</small><b>${J.soles(p.adelanto)}</b><small>Yape o Plin al 999 888 777 · Jolgorio Eventos</small></div><div><small>Saldo (hasta el ${J.fechaCorta(ven)})</small><b>${J.soles(p.saldo)}</b><small>≈ ${J.soles(p.porPersona)} por invitado</small></div></div>
+    <ul class="cond"><li>Tu fecha se aparta 48 horas; se confirma con el adelanto.</li><li>El saldo se paga hasta 7 días antes del evento.</li><li>Cambios de fecha sin costo hasta 30 días antes, sujeto a disponibilidad.</li><li>La invitación digital con confirmación de asistencia está incluida.</li></ul>
+    <div class="pie"><span>Jolgorio · hola@jolgorio.demo · WhatsApp 999 999 999</span><span>Documento de demostración · precios referenciales</span></div></article>`;
+  $("#imp").onclick = () => window.print();
+})();
+</script>
+</body>
+</html>
