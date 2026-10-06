@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!-- © Carlo · Dev — panel del anfitrión de Invita (demo). Los datos viven en este navegador. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Panel · Invita</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<style>
+body{padding-bottom:3rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.2rem 0;flex-wrap:wrap}
+.top a.volver{font-weight:600;text-decoration:none;color:var(--ac)}
+.tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin:.4rem 0 1.6rem}
+.tabs button{padding:.55rem 1.1rem;border-radius:99px;font-weight:600;font-size:.9rem;border:1.5px solid var(--linea);background:var(--papel);transition:.25s}
+.tabs button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.2rem 0 2rem}
+.stat{background:var(--papel);border:1px solid var(--linea);border-radius:var(--r);padding:1.1rem 1.2rem}
+.stat small{display:block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.stat b{font-family:var(--f-d);font-size:2.4rem;font-weight:var(--peso-d);color:var(--ac);line-height:1.1}
+.barra{height:12px;border-radius:99px;background:var(--linea);overflow:hidden;margin:-.8rem 0 2rem;display:flex}
+.barra i{display:block;height:100%;transition:width .8s var(--ease)}
+h3.t{font-size:1.7rem;margin:2rem 0 .8rem}
+.fila{display:grid;grid-template-columns:1.3fr .8fr 1fr auto;gap:1rem;align-items:center;background:var(--papel);border:1px solid var(--linea);border-radius:20px;padding:.9rem 1.2rem;margin-bottom:.6rem;animation:fadeIn .4s}
+.fila b{font-weight:600}.fila small{color:var(--mut);display:block;font-size:.82rem}
+.est{display:inline-block;padding:.2rem .7rem;border-radius:99px;font-size:.78rem;font-weight:600}
+.est.si{background:#D8F0DD;color:#1C6B34}.est.no{background:#F6D8DC;color:#9A2438}.est.pend{background:#FBE9C6;color:#8A5A00}
+.acc{display:flex;gap:.4rem;flex-wrap:wrap}
+.acc button,.acc a{padding:.45rem .85rem;border-radius:99px;font-size:.82rem;font-weight:600;border:1.5px solid var(--linea);text-decoration:none;transition:.25s;background:transparent}
+.acc button:hover,.acc a:hover{border-color:var(--ac);color:var(--ac)}
+.nuevo{display:grid;grid-template-columns:1fr 110px auto;gap:.7rem;align-items:end;background:var(--papel);border:1px dashed var(--ac);border-radius:22px;padding:1rem 1.2rem}
+.menus{display:flex;gap:.6rem;flex-wrap:wrap}
+.menus span{padding:.5rem 1rem;border-radius:99px;background:var(--papel);border:1px solid var(--linea);font-size:.9rem}
+.menus b{color:var(--ac)}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}.fila{grid-template-columns:1fr}.nuevo{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="t-boda">
+<div class="wrap">
+  <div class="top"><a class="volver" id="vuelve" href="index.html">← Ver invitación</a><span class="sello" style="border-color:var(--linea);color:var(--mut);margin:0">Panel del anfitrión · demo</span></div>
+  <h2 id="tit">Tus <em>invitados</em></h2>
+  <div class="tabs" id="tabs"></div>
+  <div class="stats" id="stats"></div>
+  <div class="barra" id="barra"></div>
+  <h3 class="t">Menús</h3><div class="menus" id="menus"></div>
+  <h3 class="t">Lista de invitados</h3>
+  <div id="lista"></div>
+  <form class="nuevo" id="nuevo" style="margin-top:1rem">
+    <label class="c">Nueva invitación<input name="n" maxlength="50" placeholder="Nombre o familia"></label>
+    <label class="c">Pases<select name="p"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
+    <button class="btn" type="submit">Agregar</button>
+  </form>
+  <p style="margin-top:2rem;display:flex;gap:.7rem;flex-wrap:wrap"><button class="btn" id="csv">Descargar lista (Excel)</button><button class="btn suave" id="borra">Borrar datos de la demo</button></p>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="logica.js"></script>
+<script>
+(function () {
+  const L = window.EV, $ = s => document.querySelector(s);
+  const q = new URLSearchParams(location.search);
+  let tipo = L.EVENTOS[q.get("e")] ? q.get("e") : "boda";
+  const K = t => ({ inv: "ev_inv_" + t, resp: "ev_resp_" + t });
+  const leer = (k, def) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? def : v; } catch (e) { return def; } };
+  const guardar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+  const inv = () => { let a = leer(K(tipo).inv, null); if (!a) { a = L.INVITADOS[tipo].map(([id, nombre, pases]) => ({ id, nombre, pases })); guardar(K(tipo).inv, a); } return a; };
+  const resp = () => { let a = leer(K(tipo).resp, null); if (!a) { a = L.SEMILLA[tipo].map(r => Object.assign({ fecha: Date.now() - 864e5 }, r)); guardar(K(tipo).resp, a); } return a; };
+  let tt; const toast = m => { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 2200); };
+  const link = id => { const u = new URL("index.html", location.href); u.search = ""; u.searchParams.set("e", tipo); u.searchParams.set("i", id); return u.href; };
+  const NOMBRES = { boda: "💍 Boda", cumple: "🎂 Cumpleaños", despedida: "🍻 Despedida" };
+
+  function pinta() {
+    const ev = L.EVENTOS[tipo]; document.body.className = ev.clase;
+    $("#vuelve").href = "index.html?e=" + tipo; document.title = "Panel · " + ev.marca;
+    $("#tabs").innerHTML = Object.keys(NOMBRES).map(t => `<button data-t="${t}" class="${t === tipo ? "on" : ""}">${NOMBRES[t]}</button>`).join("");
+    const I = inv(), R = resp(), por = {}; R.forEach(r => por[r.inv] = r);
+    const s = L.resumen(I, R);
+    $("#stats").innerHTML = [["Pases enviados", s.total], ["Confirmados", s.conf], ["Dijeron que no", s.no], ["Sin responder", s.pendPases]].map(([a, b]) => `<div class="stat"><small>${a}</small><b>${b}</b></div>`).join("");
+    const noPases = I.filter(i => por[i.id] && por[i.id].asiste === "no").reduce((t, i) => t + i.pases, 0);
+    const pc = n => s.total ? (n / s.total * 100).toFixed(1) : 0;
+    $("#barra").innerHTML = `<i style="width:${pc(s.conf)}%;background:var(--ac)"></i><i style="width:${pc(noPases)}%;background:var(--ac2);opacity:.5"></i>`;
+    const m = Object.entries(s.menus);
+    $("#menus").innerHTML = m.length ? m.map(([k, v]) => `<span>${L.esc(k)} <b>× ${v}</b></span>`).join("") : `<span style="color:var(--mut)">Aún nadie ha elegido menú</span>`;
+    $("#lista").innerHTML = I.map(i => {
+      const r = por[i.id], est = !r ? "pend" : r.asiste;
+      return `<div class="fila"><div><b>${L.esc(i.nombre)}</b><small>${i.pases} ${i.pases === 1 ? "pase" : "pases"}${i.abierta ? " · invitación abierta" : ""}${r && r.alergias ? " · alergia: " + L.esc(r.alergias) : ""}</small></div>
+      <div><span class="est ${est}">${!r ? "Sin responder" : r.asiste === "si" ? "Va · " + r.personas : "No va"}</span></div>
+      <div><small>${r && r.menu ? L.esc(r.menu) : "—"}</small></div>
+      <div class="acc"><button data-a="copia" data-id="${L.esc(i.id)}">Copiar link</button><a target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(L.waInvitacion(ev, i.nombre, link(i.id)))}">Enviar WhatsApp</a><a href="${link(i.id)}" target="_blank" rel="noopener">Ver</a>${i.abierta ? `<button data-a="quita" data-id="${L.esc(i.id)}">Quitar</button>` : ""}</div></div>`;
+    }).join("");
+  }
+
+  document.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.closest("#tabs")) { tipo = b.dataset.t; history.replaceState(null, "", "?e=" + tipo); pinta(); return; }
+    if (b.dataset.a === "copia") { const u = link(b.dataset.id); (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(() => toast("Link copiado"), () => toast(u)); }
+    if (b.dataset.a === "quita") { guardar(K(tipo).inv, inv().filter(i => i.id !== b.dataset.id)); guardar(K(tipo).resp, resp().filter(r => r.inv !== b.dataset.id)); pinta(); }
+  });
+  $("#nuevo").addEventListener("submit", e => {
+    e.preventDefault(); const f = e.target, n = f.n.value.trim();
+    if (n.length < 2) { f.n.focus(); toast("Escribe un nombre"); return; }
+    const a = inv(); let id = L.slug(n) || "inv", k = id, c = 2; while (a.some(x => x.id === k)) k = id + "-" + c++;
+    a.push({ id: k, nombre: n, pases: Number(f.p.value) }); guardar(K(tipo).inv, a); f.reset(); f.p.value = "2"; pinta(); toast("Invitación creada: copia su link");
+  });
+  $("#csv").onclick = () => {
+    const b = new Blob([L.csv(resp())], { type: "text/csv;charset=utf-8" }), a = document.createElement("a");
+    a.href = URL.createObjectURL(b); a.download = "invitados-" + tipo + ".csv"; document.body.append(a); a.click(); a.remove();
+  };
+  $("#borra").onclick = () => { if (!confirm("¿Borrar los datos de la demo en este navegador?")) return; ["boda", "cumple", "despedida"].forEach(t => { try { localStorage.removeItem(K(t).inv); localStorage.removeItem(K(t).resp); } catch (e) {} }); pinta(); toast("Datos restablecidos"); };
+  pinta();
+})();
+</script>
+</body>
+</html>

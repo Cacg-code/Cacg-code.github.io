@@ -464,7 +464,11 @@ const DEMOS=[
  {id:"cabana",cat:"reservas",hero:4,nombre:"Cabaña Pinar",tipo:"Reservas con adelanto para alojamientos",g:"#2C5241",url:"cabana/",ruta:"cacg-code.github.io/cabana",
   txt:"Una cabaña de madera que se reserva sola: calendario con noches ocupadas, precio al instante, adelanto del 30 % por Yape o Plin y confirmación por WhatsApp. La anfitriona confirma los pagos desde su panel.",
   tech:["html", "css", "js", "wa"],
-  tags:["Calendario de noches","Adelanto Yape/Plin","Panel de la anfitriona","Animaciones modernas"]}
+  tags:["Calendario de noches","Adelanto Yape/Plin","Panel de la anfitriona","Animaciones modernas"]},
+ {id:"evento",cat:"reservas",nombre:"Invita",tipo:"Invitaciones con confirmación de asistencia",g:"#FF4F9A",url:"evento/",ruta:"cacg-code.github.io/evento",
+  txt:"Una invitación web para bodas, cumpleaños y despedidas: cuenta regresiva, cronograma, mapa y confirmación de asistencia con menú. El anfitrión ve quién viene y envía el link de cada invitado por WhatsApp.",
+  tech:["html", "css", "js", "wa"],
+  tags:["Link por invitado","Confirmación (RSVP)","Panel del anfitrión","3 estilos de evento"]}
 ];
 DEMOS.sort((a,b)=>CATS.findIndex(c=>c.id===a.cat)-CATS.findIndex(c=>c.id===b.cat));
 /* la cantidad de demos sale de DEMOS: al añadir una, todo se actualiza solo */
