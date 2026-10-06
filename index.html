@@ -9,7 +9,7 @@
 <title>Carlo · Dev — Vende más con tienda online, chatbot y sistema para tu negocio</title>
 <meta name="description" content="Si tu negocio no vende por internet, estás perdiendo clientes. Tiendas online, chatbots y sistemas a medida que traen más clientes e ingresos. Agenda una llamada gratis.">
 <meta property="og:title" content="Carlo · Dev — Desarrollo web Full Stack">
-<meta property="og:description" content="Portafolio con 6 demos en vivo: landing, tienda online, CRM, e-commerce en React, asistente virtual y reservas para restaurante. React, TypeScript, PHP y MySQL.">
+<meta property="og:description" content="Portafolio con demos en vivo: landing, tienda online, CRM, e-commerce en React, asistente virtual y reservas para restaurante. React, TypeScript, PHP y MySQL.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://cacg-code.github.io/assets/portada-og.jpg?v=3">
 <meta property="og:image:width" content="1200">
@@ -145,6 +145,9 @@ section.s{padding:clamp(5rem,12vw,10rem) 0}
 .cab p{color:var(--mute);font-size:1.15rem}
 
 /* proyectos */
+/* la cantidad de demos sale de DEMOS: al añadir una, todo se actualiza solo */
+const NUM=["Cero","Una","Dos","Tres","Cuatro","Cinco","Seis","Siete","Ocho","Nueve","Diez","Once","Doce"];
+document.querySelectorAll("[data-cuenta]").forEach(e=>e.textContent=NUM[DEMOS.length]||DEMOS.length);
 .proy{display:grid;gap:clamp(1.5rem,4vw,3rem)}
 .pr{position:relative;display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;padding:clamp(1.25rem,3vw,2.25rem);border-radius:32px;border:1px solid var(--line);background:linear-gradient(160deg,#ffffff0d,#ffffff03);overflow:hidden;--g:var(--v)}
 .pr::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:var(--g);filter:blur(120px);opacity:.22;right:-120px;top:-160px;pointer-events:none;transition:opacity .6s}
@@ -330,13 +333,13 @@ input,select,textarea{width:100%;min-width:0}
 <main id="top">
   <section class="hero">
     <div class="wrap">
-      <p class="pill"><b>Nuevo</b>Cinco demos listas para probar</p>
+      <p class="pill"><b>Nuevo</b><span data-cuenta="mayus">Seis</span> demos listas para probar</p>
       <h1 aria-label="Deja de perder clientes por no estar online"><span class="l"><span>Deja de perder</span></span><span class="l"><span class="grad"><span class="cambia" id="cambia"><b>clientes</b></span></span></span><span class="l"><span>por no estar online.</span></span></h1>
       <div class="fila">
         <p class="lead">Convierto tu negocio en una máquina de ventas online: tienda, chatbot que atiende 24/7 y sistema de clientes. Más gente que te encuentra, más pedidos, más ingresos.</p>
         <div class="acciones"><a class="btn" href="#proyectos">Ver los proyectos</a><a class="btn o" data-chat href="#">Pedir cotización</a></div>
       </div>
-      <div class="escena" id="escena" aria-label="Las seis demos en computadora y en celular">
+      <div class="escena" id="escena" aria-label="Las demos en computadora y en celular">
         <div class="halo" aria-hidden="true"></div>
         <div class="cuadro"><div class="pila"><div class="flota">
           <a class="dm" href="#p-landing" data-g="#FB923C" data-n="La Marea" aria-label="Ver la demo La Marea" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/landing</em></div><div class="pant"><img src="assets/landing-d.jpg" alt="La Marea en computadora" width="1180" height="740" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/landing-m.jpg" alt="La Marea en celular" width="390" height="844" decoding="async"></div></figure><span class="ver">Ver La Marea →</span></a>
@@ -358,7 +361,7 @@ input,select,textarea{width:100%;min-width:0}
 
   <section class="s" id="proyectos">
     <div class="wrap">
-      <div class="cab rv"><h2>Pruébalas<br><span class="grad">tú mismo</span></h2><p>Cinco proyectos de ejemplo, funcionando. Toca la pantalla para usarlos como lo haría tu cliente.</p></div>
+      <div class="cab rv"><h2>Pruébalas<br><span class="grad">tú mismo</span></h2><p><span data-cuenta="mayus">Seis</span> proyectos de ejemplo, funcionando. Toca la pantalla para usarlos como lo haría tu cliente.</p></div>
       <div class="proy" id="proy"></div>
     </div>
   </section>
@@ -556,7 +559,7 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
     await bot("¡Hola! 👋 Soy el asistente de **Carlo · Dev**. Puedo mostrarte las demos, resolver dudas rápidas o dejar lista tu cotización para que Carlo te responda por WhatsApp.");
     await bot("¿Qué te gustaría hacer?",450);menu()}
   async function demos(){add("u","Ver las demos");
-    await bot('<a href="#proyectos" data-ir="1">Mira las 6 demos aquí</a>: <strong>La Marea</strong> (página), <strong>Cumbre Café</strong> y <strong>FerreMax</strong> (tiendas), <strong>Áurea Spa</strong> (chatbot 24/7), <strong>Hilo CRM</strong> (sistema) y <strong>Brasa Noble</strong> (reservas). Puedes usarlas como lo haría tu cliente.');
+    await bot(`<a href="#proyectos" data-ir="1">Mira las ${DEMOS.length} demos aquí</a>: ${DEMOS.map(d=>`<strong>${d.nombre}</strong>`).join(", ").replace(/, ([^,]*)$/," y $1")}. Puedes usarlas como lo haría tu cliente.`);
     chips([["Quiero algo así",inicioCot],["Otra duda",menu]])}
   async function precios(){add("u","¿Cuánto cuesta?");
     await bot("Depende de lo que necesites: una página sencilla no cuesta lo mismo que una tienda con carrito. Carlo te responde con **precio y plazo por escrito** en tu cotización, sin costo. Para empezar se paga el **50%** y el resto al entregar.");
