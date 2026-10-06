@@ -9,7 +9,11 @@
 <title>Cumbre Café · Café peruano tostado en Lima</title>
 <meta name="description" content="Café de especialidad de Cusco, Cajamarca y Chanchamayo, tostado esta semana. Compra online y paga con Yape o transferencia.">
 <meta property="og:title" content="Cumbre Café · Tostado esta semana">
-<meta property="og:image" content="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=70">
+<meta property="og:image" content="https://cacg-code.github.io/tienda/fotos/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="preload" as="image" href="fotos/hero-900.webp" type="image/webp" media="(max-width:899px)">
+<link rel="preload" as="image" href="fotos/hero-1800.webp" type="image/webp" media="(min-width:900px)">
 <link rel="canonical" href="https://cacg-code.github.io/tienda/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cacg-code.github.io/tienda/">
@@ -65,7 +69,7 @@ header{position:sticky;top:0;z-index:40;background:rgba(27,43,217,.88);backdrop-
 
 /* hero */
 .hero{position:relative;background:var(--blue);color:#fff;overflow:hidden;isolation:isolate}
-.hero .foto{position:absolute;inset:-5% 0;z-index:-2;background:url("https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1800&q=70") center/cover;mix-blend-mode:multiply;opacity:.55}
+.hero .foto{position:absolute;inset:-5% 0;z-index:-2;background:url("fotos/hero-900.webp") center/cover;mix-blend-mode:multiply;opacity:.55}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 78% 40%,#3D4CFF88,transparent 70%)}
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;min-height:calc(100svh - 110px);padding:3rem 0}
 .hero h1{font-size:clamp(3rem,9vw,8.4rem);font-weight:800;margin-bottom:1.5rem;line-height:.92}
@@ -152,6 +156,16 @@ summary::after{content:"+";font-size:1.6rem;transition:transform .25s;flex:none}
 details[open] summary::after{transform:rotate(45deg)}
 details p{margin-top:.6rem;color:var(--muted);max-width:60ch}
 
+@media(min-width:900px){.hero .foto{background-image:url("fotos/hero-1800.webp")}}
+.rese{padding:clamp(3rem,7vw,5.5rem) 0}
+.rese h2{font-family:var(--f-d);font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;margin-bottom:1.5rem}
+.rese ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.rese li{background:#fff;border:1px solid var(--line);border-radius:22px;padding:1.4rem;display:grid;gap:.7rem;align-content:start}
+.rese .est{color:#B8860B;letter-spacing:.15em}
+.rese blockquote{margin:0;font-size:1.05rem}
+.rese cite{font-style:normal;font-weight:600}.rese cite span{display:block;font-weight:400;color:var(--muted);font-size:.9rem}
+.rese .nota{margin-top:1rem;color:var(--muted);font-size:.9rem}
+@media(max-width:860px){.rese ul{grid-template-columns:1fr}}
 .cto{padding:clamp(3rem,7vw,5rem) 0;background:var(--paper)}
 .cto .wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
 .cto h2{font-family:var(--f-d);font-size:clamp(2rem,5vw,3rem);line-height:1.05}
@@ -271,7 +285,19 @@ dialog[open]{animation:ap .35s cubic-bezier(.2,.8,.2,1)}
       <p class="rv" style="--dl:.1s">Visitamos cada finca, probamos cada lote y pagamos un precio justo. Tostamos en Lima en lotes pequeños para que tu café llegue con aroma, no con semanas de almacén.</p>
       <ol class="pasos rv" style="--dl:.2s"><li><b>01</b>Cosecha a mano entre 1 600 y 2 200 m de altura</li><li><b>02</b>Secado al sol y selección grano a grano</li><li><b>03</b>Tueste en Lima cada martes y jueves</li><li><b>04</b>Entrega en 48 horas con la fecha en la bolsa</li></ol>
     </div>
-    <div class="ph rv"><img id="ph" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1000&q=75" alt="Dos manos sostienen tazas de café con arte latte" loading="lazy" width="1000" height="1250"><span>Cada martes y jueves</span></div>
+    <div class="ph rv"><img id="ph" src="fotos/origen-1000.webp" srcset="fotos/origen-600.webp 600w, fotos/origen-1000.webp 1000w" sizes="(max-width:860px) 100vw, 50vw" alt="Dos manos sostienen tazas de café con arte latte" loading="lazy" width="1000" height="666"><span>Cada martes y jueves</span></div>
+  </div>
+</section>
+
+<section class="rese" id="resenas">
+  <div class="wrap">
+    <h2>Lo que dicen quienes ya lo probaron</h2>
+    <ul>
+      <li><span class="est" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>El Valle Sagrado huele a jazmín desde que abres la bolsa. Llegó en dos días con la fecha de tostado.</blockquote><cite>Lucía R.<span>San Isidro · compra en tienda online</span></cite></li>
+      <li><span class="est" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>Pedí por WhatsApp, pagué con Yape y me confirmaron al toque. Ya estoy en la suscripción mensual.</blockquote><cite>Marco T.<span>Surco · suscriptor</span></cite></li>
+      <li><span class="est" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>Me molieron el Cajamarca fino para mi moka y quedó perfecto. Precio justo para café de origen.</blockquote><cite>Daniela V.<span>Miraflores · compra en tienda online</span></cite></li>
+    </ul>
+    <p class="nota">Reseñas de ejemplo para esta demo.</p>
   </div>
 </section>
 
@@ -358,7 +384,7 @@ function bolsa(p){
 }
 $("#hbag").innerHTML=bolsa(P[0]);
 (()=>{const ld=document.createElement("script");ld.type="application/ld+json";ld.textContent=JSON.stringify({"@context":"https://schema.org","@graph":[
-  {"@type":"Store","name":"Cumbre Café","url":"https://cacg-code.github.io/tienda/","telephone":"+51999999999","areaServed":"Lima, Perú","priceRange":"S/ 36 - S/ 52","image":"https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=70"},
+  {"@type":"Store","name":"Cumbre Café","url":"https://cacg-code.github.io/tienda/","telephone":"+51999999999","areaServed":"Lima, Perú","priceRange":"S/ 36 - S/ 52","image":"https://cacg-code.github.io/tienda/fotos/og.jpg"},
   ...P.map(p=>({"@type":"Product","name":"Café "+p.n+" 250 g","description":`${p.o}, tueste ${p.t.toLowerCase()}. Notas: ${p.notas}.`,"brand":{"@type":"Brand","name":"Cumbre Café"},"offers":{"@type":"Offer","priceCurrency":"PEN","price":p.p.toFixed(2),"availability":"https://schema.org/InStock","url":"https://cacg-code.github.io/tienda/#catalogo"}}))]});document.head.appendChild(ld)})();
 
 const chips=$("#chips");
