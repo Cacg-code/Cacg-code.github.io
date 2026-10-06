@@ -223,8 +223,35 @@ dialog .lead{color:var(--mute);font-size:.9rem;margin-top:-.4rem}
 .rubros button:hover,.rubros button[aria-pressed="true"]{border-color:var(--g);background:var(--gs)}
 .rubros small{color:var(--mute)}
 
-.toast{position:fixed;left:50%;bottom:1.2rem;transform:translate(-50%,24px);background:var(--panel);border:1px solid var(--g);box-shadow:var(--glow);color:var(--ink);padding:.7rem 1.1rem;border-radius:12px;opacity:0;pointer-events:none;transition:.3s;z-index:99;max-width:calc(100% - 2rem)}
-.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;display:flex;align-items:center;bottom:1.2rem;transform:translateY(24px);background:var(--panel);border:1px solid var(--g);box-shadow:var(--glow);color:var(--ink);padding:.7rem 1.1rem;border-radius:12px;opacity:0;pointer-events:none;transition:.3s;z-index:99;max-width:calc(100% - 2rem)}
+.toast.on{opacity:1;transform:none}
+.toast button{margin-left:.8rem;padding:.25rem .7rem;border:1px solid var(--g);border-radius:8px;background:var(--gs);color:var(--g2);font-weight:700;cursor:pointer;pointer-events:auto}
+.meta{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:.9rem 1.1rem;margin-bottom:1.2rem}
+.meta-t{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+.meta-t b{font-size:.95rem}
+.mbar{height:10px;border-radius:99px;background:var(--panel2);overflow:hidden;margin:.55rem 0}
+.mbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--g),var(--g2));transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.meta.ok{border-color:var(--g)}
+.meta p{font-size:.85rem;color:var(--mute)}
+#imprimible{display:none}
+@media print{
+  html{background:#fff!important}
+  body.imp{background:#fff!important;color:#111!important}
+  body.imp::before{display:none!important}
+  body.imp>*:not(#imprimible){display:none!important}
+  body.imp #imprimible{display:block;font-family:system-ui,Arial,sans-serif;color:#111;padding:8mm}
+  #imprimible h1{font-size:1.7rem;color:#0a7a55;margin:0}
+  #imprimible .ph{display:flex;justify-content:space-between;gap:1rem;border-bottom:3px solid #10B981;padding-bottom:.8rem;margin-bottom:1.2rem}
+  #imprimible .ph .r{text-align:right;display:grid;gap:.15rem;font-size:.9rem}
+  #imprimible .pc{margin-bottom:1.2rem;line-height:1.5}
+  #imprimible table{width:100%;border-collapse:collapse}
+  #imprimible th{background:#ecfdf5;text-align:left;padding:.5rem .6rem;font-size:.85rem}
+  #imprimible td{padding:.5rem .6rem;border-bottom:1px solid #ddd}
+  #imprimible th:not(:first-child),#imprimible td:not(:first-child){text-align:right}
+  #imprimible tfoot td{font-weight:700;font-size:1.15rem;border-bottom:0;border-top:2px solid #111}
+  #imprimible .pn{margin-top:1.4rem;font-size:.9rem;line-height:1.5}
+  #imprimible .pf{margin-top:2rem;font-size:.75rem;color:#666;border-top:1px solid #ddd;padding-top:.6rem}
+}
 
 
 /* guía */
@@ -381,7 +408,7 @@ dialog .lead{color:var(--mute);font-size:.9rem;margin-top:-.4rem}
   <button type="button" class="btn sec peq" data-a="addItem" style="justify-self:start">+ Agregar línea</button>
   <div class="total"><span>Total</span><span id="cTot">S/ 0</span></div>
   <p class="err" id="cErr" role="alert"></p>
-  <div class="acc"><button type="button" class="btn sec" data-a="cerrar">Cancelar</button><span style="display:flex;gap:.5rem;flex-wrap:wrap"><button type="button" class="btn sec" data-a="cotBorrador">Guardar borrador</button><button type="button" class="btn" data-a="cotEnviar">Guardar y enviar</button></span></div>
+  <div class="acc"><button type="button" class="btn sec" data-a="cerrar">Cancelar</button><span style="display:flex;gap:.5rem;flex-wrap:wrap"><button type="button" class="btn sec" data-a="cotPdf">Descargar PDF</button><button type="button" class="btn sec" data-a="cotBorrador">Guardar borrador</button><button type="button" class="btn" data-a="cotEnviar">Guardar y enviar</button></span></div>
 </form></dialog>
 
 <!-- Cobro nuevo -->
@@ -441,6 +468,7 @@ dialog .lead{color:var(--mute);font-size:.9rem;margin-top:-.4rem}
 </div>
 <input type="file" id="archivo" accept=".csv,text/csv" hidden>
 <div class="toast" id="toast" role="status"></div>
+<div id="imprimible" aria-hidden="true"></div>
 
 <script>
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -560,10 +588,10 @@ function semilla(k){
   cb.push({id:nid++,cid:mc.id,concepto:R.mensual[0],monto:R.mensual[1],pagado:0,vence:sumar(R.mensual[2]),pagos:[],mensual:true});
   R.tareas.forEach(t=>ta.push({id:nid++,cid:cl[t[0]].id,texto:t[1],fecha:sumar(t[2]),hora:t[3],hecha:false}));
   return{rubro:k,clientes:cl,cotiz:co,cobros:cb,tareas:ta,nid,
-    plant:Object.fromEntries(Object.entries(PLANT0).map(([a,b])=>[a,b.t])),auto:true,dias:3,quien:"todos",visto:false};
+    plant:Object.fromEntries(Object.entries(PLANT0).map(([a,b])=>[a,b.t])),auto:true,dias:3,quien:"todos",visto:false,meta:{taller:6000,clinica:8000,carpinteria:9000}[k]||6000};
 }
 function cargar(){
-  try{const r=JSON.parse(localStorage.getItem(KEY));if(r&&r.clientes&&r.rubro&&RUBROS[r.rubro]){E=r;return}}catch(e){}
+  try{const r=JSON.parse(localStorage.getItem(KEY));if(r&&r.clientes&&r.rubro&&RUBROS[r.rubro]){E=r;if(!E.meta)E.meta=6000;return}}catch(e){}
   E=semilla("taller");
 }
 function guardar(){try{localStorage.setItem(KEY,JSON.stringify(E))}catch(e){}}
@@ -579,8 +607,12 @@ const vis=c=>E.quien==="todos"||c.asig===E.quien;
 const sys=(c,x)=>c.notas.push({t:hoy(),x,s:1});
 const cotTotal=q=>q.items.reduce((s,i)=>s+i.q*i.p,0);
 const codCot=q=>"COT-"+String(q.id).padStart(3,"0");
-let tTimer;
-function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tTimer);tTimer=setTimeout(()=>t.classList.remove("on"),3200)}
+let tTimer,pend=null,undoS=null;
+function toast(m){
+  const t=$("#toast");t.textContent=m;let ms=3200;
+  if(pend){undoS=pend;pend=null;const b=document.createElement("button");b.type="button";b.dataset.a="deshacer";b.textContent="Deshacer";t.append(b);ms=7000}
+  t.classList.add("on");clearTimeout(tTimer);tTimer=setTimeout(()=>t.classList.remove("on"),ms);
+}
 function semaforo(c){
   if(!abierto(c))return["var(--mute)","Cerrado"];
   if(!c.prox)return["var(--amber)","Sin fecha de contacto"];
@@ -648,11 +680,17 @@ function vHoy(){
   const abiertas=E.clientes.filter(c=>vis(c)&&abierto(c));
   const sin=abiertas.filter(c=>c.prox&&c.prox<hoy());
   const sec=(t,l,cls)=>l.length?`<h3 class="sec ${cls||""}">${t} <i>${l.length}</i></h3><div class="acciones">${l.map(filaAcc).join("")}</div>`:"";
+  const mesK=hoy().slice(0,7),vend=E.clientes.filter(c=>c.etapa==="ganado"&&(c.cerrado||"").slice(0,7)===mesK).reduce((s,c)=>s+c.valor,0);
+  const falta=Math.max(0,E.meta-vend),pct=Math.min(100,Math.round(vend/E.meta*100)),posible=abiertas.reduce((s,c)=>s+c.valor,0);
+  const mesN=new Date().toLocaleDateString("es-PE",{month:"long"});
+  const metaTxt=falta<=0?`¡Meta cumplida! Vendiste ${S(vend-E.meta)} más de lo que te propusiste.`:`Te faltan ${S(falta)}. `+(posible>=falta?`Tienes ${S(posible)} en ventas posibles: con cerrar una parte llegas.`:`Tus ventas posibles (${S(posible)}) no alcanzan: busca más clientes nuevos.`);
+  const metaHtml=`<section class="meta ${falta<=0?"ok":""}" aria-label="Meta del mes"><div class="meta-t"><b>Meta de ${mesN}</b><span class="num">${S(vend)} de ${S(E.meta)} · ${pct} %</span></div><div class="mbar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div><p>${metaTxt}</p></section>`;
   return `<section class="kpis" aria-label="Resumen">
     <div class="kpi ${vencido?"rojo":""}"><span>Por cobrar</span><b>${S(porCobrar)}</b><small>${vencido?`De esto, ${S(vencido)} ya venció`:"Dinero que tus clientes te deben"}</small></div>
     <div class="kpi"><span>Ventas posibles</span><b>${S(abiertas.reduce((s,c)=>s+c.valor,0))}</b><small>${abiertas.length} clientes que aún pueden comprar</small></div>
     <div class="kpi ${sin.length?"rojo":"verde"}"><span>Clientes sin atender</span><b>${sin.length}</b><small>${sin.length?"Se les pasó la fecha de contacto":"Todo al día, ¡bien!"}</small></div>
   </section>
+  ${metaHtml}
   ${ac.length?sec("Atrasado",at,"rojo")+sec("Para hoy",hy,"amb")+sec("Próximos 2 días",pr):`<div class="todo-ok"><b>Todo al día 🎉</b><span class="mut">No hay nada pendiente para hoy. Cuando entre un cliente nuevo, aparecerá aquí.</span></div>`}`;
 }
 
@@ -762,7 +800,9 @@ function vAjustes(){
    <div class="card"><h2>Seguimiento automático</h2><p class="nota">Hilo programa solo el próximo contacto cuando mueves un cliente a «Contactado» o «Cotizado», o cuando marcas «Hecho».</p>
     <div class="pl"><label style="display:flex;gap:.6rem;align-items:center;color:var(--ink)"><input type="checkbox" id="aAuto" ${E.auto?"checked":""} style="width:20px;height:20px;accent-color:var(--g)"> Programar seguimientos automáticamente</label>
     <label>Volver a escribirle después de (días)<input class="campo" id="aDias" type="number" min="1" max="30" value="${E.dias}"></label></div>
-    <p class="insight">Con esto, ningún cliente se queda esperando: cada uno tiene siempre una fecha para volver a escribirle.</p></div></div>`;
+    <p class="insight">Con esto, ningún cliente se queda esperando: cada uno tiene siempre una fecha para volver a escribirle.</p></div>
+   <div class="card"><h2>Meta de ventas del mes</h2><p class="nota">La barra de «Hoy» muestra cuánto llevas vendido (clientes en «Ganado» este mes) frente a esta meta.</p>
+    <div class="pl"><label>Meta mensual (S/)<input class="campo" id="aMeta" type="number" min="100" step="100" value="${E.meta}"></label></div></div></div>`;
 }
 
 const TITULOS={
@@ -789,6 +829,7 @@ function ir(v){vista=v;render();window.scrollTo({top:0})}
 function mover(id,et,motivo){
   const c=cli(id);if(!c||c.etapa===et)return;
   if(et==="perdido"&&!motivo){perdId=id;$("#lMot").innerHTML=MOTIVOS.map(m=>`<option>${m}</option>`).join("");$("#dPerd").showModal();return}
+  pend=JSON.stringify(E);
   c.etapa=et;sys(c,et==="perdido"?`Perdido (${motivo})`:"Pasó a "+ETN[et]);
   if(!c.primer&&et!=="nuevo")c.primer=hoy();
   let msg=`${c.nombre} pasó a ${ETN[et]}`;
@@ -827,7 +868,7 @@ function pintarFicha(){
   $("#fqt").innerHTML=TAGS.map(t=>`<button type="button" data-a="tag" data-t="${t}" aria-pressed="${fTags.includes(t)}">${t}</button>`).join("");
   $("#fhist").innerHTML=[...c.notas].reverse().map(n=>`<div class="${n.s?"sys":""}"><small>${fcorta(n.t)}</small>${esc(n.x)}</div>`).join("");
   const cs=E.cotiz.filter(q=>q.cid===c.id),bs=E.cobros.filter(b=>b.cid===c.id),ts=E.tareas.filter(t=>t.cid===c.id&&!t.hecha);
-  $("#fcot").innerHTML=cs.map(q=>`<div class="it"><span>${codCot(q)} · ${S(cotTotal(q))}<small>${fcorta(q.fecha)}</small></span><span style="display:flex;gap:.4rem;align-items:center"><span class="est ${q.estado}">${q.estado}</span><button class="btn sec peq" data-a="cotAbrir" data-id="${q.id}">Abrir</button></span></div>`).join("")+`<button class="btn sec peq" data-a="cotNueva" data-id="${c.id}" style="justify-self:start">+ Cotización</button>`;
+  $("#fcot").innerHTML=cs.map(q=>`<div class="it"><span>${codCot(q)} · ${S(cotTotal(q))}<small>${fcorta(q.fecha)}</small></span><span style="display:flex;gap:.4rem;align-items:center"><span class="est ${q.estado}">${q.estado}</span><button class="btn sec peq" data-a="cotPdfId" data-id="${q.id}">PDF</button><button class="btn sec peq" data-a="cotAbrir" data-id="${q.id}">Abrir</button></span></div>`).join("")+`<button class="btn sec peq" data-a="cotNueva" data-id="${c.id}" style="justify-self:start">+ Cotización</button>`;
   $("#fcob").innerHTML=bs.map(b=>{const e=estCob(b);return `<div class="it"><span>${esc(b.concepto)}<small>${e==="pagado"?"Pagado":"Falta "+S(saldo(b))+" · vence "+fcorta(b.vence)}</small></span><span style="display:flex;gap:.4rem;align-items:center"><span class="est ${e}">${e==="pagado"?"pagado":e}</span>${e!=="pagado"?`<button class="btn sec peq" data-a="pagar" data-id="${b.id}">Pago</button>`:""}</span></div>`}).join("")+`<button class="btn sec peq" data-a="cobNuevo" data-id="${c.id}" style="justify-self:start">+ Cobro</button>`;
   $("#ftar").innerHTML=ts.map(t=>`<div class="it"><span>${esc(t.texto)}<small>${fcorta(t.fecha)}${t.hora?" · "+esc(t.hora):""}</small></span><button class="btn sec peq" data-a="hechaTar" data-id="${t.id}">Hecha</button></div>`).join("")+`<button class="btn sec peq" data-a="tarNueva" data-id="${c.id}" style="justify-self:start">+ Tarea</button>`;
 }
@@ -873,6 +914,22 @@ function guardarCot(enviar){
   }
   guardar();$("#dCot").close();render();
   if(enviar){toast(E.auto?`Cotización enviada. Te recordaré en ${E.dias} días si no responde`:"Cotización guardada");abrirWa(c.id,"cotizacion")}else toast("Borrador guardado");
+}
+
+/* ---------- Cotización en PDF ---------- */
+function imprimirCot(q){
+  const c=cli(q.cid);if(!c)return;
+  const f=parse(q.fecha||hoy()).toLocaleDateString("es-PE",{day:"numeric",month:"long",year:"numeric"});
+  $("#imprimible").innerHTML=`<div class="ph"><div><h1>${esc(neg())}</h1><div>Cotización de servicio</div></div><div class="r"><b>${q.id?codCot(q):"BORRADOR"}</b><span>${f}</span><span>Válida por 7 días</span></div></div>
+  <div class="pc">Para: <b>${esc(c.nombre)}</b>${c.det?`<br>${esc(c.det)}`:""}${c.tel?`<br>Tel. ${esc(c.tel)}`:""}${c.mail?`<br>${esc(c.mail)}`:""}</div>
+  <table><thead><tr><th>Descripción</th><th>Cant.</th><th>Precio</th><th>Subtotal</th></tr></thead>
+  <tbody>${q.items.map(i=>`<tr><td>${esc(i.d)}</td><td>${i.q}</td><td>${S(i.p)}</td><td>${S(i.q*i.p)}</td></tr>`).join("")}</tbody>
+  <tfoot><tr><td colspan="3">Total</td><td>${S(cotTotal(q))}</td></tr></tfoot></table>
+  <div class="pn"><b>Condiciones:</b> se inicia con un adelanto del 50 %; el saldo se paga al entregar. Precios en soles.</div>
+  <div class="pf">Documento de ejemplo creado con Hilo CRM (demo con datos ficticios).</div>`;
+  document.body.classList.add("imp");
+  addEventListener("afterprint",()=>document.body.classList.remove("imp"),{once:true});
+  setTimeout(()=>window.print(),50);
 }
 
 /* ---------- Cobros ---------- */
@@ -984,8 +1041,12 @@ document.addEventListener("click",e=>{
   const b=e.target.closest("[data-a],[data-v]");if(!b)return;
   if(b.dataset.v){ir(b.dataset.v);return}
   const a=b.dataset.a,id=+b.dataset.id;
+  if(["hechoSeg","pospSeg","hechaTar","pospTar"].includes(a))pend=JSON.stringify(E);
   const sel={
    cerrar:()=>b.closest("dialog").close(),
+   deshacer:()=>{if(!undoS)return;E=JSON.parse(undoS);undoS=null;guardar();render();toast("Deshecho ↩")},
+   cotPdf:()=>{cotEd.cid=+$("#cCli").value;const items=cotEd.items.filter(i=>i.d.trim()&&i.q>0);if(!cotEd.cid||!items.length){$("#cErr").textContent="Agrega al menos una línea con descripción.";return}const q0=cotEd.id?E.cotiz.find(x=>x.id===cotEd.id):null;imprimirCot({id:cotEd.id,cid:cotEd.cid,items,fecha:q0?q0.fecha:hoy()})},
+   cotPdfId:()=>imprimirCot(E.cotiz.find(x=>x.id===id)),
    sub:()=>{subV=b.dataset.s;render()},
    ficha:()=>abrirFicha(id),
    mv:()=>{const c=cli(id),i=ETAPAS.findIndex(x=>x[0]===c.etapa),n=ETAPAS[i+ +b.dataset.d];if(n)mover(id,n[0])},
@@ -1023,6 +1084,7 @@ document.addEventListener("click",e=>{
    tourRubro:()=>{if(b.dataset.k!==E.rubro)cambiarRubro(b.dataset.k);$$("#tourR button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.k===E.rubro))}
   }[a];
   if(sel)sel();
+  pend=null;
 });
 document.addEventListener("keydown",e=>{
   if((e.key==="Enter"||e.key===" ")&&e.target.matches(".fila[data-a]")){e.preventDefault();e.target.click()}
@@ -1048,6 +1110,7 @@ $("#fCob").addEventListener("submit",e=>{
 $("#fPago").addEventListener("submit",e=>{
   const b=E.cobros.find(x=>x.id===pagoId),m=+$("#pMon").value;
   if(!(m>0)||m>saldo(b)){e.preventDefault();$("#pErr").textContent=`Escribe un monto entre 1 y ${saldo(b)}.`;return}
+  pend=JSON.stringify(E);
   b.pagado+=m;b.pagos.push({f:hoy(),m});const c=cli(b.cid);sys(c,`Pago recibido: ${S(m)} (${b.concepto})`);
   let extra="";
   if(saldo(b)<=0&&b.mensual&&!E.cobros.some(x=>x.cid===b.cid&&x.mensual&&x.concepto===b.concepto&&saldo(x)>0)){E.cobros.push({id:nuevoId(),cid:b.cid,concepto:b.concepto,monto:b.monto,pagado:0,vence:sumarMes(b.vence),pagos:[],mensual:true});extra=". Programé el cobro del próximo mes"}
@@ -1071,6 +1134,7 @@ $("#vista").addEventListener("input",e=>{
   const t=e.target;
   if(t.id==="fq"){fCli.q=t.value;const p=t.selectionStart;vistaFiltro();const n=$("#fq");n.focus();n.setSelectionRange(p,p)}
   else if(t.dataset.pl){E.plant[t.dataset.pl]=t.value;guardar()}
+  else if(t.id==="aMeta"){E.meta=Math.max(100,+t.value||6000);guardar()}
   else if(t.id==="aDias"){const v=Math.min(30,Math.max(1,+t.value||3));E.dias=v;guardar()}
 });
 function vistaFiltro(){$("#vista").innerHTML=vClientes()}
