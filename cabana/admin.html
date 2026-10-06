@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!-- © Carlo · Dev — panel de la anfitriona (demo). Los datos viven en este navegador. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Panel · Cabaña Pinar</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<style>
+body{padding:0 0 3rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.2rem 0;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1rem 0 2rem}
+.stat{background:var(--papel);border:1px solid var(--linea);border-radius:var(--r);padding:1.2rem}
+.stat small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.stat b{font-family:var(--f-d);font-size:2.2rem;font-weight:500;color:var(--pino)}
+.lista{display:grid;gap:.8rem}
+.rsv{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:1rem;align-items:center;background:var(--papel);border:1px solid var(--linea);border-radius:22px;padding:1.1rem 1.3rem;animation:fadeIn .5s}
+.rsv b{display:block;font-family:var(--f-d);font-weight:500;font-size:1.2rem}
+.rsv small{color:var(--mut);font-size:.82rem}
+.est{display:inline-block;padding:.25rem .7rem;border-radius:99px;font-size:.78rem;font-weight:600}
+.est.pendiente{background:#FBE9C6;color:#8A5A00}.est.confirmada{background:var(--bruma);color:var(--pino)}.est.cancelada{background:#F3D9D0;color:#8A3A1F}
+.acc{display:flex;gap:.5rem;flex-wrap:wrap}
+.acc button{padding:.5rem .9rem;border-radius:99px;font-size:.85rem;font-weight:600;border:1.5px solid var(--pino);transition:.25s}
+.acc button.p{background:var(--pino);color:#fff}.acc button:hover{transform:translateY(-2px)}
+.vacio{padding:3rem 1rem;text-align:center;color:var(--mut);background:var(--papel);border:1.5px dashed var(--linea);border-radius:22px}
+@media(max-width:760px){.stats{grid-template-columns:1fr}.rsv{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="logo" href="index.html">← Cabaña Pinar</a>
+    <span class="demo" style="background:var(--bruma);color:var(--pino)">Panel de la anfitriona · demo</span>
+  </div>
+  <h2 style="margin-bottom:.4rem">Tus <em>reservas</em></h2>
+  <p style="color:var(--mut)">Cuando alguien paga el adelanto desde la web, aparece aquí para que verifiques el pago en tu Yape/Plin y lo confirmes.</p>
+  <div class="stats"><div class="stat"><small>Por verificar</small><b id="sP">0</b></div><div class="stat"><small>Confirmadas</small><b id="sC">0</b></div><div class="stat"><small>Adelantos confirmados</small><b id="sI">S/ 0</b></div></div>
+  <div class="lista" id="lista"></div>
+  <p style="margin-top:2rem"><button class="btn suave" id="borra">Borrar datos de la demo</button></p>
+</div>
+<script src="logica.js"></script>
+<script>
+(function () {
+  const L = window.CP, KEY = "cp_reservas", $ = s => document.querySelector(s);
+  const leer = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } };
+  const guardar = r => { try { localStorage.setItem(KEY, JSON.stringify(r)); } catch (e) {} };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  function pinta() {
+    const r = leer().slice().reverse();
+    $("#sP").textContent = r.filter(x => x.estado === "pendiente").length;
+    $("#sC").textContent = r.filter(x => x.estado === "confirmada").length;
+    $("#sI").textContent = L.soles(r.filter(x => x.estado === "confirmada").reduce((t, x) => t + x.adelanto, 0));
+    $("#lista").innerHTML = r.length ? r.map(x => `<div class="rsv">
+      <div><b>${esc(x.nombre)}</b><small>${esc(x.cel)} · ${x.huespedes} huésp.${x.nota ? " · " + esc(x.nota) : ""}</small></div>
+      <div><b>${L.fmt(x.ini)} → ${L.fmt(x.fin)}</b><small>${L.diasEntre(x.ini, x.fin)} noches · total ${L.soles(x.total)}</small></div>
+      <div><span class="est ${x.estado}">${x.estado}</span><br><small>${x.medio} ${L.soles(x.adelanto)} · op. ${esc(x.op)}</small></div>
+      <div class="acc">${x.estado === "pendiente" ? `<button class="p" data-a="ok" data-id="${x.id}">Confirmar pago</button>` : ""}${x.estado !== "cancelada" ? `<button data-a="no" data-id="${x.id}">Cancelar</button>` : ""}
+      <a class="btn suave" style="padding:.45rem .9rem;font-size:.85rem" target="_blank" rel="noopener" href="https://wa.me/51${esc(x.cel)}?text=${encodeURIComponent(x.estado === "confirmada" ? "Hola " + x.nombre + ", tu reserva en Cabaña Pinar está confirmada. ¡Te esperamos!" : "Hola " + x.nombre + ", recibimos tu reserva en Cabaña Pinar.")}">WhatsApp</a></div></div>`).join("")
+      : `<div class="vacio">Aún no hay reservas. Haz una desde <a href="index.html">la página principal</a> y aparecerá aquí.</div>`;
+  }
+  $("#lista").addEventListener("click", e => {
+    const b = e.target.closest("button[data-a]"); if (!b) return;
+    const r = leer(), x = r.find(y => y.id === b.dataset.id); if (!x) return;
+    x.estado = b.dataset.a === "ok" ? "confirmada" : "cancelada"; guardar(r); pinta();
+  });
+  $("#borra").onclick = () => { guardar([]); pinta(); };
+  addEventListener("storage", pinta); pinta();
+})();
+</script>
+</body>
+</html>

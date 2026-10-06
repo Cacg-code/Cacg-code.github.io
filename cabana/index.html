@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!-- © Carlo · Dev — demo de reservas con adelanto para alojamientos. Las fotos son referenciales (CC BY 2.0, ver créditos). -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cabaña Pinar · Reserva tu escapada con adelanto</title>
+<meta name="description" content="Cabaña de madera para 5 personas entre pinos. Elige tus noches, ve el precio al instante y asegura tu fecha con un adelanto por Yape o Plin.">
+<meta name="theme-color" content="#1F3A2E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%231F3A2E%27/%3E%3Cpath d=%27M16 5 9 15h4l-5 8h6v4h4v-4h6l-5-8h4z%27 fill=%27%23E3A33B%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LodgingBusiness","name":"Cabaña Pinar (demo)","description":"Cabaña de madera para 5 personas","image":"fotos/ext.webp","priceRange":"S/180 - S/240 por noche"}</script>
+</head>
+<body>
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Cabaña Pinar">
+    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3 8 14h5l-6 9h7v6h4v-6h7l-6-9h5z"/></svg>Pinar
+  </a>
+  <nav class="links"><a href="#vivir">La cabaña</a><a href="#galeria">Fotos</a><a href="#cerca">Cerca</a><a href="#resenas">Reseñas</a><a href="#reservar">Fechas</a></nav>
+  <div class="acc-nav"><a class="adm" href="admin.html" title="Acceso al panel de la anfitriona (demo)">Panel admin</a><a class="btn miel" href="#reservar" data-mag>Reservar</a></div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="marco">
+    <div class="foto"><img src="fotos/ext.webp" alt="Cabaña de madera con dos sillas en la terraza, rodeada de pasto y árboles" data-par="0.12" fetchpriority="high"></div>
+    <div class="vel"></div>
+    <canvas id="luci" aria-hidden="true"></canvas>
+    <div class="scroll">Desliza</div>
+    <div class="txt">
+      <span class="rate rv"><b>4.9</b> ★★★★★ <i>· 128 reseñas · Anfitriona destacada</i></span>
+      <span class="kick" style="color:#fff">Cabaña de madera · hasta 5 huéspedes</span>
+      <h1 data-split>Apaga el ruido, <em>enciende la estufa</em></h1>
+      <p class="sub rv" style="--d:6">Una cabaña entre pinos para desconectar. Elige tus noches, mira el precio al instante y asegura tu fecha con un adelanto.</p>
+      <div class="chips rv" style="--d:8"><span>Estufa a leña</span><span>Cocina equipada</span><span>Terraza y jardín</span><span>Wifi</span></div>
+    </div>
+    <form class="barra rv" id="barra" style="--d:9" autocomplete="off">
+      <label><small>Llegada</small><b id="bLle">Elegir</b></label>
+      <label><small>Salida</small><b id="bSal">Elegir</b></label>
+      <label><small>Huéspedes</small><b id="bHue">2 personas</b></label>
+      <a class="btn miel" href="#reservar">Ver fechas
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a>
+    </form>
+  </div>
+</section>
+
+<section class="datos wrap">
+  <div class="fila">
+    <div class="dato rv" style="--d:0"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="4"/><path d="M6 27c0-6 4-9 10-9s10 3 10 9"/></svg><b>5</b><span>huéspedes</span></div>
+    <div class="dato rv" style="--d:1"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 24V10m0 9h26v5M3 19v-3a3 3 0 0 1 3-3h20a3 3 0 0 1 3 3v3"/></svg><b>1</b><span>dormitorio + sofá cama</span></div>
+    <div class="dato rv" style="--d:2"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4c1 5 7 7 7 14a7 7 0 0 1-14 0c0-3 2-4 3-6 1 2 2 2 2 2 1-3 1-6 2-10z"/></svg><b>Leña</b><span>estufa clásica</span></div>
+    <div class="dato rv" style="--d:3"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12a16 16 0 0 1 22 0M9 16a10 10 0 0 1 14 0M13 20a4 4 0 0 1 6 0"/><circle cx="16" cy="25" r="1"/></svg><b>Wifi</b><span>en toda la cabaña</span></div>
+    <div class="dato rv" style="--d:4"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M16 9v7l5 3"/></svg><b>15:00</b><span>check-in · salida 11:00</span></div>
+  </div>
+</section>
+
+
+<section class="vivir wrap" id="vivir">
+  <div class="fila-h">
+    <div class="img rvi" style="--d:0"><img src="fotos/estufa.webp" alt="Estufa a leña con tetera" loading="lazy"></div>
+    <div class="tx"><span class="kick">Noches de leña</span><h2 data-split>El calor que <em>se escucha</em></h2>
+      <p class="rv">Prende la estufa, pon la tetera y deja que la madera haga el resto. Aquí las noches son frescas, silenciosas y llenas de estrellas.</p>
+      <ul class="lista-v rv" style="--d:2"><li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg>Leña incluida las dos primeras noches</li><li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg>Mantas y edredones extra</li><li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg>Sin ruido de ciudad: solo grillos y viento</li></ul></div>
+  </div>
+  <div class="fila-h inv">
+    <div class="img rvi" style="--d:0"><img src="fotos/jardin.webp" alt="Puertas de vidrio con vista al jardín" loading="lazy"></div>
+    <div class="tx"><span class="kick">Mañanas de jardín</span><h2 data-split>Café con vista <em>al pinar</em></h2>
+      <p class="rv">Abre las puertas de vidrio y sal directo al jardín. Terraza con sillas, pasto para correr y espacio para una parrilla en familia.</p>
+      <ul class="lista-v rv" style="--d:2"><li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg>Terraza con sillas y mesa</li><li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg>Parrilla y carbón a pedido</li><li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg>Ideal para mascotas pequeñas</li></ul></div>
+  </div>
+</section>
+
+<section class="incluye">
+  <div class="wrap">
+    <div class="cab2"><span class="kick">Todo listo</span><h2 data-split>Solo trae <em>tus ganas</em></h2></div>
+    <div class="amen"><div class="am rv" style="--d:0"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Cama matrimonial + sofá cama</span></div><div class="am rv" style="--d:1"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Cocina equipada</span></div><div class="am rv" style="--d:2"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Refrigeradora y hervidor</span></div><div class="am rv" style="--d:3"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Estufa a leña</span></div><div class="am rv" style="--d:0"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Wifi rápido</span></div><div class="am rv" style="--d:1"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>TV con streaming</span></div><div class="am rv" style="--d:2"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Aire acondicionado</span></div><div class="am rv" style="--d:3"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Ropa de cama y toallas</span></div><div class="am rv" style="--d:0"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Terraza y jardín</span></div><div class="am rv" style="--d:1"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Estacionamiento privado</span></div><div class="am rv" style="--d:2"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Parrilla (a pedido)</span></div><div class="am rv" style="--d:3"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-9"/></svg><span>Botiquín y extintor</span></div></div>
+  </div>
+</section>
+
+<section class="dia wrap">
+  <div class="cab2"><span class="kick">Un día aquí</span><h2 data-split>Sin reloj, <em>con ritmo</em></h2></div>
+  <div class="linea">
+    <div class="hito rv" style="--d:0"><i>07:30</i><h3>Café y niebla</h3><p>Abres la puerta y el pinar huele a lluvia fresca.</p></div>
+    <div class="hito rv" style="--d:1"><i>13:00</i><h3>Almuerzo en la terraza</h3><p>Cocina lo que quieras o pide a un restaurante local.</p></div>
+    <div class="hito rv" style="--d:2"><i>18:30</i><h3>Atardecer y parrilla</h3><p>El cielo se pone naranja y el humo sube lento.</p></div>
+    <div class="hito rv" style="--d:3"><i>22:00</i><h3>Estufa y estrellas</h3><p>Manta, té caliente y un cielo que no verás en la ciudad.</p></div>
+  </div>
+</section>
+
+<section class="galeria wrap" id="galeria">
+  <div class="cab">
+    <div><span class="kick">Por dentro</span><h2 data-split>Madera, luz <em>y calma</em></h2></div>
+    <p class="rv">Todo en un solo ambiente cálido: sala, cocina, comedor y dormitorio. Toca una foto para verla grande.</p>
+  </div>
+  <div class="bento">
+    <figure class="g1 rvi" style="--d:0"><img src="fotos/sala.webp" alt="Sala y dormitorio de la cabaña" loading="lazy"><figcaption>Sala y dormitorio</figcaption></figure>
+    <figure class="g2 rvi" style="--d:1"><img src="fotos/cama.webp" alt="Cama matrimonial con ropa de cama" loading="lazy"><figcaption>Dormitorio</figcaption></figure>
+    <figure class="rvi" style="--d:2"><img src="fotos/jardin.webp" alt="Puertas con vista al jardín" loading="lazy"><figcaption>Vista al jardín</figcaption></figure>
+    <figure class="rvi" style="--d:3"><img src="fotos/cocina.webp" alt="Cocina y comedor" loading="lazy"><figcaption>Cocina</figcaption></figure>
+    <figure class="g5 rvi" style="--d:4"><img src="fotos/estufa.webp" alt="Estufa a leña con tetera" loading="lazy"><figcaption>Estufa a leña</figcaption></figure>
+    <figure class="rvi" style="--d:5"><img src="fotos/comedor.webp" alt="Comedor con mesa y sillas blancas" loading="lazy"><figcaption>Comedor</figcaption></figure>
+    <figure class="g7 rvi" style="--d:6"><img src="fotos/estar.webp" alt="Área de estar con sofá" loading="lazy"><figcaption>Zona de estar</figcaption></figure>
+  </div>
+</section>
+
+
+<section class="cerca" id="cerca">
+  <div class="wrap cg">
+    <div>
+      <span class="kick">Alrededores</span><h2 data-split>Cerca de todo, <em>lejos de todo</em></h2>
+      <p class="rv" style="margin:1rem 0 1.6rem;color:var(--mut)">A unas 2 horas de la ciudad por carretera asfaltada. Desde la cabaña llegas en minutos a:</p>
+      <div class="plan">
+        <div class="pl rv" style="--d:0"><b>Cascada del Pino</b><span>Caminata · 15 min</span></div>
+        <div class="pl rv" style="--d:1"><b>Mirador del valle</b><span>En auto · 25 min</span></div>
+        <div class="pl rv" style="--d:2"><b>Mercado y panadería</b><span>En auto · 10 min</span></div>
+        <div class="pl rv" style="--d:3"><b>Laguna para kayak</b><span>En auto · 40 min</span></div>
+      </div>
+    </div>
+    <div class="mapa rv" style="--d:2" aria-hidden="true">
+      <svg viewBox="0 0 400 360"><defs><pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#cfd9c8" stroke-width=".6"/></pattern></defs>
+        <rect width="400" height="360" rx="28" fill="#E9EFE4"/><rect width="400" height="360" rx="28" fill="url(#g)"/>
+        <path d="M-10 250C80 220 130 280 210 230S330 150 410 190" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"/>
+        <path d="M-10 250C80 220 130 280 210 230S330 150 410 190" fill="none" stroke="#C9B58A" stroke-width="2" stroke-dasharray="6 7"/>
+        <path d="M250 -10C240 60 290 90 270 150S300 280 330 370" fill="none" stroke="#a9c8d6" stroke-width="12" stroke-linecap="round" opacity=".8"/>
+        <g fill="#7A9A6B" opacity=".75"><path d="m60 90 12-24 12 24z M44 110l16-30 16 30z"/><path d="m110 60 10-20 10 20z M96 76l14-26 14 26z"/><path d="m320 70 12-22 12 22z"/><path d="m60 300 12-22 12 22z M84 312l14-26 14 26z"/><path d="m350 300 12-22 12 22z"/></g>
+        <g><circle cx="205" cy="228" r="30" fill="#E3A33B" opacity=".25"><animate attributeName="r" values="14;34;14" dur="2.6s" repeatCount="indefinite"/></circle><circle cx="205" cy="228" r="11" fill="#1F3A2E"/><path d="m200 228 4 4 7-8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></g>
+        <g font-family="Outfit,sans-serif" font-size="11" fill="#1F3A2E" font-weight="600"><text x="218" y="214">Cabaña Pinar</text><text x="120" y="130" fill="#5E6B63" font-weight="500">Cascada · 15 min</text><text x="262" y="110" fill="#5E6B63" font-weight="500">Mirador</text><text x="40" y="262" fill="#5E6B63" font-weight="500">Mercado</text><text x="282" y="330" fill="#5E6B63" font-weight="500">Laguna</text></g>
+        <g fill="#5E6B63"><circle cx="150" cy="140" r="4"/><circle cx="286" cy="120" r="4"/><circle cx="70" cy="240" r="4"/><circle cx="318" cy="316" r="4"/></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="resenas" id="resenas">
+  <div class="wrap">
+    <div class="rtop">
+      <div><span class="kick">Lo que dicen</span><h2 data-split>Huéspedes que <em>vuelven</em></h2></div>
+      <div class="nota rv"><b>4.9</b><div><span class="est5">★★★★★</span><small>128 reseñas</small></div></div>
+    </div>
+    <div class="barras rv">
+      <div><span>Limpieza</span><i><u style="--w:98%"></u></i><em>4.9</em></div>
+      <div><span>Ubicación</span><i><u style="--w:96%"></u></i><em>4.8</em></div>
+      <div><span>Comunicación</span><i><u style="--w:100%"></u></i><em>5.0</em></div>
+      <div><span>Valor</span><i><u style="--w:94%"></u></i><em>4.7</em></div>
+    </div>
+    <div class="rcards">
+      <article class="rc rv" style="--d:0"><div class="st">★★★★★</div><p>“Llegamos cansados y a la media hora ya teníamos la estufa prendida. Silencio total. Volveremos en invierno.”</p><footer><span class="av">M</span><div><b>Mariana y Luis</b><small>Pareja · escapada de fin de semana</small></div></footer></article>
+      <article class="rc rv" style="--d:1"><div class="st">★★★★★</div><p>“Fuimos 5 con una perrita y todo cómodo. Rosa respondió al instante y el check-in fue facilísimo.”</p><footer><span class="av">J</span><div><b>Jorge R.</b><small>Familia · 3 noches</small></div></footer></article>
+      <article class="rc rv" style="--d:2"><div class="st">★★★★★</div><p>“Reservar fue rapidísimo: elegí fechas, adelanté por Yape y me llegó la confirmación. Cero vueltas.”</p><footer><span class="av">C</span><div><b>Camila T.</b><small>Amigas · cumpleaños</small></div></footer></article>
+    </div>
+    <p class="nota-demo">Reseñas de ejemplo para la demostración.</p>
+  </div>
+</section>
+
+<section class="reserva" id="reservar">
+  <div class="wrap">
+    <div class="cab"><span class="kick">Disponibilidad</span><h2 data-split>Elige tus noches, <em>nosotros guardamos la fecha</em></h2>
+      <p class="rv">Toca la llegada y luego la salida. El precio se calcula solo y reservas con un adelanto del 30 %.</p></div>
+    <div class="rgrid">
+      <div class="cal rv">
+        <div class="top">
+          <button class="nv" id="prev" aria-label="Mes anterior"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m10 3-5 5 5 5"/></svg></button>
+          <span id="rangoMes" style="font-size:.85rem;color:var(--mut)"></span>
+          <button class="nv" id="next" aria-label="Mes siguiente"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 3 5 5-5 5"/></svg></button>
+        </div>
+        <div class="sug" id="sug" aria-label="Fechas libres sugeridas"></div>
+        <div class="meses" id="meses"></div>
+        <div class="leyenda"><span><i style="background:var(--pino)"></i>Tu estancia</span><span><i style="background:var(--bruma)"></i>Libre</span><span><i style="background:repeating-linear-gradient(135deg,#fff 0 3px,#cfd9c8 3px 5px)"></i>Ocupado</span><span>S/ 180 entre semana · S/ 240 vie y sáb</span></div>
+        <p class="aviso" id="aviso" role="status"></p>
+      </div>
+
+      <aside class="resumen rv" style="--d:2" id="resumen">
+        <h3>Tu estancia</h3>
+        <div class="fechas"><div><small>Llegada</small><b id="rLle">—</b></div><div><small>Salida</small><b id="rSal">—</b></div></div>
+        <div class="paso"><span>Huéspedes<small>2 incluidos · +S/ 25 por noche c/u extra</small></span>
+          <div class="stp"><button id="hMenos" aria-label="Menos huéspedes">−</button><b id="hNum">2</b><button id="hMas" aria-label="Más huéspedes">+</button></div></div>
+        <div id="rDet"><p class="vacio">Elige llegada y salida en el calendario para ver el precio.</p></div>
+        <button class="btn miel" id="continuar" disabled data-mag>Continuar
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></button>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="como wrap" id="como">
+  <span class="kick">Cómo reservo</span><h2 data-split>Tres pasos, <em>sin llamadas</em></h2>
+  <div class="pasos3">
+    <div class="p3 rv" style="--d:0"><i>1</i><h3>Elige fechas</h3><p>Mira qué noches están libres y cuánto cuesta tu estancia al instante.</p></div>
+    <div class="p3 rv" style="--d:1"><i>2</i><h3>Paga el adelanto</h3><p>El 30 % por Yape o Plin. Tu fecha queda bloqueada para que nadie más la tome.</p></div>
+    <div class="p3 rv" style="--d:2"><i>3</i><h3>Recibe tu confirmación</h3><p>Te llega un mensaje por WhatsApp y puedes guardar la estancia en tu calendario.</p></div>
+  </div>
+
+  <div class="anf rv">
+    <span class="av grande">R</span>
+    <div><b>Tu anfitriona: Rosa</b><p>Responde en menos de 1 hora. Te espera con la estufa lista y te deja una guía de la zona con sus lugares favoritos.</p></div>
+    <a class="btn suave" id="hola" target="_blank" rel="noopener">Escríbele</a>
+  </div>
+  <div class="reglas">
+    <div class="rg rv"><b>Check-in</b><span>desde las 15:00</span></div><div class="rg rv" style="--d:1"><b>Check-out</b><span>hasta las 11:00</span></div>
+    <div class="rg rv" style="--d:2"><b>Silencio</b><span>después de las 22:00</span></div><div class="rg rv" style="--d:3"><b>Cancelación</b><span>gratis hasta 7 días antes</span></div>
+  </div>
+  <div class="faq" id="faq">
+    <details class="rv"><summary>¿Cuándo pago el resto?</summary><p>El saldo (70 %) se paga al llegar, en efectivo o por Yape/Plin.</p></details>
+    <details class="rv"><summary>¿Puedo cancelar?</summary><p>Si avisas con 7 días de anticipación, te devolvemos el adelanto o reprogramamos sin costo.</p></details>
+    <details class="rv"><summary>¿Se aceptan mascotas?</summary><p>Sí, pequeñas y bien portadas. Avísanos al reservar.</p></details>
+    <details class="rv"><summary>¿Incluye ropa de cama y toallas?</summary><p>Sí. Y leña para la estufa las dos primeras noches.</p></details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3 8 14h5l-6 9h7v6h4v-6h7l-6-9h5z"/></svg>Cabaña Pinar</a>
+    <span class="demo">Sitio de demostración · reservas y pagos simulados</span>
+    <p>Imágenes referenciales de <a href="https://commons.wikimedia.org/wiki/User:Shixart1985" target="_blank" rel="noopener">Shixart1985</a> en Wikimedia Commons, licencia <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>.</p>
+    <p>Diseño y desarrollo: Carlo · Dev · <a href="admin.html">Panel de la anfitriona</a></p>
+  </div>
+</footer>
+
+<div class="fija" id="fija"><div><small id="fSub">Desde</small><b id="fTxt">S/ 180 / noche</b></div><a class="btn miel" id="fBtn" href="#reservar">Ver fechas</a></div>
+<div class="lb" id="lb"><img alt=""></div>
+
+<!-- Panel de pasos -->
+<div class="vela" id="vela" aria-hidden="true">
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="pTit">
+    <button class="x" id="cerrar" aria-label="Cerrar">×</button>
+    <div class="pbar"><i></i><i></i><i></i></div>
+
+    <section data-p="1">
+      <h3 id="pTit">Tus datos</h3><p class="sm">Para avisarte por WhatsApp cuando todo esté listo.</p>
+      <div class="mini"><span id="mFechas"></span><b id="mTotal"></b></div>
+      <label class="campo" id="cNom"><span>Nombre completo</span><input id="nom" autocomplete="name" placeholder="Ana Pérez"><em>Escribe tu nombre (mínimo 3 letras)</em></label>
+      <label class="campo" id="cCel"><span>Celular</span><input id="cel" inputmode="tel" autocomplete="tel" placeholder="987 654 321"><em>Debe tener 9 dígitos y empezar con 9</em></label>
+      <label class="campo"><span>Notas (opcional)</span><textarea id="nota" rows="2" placeholder="Mascota, hora de llegada, celebración…"></textarea></label>
+      <button class="btn" id="a1">Ir al adelanto</button>
+    </section>
+
+    <section data-p="2" hidden>
+      <h3>Paga tu adelanto</h3><p class="sm">Escanea el QR o yapea al número. Es el 30 % del total.</p>
+      <div class="medios"><button class="on" data-m="Yape">Yape</button><button data-m="Plin">Plin</button></div>
+      <div class="pago"><div class="qrb" id="qr"></div>
+        <div><p>Monto a pagar</p><b id="pMonto"></b><p style="margin-top:.5rem">Número: <strong id="pNum"></strong><br>A nombre de <span id="pTit2"></span></p></div></div>
+      <label class="campo" id="cOp"><span>Código de operación</span><input id="op" inputmode="numeric" placeholder="Ej. 123456"><em>Escribe los 6 dígitos que ves en tu comprobante</em></label>
+      <button class="btn miel" id="a2">Ya pagué, confirmar</button>
+      <button class="btn suave" id="b2">Atrás</button>
+    </section>
+
+    <section data-p="3" class="final" hidden>
+      <svg class="ok" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28"/><circle class="c2" cx="32" cy="32" r="28" transform="rotate(-90 32 32)"/><path d="m20 33 8 8 16-17"/></svg>
+      <h3>¡Fecha guardada!</h3><p class="sm">Revisaremos tu pago y te confirmamos por WhatsApp.</p>
+      <div class="tkt" id="tkt"></div>
+      <a class="btn" id="wa" target="_blank" rel="noopener">Avisar por WhatsApp</a>
+      <button class="btn suave" id="ics">Añadir a mi calendario</button>
+    </section>
+  </div>
+</div>
+
+<script src="qr.js"></script>
+<script src="logica.js"></script>
+<script src="fx.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
