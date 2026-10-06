@@ -320,6 +320,23 @@ header.stuck .top{min-height:58px}
 @keyframes late{0%,88%,100%{transform:scale(1)}92%{transform:scale(1.05)}96%{transform:scale(.98)}}
 .marq div:hover{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.pasos li{opacity:1;transform:none}.hist .ph img{clip-path:none}.prog{display:none}.bean{opacity:1}}
+
+/* escritorio: que el hero quepa en pantallas bajas (portátiles) */
+@media(min-width:861px){
+  .hero .wrap{padding:2rem 0;min-height:calc(100svh - 110px)}
+  .hero h1{font-size:clamp(2.6rem,min(6.4vw,11.5vh),7rem);margin-bottom:1.1rem}
+  .hero p.l{font-size:clamp(1rem,min(1.5vw,2.6vh),1.25rem);margin-bottom:1.3rem}
+  .stats{margin-top:1.4rem;padding-top:.9rem}
+  .stats b{font-size:clamp(1.4rem,min(2.4vw,4.2vh),2.1rem)}
+  .hero .bolsa .disco{width:min(480px,92%,52vh)}
+  .anillo{width:calc(min(480px,92%,52vh)*1.2)}
+  .hero .bolsa .bag-in svg{width:min(330px,70%,calc(40vh*.74))}
+  .hero .sello{width:clamp(84px,15vh,120px);height:clamp(84px,15vh,120px)}
+  .cab h2{font-size:clamp(2.2rem,4.4vw,3.8rem)}
+  .hist h2{font-size:clamp(2.2rem,4vw,3.4rem)}
+  .sus h2{font-size:clamp(2rem,3.6vw,3rem)}
+  .hist,.sus,main{padding-block:clamp(3rem,6vw,5rem)}
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
