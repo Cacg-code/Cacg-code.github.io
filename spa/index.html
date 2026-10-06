@@ -8,7 +8,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Áurea Spa &amp; Estética · Citas con asistente 24/7 (demo)</title>
 <meta name="description" content="Demo de chatbot para salones de belleza, spa y estética: responde dudas, muestra horarios libres y agenda citas las 24 horas, y te avisa por WhatsApp.">
+<link rel="canonical" href="https://cacg-code.github.io/spa/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cacg-code.github.io/spa/">
+<meta property="og:locale" content="es_PE">
 <meta property="og:title" content="Áurea Spa & Estética · Chatbot de citas 24/7">
+<meta property="og:description" content="Demo de chatbot que responde dudas, muestra horarios libres y agenda citas las 24 horas.">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1200&q=70">
 <meta name="theme-color" content="#1D0F22">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%231D0F22'/%3E%3Cpath d='M16 6c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z' fill='%23D8B26A'/%3E%3C/svg%3E">
@@ -21,7 +27,7 @@
   --f-d:"Instrument Serif",Georgia,serif; --f-b:"Figtree",system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;overflow-x:clip}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:90px}
 body{font-family:var(--f-b);font-size:1.0625rem;line-height:1.55;color:var(--ink);background:var(--paper);overflow-x:clip;-webkit-font-smoothing:antialiased}
 a{color:inherit} img,svg{display:block;max-width:100%}
 :focus-visible{outline:3px solid var(--orchid);outline-offset:3px;border-radius:8px}
@@ -35,42 +41,63 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,246,248,.86);backdro
 .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:70px}
 .logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
 .logo svg{width:34px;height:34px}
+.logo svg path{transform-origin:50% 90%;animation:gota 5s ease-in-out infinite}
+@keyframes gota{50%{transform:scale(1.12) translateY(-1px)}}
 .logo b{font-family:var(--f-d);font-weight:400;font-size:1.7rem;line-height:1}
-.logo small{display:block;font-size:.72rem;letter-spacing:.14em;color:var(--mute)}
+.logo small{display:block;font-size:.78rem;letter-spacing:.14em;color:var(--mute)}
 .nav ul{display:flex;gap:1.8rem;list-style:none;padding:0}
 .nav ul a{text-decoration:none;font-weight:500;color:var(--mute);padding:.5rem 0}
 .nav ul a:hover{color:var(--ink)}
-@media(max-width:820px){.nav ul{display:none}}
+@media(max-width:820px){.nav{flex-wrap:wrap;padding-bottom:.5rem;row-gap:0}.nav>nav{order:3;width:100%}.nav ul{gap:1.4rem;overflow-x:auto;font-size:.93rem;padding:0 0 .1rem}.nav ul a{white-space:nowrap}html{scroll-padding-top:128px}}
+.prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:80;background:linear-gradient(90deg,var(--orchid),var(--gold));transform-origin:0 50%;transform:scaleX(var(--p,0))}
 .cr{display:none}
 @media(max-width:520px){.lg{display:none}.cr{display:inline}.logo small{display:none}}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.7rem 1.5rem;border-radius:999px;border:0;background:var(--ink);color:#fff;font:inherit;font-weight:600;text-decoration:none;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.7rem 1.5rem;border-radius:999px;border:0;background:var(--ink);color:#fff;font:inherit;font-weight:600;text-decoration:none;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s}
 .btn:hover{background:var(--orchid);box-shadow:0 14px 28px -14px var(--orchid);transform:translateY(-2px)}
 .btn:active{transform:scale(.97)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.38) 50%,transparent 70%);translate:-120% 0;transition:translate .8s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.btn:hover::after{translate:120% 0}
 .btn.o{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
 .btn.o:hover{background:var(--ink);color:#fff;box-shadow:none}
 .btn.sm{min-height:42px;padding:.4rem 1.1rem;font-size:.95rem}
 
 /* hero */
-.hero{padding:clamp(2rem,5vw,4rem) 0 clamp(3rem,6vw,5rem)}
+.hero{position:relative;padding:clamp(2rem,5vw,4rem) 0 clamp(3rem,6vw,5rem)}
+.hero .wrap{position:relative;z-index:1}
+.orbes{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.orbes i{position:absolute;border-radius:50%;filter:blur(8px);animation:orbe 16s ease-in-out infinite alternate}
+.orbes i:nth-child(1){width:46vw;max-width:560px;aspect-ratio:1;left:-12%;top:-8%;background:radial-gradient(closest-side,#ffd9e8cc,transparent)}
+.orbes i:nth-child(2){width:36vw;max-width:440px;aspect-ratio:1;right:2%;top:30%;background:radial-gradient(closest-side,#d8b26a40,transparent);animation-duration:20s;animation-delay:-6s}
+.orbes i:nth-child(3){width:28vw;max-width:340px;aspect-ratio:1;left:38%;bottom:-10%;background:radial-gradient(closest-side,#b83a8c24,transparent);animation-duration:24s;animation-delay:-11s}
+@keyframes orbe{to{transform:translate(7vw,5vh) scale(1.18)}}
 .hero .wrap{display:grid;grid-template-columns:1fr 440px;gap:clamp(1.5rem,4vw,4rem);align-items:start}
 .pill{display:inline-flex;align-items:center;gap:.55rem;padding:.4rem .95rem;border-radius:99px;background:var(--blush);color:var(--orchid-d);font-weight:600;font-size:.9rem;margin-bottom:1.3rem}
 .pill i{width:9px;height:9px;border-radius:50%;background:var(--ok);animation:pulso 2s infinite}
 @keyframes pulso{70%{box-shadow:0 0 0 9px #2f8f5b00}0%{box-shadow:0 0 0 0 #2f8f5b88}}
 .hero h1{font-size:clamp(3.4rem,8.2vw,7rem)}
-.hero h1 em{color:var(--orchid);font-style:italic}
+.hero h1 .w{display:inline-block;animation:subir 1.1s cubic-bezier(.2,.7,.2,1) both}
+.hero h1 em.w{animation:subir 1.1s .25s cubic-bezier(.2,.7,.2,1) both,brillo 8s 1.5s ease-in-out infinite alternate}
+@keyframes subir{from{opacity:0;transform:translateY(34px);filter:blur(6px)}}
+@keyframes brillo{0%,25%{background-position:0 0}75%,100%{background-position:100% 0}}
+.hero h1 em,.cab h2 em{font-style:italic;color:var(--orchid);background:linear-gradient(100deg,var(--orchid) 0 40%,var(--gold) 50%,var(--orchid) 60% 100%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;padding-right:.08em}
+.cab h2 em{animation:brillo 8s ease-in-out infinite alternate}
+.hero .lead,.hero .acc,.pill{animation:subir 1s .45s cubic-bezier(.2,.7,.2,1) both}
+.hero .acc{animation-delay:.6s}
 .hero .lead{font-size:clamp(1.1rem,1.8vw,1.3rem);color:var(--mute);max-width:42ch;margin:1.3rem 0 1.8rem}
 .hero .acc{display:flex;flex-wrap:wrap;gap:.7rem}
 .foto-arco{margin-top:2.2rem;position:relative;display:grid;grid-template-columns:1.2fr 1fr;gap:12px;max-width:640px}
 .foto-arco img{width:100%;object-fit:cover;border-radius:22px}
-.foto-arco .a{grid-row:span 2;aspect-ratio:3/4;border-radius:200px 200px 22px 22px}
-.foto-arco .b{aspect-ratio:4/3}
-.foto-arco .c{aspect-ratio:4/3}
+.foto-arco .a{grid-row:span 2;aspect-ratio:3/4;border-radius:200px 200px 22px 22px;box-shadow:0 0 0 6px var(--paper),0 0 0 7.5px var(--gold);animation:flota 8s ease-in-out infinite}
+.foto-arco .b{aspect-ratio:4/3;animation:flota 9s -3s ease-in-out infinite}
+.foto-arco .c{aspect-ratio:4/3;animation:flota 10s -6s ease-in-out infinite}
+@keyframes flota{50%{transform:translateY(-9px)}}
 .nota-demo{margin-top:1.2rem;font-size:.88rem;color:var(--mute)}
 
 /* chat */
 .chat{position:sticky;top:86px;height:min(680px,calc(100svh - 106px));min-height:520px;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:30px;box-shadow:0 40px 80px -40px rgba(58,26,69,.45);overflow:hidden}
 .chat-h{display:flex;align-items:center;gap:.8rem;padding:1rem 1.1rem;background:linear-gradient(120deg,var(--plum),var(--ink));color:#fff}
-.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--ink);font-family:var(--f-d);font-size:1.6rem;flex:none}
+.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--ink);font-family:var(--f-d);font-size:1.6rem;flex:none;animation:aura 3.2s ease-out infinite}
+@keyframes aura{0%{box-shadow:0 0 0 0 #d8b26a99}70%,100%{box-shadow:0 0 0 12px #d8b26a00}}
 .chat-h b{display:block;line-height:1.2}
 .chat-h small{display:flex;align-items:center;gap:.4rem;color:#e7d2ee;font-size:.82rem}
 .chat-h small i{width:8px;height:8px;border-radius:50%;background:#5fe0a0}
@@ -87,8 +114,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,246,248,.86);backdro
 .m.tip i{width:7px;height:7px;border-radius:50%;background:var(--mute);animation:pt 1s infinite}
 .m.tip i:nth-child(2){animation-delay:.15s}.m.tip i:nth-child(3){animation-delay:.3s}
 @keyframes pt{50%{transform:translateY(-4px);background:var(--ink)}}
-.ticket{align-self:stretch;border:1.5px dashed var(--orchid);border-radius:18px;background:#fff;padding:.9rem 1rem;display:grid;gap:.3rem;font-size:.94rem}
+.ticket{position:relative;animation:sello .7s cubic-bezier(.2,.9,.3,1.2);align-self:stretch;border:1.5px dashed var(--orchid);border-radius:18px;background:#fff;padding:.9rem 1rem;display:grid;gap:.3rem;font-size:.94rem}
 .ticket b{color:var(--orchid-d)}
+@keyframes sello{from{opacity:0;transform:scale(.88) rotate(-1.5deg)}}
+.sp{position:absolute;top:40%;width:8px;height:8px;background:var(--gold);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);pointer-events:none;animation:chispa 1.3s ease-out forwards}
+@keyframes chispa{from{opacity:1;transform:translate(0,0) scale(.4)}to{opacity:0;transform:translate(var(--x),var(--y)) scale(1.6) rotate(120deg)}}
 .ticket .t{font-family:var(--f-d);font-size:1.5rem;line-height:1.1;margin-bottom:.2rem}
 .qs{display:flex;flex-wrap:wrap;gap:.45rem;padding:.6rem 1.1rem .8rem;border-top:1px solid var(--line);background:#fff;max-height:36%;overflow-y:auto}
 .qs:empty{display:none}
@@ -103,19 +133,22 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,246,248,.86);backdro
 .cf button{width:48px;height:48px;border-radius:50%;border:0;background:var(--ink);color:#fff;cursor:pointer;display:grid;place-items:center;flex:none}
 .cf button:hover{background:var(--orchid)}
 .cf button svg{width:20px;height:20px}
-@media(max-width:1020px){.hero .wrap{grid-template-columns:1fr}.chat{position:relative;top:0;height:min(680px,86svh)}.foto-arco,.nota-demo.f{display:none}}
+@media(max-width:1020px){.hero .wrap{grid-template-columns:1fr}.chat{position:relative;top:0;height:min(680px,86svh)}.foto-arco{display:none}}
 
 /* secciones */
 section.s{padding:clamp(3.5rem,8vw,6.5rem) 0}
 .cab{display:flex;flex-wrap:wrap;gap:1rem 3rem;justify-content:space-between;align-items:end;margin-bottom:2rem}
 .cab h2{font-size:clamp(2.4rem,5.6vw,4.4rem)}
-.cab h2 em{color:var(--orchid)}
 .cab p{color:var(--mute);max-width:44ch}
 .sv{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .sv article{position:relative;aspect-ratio:4/5;border-radius:26px;overflow:hidden;color:#fff;display:flex;align-items:flex-end;padding:1.3rem;isolation:isolate}
 .sv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .sv article::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(29,15,34,.88),rgba(29,15,34,0) 62%)}
+.sv article{transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.sv article:hover{transform:translateY(-6px);box-shadow:0 30px 50px -28px rgba(58,26,69,.6)}
 .sv article:hover img{transform:scale(1.07)}
+.sv h3::after{content:"";display:block;width:0;height:2px;background:var(--gold);margin-top:.45rem;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.sv article:hover h3::after{width:56px}
 .sv h3{font-family:var(--f-d);font-weight:400;font-size:2rem;line-height:1}
 .sv p{font-size:.95rem;color:#f0dff5;margin-top:.3rem}
 .sv .pr{margin-top:.6rem;font-weight:700;color:var(--gold)}
@@ -134,7 +167,9 @@ section.s{padding:clamp(3.5rem,8vw,6.5rem) 0}
 .cita .dt span{font-size:.74rem;text-transform:capitalize;color:var(--mute);font-family:var(--f-b)}
 .cita strong{display:block}
 .cita small{color:var(--mute)}
-.cita em{font-style:normal;font-size:.76rem;font-weight:700;color:var(--orchid-d);background:var(--blush);border-radius:99px;padding:.2rem .65rem;white-space:nowrap}
+.cita.nueva{animation:min .4s,nueva 2.2s ease-out}
+@keyframes nueva{0%,30%{box-shadow:0 0 0 3px var(--gold);background:#fff4d6}100%{box-shadow:0 0 0 0 transparent}}
+.cita em{font-style:normal;font-size:.8rem;font-weight:700;color:var(--orchid-d);background:var(--blush);border-radius:99px;padding:.2rem .65rem;white-space:nowrap}
 .vacio{padding:1.6rem;text-align:center;color:var(--mute);border:1.5px dashed var(--line);border-radius:18px}
 .limpiar{margin-top:.9rem;background:none;border:0;color:var(--mute);text-decoration:underline;cursor:pointer;font:inherit;font-size:.9rem;padding:.4rem 0}
 .inc{list-style:none;padding:0;display:grid;gap:.9rem}
@@ -143,7 +178,8 @@ section.s{padding:clamp(3.5rem,8vw,6.5rem) 0}
 .inc b{display:block}
 .inc span{color:var(--mute);font-size:.95rem}
 
-.cta{margin-top:clamp(2rem,5vw,3.5rem);border-radius:34px;background:linear-gradient(135deg,var(--plum),var(--ink));color:#fff;padding:clamp(1.8rem,5vw,3.5rem);display:flex;flex-wrap:wrap;gap:1.4rem 2.5rem;align-items:center;justify-content:space-between}
+.cta{background-size:170% 170%;animation:desliza 14s ease-in-out infinite alternate;margin-top:clamp(2rem,5vw,3.5rem);border-radius:34px;background:linear-gradient(135deg,var(--plum),var(--ink));color:#fff;padding:clamp(1.8rem,5vw,3.5rem);display:flex;flex-wrap:wrap;gap:1.4rem 2.5rem;align-items:center;justify-content:space-between}
+@keyframes desliza{to{background-position:100% 100%}}
 .cta h2{font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch}
 .cta h2 em{color:var(--gold)}
 .cta p{color:#e7d2ee;margin-top:.7rem;max-width:44ch}
@@ -158,9 +194,6 @@ footer a{color:var(--orchid-d)}
 .toast.on{opacity:1;translate:-50% 0}
 @media(max-width:700px){
   .hero{padding-top:1.4rem}
-  .foto-arco{grid-template-columns:1fr 1fr;margin-top:1.6rem}
-  .foto-arco .a{grid-row:auto;border-radius:140px 140px 18px 18px;aspect-ratio:3/4}
-  .foto-arco .c{display:none}
   .hero .acc .btn{flex:1 1 100%}
   .chat{border-radius:24px;min-height:0}
   .m{max-width:92%}
@@ -169,6 +202,8 @@ footer a{color:var(--orchid-d)}
 </style>
 </head>
 <body>
+<noscript><style>.rv{opacity:1;transform:none}</style></noscript>
+<div class="prog" id="prog" aria-hidden="true"></div>
 <header>
   <div class="wrap nav">
     <a class="logo" href="#top" aria-label="Áurea Spa y Estética, inicio">
@@ -182,14 +217,15 @@ footer a{color:var(--orchid-d)}
 
 <main id="top">
   <section class="hero">
+    <div class="orbes" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="wrap">
       <div>
         <p class="pill"><i></i>Asistente atendiendo ahora, 24/7</p>
-        <h1 class="d">Tu cita, <em>a cualquier hora.</em></h1>
+        <h1 class="d"><span class="w">Tu cita,</span> <em class="w">a cualquier hora.</em></h1>
         <p class="lead">Spa, estética y cuidado personal en Miraflores. Escribe a nuestro asistente, elige tu servicio y reserva en menos de un minuto, aunque sea de madrugada.</p>
         <div class="acc"><a class="btn" href="#chat">Hablar con el asistente</a><a class="btn o" href="#servicios">Ver servicios</a></div>
         <div class="foto-arco" aria-hidden="true">
-          <img class="a" src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=700&q=70" alt="" width="700" height="933">
+          <img class="a" src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=700&q=70" alt="" loading="lazy" width="700" height="933">
           <img class="b" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=70" alt="" loading="lazy" width="600" height="450">
           <img class="c" src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=70" alt="" loading="lazy" width="600" height="450">
         </div>
@@ -216,7 +252,7 @@ footer a{color:var(--orchid-d)}
         <article class="rv"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&q=70" alt="Mascarilla facial" loading="lazy" width="700" height="875"><div><h3>Facial</h3><p>Limpieza profunda e hidratación</p><div class="pr">Desde S/ 75</div></div></article>
         <article class="rv" style="--dl:.08s"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=700&q=70" alt="Masaje con aceite" loading="lazy" width="700" height="875"><div><h3>Masajes</h3><p>Relajante, descontracturante y piedras calientes</p><div class="pr">Desde S/ 110</div></div></article>
         <article class="rv" style="--dl:.16s"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=700&q=70" alt="Uñas decoradas" loading="lazy" width="700" height="875"><div><h3>Manos y pies</h3><p>Manicure semipermanente y pedicure spa</p><div class="pr">Desde S/ 45</div></div></article>
-        <article class="rv"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=700&q=70" alt="Maquillaje y pestañas" loading="lazy" width="700" height="875"><div><h3>Cejas y pestañas</h3><p>Laminado y extensiones</p><div class="pr">Desde S/ 55</div></div></article>
+        <article class="rv"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=700&q=70" alt="Maquillaje y pestañas" loading="lazy" width="700" height="875"><div><h3>Cejas y pestañas</h3><p>Laminado, extensiones y depilación</p><div class="pr">Desde S/ 55</div></div></article>
         <article class="rv" style="--dl:.08s"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=70" alt="Cabello largo" loading="lazy" width="700" height="875"><div><h3>Cabello</h3><p>Corte, peinado, tinte y balayage</p><div class="pr">Desde S/ 60</div></div></article>
         <article class="rv" style="--dl:.16s"><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=700&q=70" alt="Piedras calientes y flores" loading="lazy" width="700" height="875"><div><h3>Día de spa</h3><p>Masaje relajante y limpieza facial</p><div class="pr">S/ 190</div></div></article>
       </div>
@@ -229,7 +265,7 @@ footer a{color:var(--orchid-d)}
       <div class="dos">
         <div class="card rv">
           <h3>Citas recibidas</h3>
-          <p class="sub">Panel del negocio (demo). Se guarda solo en tu navegador.</p>
+          <p class="sub">Panel del negocio (demo): aquí ves solo tus citas, guardadas en tu navegador. En un negocio real se conecta a una hoja compartida para que el salón vea las de todos los clientes.</p>
           <ul class="citas" id="citas"></ul>
           <button class="limpiar" id="limpiar" hidden>Borrar citas de la demo</button>
         </div>
@@ -238,15 +274,15 @@ footer a{color:var(--orchid-d)}
           <p class="sub">Todo configurable con los servicios, precios y horarios de tu negocio.</p>
           <ul class="inc">
             <li><div><b>Atiende 24/7</b><span>Responde precios, horarios y ubicación aunque el local esté cerrado.</span></div></li>
-            <li><div><b>Agenda con horarios libres</b><span>Solo ofrece las horas disponibles y evita cruces.</span></div></li>
-            <li><div><b>Te avisa por WhatsApp</b><span>La cita llega escrita al celular del salón, lista para confirmar.</span></div></li>
+            <li><div><b>Agenda con horarios libres</b><span>Solo ofrece horas libres y evita cruces según la duración. (En esta demo la disponibilidad es de ejemplo.)</span></div></li>
+            <li><div><b>Te avisa por WhatsApp</b><span>La cita se arma sola como mensaje de WhatsApp: con un toque llega al celular del salón, lista para confirmar.</span></div></li>
             <li><div><b>Sin comisiones</b><span>No dependes de plataformas de reservas que cobran por cita.</span></div></li>
           </ul>
         </div>
       </div>
       <div class="cta rv">
         <div><h2 class="d">¿Lo quieres para <em>tu negocio</em>?</h2><p>Lo adapto a tus servicios, tu estilo y tus horarios. Cuéntame de tu negocio y te cotizo.</p></div>
-        <a class="btn" href="../#contacto">Pedir cotización</a>
+        <a class="btn" href="../#chat">Pedir cotización</a>
       </div>
     </div>
   </section>
@@ -300,8 +336,9 @@ let citas=[];try{citas=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){}
 const guardar=()=>{try{localStorage.setItem(KEY,JSON.stringify(citas))}catch(e){}};
 
 /* disponibilidad */
+const hn=s=>+s.slice(0,2);
+const choca=(iso,h,dur)=>citas.some(c=>c.fecha===iso&&h<hn(c.hora)+Math.ceil(c.dur/60)&&hn(c.hora)<h+dur);
 function ocupada(iso,h,serv){
-  if(citas.some(c=>c.fecha===iso&&c.hora===h))return true;
   const n=[...iso].reduce((s,c)=>s+c.charCodeAt(0),0)+h*17+serv.length*7;
   return n%10<3;
 }
@@ -310,7 +347,7 @@ function libres(iso,s){
   const dur=Math.ceil(s.d/60),out=[];
   for(let h=hr[0];h+dur<=hr[1];h++){
     if(iso===t.iso&&h<t.h+1.5)continue;
-    if(!ocupada(iso,h,s.n))out.push(h);
+    if(!choca(iso,h,dur)&&!ocupada(iso,h,s.n))out.push(h);
   }
   return out;
 }
@@ -322,10 +359,10 @@ function diasDisponibles(s){
 
 /* chat */
 const M=$("#msgs"),Q=$("#qs"),F=$("#cf"),I=$("#ci");
-let paso="menu",lead={};
+let paso="menu",lead={},ocup=0;
 function add(cls,html){const d=document.createElement("div");d.className="m "+cls;d.innerHTML=html;M.appendChild(d);M.scrollTop=M.scrollHeight;return d}
-async function bot(html,ms=520){const t=add("b tip","<i></i><i></i><i></i>");Q.innerHTML="";await pausa(ms);t.className="m b";t.innerHTML=html;M.scrollTop=M.scrollHeight}
-function chips(arr){Q.innerHTML="";arr.forEach(([t,fn,cls])=>{const b=document.createElement("button");b.type="button";b.textContent=t;if(cls)b.className=cls;b.onclick=()=>{if(fn==="__yo")yo(t);else{add("u",esc(t));fn()}};Q.appendChild(b)})}
+async function bot(html,ms=520){ocup++;const t=add("b tip","<i></i><i></i><i></i>");Q.innerHTML="";await pausa(ms);t.className="m b";t.innerHTML=html;M.scrollTop=M.scrollHeight;ocup--}
+function chips(arr){Q.innerHTML="";arr.forEach(([t,fn,cls])=>{const b=document.createElement("button");b.type="button";b.textContent=t;if(cls)b.className=cls;b.onclick=()=>{add("u",esc(t));fn()};Q.appendChild(b)})}
 function yo(t){add("u",esc(t));procesa(t)}
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("on"),2400)}
 
@@ -376,25 +413,27 @@ async function elegirHora(iso){paso="hora";lead.fecha=iso;
   await bot(`Para el <strong>${esc(etiq(iso))}</strong> tengo estas horas libres. <strong>¿Cuál prefieres?</strong>`);
   chips([...l.map(h=>[hh(h),()=>{lead.hora=hh(h);pedirNombre()}]),["Otro día",()=>elegirDia(lead.s)]])}
 async function pedirNombre(){paso="nombre";
-  await bot(`Anotado: ${esc(corta(lead.fecha))} a las <strong>${esc(lead.hora)}</strong>. <strong>¿A nombre de quién la reservo?</strong>`)}
+  await bot(`Anotado: ${esc(corta(lead.fecha))} a las <strong>${esc(lead.hora)}</strong>. <strong>¿A nombre de quién la reservo?</strong>`);chips([["Cancelar",menu]])}
 async function pedirTel(){paso="tel";
-  await bot(`Gracias, ${esc(lead.nombre)}. <strong>¿Cuál es tu celular?</strong> Lo usamos solo para confirmar la cita.`)}
+  await bot(`Gracias, ${esc(lead.nombre)}. <strong>¿Cuál es tu celular?</strong> Lo usamos solo para confirmar la cita. En esta demo no se envía a ningún servidor.`);chips([["Cancelar",menu]])}
 async function resumen(){paso="fin";
   const c={id:Date.now(),servicio:lead.s.n,precio:lead.s.p,dur:lead.s.d,fecha:lead.fecha,hora:lead.hora,nombre:lead.nombre,tel:lead.tel};
-  citas.push(c);guardar();pintaCitas();
+  citas.push(c);guardar();pintaCitas(c.id);
   await bot("Listo, dejé tu cita reservada. Este es tu resumen:",420);
   add("ticket",`<div class="t">${esc(c.servicio)}</div><div><b>Fecha:</b> ${esc(etiq(c.fecha))}</div><div><b>Hora:</b> ${esc(c.hora)} (${c.dur} min)</div><div><b>Nombre:</b> ${esc(c.nombre)}</div><div><b>Celular:</b> ${esc(c.tel)}</div><div><b>Precio:</b> ${fmtS(c.precio)}</div>`);
-  M.scrollTop=M.scrollHeight;
+  M.scrollTop=M.scrollHeight;destellos(M.lastElementChild);
   await bot(`Toca <strong>Confirmar por WhatsApp</strong> para avisar al salón. Para cambiar o cancelar, escríbenos con 24 horas de anticipación.`,420);
   chips([["Confirmar por WhatsApp",()=>enviar(c),"wa"],["Agregar a mi calendario",()=>ics(c)],["Agendar otra cita",inicioCita],["Inicio",menu]]);
   toast("Cita agregada al panel del salón")}
+function destellos(el){for(let i=0;i<14;i++){const s=document.createElement("i");s.className="sp";const a=Math.PI*2*i/14,r=60+Math.random()*50;s.style.cssText=`--x:${Math.cos(a)*r*1.6}px;--y:${Math.sin(a)*r*.8-20}px;animation-delay:${Math.random()*.25}s;left:${20+Math.random()*60}%`;el.appendChild(s);setTimeout(()=>s.remove(),1700)}}
 function textoWa(c){return["Hola "+NEGOCIO.corto+",","Quiero confirmar mi cita:","","*Servicio:* "+c.servicio,"*Fecha:* "+etiq(c.fecha),"*Hora:* "+c.hora,"*Nombre:* "+c.nombre,"*Celular:* "+c.tel,"","_Cita agendada desde el asistente_"].join("\n")}
 function enviar(c){window.open("https://wa.me/"+NEGOCIO.wa+"?text="+encodeURIComponent(textoWa(c)),"_blank","noopener")}
+const ie=t=>t.replace(/[\\,;]/g,"\\$&");
 function ics(c){
   const [y,m,d]=c.fecha.split("-"),h=+c.hora.slice(0,2),fin=h+Math.ceil(c.dur/60);
   const p=n=>String(n).padStart(2,"0");
   const L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Carlo Dev//Demo//ES","BEGIN:VEVENT","UID:"+c.id+"@aurea-demo","DTSTAMP:"+new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z",
-    `DTSTART:${y}${m}${d}T${p(h)}0000`,`DTEND:${y}${m}${d}T${p(fin)}0000`,"SUMMARY:"+c.servicio+" - "+NEGOCIO.nombre,"LOCATION:"+NEGOCIO.direccion,"END:VEVENT","END:VCALENDAR"];
+    `DTSTART:${y}${m}${d}T${p(h)}0000`,`DTEND:${y}${m}${d}T${p(fin)}0000`,"SUMMARY:"+ie(c.servicio+" - "+NEGOCIO.nombre),"LOCATION:"+ie(NEGOCIO.direccion),"END:VEVENT","END:VCALENDAR"];
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([L.join("\r\n")],{type:"text/calendar"}));a.download="cita-aurea.ics";document.body.appendChild(a);a.click();a.remove();
   toast("Archivo de calendario descargado")}
 function handoff(){window.open("https://wa.me/"+NEGOCIO.wa+"?text="+encodeURIComponent(["Hola "+NEGOCIO.corto+",","Quisiera hablar con una persona del salón.","","_Enviado desde el asistente_"].join("\n")),"_blank","noopener")}
@@ -408,39 +447,43 @@ const INT=[
   [/(promo|oferta|descuento|paquete|pack|d[ií]a de spa)/i,()=>promos()],
   [/(pago|pagar|yape|plin|tarjeta|efectivo)/i,async()=>{await bot("Aceptamos efectivo, Yape, Plin y tarjetas. El pago se hace en el salón el día de tu cita.");chips([["Agendar una cita",inicioCita],["Inicio",menu]])}],
   [/(dura|demora|cu[aá]nto tiempo)/i,async()=>{await bot("Depende del servicio: entre 40 y 150 minutos. Al elegir el servicio te muestro la duración exacta.");chips([["Ver servicios",servicios],["Inicio",menu]])}],
-  [/(facial|cara|piel|limpieza)/i,()=>listaCat("Facial")],
+  [/(facial|\bcara\b|piel|limpieza)/i,()=>listaCat("Facial")],
   [/(masaje|relaj|descontract|espalda|piedras)/i,()=>listaCat("Masajes")],
   [/(u[nñ]as|manicure|pedicure|manos|pies)/i,()=>listaCat("Manos y pies")],
   [/(ceja|pesta|laminado)/i,()=>listaCat("Cejas y pestañas")],
-  [/(cabello|pelo|corte|tinte|peinado|balayage)/i,()=>listaCat("Cabello")],
+  [/(cabello|\bpelo\b|corte|tinte|peinado|balayage)/i,()=>listaCat("Cabello")],
   [/(depil|cera)/i,()=>listaCat("Depilación")],
   [/(precio|cuesta|cu[aá]nto|tarifa|servicios|carta|lista)/i,()=>servicios()],
-  [/(cita|reserva|agendar|turno|separar|reservar|quiero)/i,()=>inicioCita()],
+  [/(cita|reserva|agendar|turno|separar|reservar)/i,()=>inicioCita()],
   [/(humano|persona|asesora|whatsapp|llamar|hablar)/i,async()=>{await bot("Claro, te paso con el salón.");chips([["Abrir WhatsApp",handoff,"wa"],["Seguir aquí",menu]])}],
-  [/(hola|buenas|buenos d|hey)/i,async()=>{await bot("Hola, ¿en qué te ayudo?");menu()}],
-  [/(gracias|ok|perfecto|genial|listo)/i,async()=>{await bot("Con gusto. Si quieres, te ayudo a reservar.");chips([["Agendar una cita",inicioCita],["Inicio",menu]])}]
+  [/(\bhola\b|buenas|buenos d|\bhey\b)/i,async()=>{await bot("Hola, ¿en qué te ayudo?");menu()}],
+  [/\b(gracias|ok|vale|perfecto|genial|listo)\b/i,async()=>{await bot("Con gusto. Si quieres, te ayudo a reservar.");chips([["Agendar una cita",inicioCita],["Inicio",menu]])}]
 ];
 async function libre(t){
-  for(const[re,fn]of INT){if(re.test(t)){await fn();return}}
+  const tn=t.normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  for(const[re,fn]of INT){if(re.test(tn)){await fn();return}}
   await bot("No estoy seguro de haber entendido. Puedo ayudarte con servicios, precios, horarios, ubicación o agendar tu cita. Si prefieres, hablas con una persona.");
   chips([["Agendar una cita",inicioCita],["Servicios y precios",servicios],["Hablar con el salón",handoff,"wa"]])}
 async function procesa(t){
+  if(/^(men[uú]|inicio|volver|cancelar|reiniciar)$/i.test(t.trim()))return menu();
   if(paso==="nombre"){const n=t.trim().replace(/\s+/g," ");if(n.length<2||/\d{3,}/.test(n)){await bot("Escribe tu nombre, por favor (por ejemplo: Ana Torres).");return}lead.nombre=n;return pedirTel()}
   if(paso==="tel"){const d=t.replace(/\D/g,"").replace(/^51(?=9\d{8}$)/,"");if(!/^9\d{8}$/.test(d)){await bot("Escribe un celular de 9 dígitos que empiece con 9, por ejemplo 987654321.");return}lead.tel=d;return resumen()}
-  if(/^(menu|inicio|volver|cancelar)$/i.test(t.trim()))return menu();
   await libre(t)}
 
 /* panel */
-function pintaCitas(){
+function pintaCitas(nuevo){
   const ul=$("#citas"),l=[...citas].sort((a,b)=>(a.fecha+a.hora).localeCompare(b.fecha+b.hora));
   $("#limpiar").hidden=!l.length;
-  ul.innerHTML=l.length?l.map(c=>{const d=new Date(c.fecha+"T12:00:00Z");return `<li class="cita"><div class="dt"><b>${d.getUTCDate()}</b><span>${d.toLocaleDateString("es-PE",{month:"short",timeZone:"UTC"})}</span></div><div><strong>${esc(c.servicio)}</strong><small>${esc(c.hora)} · ${esc(c.nombre)} · ${esc(c.tel)}</small></div><em>Por confirmar</em></li>`}).join(""):`<li class="vacio">Aún no hay citas. Agenda una desde el chat y aparecerá aquí.</li>`}
+  ul.innerHTML=l.length?l.map(c=>{const d=new Date(c.fecha+"T12:00:00Z");return `<li class="cita${c.id===nuevo?" nueva":""}"><div class="dt"><b>${d.getUTCDate()}</b><span>${d.toLocaleDateString("es-PE",{month:"short",timeZone:"UTC"})}</span></div><div><strong>${esc(c.servicio)}</strong><small>${esc(c.hora)} · ${esc(c.nombre)} · ${esc(c.tel)}</small></div><em>Por confirmar</em></li>`}).join(""):`<li class="vacio">Aún no hay citas. Agenda una desde el chat y aparecerá aquí.</li>`}
 $("#limpiar").onclick=()=>{citas=[];guardar();pintaCitas();toast("Citas de la demo borradas")};
 
 function inicio(){M.innerHTML="";Q.innerHTML="";paso="menu";lead={};saludo()}
-$("#reinicia").onclick=inicio;
-F.addEventListener("submit",e=>{e.preventDefault();const t=I.value.trim();if(!t)return;I.value="";Q.innerHTML="";yo(t)});
+$("#reinicia").onclick=()=>{if(ocup)return toast("Un momento…");inicio()};
+F.addEventListener("submit",e=>{e.preventDefault();const t=I.value.trim();if(!t)return;if(ocup)return toast("Un momento, estoy escribiendo…");I.value="";Q.innerHTML="";yo(t)});
 
+/* barra de avance */
+const prog=$("#prog");let rq=0;
+addEventListener("scroll",()=>{if(rq)return;rq=requestAnimationFrame(()=>{rq=0;const h=document.documentElement;prog.style.setProperty("--p",h.scrollHeight>h.clientHeight?(h.scrollTop/(h.scrollHeight-h.clientHeight)).toFixed(3):0)})},{passive:true});
 /* reveal */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll(".rv").forEach(e=>io.observe(e));
