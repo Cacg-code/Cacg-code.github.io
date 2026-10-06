@@ -140,7 +140,8 @@ h3.sec i{font-style:normal;font-family:var(--fm);background:var(--panel2);border
 .etq.VIP{background:var(--as);color:var(--amber)}
 .etq.Recomendado{background:var(--gs);color:var(--g2)}
 
-.tablero{display:grid;grid-template-columns:repeat(5,minmax(230px,1fr));gap:.85rem;overflow-x:auto;padding-bottom:.6rem}
+.tablero{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.85rem;padding-bottom:.6rem}
+@media(min-width:1180px){.tablero{grid-template-columns:repeat(5,minmax(0,1fr));gap:.6rem}}
 .col{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:.7rem;min-height:300px;display:flex;flex-direction:column;gap:.55rem;transition:background .2s,border-color .2s}
 .col.sobre{border-color:var(--g);background:var(--gs);box-shadow:var(--glow)}
 .col h2{font-size:.9rem;font-weight:600;display:flex;justify-content:space-between;align-items:center;padding:.2rem .35rem 0}
@@ -271,8 +272,10 @@ dialog .lead{color:var(--mute);font-size:.9rem;margin-top:-.4rem}
   .app{grid-template-columns:minmax(0,1fr)}
   aside.lado{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;padding:.7rem;border-right:0;border-bottom:1px solid var(--line);overflow:visible;gap:.6rem}
   .marca{order:1}
-  .menu{order:3;display:flex;flex:1 1 100%;overflow-x:auto;min-width:0;gap:.25rem}
-  .menu button{white-space:nowrap;min-height:40px}
+  .menu{order:3;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));flex:1 1 100%;min-width:0;gap:.3rem}
+  .menu button{flex-direction:column;justify-content:center;gap:.15rem;min-height:56px;padding:.4rem .2rem;font-size:.8rem;position:relative;text-align:center;box-shadow:none}
+  .menu button[aria-current="page"]{box-shadow:none}
+  .menu .n{position:absolute;top:4px;right:6px;margin:0;font-size:.65rem;padding:0 .35rem}
   .menu hr{display:none}
   .ctl{order:2;margin-left:auto;grid-auto-flow:column;align-items:center}
   .ctl span{display:none}
@@ -283,8 +286,6 @@ dialog .lead{color:var(--mute);font-size:.9rem;margin-top:-.4rem}
   .kpi{display:grid;grid-template-columns:1fr auto;column-gap:.8rem;align-items:center;padding:.7rem .9rem}
   .kpi span,.kpi small{grid-column:1}
   .kpi b{grid-column:2;grid-row:1/3;font-size:1.4rem;margin:0}
-  .tablero{grid-template-columns:repeat(5,82%);scroll-snap-type:x mandatory}
-  .col{scroll-snap-align:start}
   .dos{grid-template-columns:minmax(0,1fr)}
   .item{grid-template-columns:64px minmax(0,1fr) 44px}
   .item>:first-child{grid-column:1/-1}
