@@ -177,3 +177,5 @@ footer a{color:var(--ac)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 .btn svg{width:18px;height:18px;flex:none}
 @media(max-width:760px){.t-boda .deco::before,.t-boda .deco::after{opacity:.55}.hero .acc .btn{width:100%;max-width:300px}}
+.demo a.home{border:0;background:rgba(255,255,255,.14)}
+@media(max-width:760px){.demo a.home{padding:.45rem .6rem}}

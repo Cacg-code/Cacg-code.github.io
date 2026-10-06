@@ -1,4 +1,4 @@
-/* Invita — © Carlo · Dev (demo). Página de invitación: cambia de tema según el tipo de evento. */
+/* Jolgorio · invitación — © Carlo · Dev (demo). Página de invitación: cambia de tema según el tipo de evento. */
 (function () {
   const L = window.EV, $ = (s, c = document) => c.querySelector(s), $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -92,7 +92,7 @@
   <div class="muro" id="notas"></div>
 </div></section>
 
-<footer><div class="wrap"><p>Invitación demo creada por <a href="../" >Carlo · Dev</a>. Los datos viven solo en este navegador.</p><p style="margin-top:.4rem">¿Quieres una así para tu evento? <a href="https://wa.me/51999999999?text=${encodeURIComponent("Hola Carlo, vi la demo de invitaciones y quiero una para mi evento")}" target="_blank" rel="noopener">Escríbeme por WhatsApp</a></p></div></footer>`;
+<footer><div class="wrap"><p>Invitación digital incluida en los paquetes de <a href="index.html">Jolgorio</a> · demo de <a href="../">Carlo · Dev</a>. Los datos viven solo en este navegador.</p><p style="margin-top:.4rem">¿Quieres que organicemos tu evento? <a href="https://wa.me/51999999999?text=${encodeURIComponent("Hola Jolgorio, vi la invitación de muestra y quiero cotizar mi evento")}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></p></div></footer>`;
   }
 
   function formulario(ev, g, pases, nom) {

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!-- © Carlo · Dev — panel de la organizadora de Jolgorio (demo). Los datos viven en este navegador. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Panel · Jolgorio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="empresa.css">
+</head>
+<body class="pn">
+<div class="pn-top"><div class="wrap">
+  <a class="logo" href="index.html">jolgorio</a>
+  <span class="tag">Panel de la organizadora · demo</span>
+  <a class="v" href="index.html#cotiza">← Ir al cotizador</a>
+</div></div>
+<div class="wrap">
+  <h1>Hola, <em>equipo</em> 👋</h1>
+  <p class="lead" id="lead"></p>
+  <div class="kpis" id="kpis"></div>
+  <div class="pn-tabs" id="tabs" role="tablist"></div>
+
+  <div class="vista" id="v-sol" role="tabpanel">
+    <div class="pipe" id="pipe" aria-hidden="true"></div>
+    <div class="filtros" id="filtros"></div>
+    <div id="lista"></div>
+    <div class="pn-foot"><button class="btn sm sec" id="csv">Descargar solicitudes (Excel)</button><button class="btn sm suave" style="color:var(--ink)" id="borra">Restaurar datos de la demo</button></div>
+  </div>
+
+  <div class="vista" id="v-cal" role="tabpanel"><div class="cal-p"><div class="cal-big" id="calP"></div><div class="det" id="det"></div></div></div>
+  <div class="vista" id="v-ev" role="tabpanel"><div class="evs" id="evs"></div></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="cotiza.js"></script>
+<script src="panel.js"></script>
+</body>
+</html>

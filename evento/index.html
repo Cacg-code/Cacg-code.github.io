@@ -1,26 +1,177 @@
 <!doctype html>
 <html lang="es">
 <head>
-<!-- © Carlo · Dev — Invita: invitaciones web con confirmación de asistencia (demo). -->
+<!-- © Carlo · Dev — Jolgorio: organizadora de eventos con cotizador, reservas con adelanto e invitación digital (demo). -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Invita · Invitaciones con confirmación</title>
-<meta name="description" content="Invitación digital con cuenta regresiva, cronograma, mapa y confirmación de asistencia por WhatsApp. Demo para bodas, cumpleaños y despedidas.">
+<title>Jolgorio · Organizadora de eventos</title>
+<meta name="description" content="Organizamos bodas, cumpleaños, despedidas, quinceañeras y eventos corporativos. Cotiza en 2 minutos, reserva tu fecha con adelanto y recibe tu invitación digital con confirmación de asistencia.">
+<meta name="theme-color" content="#17112B">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilo.css">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="empresa.css">
 </head>
-<body class="t-boda">
-<div class="demo" id="demo" role="tablist" aria-label="Tipo de evento (demo)">
-  <button data-t="boda" role="tab">💍 Boda</button>
-  <button data-t="cumple" role="tab">🎂 Cumpleaños</button>
-  <button data-t="despedida" role="tab">🍻 Despedida</button>
-  <a href="admin.html" id="aAdmin">Panel</a>
-</div>
-<main id="app"></main>
-<div class="fija" id="fija"><b id="fijaT">¿Vienes?</b><a href="#rsvp">Confirmar</a></div>
+<body>
+<header class="nav" id="nav"><div class="wrap">
+  <a class="logo" href="#inicio" aria-label="Jolgorio, inicio">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="8" fill="#FFC53D"/><g stroke-width="4" stroke-linecap="round"><path d="M20 3v6" stroke="#FF5A3C"/><path d="M20 31v6" stroke="#6B3FE0"/><path d="M3 20h6" stroke="#FF7AB6"/><path d="M31 20h6" stroke="#22C99A"/><path d="M8 8l4 4" stroke="#FFC53D"/><path d="M28 28l4 4" stroke="#FF5A3C"/><path d="M32 8l-4 4" stroke="#6B3FE0"/><path d="M12 28l-4 4" stroke="#22C99A"/></g></svg>jolgorio</a>
+  <nav class="menu" id="menu" aria-label="Principal">
+    <a href="#servicios">Servicios</a><a href="#paquetes">Paquetes</a><a href="#casos">Eventos</a><a href="#faq">Preguntas</a>
+    <a class="panel" href="panel.html">Panel</a><a class="btn" href="#cotiza">Cotiza tu evento</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><i></i></button>
+</div></header>
+
+<main>
+<section class="hero" id="inicio">
+  <canvas id="conf" aria-hidden="true"></canvas>
+  <span class="forma" style="width:260px;height:260px;left:-90px;bottom:10%;background:rgba(255,197,61,.12)"></span>
+  <div class="wrap hero-g">
+    <div>
+      <span class="pill rv"><b></b> Organizadora de eventos · Lima</span>
+      <h1 class="rv" style="--d:1">Tu <span class="rot" aria-label="boda, cumpleaños, despedida, quinceañera o aniversario"><span aria-hidden="true">boda</span><span aria-hidden="true">cumple</span><span aria-hidden="true">despedida</span><span aria-hidden="true">quinceañera</span><span aria-hidden="true">aniversario</span></span> sin dolores de cabeza.</h1>
+      <p class="sub rv" style="--d:2">Cotizas en 2 minutos, reservas tu fecha con un adelanto y tus invitados confirman desde su celular. Nosotros nos encargamos de todo lo demás.</p>
+      <div class="acc rv" style="--d:3"><a class="btn" href="#cotiza">Cotiza tu evento →</a><a class="btn suave" href="invitacion.html?e=boda">Ver invitación de muestra</a></div>
+      <div class="cifras rv" style="--d:4">
+        <div><b data-n="180" data-mas="1">0</b><small>eventos organizados</small></div>
+        <div><b data-n="4.9" data-dec="1">0</b><small>valoración de clientes</small></div>
+        <div><b data-n="2">0</b><small>minutos para cotizar</small></div>
+      </div>
+    </div>
+    <div class="vis rv" style="--d:2" aria-hidden="true">
+      <div class="chip a"><i>🎉</i><div>94 % confirmó<small>en solo 3 días</small></div></div>
+      <div class="card-p">
+        <small>Presupuesto en vivo</small><h3>Cumpleaños · 60 invitados</h3>
+        <div class="ln"><span>Organización y staff</span><span>S/ 1,180</span></div>
+        <div class="ln"><span>Decoración</span><span>S/ 1,100</span></div>
+        <div class="ln"><span>DJ y sonido</span><span>S/ 750</span></div>
+        <div class="ln"><span>Invitación digital</span><span style="color:var(--menta)">Incluida</span></div>
+        <div class="tot"><span>Total</span><b>S/ 3,030</b></div>
+        <div class="adel">Con S/ 909 reservas tu fecha 🔒</div>
+      </div>
+      <div class="chip b"><i>✅</i><div>Fecha reservada<small>Yape recibido</small></div></div>
+    </div>
+  </div>
+  <a class="baja" href="#servicios" aria-label="Bajar"></a>
+</section>
+
+<div class="cinta-w" aria-hidden="true"><div class="cinta"><div><span>Bodas</span><span>Cumpleaños</span><span>Despedidas</span><span>Quinceañeras</span><span>Corporativos</span><span>Bodas</span><span>Cumpleaños</span><span>Despedidas</span><span>Quinceañeras</span><span>Corporativos</span></div></div></div>
+
+<section id="servicios">
+  <div class="wrap">
+    <div class="cab rv"><span class="kick">Qué hacemos</span><h2>Un evento para cada <em>ocasión</em></h2><p>Elige el tuyo y te mostramos cuánto cuesta ahora mismo, sin esperar una llamada.</p></div>
+    <div class="bento" id="bento"></div>
+  </div>
+</section>
+
+<section class="valor oscuro" id="invitacion">
+  <div class="wrap valor-g">
+    <div class="rv">
+      <div class="tel" aria-hidden="true">
+        <div class="pant"><span class="sello">Estás invitado</span><h4>Valeria <em>&</em> Diego</h4><p>Sábado 13 de febrero · Hacienda Los Olivos</p>
+          <div class="cd"><div><b>129</b><small>días</small></div><div><b>04</b><small>hrs</small></div><div><b>12</b><small>min</small></div></div>
+          <div class="rs"><span>¿Nos acompañas?</span><span>🎉 ¡Confirmado, 3 personas!</span></div></div>
+        <div class="notif"><span style="font-size:1.3rem">💬</span><span>Familia Rojas<br><small style="font-weight:400;color:var(--mut)">confirmó su asistencia</small></span></div>
+      </div>
+    </div>
+    <div class="rv" style="--d:1">
+      <span class="kick">Valor agregado</span>
+      <h2>La invitación digital va <em>incluida</em></h2>
+      <p style="color:#C9BFE6;margin-top:1rem;max-width:52ch">No te damos solo la fiesta: también te entregamos la forma de saber quién viene. Cada invitado recibe su propio link y confirma en segundos.</p>
+      <ul class="lista-v">
+        <li><i>🔗</i><div><b>Un link por invitado</b><span>Con su nombre y el número exacto de pases.</span></div></li>
+        <li><i>📊</i><div><b>Confirmaciones en vivo</b><span>Quién viene, quién no y quién falta, en tu panel.</span></div></li>
+        <li><i>🍽️</i><div><b>Menús y alergias</b><span>Cada respuesta llega ordenada para el catering.</span></div></li>
+        <li><i>📅</i><div><b>Recordatorio al calendario</b><span>Un toque y el evento queda en su celular.</span></div></li>
+      </ul>
+      <div class="muestras"><a href="invitacion.html?e=boda">💍 Boda</a><a href="invitacion.html?e=cumple">🎂 Cumpleaños</a><a href="invitacion.html?e=despedida">🍻 Despedida</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="wrap">
+    <div class="cab centro rv"><span class="kick">Cómo funciona</span><h2>Cuatro pasos y a <em>celebrar</em></h2></div>
+    <div class="pasos">
+      <div class="ps rv"><div class="n">1</div><div><h3>Cuéntanos</h3><p>Tipo de evento, fecha e invitados. Sin formularios eternos.</p></div></div>
+      <div class="ps rv" style="--d:1"><div class="n">2</div><div><h3>Cotiza al instante</h3><p>Armas tu paquete y ves el precio cambiar en vivo.</p></div></div>
+      <div class="ps rv" style="--d:2"><div class="n">3</div><div><h3>Reserva tu fecha</h3><p>Un adelanto del 30 % por Yape y nadie te la quita.</p></div></div>
+      <div class="ps rv" style="--d:3"><div class="n">4</div><div><h3>Disfruta</h3><p>Coordinamos proveedores, invitados y cronograma por ti.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="paquetes" style="background:#FBEFDD">
+  <div class="wrap">
+    <div class="cab centro rv"><span class="kick">Paquetes</span><h2>Elige uno y <em>ajústalo</em></h2><p>Son un punto de partida: en el cotizador quitas o agregas lo que quieras.</p></div>
+    <div class="paq" id="paq"></div>
+  </div>
+</section>
+
+<section class="cz oscuro" id="cotiza">
+  <div class="wrap">
+    <div class="cab centro rv"><span class="kick">Cotizador</span><h2>Arma tu evento y mira el <em>precio</em></h2><p>Precios referenciales para esta demo. La reserva se confirma con el adelanto.</p></div>
+    <div class="cz-g">
+      <div class="panel-c rv">
+        <div class="prog" id="prog"></div>
+        <div id="pasos"></div>
+      </div>
+      <aside class="res rv" style="--d:1" id="res" aria-live="polite"></aside>
+    </div>
+  </div>
+</section>
+
+<section id="casos">
+  <div class="wrap">
+    <div class="cab rv"><span class="kick">Eventos de ejemplo</span><h2>Así se ve un <em>jolgorio</em> bien hecho</h2><p>Estos tres tienen su invitación digital funcionando. Ábrela y pruébala como invitado.</p></div>
+    <div class="casos">
+      <a class="caso rv" href="invitacion.html?e=boda"><div class="arte" style="background:radial-gradient(110% 80% at 50% 0,#8A9B72,#3C4631 60%,#241F18)"><span style="position:absolute;right:-20px;top:20px;font-size:12rem;opacity:.18">💍</span></div><span class="t">Boda · Huaral</span><h3>Valeria &amp; Diego</h3><div class="nums"><div><b>120</b><small>invitados</small></div><div><b>96%</b><small>confirmaron</small></div><div><b>5</b><small>proveedores</small></div></div><span class="ver">Ver su invitación →</span></a>
+      <a class="caso rv" style="--d:1" href="invitacion.html?e=cumple"><div class="arte" style="background:radial-gradient(90% 70% at 20% 10%,#FF4F9A,transparent 60%),radial-gradient(90% 80% at 85% 90%,#7B4DFF,transparent 60%),#1A0F3A"><span style="position:absolute;right:-10px;top:10px;font-size:12rem;opacity:.2">🎂</span></div><span class="t">Cumpleaños · Miraflores</span><h3>Los 30 de Sofi</h3><div class="nums"><div><b>60</b><small>invitados</small></div><div><b>88%</b><small>confirmaron</small></div><div><b>3</b><small>días de RSVP</small></div></div><span class="ver">Ver su invitación →</span></a>
+      <a class="caso rv" style="--d:2" href="invitacion.html?e=despedida"><div class="arte" style="background:linear-gradient(180deg,#0E0A07,#2A140C 55%,#B33A16)"><span style="position:absolute;right:-10px;top:20px;font-size:12rem;opacity:.2">🍻</span></div><span class="t">Despedida · Cieneguilla</span><h3>La última de Andrés</h3><div class="nums"><div><b>25</b><small>invitados</small></div><div><b>100%</b><small>confirmaron</small></div><div><b>1</b><small>bus ida y vuelta</small></div></div><span class="ver">Ver su invitación →</span></a>
+    </div>
+  </div>
+</section>
+
+<section style="background:#FBEFDD">
+  <div class="wrap">
+    <div class="cab centro rv"><span class="kick">Opiniones de ejemplo</span><h2>Lo que <em>dicen</em> los clientes</h2></div>
+    <div class="ops">
+      <div class="op rv"><div class="st">★★★★★</div><p>“Cotizé a las once de la noche desde el celular y al día siguiente ya tenía mi fecha apartada. Cero estrés.”</p><div class="qn"><div class="av" style="background:var(--viol)">V</div><div><b>Valeria R.</b><small>Boda · 120 invitados</small></div></div></div>
+      <div class="op rv" style="--d:1"><div class="st">★★★★★</div><p>“Lo mejor fue el link por invitado: en tres días ya sabía quién venía y qué iba a comer cada uno.”</p><div class="qn"><div class="av" style="background:var(--coral)">S</div><div><b>Sofía T.</b><small>Cumpleaños · 60 invitados</small></div></div></div>
+      <div class="op rv" style="--d:2"><div class="st">★★★★★</div><p>“Para la fiesta de aniversario de la empresa fueron puntuales, ordenados y el costo fue el que dijeron.”</p><div class="qn"><div class="av" style="background:var(--menta);color:#06382b">R</div><div><b>Rosa M.</b><small>Corporativo · 90 invitados</small></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="cab centro rv"><span class="kick">Preguntas</span><h2>Lo que <em>siempre</em> nos preguntan</h2></div>
+    <div class="faq rv">
+      <details><summary>¿Cuánto cuesta reservar mi fecha?</summary><p>El 30 % del total estimado, por Yape o Plin. El saldo se paga antes del evento. Con el adelanto tu fecha queda bloqueada para otros clientes.</p></details>
+      <details><summary>¿Con cuánta anticipación debo reservar?</summary><p>Mínimo 7 días en el cotizador. Para bodas y quinceañeras recomendamos 3 meses o más, sobre todo en diciembre y fines de semana.</p></details>
+      <details><summary>¿Por qué cambia el precio según la fecha?</summary><p>Sábados llevan +10 %, viernes y domingos +5 %, y diciembre +8 % por demanda de proveedores. Un día de semana siempre sale más barato.</p></details>
+      <details><summary>¿La invitación digital tiene costo?</summary><p>No, va incluida en todos los eventos. Creamos un link por invitado, recibes las confirmaciones, menús y alergias ordenadas y puedes escribirles por WhatsApp desde el panel.</p></details>
+      <details><summary>¿Puedo cambiar lo que elegí después de reservar?</summary><p>Sí. Puedes sumar o quitar servicios hasta 15 días antes del evento y ajustamos el saldo. El adelanto no se pierde: se descuenta del total.</p></details>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="final rv"><h2>¿Y si hacemos <em style="color:var(--oro)">jolgorio</em>?</h2><p>Cotiza en dos minutos. Si tienes dudas, escríbenos y te respondemos hoy mismo.</p>
+    <div class="acc"><a class="btn claro" href="#cotiza">Cotiza tu evento</a><a class="btn suave" id="waFinal" target="_blank" rel="noopener" href="#">Escribir por WhatsApp</a></div></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div><a class="logo" href="#inicio" style="margin-bottom:.8rem">jolgorio</a><p>Eventos que se sienten, no que se sufren.</p></div>
+  <div><p>Demo creada por <a href="../">Carlo · Dev</a>. Cifras, opiniones y precios son de ejemplo.</p><p>Los datos de la demo viven solo en este navegador. <a href="panel.html">Ver el panel de la organizadora</a></p></div>
+</div></footer>
+
+<a class="wa" id="wa" target="_blank" rel="noopener" href="#" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 32 32"><path d="M6 4h20a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3H15l-6.500 5.500V23H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z"/><circle cx="10.500" cy="13.500" r="1.700" fill="#25D366"/><circle cx="16" cy="13.500" r="1.700" fill="#25D366"/><circle cx="21.500" cy="13.500" r="1.700" fill="#25D366"/></svg></a>
+<div class="barra-m" id="barraM"><div><small id="bmT">Tu presupuesto</small><b id="bmV">S/ 0</b></div><a class="btn" href="#cotiza" id="bmB">Armar mi evento</a></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="logica.js"></script>
-<script src="app.js"></script>
+<script src="cotiza.js"></script>
+<script src="qr.js"></script>
+<script src="empresa.js"></script>
 </body>
 </html>

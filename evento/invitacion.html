@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!-- © Carlo · Dev — Jolgorio: invitaciones web con confirmación de asistencia (demo). -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Invitación digital · Jolgorio</title>
+<meta name="description" content="Invitación digital con cuenta regresiva, cronograma, mapa y confirmación de asistencia por WhatsApp. Demo para bodas, cumpleaños y despedidas.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="t-boda">
+<div class="demo" id="demo" role="tablist" aria-label="Tipo de evento (demo)">
+  <a href="index.html" class="home" aria-label="Volver a Jolgorio">← Jolgorio</a>
+  <button data-t="boda" role="tab">💍 Boda</button>
+  <button data-t="cumple" role="tab">🎂 Cumpleaños</button>
+  <button data-t="despedida" role="tab">🍻 Despedida</button>
+  <a href="admin.html" id="aAdmin">Invitados</a>
+</div>
+<main id="app"></main>
+<div class="fija" id="fija"><b id="fijaT">¿Vienes?</b><a href="#rsvp">Confirmar</a></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="logica.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
