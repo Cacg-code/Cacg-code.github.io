@@ -60,6 +60,10 @@
     return mapa[r.interes] || "excel";
   };
   const busca = (cursos, q) => { const n = norm(q).trim(); if (n.length < 2) return []; return cursos.flatMap(c => lecciones(c).filter(l => norm(l.t + " " + l.p.join(" ") + " " + c.nombre).includes(n)).map(l => ({ c, l }))).slice(0, 12); };
-  r.Cat = { clave, lecciones, resumen, nota, puedeCertificar, proxima, codigoCert, validaLogin, nombreDeCorreo, rachaDias, csv, dia, heatmap, diasSemana, insignias, ics, recomienda, busca, norm };
+  const xp = x => x.hechas * 10 + x.certs * 100 + x.aprobados * 40 + Math.min(x.racha, 30) * 5;
+  const NIVELES = ["Aspirante", "Aprendiz", "Estudiante", "Avanzado", "Destacado", "Maestro"];
+  const nivel = v => { const n = Math.min(NIVELES.length - 1, Math.floor(Math.sqrt(v / 25))), ini = n * n * 25, fin = (n + 1) * (n + 1) * 25; return { n: n + 1, nombre: NIVELES[n], ini, fin, pct: n === NIVELES.length - 1 ? 100 : Math.round((v - ini) / (fin - ini) * 100) }; };
+  const ranking = (rivales, yo) => [...rivales, yo].sort((a, b) => b.xp - a.xp).map((x, i) => ({ ...x, pos: i + 1 }));
+  r.Cat = { xp, nivel, ranking, clave, lecciones, resumen, nota, puedeCertificar, proxima, codigoCert, validaLogin, nombreDeCorreo, rachaDias, csv, dia, heatmap, diasSemana, insignias, ics, recomienda, busca, norm };
   if (typeof module !== "undefined") module.exports = r.Cat;
 })(typeof window !== "undefined" ? window : globalThis);

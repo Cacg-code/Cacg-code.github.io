@@ -23,12 +23,17 @@
     const ins6 = C.insignias({ hechas, racha, certs: certs.length, maxNota, metaOk: ds >= meta });
     const sig = ins.map(c => ({ c, l: C.proxima(c, todo[c.id]) })).find(x => x.l);
     const otros = CURSOS.filter(c => !ins.includes(c)), hm = C.heatmap(dias);
+    const aprobados = CURSOS.filter(c => (todo[c.id] && todo[c.id].n || 0) >= 11).length;
+    const puntos = C.xp({ hechas, certs: certs.length, aprobados, racha }), nv = C.nivel(puntos);
+    const rk = C.ranking([["Valeria Soto", 410], ["Diego Huamán", 305], ["Camila Ríos", 240], ["Luis Mendoza", 150], ["Rosa Flores", 70]].map(x => ({ nombre: x[0], xp: x[1] })), { nombre: u.nombre, xp: puntos, yo: true });
     const pctMeta = Math.min(100, Math.round(ds / meta * 100));
     const hora = new Date().getHours(), saludo = hora < 12 ? "Buenos días" : hora < 19 ? "Buenas tardes" : "Buenas noches";
     app.innerHTML = `<div class="saludo rv in"><span class="kick">${esc(u.uni)}</span><h1>${saludo}, ${esc(u.nombre.split(" ")[0])}</h1>
       <p style="color:var(--gris);margin-top:8px">${racha >= 2 ? `Llevas <b>${racha} días</b> seguidos. ¡No rompas la racha!` : hechas ? "Cada lección cuenta. Hoy es buen día para una más." : "Empieza con una lección de 10 minutos. Tu avance se guarda solo."}</p></div>
     <div class="kpis"><div class="kpi rv in"><b>${racha}</b><span>${racha === 1 ? "día" : "días"} de racha 🔥</span></div><div class="kpi rv in" style="--d:1"><b>${hechas}</b><span>lecciones vistas</span></div><div class="kpi rv in" style="--d:2"><b>${(min / 60).toFixed(1).replace(".", ",")}</b><span>horas de estudio</span></div><div class="kpi rv in" style="--d:3"><b>${certs.length}</b><span>certificados</span></div></div>
     ${sig ? `<div class="sigue"><div class="tx"><small>Continúa donde quedaste</small><h2 style="font-size:1.5rem;margin-top:4px">${esc(sig.l.t)}</h2><small>${sig.c.nombre} · ${sig.l.m} min</small></div><a class="btn" href="#/curso/${sig.c.id}">Seguir ▶</a></div>` : `<div class="sigue"><div class="tx"><h2 style="font-size:1.4rem">¡Terminaste todas tus lecciones!</h2><small>Rinde el examen final para tu certificado o inscríbete en otro curso.</small></div></div>`}
+    <div class="bloque nivel rv in"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline"><b>Nivel ${nv.n} · ${nv.nombre}</b><span class="xp">${puntos} XP</span></div><div class="barra" style="margin:10px 0 4px"><i id="nvb" style="--w:0%"></i></div><small style="color:var(--gris)">${nv.pct < 100 ? `Te faltan ${nv.fin - puntos} XP para el siguiente nivel` : "¡Nivel máximo!"} · +10 XP por lección, +40 por examen aprobado, +100 por certificado</small>
+      <h3 style="margin:16px 0 8px;font-size:1rem">Ranking · ${esc(u.uni)}</h3><div class="rank">${rk.map(x => `<div class="${x.yo ? "yo" : ""}"><span>${x.pos}</span><b>${esc(x.nombre)}${x.yo ? " (Tú)" : ""}</b><i style="--w:${Math.round(x.xp / rk[0].xp * 100)}%"></i><small>${x.xp} XP</small></div>`).join("")}</div></div>
     <div class="dos">
       <div class="bloque" style="margin:0"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><b>Meta de la semana</b><label style="font-size:.85rem;color:var(--gris)">Estudiar <select id="meta" class="mini">${[2, 3, 4, 5, 6, 7].map(n => `<option ${n === meta ? "selected" : ""}>${n}</option>`).join("")}</select> días</label></div>
         <div style="display:flex;align-items:center;gap:16px;margin:14px 0">${anillo(pctMeta, "var(--ok)")}<div><b style="font:800 1.6rem var(--serif)">${ds}/${meta}</b> días<br><small style="color:var(--gris)">${ds >= meta ? "¡Meta cumplida! 🎯" : `Te faltan ${meta - ds} ${meta - ds === 1 ? "día" : "días"}.`}</small></div></div>
@@ -45,6 +50,7 @@
     $("#meta").onchange = e => { S.ponMeta(em, +e.target.value); inicio(); };
     $("#ics").onclick = () => { const l = document.createElement("a"); l.href = URL.createObjectURL(new Blob([C.ics($("#hora").value || "19:00")], { type: "text/calendar" })); l.download = "recordatorio-estudio.ics"; l.click(); toast("Recordatorio descargado ✓"); };
     $("#reinicia").onclick = e => { e.preventDefault(); if (confirm("¿Borrar todo tu avance de esta demo?")) { S.reinicia(em); S.entrar(u); inicio(); } };
+    requestAnimationFrame(() => requestAnimationFrame(() => $("#nvb") && $("#nvb").style.setProperty("--w", nv.pct + "%")));
     animaAnillos();
   }
   const animaAnillos = () => $$(".anillo").forEach(a => { const v = a.style.getPropertyValue("--p"); a.style.setProperty("--p", 0); requestAnimationFrame(() => requestAnimationFrame(() => a.style.setProperty("--p", v))); });
@@ -76,7 +82,8 @@
     <div class="mando"><button class="pp" id="pp" aria-label="Reproducir">▶</button><div class="barra"><i id="pb" style="--w:${hecha ? 100 : 0}%;transition:none"></i></div><span class="t" id="tm">${hecha ? "Vista ✓" : "0:00 / " + l.m + ":00"}</span><div class="vel" role="group" aria-label="Velocidad">${[1, 1.5, 2].map(v => `<button type="button" data-v="${v}" class="${v === vel ? "on" : ""}">${v}x</button>`).join("")}</div></div>
     <p class="atajos"><kbd>Espacio</kbd> reproducir · <kbd>←</kbd> <kbd>→</kbd> cambiar lección · <kbd>/</kbd> buscar</p>
     <div class="acciones"><button class="btn" id="ok" ${hecha ? "disabled" : ""}>${hecha ? "✓ Lección vista" : "Marcar como vista"}</button>${sig ? `<button class="btn lin" id="nx">Siguiente: ${esc(sig.t.length > 28 ? sig.t.slice(0, 26) + "…" : sig.t)} →</button>` : ""}</div>
-    <div class="bloque"><b>Mis apuntes</b><small style="color:var(--gris)"> (se guardan solos)</small><textarea id="ap" placeholder="Escribe lo que quieras recordar…">${esc(S.apunte(em, l.key))}</textarea></div>`;
+    <div class="bloque"><b>Mis apuntes</b><small style="color:var(--gris)"> (se guardan solos)</small><textarea id="ap" placeholder="Escribe lo que quieras recordar…">${esc(S.apunte(em, l.key))}</textarea></div>
+    <div class="bloque"><b>Dudas de la clase</b><div id="dudas">${dudas(l.key)}</div><div style="display:flex;gap:8px;margin-top:10px"><input id="dq" class="mini" style="flex:1" placeholder="Escribe tu duda…" maxlength="160"><button class="btn chico" id="dsend">Preguntar</button></div></div>`;
     const lis = $$(".escena li"), pb = $("#pb"), tm = $("#tm"), pp = $("#pp");
     const muestra = f => lis.forEach((x, i) => x.classList.toggle("v", f >= (i + .3) / lis.length - .15 || hecha));
     muestra(hecha ? 1 : 0); if (hecha) lis.forEach(x => x.classList.add("v"));
@@ -96,6 +103,7 @@
     };
     $$(".vel button").forEach(b => b.onclick = () => { if (jugando) { acum += (performance.now() - t0) * vel; t0 = performance.now(); } vel = +b.dataset.v; $$(".vel button").forEach(x => x.classList.toggle("on", x === b)); });
     ctl = { toggle: () => pp.click(), next: () => sig && (location.hash = `#/curso/${c.id}/${sig.key}`), prev: () => prev && (location.hash = `#/curso/${c.id}/${prev.key}`) };
+    $("#dsend").onclick = () => { const v = $("#dq").value.trim(); if (!v) return; const q = leeD(l.key); q.push(v); try { localStorage.setItem("ac_q_" + l.key, JSON.stringify(q)); } catch (e) {} $("#dq").value = ""; $("#dudas").innerHTML = dudas(l.key); toast("Duda enviada ✓"); };
     $("#ok").onclick = marca;
     if ($("#nx")) $("#nx").onclick = () => { location.hash = `#/curso/${c.id}/${sig.key}`; };
     $("#ap").oninput = e => S.guardaApunte(em, l.key, e.target.value);
@@ -139,6 +147,15 @@
     pinta();
   }
 
+  /* ---------- dudas por lección ---------- */
+  const SEMILLA = [["Mateo (tutor)", "Revisa el resumen de la lección y luego intenta el ejemplo tú mismo; si sigue la duda, pregunta aquí."], ["Ana, alumna", "A mí me ayudó repetir el ejemplo a mano antes de ver la solución."]];
+  const leeD = k => { try { return JSON.parse(localStorage.getItem("ac_q_" + k)) || []; } catch (e) { return []; } };
+  const dudas = k => [...SEMILLA.map(x => ({ a: x[0], t: x[1], s: 1 })), ...leeD(k).map(t => ({ a: u.nombre.split(" ")[0] + " (Tú)", t }))].map(x => `<div class="duda ${x.s ? "" : "mia"}"><b>${esc(x.a)}</b><p>${esc(x.t)}</p></div>`).join("");
+  /* ---------- modo enfoque (pomodoro) ---------- */
+  const pom = document.createElement("div"); pom.className = "pomo"; pom.innerHTML = `<button type="button" id="pomb" aria-label="Modo enfoque">🍅 <span id="pomt">Enfoque 25:00</span></button>`; document.body.appendChild(pom);
+  let pi = null, pr = 1500;
+  const pf = () => { const m = String(Math.floor(pr / 60)).padStart(2, "0"), s = String(pr % 60).padStart(2, "0"); $("#pomt").textContent = (pi ? "Enfocado " : "Enfoque ") + m + ":" + s; };
+  $("#pomb").onclick = () => { if (pi) { clearInterval(pi); pi = null; pr = 1500; pom.classList.remove("on"); document.body.classList.remove("enfoque"); pf(); return; } pom.classList.add("on"); document.body.classList.add("enfoque"); pi = setInterval(() => { pr--; pf(); if (pr <= 0) { clearInterval(pi); pi = null; pr = 1500; pom.classList.remove("on"); document.body.classList.remove("enfoque"); pf(); toast("¡Pomodoro completo! Descansa 5 minutos 🍅"); confeti(); } }, 1000); pf(); };
   /* ---------- buscador global ---------- */
   const bus = document.createElement("div"); bus.className = "buscador"; bus.innerHTML = `<div role="dialog" aria-label="Buscar"><input id="q" placeholder="Busca un tema: derivada, IGV, APA, bucles…" autocomplete="off"><div id="rb" style="margin-top:8px"></div></div>`; document.body.appendChild(bus);
   const abreBus = () => { bus.classList.add("on"); $("#q").value = ""; $("#rb").innerHTML = `<p class="vacio">Escribe al menos 2 letras.</p>`; setTimeout(() => $("#q").focus(), 30); };

@@ -263,3 +263,15 @@ footer .w{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 :root[data-tema="oscuro"] .reco .res{background:#1B2A55;border:1px solid #3C4E8C;color:#fff}
 :root[data-tema="oscuro"] .reco .res small{color:#B6C3E6!important}
 :root[data-tema="oscuro"] .reco .res .btn{background:var(--ambar);color:#0E1A3A}
+/* ===== nivel, ranking, dudas, enfoque ===== */
+.nivel{margin:18px 0}.xp{font:800 1.3rem var(--serif);color:var(--ambar)}
+.rank{display:grid;gap:6px}.rank>div{display:grid;grid-template-columns:28px 1fr 90px;grid-template-areas:"p n x" "b b b";gap:2px 10px;align-items:center;padding:8px 10px;border-radius:12px;background:var(--hueco)}
+.rank>div span{grid-area:p;font:800 .95rem var(--serif);color:var(--gris)}.rank>div b{grid-area:n;font-size:.92rem}.rank>div small{grid-area:x;text-align:right;color:var(--gris)}
+.rank>div i{grid-area:b;height:5px;border-radius:9px;background:linear-gradient(90deg,var(--ambar) var(--w),transparent 0);opacity:.7}
+.rank>div.yo{background:var(--suave);outline:2px solid var(--ambar);animation:pop .6s both}
+.duda{padding:10px 12px;border-radius:12px;background:var(--hueco);margin-top:8px}.duda p{margin:2px 0 0;font-size:.92rem;color:var(--tinta2)}.duda.mia{background:var(--suave);animation:pop .4s both}
+.pomo{position:fixed;left:16px;bottom:16px;z-index:40}
+.pomo button{background:var(--papel);color:var(--tinta);border:1.5px solid var(--linea);border-radius:99px;padding:10px 16px;font:700 .85rem var(--sans);cursor:pointer;box-shadow:var(--sombra);min-height:44px}
+.pomo.on button{border-color:#E11D48;animation:pulso 2s infinite}
+body.enfoque .lateral,body.enfoque .atajos,body.enfoque .btn-buscar{opacity:.25;transition:opacity .4s}
+body.enfoque .lateral:hover{opacity:1}
