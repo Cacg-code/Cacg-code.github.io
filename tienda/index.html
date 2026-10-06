@@ -10,6 +10,12 @@
 <meta name="description" content="Café de especialidad de Cusco, Cajamarca y Chanchamayo, tostado esta semana. Compra online y paga con Yape o transferencia.">
 <meta property="og:title" content="Cumbre Café · Tostado esta semana">
 <meta property="og:image" content="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=70">
+<link rel="canonical" href="https://cacg-code.github.io/tienda/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cacg-code.github.io/tienda/">
+<meta property="og:locale" content="es_PE">
+<meta property="og:description" content="Café peruano de especialidad, tostado esta semana. Pide por WhatsApp y paga con Yape.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1B2BD9">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%231B2BD9'/%3E%3Cpath d='M6 24 16 8l10 16z' fill='%23FFE27A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +45,9 @@ header{position:sticky;top:0;z-index:40;background:rgba(27,43,217,.88);backdrop-
 .top nav ul{display:flex;gap:1.75rem;list-style:none;padding:0}
 .top nav a{text-decoration:none;font-weight:600;opacity:.9;padding:.5rem 0}
 .top nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px}
-@media(max-width:760px){.top nav{display:none}}
+.logo{min-height:44px;display:inline-flex;align-items:center}
+.top nav a{display:inline-flex;align-items:center;min-height:44px}
+@media(max-width:760px){.top{flex-wrap:wrap;row-gap:0;padding-top:.3rem}.top nav{order:3;width:100%}.top nav ul{gap:1.1rem;justify-content:space-between}.top nav a{font-size:.95rem}}
 .carro-btn{display:inline-flex;gap:.6rem;align-items:center;min-height:48px;padding:.4rem .5rem .4rem 1.2rem;border-radius:999px;background:var(--butter);color:var(--ink);border:0;font:inherit;font-weight:700;cursor:pointer;transition:transform .2s}
 .carro-btn:hover{transform:scale(1.04)}
 .carro-btn b{background:var(--ink);color:var(--butter);border-radius:999px;min-width:34px;height:34px;display:grid;place-items:center;font-size:.9rem}
@@ -144,6 +152,12 @@ summary::after{content:"+";font-size:1.6rem;transition:transform .25s;flex:none}
 details[open] summary::after{transform:rotate(45deg)}
 details p{margin-top:.6rem;color:var(--muted);max-width:60ch}
 
+.cto{padding:clamp(3rem,7vw,5rem) 0;background:var(--paper)}
+.cto .wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.cto h2{font-family:var(--f-d);font-size:clamp(2rem,5vw,3rem);line-height:1.05}
+.cto ul{list-style:none;padding:0;display:grid;gap:.4rem;margin-top:1rem;color:var(--muted)}
+.cto .fila{display:flex;flex-wrap:wrap;gap:.75rem}
+@media(max-width:760px){.cto .wrap{grid-template-columns:1fr}}
 footer{background:var(--ink);color:#C9CDEE;padding:2.5rem 0 2rem;font-size:.95rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 footer a{color:var(--butter)}
@@ -167,10 +181,10 @@ footer a{color:var(--butter)}
 .linea b{display:block}
 .linea small{color:var(--muted)}
 .cant{display:inline-flex;align-items:center;border:2px solid var(--ink);border-radius:999px;margin-top:.4rem}
-.cant button{width:38px;height:38px;border:0;background:none;font:inherit;font-size:1.2rem;cursor:pointer;border-radius:50%}
+.cant button{width:44px;height:44px;border:0;background:none;font:inherit;font-size:1.2rem;cursor:pointer;border-radius:50%}
 .cant button:hover{background:var(--butter)}
 .cant span{min-width:26px;text-align:center;font-weight:700}
-.quitar{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font:inherit;font-size:.85rem;padding:.3rem 0}
+.quitar{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font:inherit;font-size:.85rem;padding:.3rem 0;min-height:44px}
 .pie-carro{border-top:1px solid var(--line);padding:1.1rem 1.4rem 1.4rem;display:grid;gap:.7rem;margin-top:auto}
 .tot{display:flex;justify-content:space-between}
 .tot.g{font-family:var(--f-d);font-weight:700;font-size:1.3rem;letter-spacing:-.015em}
@@ -282,6 +296,16 @@ dialog[open]{animation:ap .35s cubic-bezier(.2,.8,.2,1)}
   </div>
 </section>
 
+<section class="cto" id="contacto">
+  <div class="wrap">
+    <div>
+      <h2>¿Dudas antes de pedir?</h2>
+      <ul><li>Atención por WhatsApp: lunes a sábado, 9:00 a 19:00 (hora de Lima)</li><li>Respondemos en menos de 30 minutos en ese horario</li><li>Despachos en Lima: martes y jueves, entrega en 48 horas</li></ul>
+    </div>
+    <div class="fila"><a class="btn" href="https://wa.me/51999999999?text=Hola%20Cumbre%2C%20tengo%20una%20consulta" target="_blank" rel="noopener">Escribir por WhatsApp</a><a class="btn o" href="tel:+51999999999">Llamar al 999 999 999</a></div>
+  </div>
+</section>
+
 <footer><div class="wrap"><span>© 2026 Cumbre Café (negocio ficticio)</span><span>Demo de tienda por <a href="../">Carlo Andre Chiuyare Guillen · Carlo · Dev</a>. Todos los derechos reservados; prohibida su copia. Desarrollo con apoyo de IA (Claude), bajo dirección del autor. Productos y datos ficticios. Fotos: Unsplash.</span></div></footer>
 
 <div class="velo" id="velo"></div>
@@ -333,6 +357,9 @@ function bolsa(p){
    <text x="100" y="222" text-anchor="middle" font-family="Hanken Grotesk,sans-serif" font-weight="600" font-size="10" fill="#5A5F86">${p.o} · 250 g</text></svg>`;
 }
 $("#hbag").innerHTML=bolsa(P[0]);
+(()=>{const ld=document.createElement("script");ld.type="application/ld+json";ld.textContent=JSON.stringify({"@context":"https://schema.org","@graph":[
+  {"@type":"Store","name":"Cumbre Café","url":"https://cacg-code.github.io/tienda/","telephone":"+51999999999","areaServed":"Lima, Perú","priceRange":"S/ 36 - S/ 52","image":"https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=70"},
+  ...P.map(p=>({"@type":"Product","name":"Café "+p.n+" 250 g","description":`${p.o}, tueste ${p.t.toLowerCase()}. Notas: ${p.notas}.`,"brand":{"@type":"Brand","name":"Cumbre Café"},"offers":{"@type":"Offer","priceCurrency":"PEN","price":p.p.toFixed(2),"availability":"https://schema.org/InStock","url":"https://cacg-code.github.io/tienda/#catalogo"}}))]});document.head.appendChild(ld)})();
 
 const chips=$("#chips");
 ["Todos","Claro","Medio","Oscuro"].forEach(t=>{const b=document.createElement("button");b.className="chip";b.textContent=t==="Todos"?"Todos":"Tueste "+t.toLowerCase();b.setAttribute("aria-pressed",t==="Todos");
