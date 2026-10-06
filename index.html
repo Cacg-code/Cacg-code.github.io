@@ -145,9 +145,6 @@ section.s{padding:clamp(5rem,12vw,10rem) 0}
 .cab p{color:var(--mute);font-size:1.15rem}
 
 /* proyectos */
-/* la cantidad de demos sale de DEMOS: al añadir una, todo se actualiza solo */
-const NUM=["Cero","Una","Dos","Tres","Cuatro","Cinco","Seis","Siete","Ocho","Nueve","Diez","Once","Doce"];
-document.querySelectorAll("[data-cuenta]").forEach(e=>e.textContent=NUM[DEMOS.length]||DEMOS.length);
 .proy{display:grid;gap:clamp(1.5rem,4vw,3rem)}
 .pr{position:relative;display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;padding:clamp(1.25rem,3vw,2.25rem);border-radius:32px;border:1px solid var(--line);background:linear-gradient(160deg,#ffffff0d,#ffffff03);overflow:hidden;--g:var(--v)}
 .pr::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:var(--g);filter:blur(120px);opacity:.22;right:-120px;top:-160px;pointer-events:none;transition:opacity .6s}
@@ -459,6 +456,9 @@ const DEMOS=[
   tech:["html", "css", "js", "wa"],
   tags:["Calendario de noches","Adelanto Yape/Plin","Panel de la anfitriona","Animaciones modernas"]}
 ];
+/* la cantidad de demos sale de DEMOS: al añadir una, todo se actualiza solo */
+const NUM=["Cero","Una","Dos","Tres","Cuatro","Cinco","Seis","Siete","Ocho","Nueve","Diez","Once","Doce"];
+document.querySelectorAll("[data-cuenta]").forEach(e=>e.textContent=NUM[DEMOS.length]||DEMOS.length);
 const $=s=>document.querySelector(s);
 const wa=t=>`https://wa.me/${CONTACTO.whatsapp}${t?"?text="+encodeURIComponent(t):""}`;
 document.querySelectorAll("[data-c]").forEach(e=>e.textContent=CONTACTO[e.dataset.c]);
