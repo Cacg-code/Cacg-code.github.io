@@ -135,6 +135,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,246,248,.86);backdro
 .cf button svg{width:20px;height:20px}
 @media(max-width:1020px){.hero .wrap{grid-template-columns:1fr}.chat{position:relative;top:0;height:min(680px,86svh)}.foto-arco{display:none}}
 
+.m.wab{align-self:flex-start;background:#d9fdd3;border:1px solid #bfe8b8;border-bottom-left-radius:5px;max-width:92%}
+.wab small{display:block;color:#2b6b3c;font-weight:700;font-size:.78rem;margin-bottom:.25rem}
+.ticket.cup{border-color:var(--gold);background:linear-gradient(135deg,#fff,#fff6df)}
+.ticket.cup .t{color:#8a6a1d;letter-spacing:.14em}
+
 /* secciones */
 section.s{padding:clamp(3.5rem,8vw,6.5rem) 0}
 .cab{display:flex;flex-wrap:wrap;gap:1rem 3rem;justify-content:space-between;align-items:end;margin-bottom:2rem}
@@ -155,6 +160,22 @@ section.s{padding:clamp(3.5rem,8vw,6.5rem) 0}
 @media(max-width:860px){.sv{grid-template-columns:1fr 1fr}.sv article{aspect-ratio:1}}
 @media(max-width:520px){.sv{grid-template-columns:1fr}.sv article{aspect-ratio:4/3}}
 
+.dos2{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+@media(max-width:900px){.dos2{grid-template-columns:1fr}}
+.ba{--pos:50%;position:relative;aspect-ratio:4/3;border-radius:28px;overflow:hidden;background:var(--blush);user-select:none;touch-action:pan-y}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.2) contrast(1.05)}
+.ba img.antes{clip-path:inset(0 calc(100% - var(--pos)) 0 0);filter:grayscale(.9) contrast(.78) brightness(.88)}
+.ba .asa{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 14px rgba(0,0,0,.35)}
+.ba .asa::after{content:"\2194";position:absolute;top:50%;left:50%;width:44px;height:44px;margin:-22px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;font-size:1.2rem;box-shadow:0 8px 20px -6px rgba(0,0,0,.5)}
+.ba .tag{position:absolute;top:14px;padding:.25rem .8rem;border-radius:99px;background:rgba(29,15,34,.62);backdrop-filter:blur(6px);color:#fff;font-size:.82rem;font-weight:600}
+.ba .tag.a{left:14px}.ba .tag.dsp{right:14px}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba:focus-within{outline:3px solid var(--orchid);outline-offset:3px}
+.est{color:var(--gold);letter-spacing:.15em;font-size:1.1rem}
+.rl{list-style:none;padding:0;display:grid;gap:1rem}
+.rl li{border-left:2px solid var(--gold);padding-left:1rem}
+.rl p{font-family:var(--f-d);font-size:1.3rem;line-height:1.25}
+.rl small{color:var(--mute)}
 .dos{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
 @media(max-width:900px){.dos{grid-template-columns:1fr}}
 .card{background:#fff;border:1px solid var(--line);border-radius:28px;padding:clamp(1.3rem,3vw,2rem)}
@@ -224,7 +245,7 @@ footer a{color:var(--orchid-d)}
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#1D0F22"/><path d="M16 6c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z" fill="#D8B26A"/></svg>
       <span><b>Áurea</b><small>SPA &amp; ESTÉTICA</small></span>
     </a>
-    <nav aria-label="Principal"><ul><li><a href="#servicios">Servicios</a></li><li><a href="#panel">Panel del salón</a></li><li><a href="#incluye">Qué incluye</a></li></ul></nav>
+    <nav aria-label="Principal"><ul><li><a href="#servicios">Servicios</a></li><li><a href="#resultados">Resultados</a></li><li><a href="#panel">Panel del salón</a></li><li><a href="#incluye">Qué incluye</a></li></ul></nav>
     <a class="btn sm" href="#chat"><span class="lg">Agendar con el asistente</span><span class="cr">Agendar</span></a>
   </div>
 </header>
@@ -269,6 +290,29 @@ footer a{color:var(--orchid-d)}
         <article class="rv"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=700&q=70" alt="Maquillaje y pestañas" loading="lazy" width="700" height="875"><div><h3>Cejas y pestañas</h3><p>Laminado, extensiones y depilación</p><div class="pr">Desde S/ 55</div></div></article>
         <article class="rv" style="--dl:.08s"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=70" alt="Cabello largo" loading="lazy" width="700" height="875"><div><h3>Cabello</h3><p>Corte, peinado, tinte y balayage</p><div class="pr">Desde S/ 60</div></div></article>
         <article class="rv" style="--dl:.16s"><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=700&q=70" alt="Piedras calientes y flores" loading="lazy" width="700" height="875"><div><h3>Día de spa</h3><p>Masaje relajante y limpieza facial</p><div class="pr">S/ 190</div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="resultados" style="padding-top:0">
+    <div class="wrap">
+      <div class="cab rv"><h2 class="d">Resultados que <em>se notan</em></h2><p>Desliza para comparar el antes y el después. Imágenes y reseñas de ejemplo.</p></div>
+      <div class="dos2">
+        <div class="ba rv" id="ba">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=70" alt="Cabello después del tratamiento: color vivo y brillante" loading="lazy" width="900" height="675">
+          <img class="antes" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=70" alt="" aria-hidden="true" loading="lazy" width="900" height="675">
+          <span class="tag a">Antes</span><span class="tag dsp">Después</span><i class="asa"></i>
+          <input type="range" min="0" max="100" value="50" aria-label="Deslizar para comparar antes y después">
+        </div>
+        <div class="card rv" style="--dl:.1s">
+          <h3>Lo que dicen</h3>
+          <p class="sub"><span class="est" aria-hidden="true">★★★★★</span> 4,9 de 5 · 312 reseñas (ejemplo)</p>
+          <ul class="rl">
+            <li><p>“Reservé a las once de la noche y al día siguiente ya tenía mi masaje. Cero llamadas.”</p><small>Valeria M. · Masaje relajante</small></li>
+            <li><p>“Me llegó el recordatorio y pude mover mi cita en un minuto.”</p><small>Daniela R. · Manicure semipermanente</small></li>
+            <li><p>“Elegí con quién atenderme y la hora exacta. Se siente premium.”</p><small>Fiorella S. · Día de spa</small></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -351,20 +395,24 @@ const guardar=()=>{try{localStorage.setItem(KEY,JSON.stringify(citas))}catch(e){
 
 /* disponibilidad */
 const hn=s=>+s.slice(0,2);
-const choca=(iso,h,dur)=>citas.some(c=>c.fecha===iso&&h<hn(c.hora)+Math.ceil(c.dur/60)&&hn(c.hora)<h+dur);
-function ocupada(iso,h,serv){
-  const n=[...iso].reduce((s,c)=>s+c.charCodeAt(0),0)+h*17+serv.length*7;
+const choca=(iso,h,dur,pro)=>citas.some(c=>c.fecha===iso&&(!c.pro||c.pro===pro)&&h<hn(c.hora)+Math.ceil(c.dur/60)&&hn(c.hora)<h+dur);
+function ocupada(iso,h,serv,pro=""){
+  const n=[...iso].reduce((s,c)=>s+c.charCodeAt(0),0)+h*17+serv.length*7+(pro.charCodeAt(0)||0)*3;
   return n%10<3;
 }
-function libres(iso,s){
+function libresDe(iso,s,pro){
   const t=lima(),hr=HORAS[dow(iso)];if(!hr)return[];
   const dur=Math.ceil(s.d/60),out=[];
   for(let h=hr[0];h+dur<=hr[1];h++){
     if(iso===t.iso&&h<t.h+1.5)continue;
-    if(!choca(iso,h,dur)&&!ocupada(iso,h,s.n))out.push(h);
+    if(!choca(iso,h,dur,pro)&&!ocupada(iso,h,s.n,pro))out.push(h);
   }
   return out;
 }
+const PROS=[["Camila","Faciales y masajes"],["Lucía","Uñas, cejas y cabello"]];
+function libres(iso,s,pro=lead.pro){
+  if(pro&&pro!=="Cualquiera")return libresDe(iso,s,pro);
+  return[...new Set(PROS.flatMap(([n])=>libresDe(iso,s,n)))].sort((a,b)=>a-b)}
 function diasDisponibles(s){
   const t=lima(),out=[];
   for(let i=0;i<14&&out.length<5;i++){const iso=sumaDias(t.iso,i);if(libres(iso,s).length)out.push(iso)}
@@ -380,8 +428,8 @@ function chips(arr){Q.innerHTML="";arr.forEach(([t,fn,cls])=>{const b=document.c
 function yo(t){add("u",esc(t));procesa(t)}
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("on"),2400)}
 
-const MENU=[["Agendar una cita",inicioCita],["Servicios y precios",servicios],["Horarios",horarios],["Ubicación",ubicacion],["Promociones",promos]];
-function menu(){paso="menu";chips(MENU)}
+const MENU=[["Agendar una cita",inicioCita],["Cupón de bienvenida",cuponInfo],["Servicios y precios",servicios],["Horarios",horarios],["Ubicación",ubicacion],["Promociones",promos]];
+function menu(){paso="menu";lead={};chips(MENU)}
 async function saludo(){
   const t=lima(),ab=HORAS[t.dow]&&t.h>=HORAS[t.dow][0]&&t.h<HORAS[t.dow][1];
   await bot(`Hola, soy el asistente de <strong>${esc(NEGOCIO.corto)}</strong>. Atiendo las 24 horas, aunque el salón esté cerrado. ${ab?"Ahora mismo el salón está <strong>abierto</strong>.":"Ahora el salón está cerrado, pero puedo dejarte la cita lista."}`);
@@ -417,7 +465,10 @@ async function elegirServicio(c){
   paso="serv";
   await bot("Elige el servicio exacto:");
   chips([...l.map(([n,p,d])=>[`${n} · ${fmtS(p)}`,()=>elegirDia({cat:c,n,p,d})]),["Volver",inicioCita]])}
-async function elegirDia(s){paso="dia";lead.s=s;
+async function elegirPro(s){paso="pro";
+  await bot("¿Con quién prefieres atenderte?");
+  chips([...PROS.map(([n,e])=>[`${n} · ${e}`,()=>{lead.pro=n;elegirDia(s)}]),["Cualquiera (más horarios)",()=>{lead.pro="Cualquiera";elegirDia(s)}],["Volver",inicioCita]])}
+async function elegirDia(s){lead.s=s;if(!lead.pro)return elegirPro(s);paso="dia";
   const dias=diasDisponibles(s);
   if(!dias.length){await bot("No veo horarios libres en los próximos días. Escríbenos por WhatsApp y te ayudamos.");chips([["Hablar con el salón",handoff,"wa"],["Inicio",menu]]);return}
   await bot(`<strong>${esc(s.n)}</strong> (${fmtS(s.p)}, ${s.d} min). <strong>¿Qué día te acomoda?</strong>`);
@@ -425,22 +476,32 @@ async function elegirDia(s){paso="dia";lead.s=s;
 async function elegirHora(iso){paso="hora";lead.fecha=iso;
   const l=libres(iso,lead.s);
   await bot(`Para el <strong>${esc(etiq(iso))}</strong> tengo estas horas libres. <strong>¿Cuál prefieres?</strong>`);
-  chips([...l.map(h=>[hh(h),()=>{lead.hora=hh(h);pedirNombre()}]),["Otro día",()=>elegirDia(lead.s)]])}
+  chips([...l.map(h=>[hh(h),()=>{lead.hora=hh(h);lead.asig=lead.pro==="Cualquiera"?(PROS.find(([n])=>!choca(lead.fecha,h,Math.ceil(lead.s.d/60),n)&&!ocupada(lead.fecha,h,lead.s.n,n))||PROS[0])[0]:lead.pro;pedirNombre()}]),["Otro día",()=>elegirDia(lead.s)]])}
 async function pedirNombre(){paso="nombre";
   await bot(`Anotado: ${esc(corta(lead.fecha))} a las <strong>${esc(lead.hora)}</strong>. <strong>¿A nombre de quién la reservo?</strong>`);chips([["Cancelar",menu]])}
 async function pedirTel(){paso="tel";
   await bot(`Gracias, ${esc(lead.nombre)}. <strong>¿Cuál es tu celular?</strong> Lo usamos solo para confirmar la cita. En esta demo no se envía a ningún servidor.`);chips([["Cancelar",menu]])}
+let cupon=false;
+async function cuponInfo(){
+  await bot("Un regalo de bienvenida para tu primera visita:");
+  add("ticket cup",`<div class="t">AUREA10</div><div>10 % de descuento en tu primera cita. No acumulable con promociones.</div>`);
+  chips([[cupon?"Cupón activado":"Activar el cupón",()=>{cupon=true;toast("Cupón AUREA10 activado");inicioCita()}],["Inicio",menu]])}
 async function resumen(){paso="fin";
-  const c={id:Date.now(),servicio:lead.s.n,precio:lead.s.p,dur:lead.s.d,fecha:lead.fecha,hora:lead.hora,nombre:lead.nombre,tel:lead.tel};
+  const cup=cupon&&lead.s.cat!=="Promos",total=cup?Math.round(lead.s.p*.9):lead.s.p;if(cup)cupon=false;
+  const c={id:Date.now(),servicio:lead.s.n,precio:total,cup,pro:lead.asig,dur:lead.s.d,fecha:lead.fecha,hora:lead.hora,nombre:lead.nombre,tel:lead.tel};
   citas.push(c);guardar();pintaCitas(c.id);
   await bot("Listo, dejé tu cita reservada. Este es tu resumen:",420);
-  add("ticket",`<div class="t">${esc(c.servicio)}</div><div><b>Fecha:</b> ${esc(etiq(c.fecha))}</div><div><b>Hora:</b> ${esc(c.hora)} (${c.dur} min)</div><div><b>Nombre:</b> ${esc(c.nombre)}</div><div><b>Celular:</b> ${esc(c.tel)}</div><div><b>Precio:</b> ${fmtS(c.precio)}</div>`);
+  add("ticket",`<div class="t">${esc(c.servicio)}</div><div><b>Fecha:</b> ${esc(etiq(c.fecha))}</div><div><b>Hora:</b> ${esc(c.hora)} (${c.dur} min)</div><div><b>Profesional:</b> ${esc(c.pro)}</div><div><b>Nombre:</b> ${esc(c.nombre)}</div><div><b>Celular:</b> ${esc(c.tel)}</div><div><b>Precio:</b> ${fmtS(c.precio)}${c.cup?" (cupón AUREA10 −10 %)":""}</div>`);
   M.scrollTop=M.scrollHeight;destellos(M.lastElementChild);
   await bot(`Toca <strong>Confirmar por WhatsApp</strong> para avisar al salón. Para cambiar o cancelar, escríbenos con 24 horas de anticipación.`,420);
-  chips([["Confirmar por WhatsApp",()=>enviar(c),"wa"],["Agregar a mi calendario",()=>ics(c)],["Agendar otra cita",inicioCita],["Inicio",menu]]);
+  chips([["Confirmar por WhatsApp",()=>enviar(c),"wa"],["Agregar a mi calendario",()=>ics(c)],["Ver el recordatorio",()=>recordatorio(c)],["Agendar otra cita",inicioCita],["Inicio",menu]]);
   toast("Cita agregada al panel del salón")}
 function destellos(el){for(let i=0;i<14;i++){const s=document.createElement("i");s.className="sp";const a=Math.PI*2*i/14,r=60+Math.random()*50;s.style.cssText=`--x:${Math.cos(a)*r*1.6}px;--y:${Math.sin(a)*r*.8-20}px;animation-delay:${Math.random()*.25}s;left:${20+Math.random()*60}%`;el.appendChild(s);setTimeout(()=>s.remove(),1700)}}
-function textoWa(c){return["Hola "+NEGOCIO.corto+",","Quiero confirmar mi cita:","","*Servicio:* "+c.servicio,"*Fecha:* "+etiq(c.fecha),"*Hora:* "+c.hora,"*Nombre:* "+c.nombre,"*Celular:* "+c.tel,"","_Cita agendada desde el asistente_"].join("\n")}
+async function recordatorio(c){
+  await bot("Así le llega al cliente el recordatorio automático, 24 horas antes de su cita:");
+  add("wab",`<small>WhatsApp · Mensaje automático</small>Hola ${esc(c.nombre.split(" ")[0])}, te esperamos el ${esc(corta(c.fecha))} a las <strong>${esc(c.hora)}</strong> en ${esc(NEGOCIO.corto)} para tu ${esc(c.servicio.toLowerCase())}${c.pro?` con ${esc(c.pro)}`:""}.<br>Responde <strong>1</strong> para confirmar o <strong>2</strong> para reprogramar.`);
+  chips([["Agendar otra cita",inicioCita],["Inicio",menu]])}
+function textoWa(c){return["Hola "+NEGOCIO.corto+",","Quiero confirmar mi cita:","","*Servicio:* "+c.servicio,"*Fecha:* "+etiq(c.fecha),"*Hora:* "+c.hora,"*Profesional:* "+(c.pro||"Cualquiera"),"*Nombre:* "+c.nombre,"*Celular:* "+c.tel,"","_Cita agendada desde el asistente_"].join("\n")}
 function enviar(c){window.open("https://wa.me/"+NEGOCIO.wa+"?text="+encodeURIComponent(textoWa(c)),"_blank","noopener")}
 const ie=t=>t.replace(/[\\,;]/g,"\\$&");
 function ics(c){
@@ -458,6 +519,7 @@ const INT=[
   [/(cancel|reprogram|cambiar (mi )?cita|mover (mi )?cita)/i,async()=>{await bot("Para cambiar o cancelar una cita escríbenos por WhatsApp con 24 horas de anticipación y la movemos sin costo.");chips([["Hablar con el salón",handoff,"wa"],["Inicio",menu]])}],
   [/(horario|hora de atenci|abren|cierran|atienden|abierto)/i,()=>horarios()],
   [/(donde|ubicaci|direcci|llegar|mapa|queda)/i,()=>ubicacion()],
+  [/(cupon|codigo)/i,()=>cuponInfo()],
   [/(promo|oferta|descuento|paquete|pack|d[ií]a de spa)/i,()=>promos()],
   [/(pago|pagar|yape|plin|tarjeta|efectivo)/i,async()=>{await bot("Aceptamos efectivo, Yape, Plin y tarjetas. El pago se hace en el salón el día de tu cita.");chips([["Agendar una cita",inicioCita],["Inicio",menu]])}],
   [/(dura|demora|cu[aá]nto tiempo)/i,async()=>{await bot("Depende del servicio: entre 40 y 150 minutos. Al elegir el servicio te muestro la duración exacta.");chips([["Ver servicios",servicios],["Inicio",menu]])}],
@@ -488,7 +550,7 @@ async function procesa(t){
 function pintaCitas(nuevo){
   const ul=$("#citas"),l=[...citas].sort((a,b)=>(a.fecha+a.hora).localeCompare(b.fecha+b.hora));
   $("#limpiar").hidden=!l.length;
-  ul.innerHTML=l.length?l.map(c=>{const d=new Date(c.fecha+"T12:00:00Z");return `<li class="cita${c.id===nuevo?" nueva":""}"><div class="dt"><b>${d.getUTCDate()}</b><span>${d.toLocaleDateString("es-PE",{month:"short",timeZone:"UTC"})}</span></div><div><strong>${esc(c.servicio)}</strong><small>${esc(c.hora)} · ${esc(c.nombre)} · ${esc(c.tel)}</small></div><em>Por confirmar</em></li>`}).join(""):`<li class="vacio">Aún no hay citas. Agenda una desde el chat y aparecerá aquí.</li>`}
+  ul.innerHTML=l.length?l.map(c=>{const d=new Date(c.fecha+"T12:00:00Z");return `<li class="cita${c.id===nuevo?" nueva":""}"><div class="dt"><b>${d.getUTCDate()}</b><span>${d.toLocaleDateString("es-PE",{month:"short",timeZone:"UTC"})}</span></div><div><strong>${esc(c.servicio)}</strong><small>${esc(c.hora)}${c.pro?" · "+esc(c.pro):""} · ${esc(c.nombre)} · ${esc(c.tel)}</small></div><em>Por confirmar</em></li>`}).join(""):`<li class="vacio">Aún no hay citas. Agenda una desde el chat y aparecerá aquí.</li>`}
 $("#limpiar").onclick=()=>{citas=[];guardar();pintaCitas();toast("Citas de la demo borradas")};
 
 function inicio(){M.innerHTML="";Q.innerHTML="";paso="menu";lead={};saludo()}
@@ -498,6 +560,12 @@ F.addEventListener("submit",e=>{e.preventDefault();const t=I.value.trim();if(!t)
 /* barra de avance */
 const prog=$("#prog");let rq=0;
 addEventListener("scroll",()=>{if(rq)return;rq=requestAnimationFrame(()=>{rq=0;const h=document.documentElement;prog.style.setProperty("--p",h.scrollHeight>h.clientHeight?(h.scrollTop/(h.scrollHeight-h.clientHeight)).toFixed(3):0)})},{passive:true});
+/* antes / después */
+const ba=$("#ba"),rg=ba.querySelector("input");let tocado=false;
+const setP=v=>{ba.style.setProperty("--pos",v+"%");rg.value=v};
+rg.addEventListener("input",()=>{tocado=true;setP(rg.value)});
+if(!reduce)new IntersectionObserver((es,o)=>{if(!es[0].isIntersecting)return;o.disconnect();const t0=performance.now();
+  (function f(t){if(tocado)return;const k=Math.min((t-t0)/2800,1);setP((50+32*Math.sin(k*Math.PI*2)*(1-k*.35)).toFixed(1));if(k<1)requestAnimationFrame(f)})(t0)},{threshold:.6}).observe(ba);
 /* reveal */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll(".rv").forEach(e=>io.observe(e));
