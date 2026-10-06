@@ -176,6 +176,44 @@ section.s{padding:clamp(3.5rem,8vw,6.5rem) 0}
 .rl li{border-left:2px solid var(--gold);padding-left:1rem}
 .rl p{font-family:var(--f-d);font-size:1.3rem;line-height:1.25}
 .rl small{color:var(--mute)}
+.dos>*{min-width:0}
+.dos .crm,.dos #incluye{grid-column:1/-1}
+#incluye .inc{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem 2rem}
+.crm-h{display:flex;flex-wrap:wrap;gap:.8rem 1.5rem;justify-content:space-between;align-items:center}
+.crm-h h3{margin:0}
+.tabs{display:inline-flex;padding:4px;border-radius:99px;background:var(--blush2);border:1px solid var(--line)}
+.tabs button{min-height:40px;padding:.3rem 1.2rem;border-radius:99px;border:0;background:none;font:inherit;font-weight:600;color:var(--mute);cursor:pointer;transition:background .25s,color .25s}
+.tabs button[aria-pressed=true]{background:var(--ink);color:#fff}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:1rem 0 1.4rem}
+.kpi{padding:1rem 1.2rem;border-radius:20px;background:linear-gradient(135deg,var(--blush2),#fff);border:1px solid var(--line)}
+.kpi b{display:block;font-family:var(--f-d);font-weight:400;font-size:2.6rem;line-height:1}
+.kpi b.txt{font-size:1.5rem;line-height:1.1;padding:.45rem 0 .2rem}
+.kpi span{color:var(--mute);font-size:.88rem}
+@media(max-width:600px){.kpis{grid-template-columns:1fr 1fr}.kpi:last-child{grid-column:1/-1}.kpi b{font-size:2.1rem}}
+.vista{animation:min .35s}
+.vista h4{font-family:var(--f-d);font-weight:400;font-size:1.4rem;margin:1.2rem 0 .6rem}
+.vista h4:first-child{margin-top:0}
+.vista .citas.sc{max-height:440px;overflow-y:auto;padding-right:.3rem}
+.barras{display:grid;gap:.7rem}
+.barra{display:grid;grid-template-columns:64px 1fr 28px;gap:.8rem;align-items:center;font-size:.92rem}
+.barra i{display:block;height:10px;border-radius:99px;background:var(--blush);overflow:hidden}
+.barra i::before{content:"";display:block;height:100%;width:var(--w);border-radius:99px;background:var(--c);transform-origin:0 50%;animation:crece 1.1s cubic-bezier(.2,.8,.2,1)}
+@keyframes crece{from{transform:scaleX(0)}}
+.sem-w{overflow-x:auto;border-radius:18px}
+.sem{display:grid;min-width:640px;grid-template-columns:46px repeat(var(--n),1fr);grid-template-rows:auto repeat(10,40px);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.sem .th{padding:.5rem .3rem;text-align:center;font-size:.8rem;color:var(--mute);background:var(--blush2);text-transform:capitalize;grid-row:1}
+.sem .th.hoy{color:var(--orchid-d);font-weight:700}
+.sem .hr{grid-column:1;font-size:.72rem;color:var(--mute);padding:.2rem .3rem;border-top:1px solid var(--line)}
+.sem .ce{border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.sem .bl{margin:2px;padding:.25rem .5rem;border-radius:10px;font-size:.74rem;line-height:1.2;overflow:hidden;color:#fff;background:var(--c);animation:min .4s;z-index:1}
+.sem .bl b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sem .bl.tu{background:#fff;color:var(--orchid-d);border:1.5px dashed var(--orchid)}
+.sem .bl.nueva{animation:min .4s,nueva 2.2s ease-out}
+.sem .bl.past{opacity:.5}
+.leyenda{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:.8rem;font-size:.85rem;color:var(--mute)}
+.leyenda i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-right:.4rem}
+.cita em.ok{background:#dff3e8;color:#1f6b43}
+.cita em.done{background:#eee;color:var(--mute)}
 .dos{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
 @media(max-width:900px){.dos{grid-template-columns:1fr}}
 .card{background:#fff;border:1px solid var(--line);border-radius:28px;padding:clamp(1.3rem,3vw,2rem)}
@@ -319,13 +357,16 @@ footer a{color:var(--orchid-d)}
 
   <section class="s" id="panel" style="padding-top:0">
     <div class="wrap">
-      <div class="cab rv"><h2 class="d">Lo que <em>ve el salón</em></h2><p>Cada cita que se agenda en el chat aparece aquí al instante. Pruébalo: agenda una y mira cómo llega.</p></div>
+      <div class="cab rv"><h2 class="d">Lo que <em>ve el salón</em></h2><p>Así vería el salón su día: citas, ingresos y la semana. Agenda una desde el chat y aparece al instante.</p></div>
       <div class="dos">
-        <div class="card rv">
-          <h3>Citas recibidas</h3>
-          <p class="sub">Panel del negocio (demo): aquí ves solo tus citas, guardadas en tu navegador. En un negocio real se conecta a una hoja compartida para que el salón vea las de todos los clientes.</p>
-          <ul class="citas" id="citas"></ul>
-          <button class="limpiar" id="limpiar" hidden>Borrar citas de la demo</button>
+        <div class="card rv crm">
+          <div class="crm-h"><h3>Panel del salón</h3>
+            <div class="tabs" role="group" aria-label="Vista del panel"><button data-v="resumen" aria-pressed="true">Resumen</button><button data-v="semana" aria-pressed="false">Semana</button><button data-v="lista" aria-pressed="false">Lista</button></div>
+          </div>
+          <p class="sub">Datos de ejemplo más tus citas (guardadas solo en tu navegador). En un negocio real se conecta a una hoja compartida con todos los clientes.</p>
+          <div class="kpis" id="kpis"></div>
+          <div class="vista" id="vista"></div>
+          <button class="limpiar" id="limpiar" hidden>Borrar mis citas de la demo</button>
         </div>
         <div class="card rv" id="incluye" style="--dl:.1s">
           <h3>Qué incluye este chatbot</h3>
@@ -389,13 +430,19 @@ const corta=iso=>new Date(iso+"T12:00:00Z").toLocaleDateString("es-PE",{weekday:
 const hh=h=>String(h).padStart(2,"0")+":00";
 
 /* citas guardadas */
+const PCOL={Camila:"var(--plum)","Lucía":"var(--orchid-d)"};
+/* citas de ejemplo (día relativo a hoy, hora, profesional, servicio, min, precio, cliente) */
+const SEMILLA=[[0,10,"Camila","Limpieza facial profunda",60,90,"Mariana L."],[0,12,"Lucía","Manicure semipermanente",45,45,"Rocío P."],[0,15,"Camila","Masaje descontracturante",60,130,"Andrea V."],[0,17,"Lucía","Corte y peinado",60,60,"Sofía C."],
+[1,11,"Lucía","Extensiones de pestañas",90,150,"Paola G."],[1,16,"Camila","Piedras calientes",75,150,"Karen T."],[2,10,"Camila","Día de spa",120,190,"Gabriela R."],[2,14,"Lucía","Tinte o balayage",150,220,"Daniela M."],
+[3,12,"Camila","Masaje relajante",60,110,"Valentina Q."],[4,11,"Lucía","Pedicure spa",60,60,"Renata S."],[4,15,"Camila","Hidratación con mascarilla",45,75,"Isabel H."]];
+function semilla(){const t=lima();return SEMILLA.flatMap(([o,h,pro,servicio,dur,precio,nombre],i)=>{const fecha=sumaDias(t.iso,o);return dow(fecha)===0?[]:[{id:"e"+i,servicio,precio,dur,fecha,hora:hh(h),nombre,tel:"",pro,ej:true}]})}
 const KEY="aurea-citas-v1";
 let citas=[];try{citas=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){}
 const guardar=()=>{try{localStorage.setItem(KEY,JSON.stringify(citas))}catch(e){}};
 
 /* disponibilidad */
 const hn=s=>+s.slice(0,2);
-const choca=(iso,h,dur,pro)=>citas.some(c=>c.fecha===iso&&(!c.pro||c.pro===pro)&&h<hn(c.hora)+Math.ceil(c.dur/60)&&hn(c.hora)<h+dur);
+const choca=(iso,h,dur,pro)=>todas().some(c=>c.fecha===iso&&(!c.pro||c.pro===pro)&&h<hn(c.hora)+Math.ceil(c.dur/60)&&hn(c.hora)<h+dur);
 function ocupada(iso,h,serv,pro=""){
   const n=[...iso].reduce((s,c)=>s+c.charCodeAt(0),0)+h*17+serv.length*7+(pro.charCodeAt(0)||0)*3;
   return n%10<3;
@@ -547,11 +594,36 @@ async function procesa(t){
   await libre(t)}
 
 /* panel */
-function pintaCitas(nuevo){
-  const ul=$("#citas"),l=[...citas].sort((a,b)=>(a.fecha+a.hora).localeCompare(b.fecha+b.hora));
-  $("#limpiar").hidden=!l.length;
-  ul.innerHTML=l.length?l.map(c=>{const d=new Date(c.fecha+"T12:00:00Z");return `<li class="cita${c.id===nuevo?" nueva":""}"><div class="dt"><b>${d.getUTCDate()}</b><span>${d.toLocaleDateString("es-PE",{month:"short",timeZone:"UTC"})}</span></div><div><strong>${esc(c.servicio)}</strong><small>${esc(c.hora)}${c.pro?" · "+esc(c.pro):""} · ${esc(c.nombre)} · ${esc(c.tel)}</small></div><em>Por confirmar</em></li>`}).join(""):`<li class="vacio">Aún no hay citas. Agenda una desde el chat y aparecerá aquí.</li>`}
-$("#limpiar").onclick=()=>{citas=[];guardar();pintaCitas();toast("Citas de la demo borradas")};
+const todas=()=>[...semilla(),...citas];
+const orden=(a,b)=>(a.fecha+a.hora).localeCompare(b.fecha+b.hora);
+function pasada(c){const t=lima();return c.fecha<t.iso||(c.fecha===t.iso&&hn(c.hora)+Math.ceil(c.dur/60)<=t.h)}
+let vista="resumen";
+function fila(c,nuevo){const d=new Date(c.fecha+"T12:00:00Z"),est=c.ej?(pasada(c)?["Atendida","done"]:["Confirmada","ok"]):["Por confirmar",""];
+  return `<li class="cita${c.id===nuevo?" nueva":""}"><div class="dt"><b>${d.getUTCDate()}</b><span>${d.toLocaleDateString("es-PE",{month:"short",timeZone:"UTC"})}</span></div><div><strong>${esc(c.servicio)}</strong><small>${esc(c.hora)}${c.pro?" · "+esc(c.pro):""} · ${esc(c.nombre)}${c.tel?" · "+esc(c.tel):""}</small></div><em class="${est[1]}">${est[0]}</em></li>`}
+function pintaKpis(){
+  const t=lima(),all=todas(),hoy=all.filter(c=>c.fecha===t.iso),ing=hoy.reduce((s,c)=>s+c.precio,0),cnt={};
+  all.forEach(c=>cnt[c.servicio]=(cnt[c.servicio]||0)+1);
+  const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
+  $("#kpis").innerHTML=`<div class="kpi"><b data-n="${hoy.length}">0</b><span>Citas de hoy</span></div><div class="kpi"><b data-n="${ing}" data-p="S/ ">0</b><span>Ingresos estimados de hoy</span></div><div class="kpi"><b class="txt">${esc(top?top[0]:"-")}</b><span>Servicio más pedido</span></div>`;
+  document.querySelectorAll("#kpis [data-n]").forEach(e=>{const n=+e.dataset.n,pf=e.dataset.p||"";if(reduce){e.textContent=pf+n;return}const t0=performance.now();(function f(x){const k=Math.min((x-t0)/900,1);e.textContent=pf+Math.round(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(t0)})}
+function pintaVista(nuevo){
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===vista));
+  const t=lima(),all=todas().sort(orden);let h="";
+  if(vista==="resumen"){
+    const prox=all.filter(c=>!pasada(c)).slice(0,4),carga=PROS.map(([n])=>[n,all.filter(c=>c.pro===n).length]),mx=Math.max(1,...carga.map(x=>x[1]));
+    h=`<h4>Próximas citas</h4><ul class="citas">${prox.map(c=>fila(c,nuevo)).join("")||'<li class="vacio">Sin citas próximas.</li>'}</ul><h4>Citas por profesional (semana)</h4><div class="barras">${carga.map(([n,k])=>`<div class="barra"><span>${esc(n)}</span><i style="--w:${k/mx*100}%;--c:${PCOL[n]}"></i><b>${k}</b></div>`).join("")}</div>`}
+  else if(vista==="semana"){
+    const dias=[];for(let i=0;dias.length<6&&i<10;i++){const iso=sumaDias(t.iso,i);if(HORAS[dow(iso)])dias.push(iso)}
+    let g=`<div class="sem-w"><div class="sem" style="--n:${dias.length}">`+dias.map((iso,i)=>`<div class="th${iso===t.iso?" hoy":""}" style="grid-column:${i+2}">${iso===t.iso?"Hoy":esc(corta(iso))}</div>`).join("");
+    for(let r=0;r<10;r++){g+=`<div class="hr" style="grid-row:${r+2}">${hh(10+r)}</div>`+dias.map((_,i)=>`<div class="ce" style="grid-row:${r+2};grid-column:${i+2}"></div>`).join("")}
+    all.forEach(c=>{const i=dias.indexOf(c.fecha),hi=hn(c.hora);if(i<0||hi<10)return;
+      g+=`<div class="bl${c.ej?"":" tu"}${pasada(c)?" past":""}${c.id===nuevo?" nueva":""}" style="grid-column:${i+2};grid-row:${hi-10+2}/span ${Math.ceil(c.dur/60)};--c:${PCOL[c.pro]||"var(--plum)"}" title="${esc(c.servicio)} · ${esc(c.pro||"")}"><b>${esc(c.nombre.split(" ")[0])}${c.ej?"":" (tú)"}</b>${esc(c.servicio)}</div>`});
+    h=g+`</div></div><div class="leyenda">${PROS.map(([n])=>`<span><i style="--c:${PCOL[n]}"></i>${esc(n)}</span>`).join("")}<span>Recuadro punteado: tus citas de la demo</span></div>`}
+  else h=`<ul class="citas sc">${all.map(c=>fila(c,nuevo)).join("")}</ul>`;
+  const V=$("#vista");V.innerHTML=h;V.classList.remove("vista");void V.offsetWidth;V.classList.add("vista")}
+function pintaCitas(nuevo){$("#limpiar").hidden=!citas.length;pintaKpis();pintaVista(nuevo)}
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{vista=b.dataset.v;pintaVista()});
+$("#limpiar").onclick=()=>{citas=[];guardar();pintaCitas();toast("Tus citas de la demo se borraron")};
 
 function inicio(){M.innerHTML="";Q.innerHTML="";paso="menu";lead={};saludo()}
 $("#reinicia").onclick=()=>{if(ocup)return toast("Un momento…");inicio()};
