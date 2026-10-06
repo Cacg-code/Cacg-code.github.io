@@ -225,6 +225,47 @@ dialog .lead{color:var(--mute);font-size:.9rem;margin-top:-.4rem}
 .toast{position:fixed;left:50%;bottom:1.2rem;transform:translate(-50%,24px);background:var(--panel);border:1px solid var(--g);box-shadow:var(--glow);color:var(--ink);padding:.7rem 1.1rem;border-radius:12px;opacity:0;pointer-events:none;transition:.3s;z-index:99;max-width:calc(100% - 2rem)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
+
+/* guía */
+#guia{position:fixed;inset:0;z-index:200}
+#gBloq{position:absolute;inset:0;transition:background .4s,backdrop-filter .4s}
+#guia.dim #gBloq{background:#05070Ad9;backdrop-filter:blur(5px)}
+#gSpot{position:fixed;border-radius:16px;box-shadow:0 0 0 9999px #05070Ab8;pointer-events:none;transition:top .5s cubic-bezier(.2,.8,.2,1),left .5s cubic-bezier(.2,.8,.2,1),width .5s cubic-bezier(.2,.8,.2,1),height .5s cubic-bezier(.2,.8,.2,1),opacity .3s}
+#gSpot::after{content:"";position:absolute;inset:-3px;border-radius:19px;border:2px solid var(--g2);animation:pulso 1.6s ease-out infinite}
+@keyframes pulso{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.05)}}
+#guia.dim #gSpot{opacity:0}
+#gTip{position:fixed;width:min(380px,calc(100% - 24px));background:var(--panel);border:1px solid var(--g);border-radius:18px;padding:1.1rem 1.15rem 1rem;box-shadow:var(--glow),0 30px 60px -20px #000c;display:grid;gap:.6rem;transition:top .5s cubic-bezier(.2,.8,.2,1),left .5s cubic-bezier(.2,.8,.2,1);animation:pop .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.96)}}
+#gTip.centro{width:min(460px,calc(100% - 24px))}
+#gTip h2{font-size:1.2rem;font-weight:700;letter-spacing:-.02em}
+#gC{color:var(--mute);font-size:.95rem;min-height:3.2em}
+#gC p+p{margin-top:.5rem}
+#gC b{color:var(--ink)}
+#gC .esc{animation:fadeup .35s ease both}
+@keyframes fadeup{from{opacity:0;transform:translateY(6px)}}
+.puntos{display:inline-flex;gap:5px;padding:.3rem 0}
+.puntos i{width:7px;height:7px;border-radius:50%;background:var(--g2);animation:salto 1s infinite}
+.puntos i:nth-child(2){animation-delay:.15s}.puntos i:nth-child(3){animation-delay:.3s}
+@keyframes salto{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-6px);opacity:1}}
+.gh{display:flex;align-items:center;gap:.6rem}
+.gbot{width:34px;height:34px;flex:none;animation:flota 3s ease-in-out infinite}
+.gbot svg{width:100%;height:100%;display:block}
+.gbot .hilo{stroke-dasharray:40;stroke-dashoffset:40;animation:traza 1.4s .2s ease forwards}
+@keyframes traza{to{stroke-dashoffset:0}}
+@keyframes flota{50%{transform:translateY(-4px) rotate(-4deg)}}
+#gTip.centro .gbot{width:46px;height:46px}
+.gn{font-size:.78rem;color:var(--mute);font-family:var(--fm);white-space:nowrap}
+.gbar{flex:1;height:5px;border-radius:99px;background:var(--panel2);overflow:hidden}
+.gbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--g2));border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.flecha{position:absolute;width:14px;height:14px;background:var(--panel);border:1px solid var(--g);transform:rotate(45deg);left:var(--ax,40px);margin-left:-7px;animation:rebote 1.2s ease-in-out infinite}
+#gTip.arr-up .flecha{top:-8px;border-right:0;border-bottom:0}
+#gTip.arr-down .flecha{bottom:-8px;border-left:0;border-top:0;animation-name:reboteb}
+#gTip.arr-none .flecha{display:none}
+@keyframes rebote{50%{margin-top:-5px}}
+@keyframes reboteb{50%{margin-bottom:-5px}}
+.menu button.guia-nav{animation:navpulso 1.4s ease-in-out infinite}
+@keyframes navpulso{50%{box-shadow:inset 2px 0 0 var(--g),0 0 0 3px var(--gs),0 0 18px #10B98155}}
+
 @media(max-width:1100px){.grid2{grid-template-columns:1fr}.fcuerpo{grid-template-columns:1fr}}
 @media(max-width:820px){
   .app{grid-template-columns:minmax(0,1fr)}
@@ -254,6 +295,9 @@ dialog .lead{color:var(--mute);font-size:.9rem;margin-top:-.4rem}
   .item{grid-template-columns:minmax(0,1fr) 54px 84px 34px}
   .br{grid-template-columns:84px minmax(0,1fr) 70px}
   h1{font-size:1.4rem}
+  #gTip{top:auto!important;left:12px!important;bottom:12px;width:calc(100% - 24px)}
+  #gTip.centro{bottom:50%;transform:translateY(50%)}
+  #gTip .flecha{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -378,13 +422,18 @@ dialog .lead{color:var(--mute);font-size:.9rem;margin-top:-.4rem}
   <div class="acc"><span></span><span style="display:flex;gap:.5rem"><button type="button" class="btn sec" data-a="cerrar">Cancelar</button><button type="submit" class="btn">Crear tarea</button></span></div>
 </form></dialog>
 
-<!-- Recorrido -->
-<dialog id="dTour" aria-labelledby="tourT"><div class="f">
-  <div class="paso" id="tourP" aria-hidden="true"></div>
-  <h2 id="tourT"></h2>
-  <div id="tourC"></div>
-  <div class="acc"><button class="btn sec" data-a="tourSalir">Saltar</button><span style="display:flex;gap:.5rem"><button class="btn sec" data-a="tourAtras" id="tourAtras">Atrás</button><button class="btn" data-a="tourSig" id="tourSig">Siguiente</button></span></div>
-</div></dialog>
+<!-- Guía interactiva -->
+<div id="guia" hidden>
+  <div id="gBloq"></div>
+  <div id="gSpot"></div>
+  <div id="gTip" role="dialog" aria-modal="true" aria-labelledby="gT">
+    <i class="flecha" id="gFl"></i>
+    <div class="gh"><span class="gbot" aria-hidden="true"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#10B981"/><path class="hilo" d="M8 22c0-8 6-4 8-8s2-4 8-4" stroke="#032" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span><span class="gn" id="gN"></span><span class="gbar" aria-hidden="true"><i id="gBar"></i></span></div>
+    <h2 id="gT"></h2>
+    <div id="gC" aria-live="polite"></div>
+    <div class="acc"><button class="btn sec peq" data-a="tourSalir" id="tourSalir">Saltar guía</button><span style="display:flex;gap:.5rem"><button class="btn sec peq" data-a="tourAtras" id="tourAtras">Atrás</button><button class="btn peq" data-a="tourSig" id="tourSig">Siguiente</button></span></div>
+  </div>
+</div>
 <input type="file" id="archivo" accept=".csv,text/csv" hidden>
 <div class="toast" id="toast" role="status"></div>
 
@@ -870,20 +919,60 @@ function importar(texto){
   guardar();render();toast(n?`Importé ${n} cliente${n>1?"s":""} como «Nuevo»`:"No encontré filas con nombre.");
 }
 
-/* ---------- Recorrido ---------- */
+/* ---------- Guía interactiva ---------- */
 const PASOS=[
- ["Bienvenido a Hilo","<p class=\"mut\">Hilo es un sistema para que ningún cliente se te pierda: te dice <b>a quién escribir hoy</b>, lleva tus <b>ventas</b>, <b>cotizaciones</b> y <b>cobros</b>, y te muestra qué está funcionando.</p><p class=\"mut\" style=\"margin:.7rem 0 .5rem\">Elige un negocio de ejemplo para verlo en acción:</p><div class=\"rubros\" id=\"tourR\"></div>"],
- ["1. Empieza por «Hoy»","<p class=\"mut\">Es tu lista de tareas del día: clientes a los que toca escribir, pagos por cobrar y tareas. Cada línea tiene botones para <b>escribirle por WhatsApp con el mensaje ya redactado</b>, marcarlo como hecho o dejarlo para después.</p>"],
- ["2. Ventas y clientes","<p class=\"mut\">En <b>Ventas</b> cada cliente avanza por etapas: Nuevo → Contactado → Cotizado → Ganado. Arrastra las tarjetas o usa las flechas. Hilo programa solo el próximo seguimiento.</p><p class=\"mut\" style=\"margin-top:.6rem\">En <b>Clientes</b> abres la ficha completa: datos, historial, cotizaciones y pagos.</p>"],
- ["3. Cobros y reportes","<p class=\"mut\"><b>Cobros</b> te muestra quién te debe, qué ya venció y te deja registrar pagos y recordar por WhatsApp. <b>Reportes</b> te explica en frases simples de dónde vienen tus ventas y por qué se pierden.</p><p class=\"mut\" style=\"margin-top:.6rem\">Todo lo que cambies queda guardado en tu navegador. Puedes volver a empezar con «Restablecer datos de ejemplo».</p>"]];
+ {w:1,t:"Hola, soy Hilo",c:`<p>Te ayudo a que <b>ningún cliente se te pierda</b>: te digo a quién escribir hoy, llevo tus ventas, cotizaciones y cobros, y te muestro qué funciona.</p><p>Te llevo de paseo por cada sección, <b>señalándote lo que explico</b>. Primero, elige un negocio de ejemplo:</p><div class="rubros" id="tourR"></div>`},
+ {v:"hoy",s:".kpis",t:"Tus 3 números clave",c:`<p><b>Por cobrar:</b> dinero que te deben. <b>Ventas posibles:</b> lo que podrías ganar con los clientes que aún no deciden. <b>Sin atender:</b> clientes a los que se te pasó escribirles.</p>`},
+ {v:"hoy",s:".acc-i, .todo-ok",t:"Aquí está lo que toca hacer",c:`<p>Cada línea es una acción del día, de lo más urgente a lo menos. Usa <b>WhatsApp</b> para escribirle con el mensaje ya redactado, <b>Hecho</b> cuando termines, o <b>+2 días</b> para dejarlo para después.</p>`},
+ {v:"ventas",sub:"tablero",s:"#tablero",t:"Ventas: de curioso a cliente",c:`<p>Cada columna es una etapa y cada tarjeta es un cliente. <b>Arrástralas</b> (o usa las flechas ← →) a medida que avanzan. Al moverlas, Hilo agenda solo el próximo seguimiento.</p><p>Si la mueves a <b>Ganado</b>, crea los cobros; si es <b>Perdido</b>, te pregunta por qué.</p>`},
+ {v:"ventas",sub:"tablero",s:"[data-a=sub][data-s=cot]",t:"Cotizaciones",c:`<p>Aquí armas el precio que le envías a un cliente, línea por línea. Al enviarla se abre el <b>mensaje de WhatsApp listo</b>, y si no responde, Hilo te avisa.</p>`},
+ {v:"clientes",s:".filtros",t:"Clientes: todos en un lugar",c:`<p>Busca por nombre o teléfono y filtra por etapa, origen o etiqueta. También puedes <b>descargar o subir tu lista en Excel (CSV)</b>.</p>`},
+ {v:"clientes",s:".lista .fila[data-a=ficha]",t:"Toca un cliente para ver su ficha",c:`<p>El punto de color es un <b>semáforo</b>: verde al día, amarillo toca escribirle, rojo se te pasó. La ficha guarda su historial, cotizaciones, pagos y tareas.</p>`},
+ {v:"cobros",s:".kpis",t:"Cobros: que no se te escape el dinero",c:`<p>Ves lo que te deben, lo que ya <b>venció</b> y lo cobrado este mes. Abajo registras pagos (también parciales), divides 50/50 o creas cobros mensuales, y recuerdas por WhatsApp.</p>`},
+ {v:"reportes",s:".grid2",t:"Reportes en lenguaje simple",c:`<p>Cuatro gráficos y, debajo de cada uno, una <b>frase que te dice qué hacer</b>: de dónde vienen tus ventas, por qué se pierden, qué tan rápido respondes.</p>`},
+ {v:"ajustes",s:".grid2 .card",t:"Ajustes: tus mensajes",c:`<p>Edita los mensajes de WhatsApp una vez y se usan con un clic en toda la app. Las palabras entre llaves, como {nombre}, se rellenan solas. Aquí también activas el <b>seguimiento automático</b>.</p>`},
+ {w:1,fin:1,t:"¡Eso es todo!",c:`<p>Prueba mover un cliente, enviar una cotización o registrar un pago. Todo es de ejemplo y se guarda solo en tu navegador.</p><p>Puedes volver a ver esta guía con <b>«¿Cómo funciona?»</b> en el menú.</p>`}];
+let gTok=0;
+function abrirTour(){tour=0;$("#guia").hidden=false;document.body.style.overflow="hidden";pintarTour()}
+function cerrarTour(){E.visto=true;guardar();$("#guia").hidden=true;document.body.style.overflow="";$$(".guia-nav").forEach(x=>x.classList.remove("guia-nav"));window.scrollTo({top:0})}
 function pintarTour(){
-  $("#tourT").textContent=PASOS[tour][0];$("#tourC").innerHTML=PASOS[tour][1];
-  $("#tourP").innerHTML=PASOS.map((_,i)=>`<i class="${i===tour?"on":""}"></i>`).join("");
-  $("#tourAtras").hidden=tour===0;$("#tourSig").textContent=tour===PASOS.length-1?"Empezar":"Siguiente";
-  const r=$("#tourR");if(r)r.innerHTML=Object.entries(RUBROS).map(([k,v])=>`<button type="button" data-a="tourRubro" data-k="${k}" aria-pressed="${E.rubro===k}"><b>${v.tipo}</b><small>${v.nombre}</small></button>`).join("");
+  const p=PASOS[tour],tok=++gTok,tip=$("#gTip"),g=$("#guia");
+  if(p.v&&(vista!==p.v||(p.sub&&subV!==p.sub))){vista=p.v;if(p.sub)subV=p.sub;render()}
+  if(p.v)$$(".menu button").forEach(b=>b.classList.toggle("guia-nav",b.dataset.v===p.v));else $$(".guia-nav").forEach(x=>x.classList.remove("guia-nav"));
+  g.classList.toggle("dim",!!p.w);tip.classList.toggle("centro",!!p.w);
+  tip.style.animation="none";void tip.offsetWidth;tip.style.animation="";
+  $("#gT").textContent=p.t;$("#gN").textContent=`${tour+1} de ${PASOS.length}`;$("#gBar").style.width=(tour+1)/PASOS.length*100+"%";
+  $("#gC").innerHTML=`<span class="puntos"><i></i><i></i><i></i></span>`;
+  $("#tourAtras").hidden=tour===0;$("#tourSalir").hidden=!!p.fin;$("#tourSig").textContent=p.fin?"Empezar a usar Hilo":tour===0?"Empezar el paseo":"Siguiente";
+  posGuia(true);
+  setTimeout(()=>{if(tok!==gTok)return;$("#gC").innerHTML=`<div class="esc">${p.c}</div>`;
+    const r=$("#tourR");if(r)r.innerHTML=Object.entries(RUBROS).map(([k,v])=>`<button type="button" data-a="tourRubro" data-k="${k}" aria-pressed="${E.rubro===k}"><b>${v.tipo}</b><small>${v.nombre}</small></button>`).join("");
+    posGuia(false);$("#tourSig").focus({preventScroll:true})},p.w&&tour===0?300:420);
 }
-function abrirTour(){tour=0;pintarTour();$("#dTour").showModal()}
-function cerrarTour(){E.visto=true;guardar();$("#dTour").close()}
+function posGuia(ir){
+  const p=PASOS[tour],tip=$("#gTip"),sp=$("#gSpot"),movil=innerWidth<=820;
+  if(p.w){tip.classList.remove("arr-up","arr-down");tip.classList.add("arr-none");if(!movil){tip.style.left=Math.max(12,(innerWidth-tip.offsetWidth)/2)+"px";tip.style.top=Math.max(12,(innerHeight-tip.offsetHeight)/2)+"px"}return}
+  const el=$(p.s);if(!el){tip.classList.add("arr-none");return}
+  if(ir){el.scrollIntoView({block:movil?"start":"center",behavior:"instant"});if(movil)window.scrollBy(0,-72)}
+  const r=el.getBoundingClientRect(),pad=8,th=tip.offsetHeight,tw=tip.offsetWidth;
+  const limAbajo=movil?innerHeight-th-24:innerHeight-8;
+  const top=Math.max(8,r.top-pad),bot=Math.min(limAbajo,r.bottom+pad);
+  Object.assign(sp.style,{top:top+"px",left:Math.max(6,r.left-pad)+"px",width:Math.min(innerWidth-12,r.width+pad*2)+"px",height:Math.max(36,bot-top)+"px"});
+  tip.classList.remove("arr-none","arr-up","arr-down");
+  if(movil)return;
+  const alto=r.height>innerHeight*.6;
+  let t,cls="arr-none";
+  if(!alto&&innerHeight-r.bottom>=th+34){t=r.bottom+pad+16;cls="arr-up"}
+  else if(!alto&&r.top>=th+34){t=r.top-pad-16-th;cls="arr-down"}
+  else{t=innerHeight-th-24}
+  let l=Math.min(Math.max(12,r.left),innerWidth-tw-12);
+  if(cls==="arr-none"&&alto)l=innerWidth-tw-24;
+  tip.style.left=l+"px";tip.style.top=t+"px";tip.classList.add(cls);
+  tip.style.setProperty("--ax",Math.min(tw-24,Math.max(24,r.left+Math.min(r.width,200)/2-l))+"px");
+}
+addEventListener("resize",()=>{if(!$("#guia").hidden)posGuia(false)});
+addEventListener("scroll",()=>{if(!$("#guia").hidden)requestAnimationFrame(()=>posGuia(false))},{passive:true});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#guia").hidden){e.preventDefault();cerrarTour()}else if(!$("#guia").hidden&&e.key==="ArrowRight"){$("#tourSig").click()}else if(!$("#guia").hidden&&e.key==="ArrowLeft"&&tour>0){$("#tourAtras").click()}});
 
 /* ---------- Eventos ---------- */
 document.addEventListener("click",e=>{
@@ -923,10 +1012,10 @@ document.addEventListener("click",e=>{
    exportar:()=>exportar(),
    importar:()=>$("#archivo").click(),
    resetPl:()=>{E.plant=Object.fromEntries(Object.entries(PLANT0).map(([k,v])=>[k,v.t]));guardar();render();toast("Mensajes originales restaurados")},
-   tourSig:()=>{if(tour>=PASOS.length-1){cerrarTour();ir("hoy")}else{tour++;pintarTour()}},
+   tourSig:()=>{if(tour>=PASOS.length-1){cerrarTour();vista="hoy";subV="tablero";render()}else{tour++;pintarTour()}},
    tourAtras:()=>{tour=Math.max(0,tour-1);pintarTour()},
    tourSalir:()=>cerrarTour(),
-   tourRubro:()=>{if(b.dataset.k!==E.rubro)cambiarRubro(b.dataset.k);pintarTour()}
+   tourRubro:()=>{if(b.dataset.k!==E.rubro)cambiarRubro(b.dataset.k);$$("#tourR button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.k===E.rubro))}
   }[a];
   if(sel)sel();
 });
@@ -998,7 +1087,7 @@ $("#verTour").onclick=abrirTour;
 $("#reset").onclick=()=>{if(!confirm("¿Volver a los datos de ejemplo? Se borrará lo que hayas agregado."))return;const k=E.rubro;E=semilla(k);E.visto=true;guardar();render();toast("Datos de ejemplo restaurados")};
 $$(".tema button").forEach(b=>b.onclick=()=>setTema(b.dataset.t));
 function setTema(t){document.documentElement.dataset.tema=t;$$(".tema button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.t===t));$('meta[name="theme-color"]').content=t==="claro"?"#F4F5F7":"#0B0D10";try{localStorage.setItem("hilo-tema",t)}catch(e){}}
-$$("dialog").forEach(d=>d.addEventListener("click",e=>{if(e.target===d&&d.id!=="dTour")d.close()}));
+$$("dialog").forEach(d=>d.addEventListener("click",e=>{if(e.target===d&&true)d.close()}));
 
 try{const t=localStorage.getItem("hilo-tema");if(t==="claro"||t==="oscuro")setTema(t)}catch(e){}
 cargar();
