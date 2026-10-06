@@ -11,13 +11,17 @@
 <meta property="og:title" content="La Marea · Cevichería en Miraflores">
 <meta property="og:description" content="Pesca del día, carta y reservas por WhatsApp.">
 <meta property="og:image" content="https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?w=1200&q=70">
+<link rel="canonical" href="https://cacg-code.github.io/landing/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cacg-code.github.io/landing/">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#04141A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2304141A'/%3E%3Cpath d='M4 19c4-6 8 6 12 0s8 6 12 0' stroke='%23D9F24A' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Restaurant","name":"La Marea","servesCuisine":"Peruana, cevichería","telephone":"+51999999999","geo":{"@type":"GeoCoordinates","latitude":-12.1219,"longitude":-77.0297},"hasMap":"https://www.google.com/maps/dir/?api=1&destination=-12.1219,-77.0297","priceRange":"S/ 12 - S/ 64","acceptsReservations":"True","address":{"@type":"PostalAddress","streetAddress":"Av. Mariscal La Mar 1234","addressLocality":"Miraflores","addressRegion":"Lima","addressCountry":"PE"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Sunday"],"opens":"12:00","closes":"17:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"12:00","closes":"18:00"}]}
+{"@context":"https://schema.org","@type":"Restaurant","name":"La Marea","url":"https://cacg-code.github.io/landing/","image":"https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?w=1200&q=70","servesCuisine":"Peruana, cevichería","telephone":"+51999999999","geo":{"@type":"GeoCoordinates","latitude":-12.1219,"longitude":-77.0297},"hasMap":"https://www.google.com/maps/dir/?api=1&destination=-12.1219,-77.0297","priceRange":"S/ 12 - S/ 64","acceptsReservations":"True","address":{"@type":"PostalAddress","streetAddress":"Av. Mariscal La Mar 1234","addressLocality":"Miraflores","addressRegion":"Lima","addressCountry":"PE"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Sunday"],"opens":"12:00","closes":"17:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"12:00","closes":"18:00"}]}
 </script>
 <style>
 :root{
@@ -124,7 +128,7 @@ section.s{padding:clamp(4.5rem,11vw,9rem) 0}
 .plato{display:grid;grid-template-columns:1fr auto;gap:.2rem 1.5rem;padding:1.4rem 0;border-top:1px solid var(--line);align-items:baseline;cursor:pointer;transition:padding .3s,background .3s}
 .plato:last-child{border-bottom:1px solid var(--line)}
 .plato:hover{padding-left:1rem;background:linear-gradient(90deg,#d9f24a14,transparent)}
-.plato[aria-pressed="true"]{padding-left:1rem;background:linear-gradient(90deg,#d9f24a26,transparent);box-shadow:inset 4px 0 0 var(--lime)}
+.plato[aria-current="true"]{padding-left:1rem;background:linear-gradient(90deg,#d9f24a26,transparent);box-shadow:inset 4px 0 0 var(--lime)}
 .plato h3{font-family:var(--f-d);font-weight:400;font-size:clamp(1.8rem,4vw,2.9rem);text-transform:uppercase;line-height:1}
 .plato .pr{font-family:var(--f-d);font-size:clamp(1.5rem,3vw,2.2rem);color:var(--lime)}
 .plato p{grid-column:1;color:var(--mute);font-size:1rem}
@@ -160,7 +164,7 @@ section.s{padding:clamp(4.5rem,11vw,9rem) 0}
 .horarios{width:100%;border-collapse:collapse;margin:1.5rem 0}
 .horarios th,.horarios td{text-align:left;padding:.7rem 0;border-bottom:1px solid #04141A22;font-weight:500}
 .horarios td{text-align:right;font-variant-numeric:tabular-nums}
-.horarios tr.hoy th,.horarios tr.hoy td{font-weight:700;color:var(--aji)}
+.horarios tr.hoy th,.horarios tr.hoy td{font-weight:700;color:#B53318}
 .donde .btn{background:#04141A;color:var(--foam)}
 .donde .btn:hover{box-shadow:0 14px 34px -12px #04141A}
 .mapa{width:100%;height:100%;min-height:380px;border:0;border-radius:26px;background:#cfe3dc}
@@ -346,7 +350,9 @@ footer a{color:var(--lime)}
 </footer>
 <div class="flota" role="group" aria-label="Contacto rápido"><a class="btn" href="#contacto">Reservar</a><a class="btn o" href="tel:+51999999999">Llamar</a><a class="btn wa" href="https://wa.me/51999999999?text=Hola%20La%20Marea%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">WhatsApp</a></div>
 
+<script src="logica.js"></script>
 <script>
+const{HORAS:horas,DN:dn,fmtH,diaDe,dmas,ahoraLima,textoEstado,slotsDelDia,errorFecha,errorNombre,mensajeReserva,mensajePedido,urlWhatsApp}=Marea;
 const WA="51999999999";
 const IMG=id=>`https://images.unsplash.com/photo-${id}?w=1000&q=75`;
 const carta={
@@ -375,18 +381,13 @@ function pintar(cat){
   catAct=cat;selAct=null;
   [...tabs.children].forEach(b=>b.setAttribute("aria-selected",b.dataset.cat===cat));
   lista.innerHTML=carta[cat].items.map(([n,d,p,f])=>{
-    const t=encodeURIComponent(`Hola La Marea,
-Quiero pedir:
-*${n}* (S/ ${p})
-
-_Pedido desde la web_`);
-    return `<li class="plato" tabindex="0" role="button" aria-pressed="false" data-f="${f}"><h3>${n}</h3><span class="pr">S/ ${p}</span><p>${d}</p><a href="https://wa.me/${WA}?text=${t}" target="_blank" rel="noopener" aria-label="Pedir ${n} por WhatsApp">Pedir →</a></li>`;
+    return `<li class="plato" tabindex="0" data-f="${f}"><h3>${n}</h3><span class="pr">S/ ${p}</span><p>${d}</p><a href="${urlWhatsApp(WA,mensajePedido(n,p))}" target="_blank" rel="noopener" aria-label="Pedir ${n} por WhatsApp">Pedir →</a></li>`;
   }).join("");
   vistaActual();
 }
 function elegir(li){
   selAct=li.dataset.f;
-  lista.querySelectorAll(".plato").forEach(x=>x.setAttribute("aria-pressed",x===li));
+  lista.querySelectorAll(".plato").forEach(x=>x.setAttribute("aria-current",x===li));
   vistaActual();
 }
 lista.addEventListener("click",e=>{const li=e.target.closest(".plato");if(li&&!e.target.closest("a"))elegir(li)});
@@ -397,15 +398,10 @@ cats.forEach(c=>{const b=document.createElement("button");b.className="tab";b.ro
 pintar(cats[0]);
 
 /* horario (hora de Lima) */
-const horas={0:[12,17],1:null,2:[12,17],3:[12,17],4:[12,17],5:[12,18],6:[12,18]};
-function lima(){const p=new Intl.DateTimeFormat("en-US",{timeZone:"America/Lima",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());const g=t=>p.find(x=>x.type===t).value;return{d:{Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[g("weekday")],h:(+g("hour"))%24+(+g("minute"))/60}}
 function estado(){
-  const{d,h}=lima(),el=$("#estado"),tx=el.querySelector("span"),hoy=horas[d];
+  const{d,h}=ahoraLima(),el=$("#estado"),r=textoEstado(d,h);
   document.querySelectorAll("#horarios tr").forEach(tr=>tr.classList.toggle("hoy",+tr.dataset.d===d));
-  if(hoy&&h>=hoy[0]&&h<hoy[1]){const f=hoy[1]-h,hh=Math.floor(f),mm=Math.round((f-hh)*60);el.classList.add("ab");tx.textContent=`Abierto ahora · cierra en ${hh?hh+" h ":""}${mm} min`}
-  else{el.classList.remove("ab");let s=null;for(let i=0;i<=7;i++){const dd=(d+i)%7,hr=horas[dd];if(hr&&(i>0||h<hr[0])){s=[i,dd,hr[0]];break}}
-    const n=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
-    tx.textContent=s?`Cerrado ahora · abrimos ${s[0]===0?"hoy":s[0]===1?"mañana":"el "+n[s[1]]} a las ${s[2]}:00`:"Cerrado ahora"}
+  el.classList.toggle("ab",r.abierto);el.querySelector("span").textContent=r.texto;
 }
 estado();setInterval(estado,60000);
 
@@ -413,7 +409,7 @@ estado();setInterval(estado,60000);
 const R=[["El pescado se nota fresco desde el primer bocado. La leche de tigre sola ya vale la visita.","Rosa M.","Reseña en Google · hace 2 semanas"],["Reservamos por WhatsApp y nos respondieron en minutos. Mesa lista, sin esperas.","Julio P.","Reseña en Google · hace 1 mes"],["Porciones generosas y buen precio para Miraflores. Vayan temprano, se llena a la 1.","Andrea C.","Reseña en Google · hace 3 meses"],["Fuimos en familia por el cumpleaños de mi hija y nos atendieron de maravilla. La jalea mixta, imperdible.","Carlos T.","Reseña en Google · hace 2 días"]];
 let ri=0,rt;const pts=$("#pts");
 R.forEach((_,i)=>{const b=document.createElement("button");b.setAttribute("aria-label","Reseña "+(i+1));b.onclick=()=>{ri=i;res(true)};pts.appendChild(b)});
-function res(man){const[q,n,f]=R[ri];const el=$("#q");el.style.opacity=0;setTimeout(()=>{el.querySelector("q").textContent=q;$("#qn").textContent=n;$("#qf").textContent=f;el.style.opacity=1},250);el.style.transition="opacity .25s";[...pts.children].forEach((b,i)=>b.toggleAttribute("aria-current",i===ri));clearInterval(rt);rt=setInterval(()=>{ri=(ri+1)%R.length;res()},7000)}
+function res(man){const[q,n,f]=R[ri];const el=$("#q");el.style.opacity=0;setTimeout(()=>{el.querySelector("q").textContent=q;$("#qn").textContent=n;$("#qf").textContent=f;el.style.opacity=1},250);el.style.transition="opacity .25s";[...pts.children].forEach((b,i)=>b.setAttribute("aria-current",i===ri));clearInterval(rt);if(!man&&!matchMedia("(prefers-reduced-motion:reduce)").matches)rt=setInterval(()=>{ri=(ri+1)%R.length;res()},7000)}
 res();
 
 /* reveal + contadores */
@@ -436,36 +432,20 @@ if(matchMedia("(hover:hover) and (pointer:fine)").matches){
 
 /* formulario: todo obligatorio y validado (hora de Lima) */
 const f=$("#form"),err=$("#err"),selHora=f.hora;
-const dn=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
-function ahoraLima(){const p=Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:"America/Lima",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date()).map(x=>[x.type,x.value]));return{fecha:`${p.year}-${p.month}-${p.day}`,h:(+p.hour%24)+(+p.minute)/60}}
-const dmas=(iso,n)=>{const[y,m,d]=iso.split("-").map(Number);return new Date(Date.UTC(y,m-1,d+n)).toISOString().slice(0,10)};
 f.fecha.min=ahoraLima().fecha;f.fecha.max=dmas(ahoraLima().fecha,60);
-const fmtH=t=>`${String(Math.floor(t)).padStart(2,"0")}:${t%1?"30":"00"}`;
-const diaDe=v=>{const[y,m,d]=v.split("-").map(Number);return new Date(y,m-1,d).getDay()};
 function marca(campo,msg){const e=$("#e-"+campo),inp=f[campo];if(e)e.textContent=msg;if(inp){msg?inp.setAttribute("aria-invalid","true"):inp.removeAttribute("aria-invalid")}return !msg}
+const MOTIVO={sinFecha:"Primero elige la fecha",cerrado:"Cerrado ese día",sinHorarios:"Sin horarios hoy"};
 function horasDelDia(){ // llena las horas según el horario de ese día (última mesa 1 h antes de cerrar)
-  const v=f.fecha.value,ya=ahoraLima(),previa=selHora.value;
-  if(!v||v<ya.fecha||v>f.fecha.max){selHora.disabled=true;selHora.innerHTML='<option value="">Primero elige la fecha</option>';return []}
-  const hr=horas[diaDe(v)];
-  if(!hr){selHora.disabled=true;selHora.innerHTML='<option value="">Cerrado ese día</option>';return []}
-  const slots=[];for(let t=hr[0];t<=hr[1]-1;t+=.5)if(v!==ya.fecha||t>ya.h+.5)slots.push(fmtH(t));
-  if(!slots.length){selHora.disabled=true;selHora.innerHTML='<option value="">Sin horarios hoy</option>';return []}
+  const previa=selHora.value,{slots,motivo}=slotsDelDia(f.fecha.value,ahoraLima(),f.fecha.max);
+  if(motivo){selHora.disabled=true;selHora.innerHTML=`<option value="">${MOTIVO[motivo]}</option>`;return []}
   selHora.disabled=false;selHora.innerHTML='<option value="">Elige la hora…</option>'+slots.map(t=>`<option${t===previa?" selected":""}>${t}</option>`).join("");
   return slots;
 }
-function validaFecha(slots){
-  const v=f.fecha.value,ya=ahoraLima();
-  if(!v)return marca("fecha","Elige la fecha de tu visita.");
-  if(v<ya.fecha)return marca("fecha","Esa fecha ya pasó. Elige hoy o un día futuro.");
-  if(v>f.fecha.max)return marca("fecha","Puedes reservar hasta con 60 días de anticipación.");
-  if(!horas[diaDe(v)])return marca("fecha","Los "+dn[diaDe(v)]+" estamos cerrados. Elige otro día.");
-  if(!slots.length)return marca("fecha","Hoy ya no quedan horarios. Elige otro día.");
-  return marca("fecha","");
-}
+function validaFecha(slots){return marca("fecha",errorFecha(f.fecha.value,ahoraLima(),f.fecha.max,slots))}
 function validaTodo(){
   const slots=horasDelDia(),fechaOk=validaFecha(slots);
   const ok=[
-    marca("nombre",f.nombre.value.trim().length<2?"Escribe tu nombre (mínimo 2 letras).":""),
+    marca("nombre",errorNombre(f.nombre.value)),
     fechaOk,
     marca("hora",fechaOk&&!selHora.value?"Elige la hora de llegada.":""),
     marca("personas",!f.personas.value?"Indica cuántas personas son.":"")
@@ -478,9 +458,8 @@ selHora.addEventListener("change",()=>marca("hora",""));
 f.personas.addEventListener("change",()=>marca("personas",""));
 f.addEventListener("submit",e=>{e.preventDefault();
   if(!validaTodo()){err.textContent="Revisa los campos marcados para continuar.";const malo=f.querySelector('[aria-invalid="true"]');malo&&malo.focus();return}
-  err.textContent="";const[y,m,d]=f.fecha.value.split("-");
-  const t=["Hola La Marea,","Quiero reservar una mesa.","",`*Nombre:* ${f.nombre.value.trim()}`,`*Fecha:* ${dn[diaDe(f.fecha.value)]} ${d}/${m}/${y}`,`*Hora:* ${selHora.value}`,`*Personas:* ${f.personas.value}`,f.msg.value.trim()?`*Nota:* ${f.msg.value.trim()}`:null,"","_Reserva desde la web_"].filter(x=>x!==null).join("\n");
-  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(t)}`,"_blank","noopener")});
+  err.textContent="";
+  window.open(urlWhatsApp(WA,mensajeReserva({nombre:f.nombre.value,fecha:f.fecha.value,hora:selHora.value,personas:f.personas.value,nota:f.msg.value})),"_blank","noopener")});
 
 /* menú del celular */
 const burger=$("#burger"),menuM=$("#menu-m");
