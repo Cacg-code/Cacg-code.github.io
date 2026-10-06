@@ -77,17 +77,28 @@
   /* Eventos reservados */
   const C = 2 * Math.PI * 52;
   function aro(p) { return `<div class="aro"><svg viewBox="0 0 130 130" aria-hidden="true"><circle class="f" cx="65" cy="65" r="52"/><circle class="p" cx="65" cy="65" r="52" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C * (1 - p / 100)).toFixed(1)}"/></svg><b>${p}%</b></div>`; }
+  const abiertos = new Set();
   function pintaEv() {
     const evs = sols.filter(s => s.estado === "reservado").sort((a, b) => a.fecha.localeCompare(b.fecha));
-    $("#evs").innerHTML = evs.length ? evs.map(s => { const t = J.TIPOS[s.tipo], l = lista(s.id), p = J.avance(l);
-      return `<article class="ev" data-id="${s.id}">${aro(p)}<div><h3>${t.emoji} ${esc(s.nombre)}</h3><div class="meta">${t.n} · ${J.fechaLarga(s.fecha)} · ${s.invitados} invitados</div>
-        <div class="din"><span>Total <b>${J.soles(s.total)}</b></span><span>Adelanto <b>${J.soles(s.adelanto)}</b> ${s.pago ? "✅" : "⏳"}</span><span>Saldo <b>${J.soles(s.total - s.adelanto)}</b></span></div>
-        <div class="chk">${l.map((x, i) => `<label><input type="checkbox" data-i="${i}" ${x.ok ? "checked" : ""}><span>${esc(x.t)}</span></label>`).join("")}</div>
-        <form class="nt"><input maxlength="80" placeholder="Agregar tarea…" aria-label="Nueva tarea"><button class="btn sm sec" type="submit">Agregar</button></form>
-        <div class="ac"><a href="admin.html?e=${t.inv}">👥 Invitados y RSVP</a><a href="invitacion.html?e=${t.inv}">💌 Invitación</a><a target="_blank" rel="noopener" href="${celWa(s)}">WhatsApp</a><button data-real>Marcar realizado</button></div></div></article>`; }).join("")
+    $("#evs").innerHTML = evs.length ? evs.map(s => { const t = J.TIPOS[s.tipo], l = lista(s.id), p = J.avance(l), op = abiertos.has(s.id);
+      const hechas = l.filter(x => x.ok).length, sig = l.find(x => !x.ok);
+      const dias = Math.round((J.aFecha(s.fecha) - new Date().setHours(0, 0, 0, 0)) / 864e5);
+      const cuando = dias < 0 ? "ya pasó" : dias === 0 ? "es hoy" : dias === 1 ? "mañana" : `en ${dias} días`;
+      const pend = l.map((x, i) => [x, i]).filter(([x]) => !x.ok), hechos = l.map((x, i) => [x, i]).filter(([x]) => x.ok);
+      const fila = ([x, i]) => `<label><input type="checkbox" data-i="${i}" ${x.ok ? "checked" : ""}><span>${esc(x.t)}</span></label>`;
+      return `<article class="ev${op ? " abre" : ""}" data-id="${s.id}">
+        <button class="ev-cab" type="button" aria-expanded="${op}">${aro(p)}<span class="ev-tit"><h3>${t.emoji} ${esc(s.nombre)}</h3><span class="meta">${J.fechaCorta ? J.fechaCorta(s.fecha) : J.fechaLarga(s.fecha)} · ${cuando} · ${s.invitados} invitados</span></span>
+          <span class="ev-est"><span class="chip ${s.pago ? "ok" : "pen"}">${s.pago ? "Adelanto ✅" : "Adelanto ⏳"}</span><span class="ev-mas">${op ? "Ocultar" : "Ver detalle"} <i>⌄</i></span></span></button>
+        <div class="ev-sig">${sig ? `<span>Siguiente paso</span><b>${esc(sig.t)}</b>` : `<span>Todo listo</span><b>Solo falta marcar el evento como realizado 🎉</b>`}<em>${hechas}/${l.length}</em></div>
+        <div class="ev-cuerpo"><div class="din"><span>Total <b>${J.soles(s.total)}</b></span><span>Adelanto <b>${J.soles(s.adelanto)}</b></span><span>Saldo <b>${J.soles(s.total - s.adelanto)}</b></span></div>
+          <div class="chk">${pend.map(fila).join("")}</div>
+          ${hechos.length ? `<details class="hechas"><summary>${hechos.length} tarea${hechos.length > 1 ? "s" : ""} hecha${hechos.length > 1 ? "s" : ""}</summary><div class="chk">${hechos.map(fila).join("")}</div></details>` : ""}
+          <form class="nt"><input maxlength="80" placeholder="Agregar tarea…" aria-label="Nueva tarea"><button class="btn sm sec" type="submit">Agregar</button></form></div>
+        <div class="ac"><a href="admin.html?e=${t.inv}">👥 Invitados</a><a href="invitacion.html?e=${t.inv}">💌 Invitación</a><a target="_blank" rel="noopener" href="${celWa(s)}">WhatsApp</a><button data-real>Marcar realizado</button></div></article>`; }).join("")
       : `<div class="vacio-p">Aún no hay eventos reservados. Confirma el adelanto de una solicitud y aparecerá aquí con su checklist.</div>`;
     $$("#evs .ev").forEach(el => { const s = sols.find(x => x.id === el.dataset.id);
-      $$(".chk input", el).forEach(i => i.onchange = () => { lista(s.id)[Number(i.dataset.i)].ok = i.checked; guardaChk(); const p = J.avance(lista(s.id)); $(".aro b", el).textContent = p + "%"; $(".aro .p", el).setAttribute("stroke-dashoffset", (C * (1 - p / 100)).toFixed(1)); });
+      $(".ev-cab", el).onclick = () => { abiertos.has(s.id) ? abiertos.delete(s.id) : abiertos.add(s.id); pintaEv(); };
+      $$(".chk input", el).forEach(i => i.onchange = () => { lista(s.id)[Number(i.dataset.i)].ok = i.checked; guardaChk(); pintaEv(); });
       $(".nt", el).onsubmit = e => { e.preventDefault(); const v = $("input", e.target).value.trim(); if (!v) return; lista(s.id).push({ t: v, ok: false }); guardaChk(); pintaEv(); };
       $("[data-real]", el).onclick = () => cambia(s, "realizado");
     });

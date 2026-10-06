@@ -382,3 +382,22 @@ footer a{color:#fff}footer p+p{margin-top:.4rem}
 @media(max-width:980px){.kpis{grid-template-columns:1fr 1fr}.cal-p{grid-template-columns:1fr}.sol{grid-template-columns:1fr}.sol .ac{justify-content:flex-start}}
 @media(max-width:620px){.ev{grid-template-columns:1fr}.pn-tabs .dem{display:none}.cal-big .cal-g button{aspect-ratio:1;font-size:.82rem}.cal-big .cal-g button.b small{display:none}}
 @media(max-width:760px){.cz{padding-bottom:7rem}}
+
+/* Eventos compactos: resumen + detalle plegable */
+#evs{display:grid;gap:.8rem}
+.ev{display:block;padding:0;border-radius:22px;overflow:hidden}
+.ev-cab{all:unset;box-sizing:border-box;display:grid;grid-template-columns:64px 1fr auto;gap:1rem;align-items:center;width:100%;padding:1rem 1.2rem;cursor:pointer}
+.ev-cab:focus-visible{outline:2px solid var(--coral);outline-offset:-4px;border-radius:22px}
+.ev-cab .aro{width:60px;height:60px}.ev-cab .aro circle{stroke-width:14}.ev-cab .aro b{font-size:.95rem}
+.ev-tit h3{font-size:1.15rem;line-height:1.2}.ev-tit .meta{display:block;color:var(--mut);font-size:.85rem;margin-top:.15rem}
+.ev-est{display:grid;justify-items:end;gap:.35rem}
+.chip{font-size:.75rem;font-weight:700;padding:.2rem .65rem;border-radius:99px;background:var(--crema)}
+.chip.ok{color:#1f7a55}.chip.pen{color:#a8620a}
+.ev-mas{font-size:.8rem;color:var(--mut);display:flex;gap:.3rem;align-items:center}.ev-mas i{font-style:normal;transition:rotate .3s var(--ease)}
+.ev.abre .ev-mas i{rotate:180deg}
+.ev-sig{display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap;padding:.65rem 1.2rem;background:var(--crema);font-size:.88rem}
+.ev-sig span{color:var(--mut);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}.ev-sig b{font-weight:600}.ev-sig em{margin-left:auto;font-style:normal;font-weight:700;color:var(--mut)}
+.ev-cuerpo{display:none;padding:1rem 1.2rem 0}.ev.abre .ev-cuerpo{display:block}
+.ev .ac{padding:.9rem 1.2rem 1.1rem}
+.hechas{margin-bottom:.9rem}.hechas summary{cursor:pointer;font-size:.82rem;color:var(--mut);padding:.3rem .6rem}
+@media(max-width:620px){.ev-cab{grid-template-columns:52px 1fr;padding:.9rem}.ev-cab .aro{width:52px;height:52px}.ev-est{grid-column:1/-1;grid-auto-flow:column;justify-content:space-between;align-items:center}.ev-sig{padding:.6rem .9rem}.ev-cuerpo,.ev .ac{padding-inline:.9rem}}
