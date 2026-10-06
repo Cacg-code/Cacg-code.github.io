@@ -9,6 +9,8 @@
   /* índice para entradas escalonadas */
   const indexa = raiz => $$(".sol,.ev,.chk label,.extras .ex,.tipos .tp", raiz).forEach(e => { if (!e.style.getPropertyValue("--i")) e.style.setProperty("--i", Math.min(10, [...e.parentNode.children].indexOf(e))); });
   $$(".bento,.paq,.casos,.pasos,.ops,.muestras,.lista-v,.faq").forEach(g => [...g.children].forEach((c, i) => { if (c.classList.contains("rv")) c.style.setProperty("--d", i); }));
+  /* la línea de pasos se dibuja al entrar en pantalla */
+  $$(".pasos").forEach(el => { if (!("IntersectionObserver" in window)) return el.classList.add("in"); new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { el.classList.add("in"); o.disconnect(); } }, { threshold: .3 }).observe(el); });
   /* brillo bajo el cursor */
   const SEL = ".srv,.pk,.ps,.caso,.kpi,.sol,.ev,.faq details,.op,.ex,.tp";
   function brillo(raiz) {
