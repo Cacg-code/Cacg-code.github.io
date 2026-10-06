@@ -1,0 +1,146 @@
+<!doctype html>
+<!-- © 2026 Carlo Andre Chiuyare Guillen (Carlo · Dev). Todos los derechos reservados. Diseño y desarrollo con apoyo de IA (Claude, de Anthropic) bajo dirección y revisión del autor. Prohibida la copia, reproducción o reutilización total o parcial sin autorización escrita. Contacto: chiuyareguillendev@gmail.com -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Carlo Andre Chiuyare Guillen (Carlo · Dev)">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta · Brasa Noble</title>
+<meta name="description" content="Carta completa de Brasa Noble: entradas, parrilla, platos para compartir, criollo, postres y bar.">
+<meta name="theme-color" content="#F4EEE4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23C1121F'/%3E%3Cpath d='M16 4c1 5 7 8 7 15a7 7 0 0 1-14 0c0-3 2-5 3-7 1 2 2 3 3 3 1-3 0-7 1-11z' fill='%23F4EEE4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<style>
+.cab{padding:3.5rem 0 1.5rem}
+.cab h1{font-size:clamp(4rem,11vw,9rem);line-height:.8;margin:.8rem 0 1rem}
+.cab h1 em{font-style:normal;color:var(--carmesi)}
+.cab p{max-width:46ch;font-size:1.15rem;color:var(--mut)}
+.barra{position:sticky;top:var(--hh);z-index:80;background:rgba(244,238,228,.92);backdrop-filter:blur(12px);border-block:1px solid rgba(20,16,14,.12);padding:.7rem 0}
+.barra .wrap{display:grid;gap:.7rem}
+.cats{display:flex;gap:.45rem;overflow-x:auto;scrollbar-width:none;padding:2px}
+.cats::-webkit-scrollbar{display:none}
+.cats a{flex:none;min-height:44px;display:inline-flex;align-items:center;padding:.2rem 1.1rem;border-radius:999px;border:2px solid var(--tinta);font-weight:700;font-size:.92rem;text-decoration:none;transition:background .25s,color .25s}
+.cats a:hover{background:var(--tinta);color:var(--hueso)}
+.cats a.on{background:var(--carmesi);border-color:var(--carmesi);color:var(--hueso)}
+.tools{padding-block:1rem;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.tools input{flex:1 1 200px;min-height:48px;padding:.5rem 1.1rem;border-radius:999px;border:2px solid var(--tinta);background:#fff}
+.tools input:focus{outline:none;border-color:var(--carmesi);box-shadow:0 0 0 4px rgba(193,18,31,.18)}
+.chip{min-height:44px;padding:.2rem 1rem;border-radius:999px;border:2px solid var(--tinta);background:transparent;font-weight:700;font-size:.9rem;transition:background .25s,color .25s}
+.chip[aria-pressed=true]{background:var(--tinta);color:var(--hueso)}
+@media(min-width:900px){.barra .wrap{grid-template-columns:1fr auto;align-items:center}}
+
+.cat{padding:3rem 0 1rem}
+.hd{position:relative;height:clamp(150px,20vw,220px);border-radius:26px;overflow:hidden;border:2px solid var(--tinta);background:var(--carmesi);isolation:isolate;display:flex;align-items:flex-end;padding:1.4rem 1.6rem;color:var(--hueso)}
+.hd img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;opacity:.9;filter:grayscale(1) contrast(1.15);z-index:-1;transition:transform 1.2s var(--ease)}
+.cat:hover .hd img{transform:scale(1.05)}
+.hd h2{font-size:clamp(2.4rem,6vw,4.6rem);line-height:.85}
+.hd p{font-family:var(--f-s);font-style:italic;font-size:1.3rem;margin:0 0 .3rem auto;text-align:right;max-width:24ch}
+.hd .ct{position:absolute;top:1rem;right:1.2rem;background:var(--tinta);color:var(--hueso);border-radius:999px;padding:.2rem .9rem;font-weight:700;font-size:.82rem}
+.grid{display:grid;gap:.9rem;margin-top:1rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr))}
+.pl{position:relative;display:flex;flex-direction:column;gap:.5rem;padding:0 0 1.2rem;overflow:hidden;border:2px solid var(--tinta);border-radius:20px;background:#fff;transition:transform .4s var(--ease),box-shadow .4s var(--ease),background .3s}
+.pl:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--tinta)}
+.pl .im{position:relative;aspect-ratio:16/10;overflow:hidden;border-bottom:2px solid var(--tinta);background:#2a1a14}
+.pl .im img{width:100%;height:100%;object-fit:cover;filter:saturate(1.08) contrast(1.05);transition:transform .9s var(--ease)}
+.pl:hover .im img{transform:scale(1.07)}
+.pl .im::after{content:"Imagen referencial";position:absolute;left:.7rem;bottom:.6rem;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(20,16,14,.62);padding:.15rem .6rem;border-radius:999px;backdrop-filter:blur(4px)}
+.pl .f,.pl p,.pl .et{margin-inline:1.3rem}
+.pl .f:first-child{margin-top:1.3rem}
+.pl .f{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.pl h3{font-family:var(--f-d);font-weight:400;text-transform:uppercase;font-size:1.5rem;line-height:1}
+.pl .pr{font-family:var(--f-d);font-size:1.5rem;color:var(--carmesi);white-space:nowrap}
+.pl p{color:var(--mut);font-size:.98rem;flex:1}
+.pl .et{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem}
+.pl .et span{font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid var(--tinta);border-radius:999px;padding:.12rem .7rem}
+.pl .et .g{background:var(--ambar);border-color:var(--ambar)}
+.pl .et .v{background:#2f8a4f;border-color:#2f8a4f;color:#fff}
+.pl .et .h{background:var(--carmesi);border-color:var(--carmesi);color:var(--hueso)}
+.pl .et .t{background:var(--tinta);color:var(--hueso)}
+.vacio{text-align:center;padding:4rem 1rem;font-size:1.2rem;color:var(--mut)}
+.nota{margin:3rem 0 1rem;color:var(--mut);font-size:.9rem}
+.cta{position:fixed;left:.7rem;right:.7rem;bottom:.7rem;z-index:90}
+.cta .btn{width:100%;min-height:56px;box-shadow:0 12px 30px -10px rgba(20,16,14,.6)}
+@media(min-width:760px){.cta{left:auto;right:1.4rem;bottom:1.4rem;width:auto}.cta .btn{width:auto}}
+.pl.rv{transition-delay:calc(var(--k,0)*55ms)}
+</style>
+</head>
+<body>
+<div id="prog" aria-hidden="true"></div>
+<div id="cur" aria-hidden="true"><span></span></div>
+<div class="aviso">Demo de diseño web: Brasa Noble es un negocio ficticio. <a href="../">Ver más demos de Carlo · Dev</a></div>
+<header class="top">
+ <div class="wrap in">
+  <a class="logo" href="index.html" aria-label="Brasa Noble, inicio"><i></i>Brasa <b>Noble</b></a>
+  <nav aria-label="Principal"><a href="index.html#fuego">La brasa</a><a href="index.html#visita">Visítanos</a><a href="carta.html" aria-current="page">Carta</a><a class="btn c" href="index.html#reservar" data-mag>Reservar</a></nav>
+ </div>
+</header>
+
+<main>
+ <section class="cab"><div class="wrap">
+  <span class="kicker rv">La carta</span>
+  <h1 class="d" data-split>La <em>carta</em></h1>
+  <p class="rv">Todo se cocina al momento sobre brasa de algarrobo. Precios en soles, incluyen IGV. Consulta por alérgenos con tu mozo.</p>
+ </div></section>
+
+ <div class="wrap tools">
+  <label class="sr" for="q">Buscar plato</label><input id="q" type="search" placeholder="Buscar: ribeye, pisco, vegetariano…" autocomplete="off">
+  <button class="chip" data-f="veg" aria-pressed="false">Vegetariano</button>
+  <button class="chip" data-f="picante" aria-pressed="false">Picante</button>
+  <button class="chip" data-f="comp" aria-pressed="false">Para compartir</button>
+ </div>
+ <div class="barra"><div class="wrap"><nav class="cats" id="cats" aria-label="Categorías"></nav></div></div>
+
+ <div class="wrap" id="lista" aria-live="polite"></div>
+ <div class="wrap"><p class="nota">Imágenes referenciales solo donde representan el plato. Precios y platos de ejemplo: demo de diseño web.</p></div>
+</main>
+
+<footer>
+ <div class="wrap">
+  <span>© 2026 Brasa Noble (negocio ficticio). Demo de diseño web por <a href="../">Carlo Andre Chiuyare Guillen · Carlo · Dev</a>. Todos los derechos reservados; prohibida su copia. Desarrollo con apoyo de IA (Claude), bajo dirección del autor.</span>
+  <details><summary>Créditos de las fotos</summary><ul id="creditos"></ul></details>
+ </div>
+</footer>
+<div class="cta"><a class="btn c" href="index.html#reservar">Reservar mesa</a></div>
+
+<script src="logica.js"></script>
+<script src="fx.js"></script>
+<script>
+const {CATS,MENU,fmt,esc}=BN;
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const FOTO={entradas:"c-filete-flo",parrilla:"c-ribeye",compartir:"c-ribeye-tabla",criollo:"c-lomo-saltado",guarniciones:"c-bife-chorizo",postres:"c-tiramisu",bar:"c-pisco-sour"};
+const IMG={p1:"c-bife-chorizo",p2:"c-filete-eddie",p3:"c-ribeye",c1:"c-lomo-saltado",d1:"c-tiramisu",b1:"c-pisco-sour"};
+const S={q:"",f:new Set()};
+let k=0;
+
+function tarjeta(i){
+  const et=[i.gr?`<span class="t">${esc(i.gr)}</span>`:"",i.tag?`<span class="g">${esc(i.tag)}</span>`:"",i.veg?'<span class="v">Vegetariano</span>':"",i.picante?'<span class="h">Picante</span>':"",i.comp?'<span class="t">Para compartir</span>':""].join("");
+  return `<article class="pl rv" style="--k:${k++%6}">${IMG[i.id]?`<div class="im"><img src="fotos/${IMG[i.id]}.webp" alt="" loading="lazy" width="900" height="675"></div>`:""}<div class="f" style="margin-top:${IMG[i.id]?".9rem":"1.3rem"}"><h3>${esc(i.n)}</h3><span class="pr">${fmt(i.p)}</span></div><p>${esc(i.d)}</p>${et?`<div class="et">${et}</div>`:""}</article>`;
+}
+function pinta(){
+  k=0;
+  const res=BN.filtrar(MENU,{texto:S.q,filtros:[...S.f]});
+  const sec=CATS.map(c=>({c,items:res.filter(i=>i.cat===c.id)})).filter(x=>x.items.length);
+  $("#lista").innerHTML=sec.length?sec.map(({c,items})=>`<section class="cat" id="${c.id}" aria-labelledby="t-${c.id}"><div class="hd"><img src="fotos/${FOTO[c.id]}.webp" alt="" loading="lazy" width="900" height="675"><h2 class="d" id="t-${c.id}">${esc(c.n)}</h2><p>${esc(c.sub||"")}</p><span class="ct">${items.length} ${items.length===1?"plato":"platos"}</span></div><div class="grid">${items.map(tarjeta).join("")}</div></section>`).join(""):`<p class="vacio">No encontramos platos con eso. Prueba otra búsqueda o quita los filtros.</p>`;
+  $("#cats").innerHTML=sec.map(x=>`<a href="#${x.c.id}">${esc(x.c.n)}</a>`).join("");
+  window.fxWatch();spy();
+}
+let t;$("#q").addEventListener("input",e=>{clearTimeout(t);t=setTimeout(()=>{S.q=e.target.value;pinta()},150)});
+$$(".tools .chip").forEach(b=>b.addEventListener("click",()=>{const f=b.dataset.f,on=!S.f.has(f);on?S.f.add(f):S.f.delete(f);b.setAttribute("aria-pressed",on);pinta()}));
+
+/* categoría activa al hacer scroll */
+let obs;function spy(){
+  obs&&obs.disconnect();
+  obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){$$("#cats a").forEach(a=>{const on=a.getAttribute("href")==="#"+e.target.id;a.classList.toggle("on",on);if(on&&a.scrollIntoView)a.parentElement.scrollTo({left:a.offsetLeft-20,behavior:"smooth"})})}}),{rootMargin:"-30% 0px -60% 0px"});
+  $$(".cat").forEach(s=>obs.observe(s));
+}
+$("#cats").addEventListener("click",e=>{const a=e.target.closest("a");if(!a)return;e.preventDefault();const s=document.querySelector(a.getAttribute("href"));s&&window.scrollTo({top:s.getBoundingClientRect().top+scrollY-130,behavior:"smooth"})});
+pinta();
+
+$("#creditos").innerHTML=[
+ ["Bife de chorizo","Yotam Nachum","CC0"],["Filete mignon","Gatorfan252525","CC BY-SA 4.0"],["Ribeye","Socket0","CC0"],["Corte para compartir","Shixart1985","CC BY 2.0"],
+ ["Lomo saltado","HugoMon","CC BY 3.0"],["Tiramisú","Syced","CC0"],["Pisco sour","young shanahan","CC BY 2.0"],["Salón","Sarah Stierch","CC BY 4.0"]
+].map(([n,a,l])=>`<li>${n}: ${a} · ${l} · Wikimedia Commons</li>`).join("");
+</script>
+</body>
+</html>
