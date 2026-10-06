@@ -78,16 +78,20 @@
 .fuego[data-s="0"] .fi:nth-of-type(1),.fuego[data-s="1"] .fi:nth-of-type(2),.fuego[data-s="2"] .fi:nth-of-type(3){opacity:1;transform:scale(1)}
 .fuego .meter{position:absolute;left:1.2rem;bottom:1.2rem;background:var(--tinta);color:var(--hueso);border-radius:999px;padding:.5rem 1.1rem;font-weight:700;font-size:.9rem}
 .fuego .meter b{color:var(--ambar);font-family:var(--f-d);font-weight:400;font-size:1.3rem;letter-spacing:.04em}
+.paso .pi{display:none}
 @media(max-width:899px){
-  .fuego{height:auto;padding:4.5rem 0}
-  .stage{position:static;height:auto;grid-template-columns:1fr;gap:2rem;overflow:visible}
+  .fuego{height:auto;padding:4rem 0}
+  .stage{position:static;height:auto;grid-template-columns:1fr;gap:1.4rem;overflow:visible}
   .fuego .izq{padding:0 1.2rem}
-  .pasos{min-height:0}
-  .paso{position:relative;opacity:1;transform:none;padding:1.4rem 0;border-top:1px solid rgba(244,238,228,.3);pointer-events:auto}
-  .paso .n{position:static;font-size:5.5rem;display:block;margin-bottom:.2rem;-webkit-text-stroke-width:1.5px}
-  .puntos,.fuego .meter{display:none}
-  .der{margin:0 1.2rem;height:auto;border-radius:24px;display:grid;gap:.6rem;border:0;overflow:visible}
-  .der .fi{position:static;opacity:1;transform:none;height:200px;border-radius:18px;border:2px solid var(--tinta)}
+  .fuego .tit{margin:.6rem 0 1.4rem}
+  .pasos{min-height:0;display:grid;gap:1.1rem}
+  .paso{position:relative;opacity:1;transform:none;pointer-events:auto;display:grid;overflow:hidden;border-radius:22px;background:var(--tinta);border:2px solid var(--tinta);box-shadow:5px 5px 0 rgba(20,16,14,.55)}
+  .paso .pi{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+  .paso .n{position:absolute;left:.9rem;top:.5rem;right:auto;font-size:4.2rem;color:var(--hueso);-webkit-text-stroke:0;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+  .paso .pt{padding:1.1rem 1.2rem 1.3rem}
+  .paso h3{font-size:2rem;margin-bottom:.4rem}
+  .paso p{font-size:1rem;max-width:none}
+  .puntos,.fuego .meter,.der{display:none}
 }
 
 /* experiencias */
@@ -244,9 +248,9 @@ dialog::backdrop{background:rgba(20,16,14,.7);backdrop-filter:blur(4px)}
    <span class="kicker" style="color:var(--ambar)">La brasa</span>
    <h2 class="d tit" id="tFuego" data-split>Tres cosas, <em>bien hechas.</em></h2>
    <div class="pasos">
-    <div class="paso" data-i="0"><span class="n" aria-hidden="true">01</span><h3 class="d">Madurar</h3><p>Treinta días en cámara hasta que la carne gana ternura y profundidad. Aquí no hay atajos.</p></div>
-    <div class="paso" data-i="1"><span class="n" aria-hidden="true">02</span><h3 class="d">Encender</h3><p>Brasa de algarrobo a más de 800 grados. Sellamos en minutos y respetamos el punto que elijas.</p></div>
-    <div class="paso" data-i="2"><span class="n" aria-hidden="true">03</span><h3 class="d">Reposar</h3><p>El corte descansa antes de llegar a tu mesa para que cada jugo quede donde debe: en tu plato.</p></div>
+    <div class="paso" data-i="0"><img class="pi" src="fotos/c-ribeye-tabla.webp" width="900" height="675" loading="lazy" alt="Corte de ribeye crudo, listo para madurar"><span class="n" aria-hidden="true">01</span><div class="pt"><h3 class="d">Madurar</h3><p>Treinta días en cámara hasta que la carne gana ternura y profundidad. Aquí no hay atajos.</p></div></div>
+    <div class="paso" data-i="1"><img class="pi" src="fotos/c-filete-eddie.webp" width="900" height="675" loading="lazy" alt="Corte sellado en la parrilla con marcas de brasa"><span class="n" aria-hidden="true">02</span><div class="pt"><h3 class="d">Encender</h3><p>Brasa de algarrobo a más de 800 grados. Sellamos en minutos y respetamos el punto que elijas.</p></div></div>
+    <div class="paso" data-i="2"><img class="pi" src="fotos/c-filete-flo.webp" width="900" height="675" loading="lazy" alt="Filete reposado y servido en el plato"><span class="n" aria-hidden="true">03</span><div class="pt"><h3 class="d">Reposar</h3><p>El corte descansa antes de llegar a tu mesa para que cada jugo quede donde debe: en tu plato.</p></div></div>
    </div>
    <div class="puntos" aria-hidden="true"><i></i><i></i><i></i></div>
   </div>
