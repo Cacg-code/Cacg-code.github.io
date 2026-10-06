@@ -309,23 +309,14 @@ dialog[open]{animation:ap .35s cubic-bezier(.2,.8,.2,1)}
 </dialog>
 <div class="toast" id="toast" role="status"></div>
 
+<script src="logica.js"></script>
 <script>
-const WA="51999999999",ENVIO_GRATIS=120,ENVIO=12;
-const P=[
- {id:1,n:"Machu Picchu",o:"Cusco",t:"Medio",p:42,notas:"Cacao, naranja, panela",c:"#FFE27A",tc:"#1B2BD9",tag:"Más vendido",alt:1900,perfil:[70,55,40]},
- {id:2,n:"Valle Sagrado",o:"Cusco",t:"Claro",p:46,notas:"Jazmín, durazno, miel",c:"#BFD2FF",tc:"#0D1030",alt:2100,perfil:[85,35,75]},
- {id:3,n:"Chanchamayo",o:"Junín",t:"Medio",p:38,notas:"Nuez, caramelo, chocolate",c:"#FFC9B8",tc:"#9A2B0B",alt:1600,perfil:[55,70,35]},
- {id:4,n:"Cajamarca",o:"Cajamarca",t:"Oscuro",p:36,notas:"Cacao amargo, tostado, especias",c:"#C9F0D6",tc:"#0B5A33",alt:1900,perfil:[35,90,20]},
- {id:5,n:"Amazonas Nativo",o:"Amazonas",t:"Claro",p:52,notas:"Cereza, flores, té negro",c:"#F1D2FF",tc:"#5B1E80",tag:"Nuevo",alt:1800,perfil:[90,30,85]},
- {id:6,n:"Alto Mayo",o:"San Martín",t:"Medio",p:40,notas:"Almendra, panela, manzana",c:"#FFE27A",tc:"#0D1030",alt:1500,perfil:[60,60,50]},
- {id:7,n:"Puno Orgánico",o:"Puno",t:"Oscuro",p:44,notas:"Chocolate negro, frutos secos",c:"#D8DCF5",tc:"#1B2BD9",alt:2200,perfil:[40,85,25]},
- {id:8,n:"Descafeinado",o:"Cusco",t:"Medio",p:48,notas:"Suave, dulce, sin cafeína",c:"#BFD2FF",tc:"#1B2BD9",alt:1900,perfil:[50,50,45]}
-];
-const $=s=>document.querySelector(s),fmt=n=>"S/ "+n.toFixed(2);
+const{ENVIO_GRATIS,PRODUCTOS:P,fmt,esc,filtrar,claveLinea:key,totales,agregarLinea,moverLinea,quitarLinea,textoEnvio,errorPedido,mensajePedido,urlWhatsApp}=Cumbre;
+const WA="51999999999";
+const $=s=>document.querySelector(s);
 let filtro="Todos",cart=[];
 try{cart=JSON.parse(localStorage.getItem("cumbre-cart2")||"[]").filter(l=>P.some(p=>p.id===l.id))}catch(e){}
 const guardar=()=>{try{localStorage.setItem("cumbre-cart2",JSON.stringify(cart))}catch(e){}};
-const key=l=>l.id+"|"+l.g;
 let uid=0;
 function bolsa(p){
   const u="gb"+(uid++);
@@ -350,13 +341,12 @@ const chips=$("#chips");
 
 function pintar(){
   const q=$("#q").value.trim().toLowerCase(),o=$("#orden").value;
-  let r=P.filter(p=>(filtro==="Todos"||p.t===filtro)&&`${p.n} ${p.o} ${p.notas}`.toLowerCase().includes(q));
-  if(o==="asc")r.sort((a,b)=>a.p-b.p);if(o==="desc")r.sort((a,b)=>b.p-a.p);
+  const r=filtrar(P,{tueste:filtro,texto:q,orden:o});
   $("#conteo").textContent=r.length+(r.length===1?" café":" cafés");
   $("#grid").innerHTML=r.length?r.map(p=>`<li><article class="card">
     <button class="img" style="background:${p.c}55" data-ver="${p.id}" aria-label="Ver detalle de ${p.n}">${p.tag?`<span class="tag">${p.tag}</span>`:""}${bolsa(p)}<span class="ver">Ver detalle</span></button>
     <div class="info"><h3>${p.n}</h3><p class="meta">${p.o} · Tueste ${p.t.toLowerCase()}</p><p class="notas">${p.notas}</p>
-    <div class="fila"><span class="precio">${fmt(p.p)}</span><button class="btn sm" data-add="${p.id}" aria-label="Agregar ${p.n} al carrito">Agregar</button></div></div></article></li>`).join(""):`<li class="vacio" style="grid-column:1/-1">No hay cafés con “${q}”. Prueba con otro nombre o quita el filtro de tueste.</li>`;
+    <div class="fila"><span class="precio">${fmt(p.p)}</span><button class="btn sm" data-add="${p.id}" aria-label="Agregar ${p.n} al carrito">Agregar</button></div></div></article></li>`).join(""):`<li class="vacio" style="grid-column:1/-1">No hay cafés con “${esc(q)}”. Prueba con otro nombre o quita el filtro de tueste.</li>`;
 }
 $("#grid").addEventListener("click",e=>{
   const a=e.target.closest("[data-add]");if(a){agregar(+a.dataset.add,"Grano entero",1);a.textContent="Agregado ✓";setTimeout(()=>a.textContent="Agregar",1200);return}
@@ -364,21 +354,19 @@ $("#grid").addEventListener("click",e=>{
 });
 
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("on"),2200)}
-function agregar(id,g,q){const l=cart.find(x=>x.id===id&&x.g===g);l?l.q+=q:cart.push({id,g,q});cambio();const b=$("#n");b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop");toast(`${P.find(p=>p.id===id).n} agregado al carrito`)}
-function mover(k,d){const l=cart.find(x=>key(x)===k);if(!l)return;l.q+=d;if(l.q<=0)cart=cart.filter(x=>key(x)!==k);cambio()}
-function quitar(k){cart=cart.filter(x=>key(x)!==k);cambio()}
-function totales(){const sub=cart.reduce((s,l)=>s+P.find(p=>p.id===l.id).p*l.q,0);const env=sub===0||sub>=ENVIO_GRATIS?0:ENVIO;return{sub,env,tot:sub+env}}
+function agregar(id,g,q){cart=agregarLinea(cart,id,g,q);cambio();const b=$("#n");b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop");toast(`${P.find(p=>p.id===id).n} agregado al carrito`)}
+function mover(k,d){cart=moverLinea(cart,k,d);cambio()}
+function quitar(k){cart=quitarLinea(cart,k);cambio()}
 function cambio(){guardar();render()}
 function render(){
-  const{sub,env,tot}=totales(),n=cart.reduce((s,l)=>s+l.q,0);
+  const{sub,env,tot}=totales(cart,P),n=cart.reduce((s,l)=>s+l.q,0);
   $("#n").textContent=n;
   $("#lineas").innerHTML=cart.length?cart.map(l=>{const p=P.find(x=>x.id===l.id),k=key(l);return `<li class="linea"><div class="mini" style="background:${p.c}66">${bolsa(p)}</div>
    <div><b>${p.n}</b><small>${l.g} · 250 g · ${fmt(p.p)}</small><br><span class="cant"><button data-m="${k}|-1" aria-label="Quitar uno de ${p.n}">−</button><span aria-live="polite">${l.q}</span><button data-m="${k}|1" aria-label="Agregar uno de ${p.n}">+</button></span><br><button class="quitar" data-q="${k}">Quitar</button></div>
    <b>${fmt(p.p*l.q)}</b></li>`}).join(""):`<li class="vacio-carro">Tu carrito está vacío.<br>Agrega un café y aparecerá aquí.</li>`;
   $("#pie").style.display=cart.length?"grid":"none";
   $("#sub").textContent=fmt(sub);$("#env").textContent=env?fmt(env):"Gratis";$("#tot").textContent=fmt(tot);
-  const falta=ENVIO_GRATIS-sub;
-  $("#envtxt").textContent=sub===0?`Envío gratis desde ${fmt(ENVIO_GRATIS)}`:falta>0?`Te faltan ${fmt(falta)} para el envío gratis`:"Tienes envío gratis";
+  $("#envtxt").textContent=textoEnvio(sub);
   $("#envbar").style.width=Math.min(100,sub/ENVIO_GRATIS*100)+"%";
 }
 $("#lineas").addEventListener("click",e=>{const m=e.target.closest("[data-m]"),q=e.target.closest("[data-q]");if(m){const i=m.dataset.m.lastIndexOf("|");mover(m.dataset.m.slice(0,i),+m.dataset.m.slice(i+1))}if(q)quitar(q.dataset.q)});
@@ -412,11 +400,11 @@ dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
 
 $("#form").addEventListener("submit",e=>{
   e.preventDefault();const f=e.target;
-  if(!f.nombre.value.trim()||!f.distrito.value.trim()){$("#err").textContent="Escribe tu nombre y distrito para enviar el pedido.";return}
-  $("#err").textContent="";const{sub,env,tot}=totales();
-  const items=cart.map(l=>{const p=P.find(x=>x.id===l.id);return `• ${l.q} × *${p.n}* · ${l.g} (${fmt(p.p*l.q)})`}).join("\n");
-  const t=["Hola Cumbre Café,","Quiero hacer este pedido:","",items,"",`*Subtotal:* ${fmt(sub)}`,`*Envío:* ${env?fmt(env):"Gratis"}`,`*Total:* ${fmt(tot)}`,"",`*Nombre:* ${f.nombre.value.trim()}`,`*Distrito:* ${f.distrito.value.trim()}`,`*Pago:* ${f.pago.value}`,"","_Pedido desde la web_"].join("\n");
-  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(t)}`,"_blank","noopener");
+  const er=errorPedido(cart,f.nombre.value,f.distrito.value);
+  if(er){$("#err").textContent=er;return}
+  $("#err").textContent="";
+  const t=mensajePedido(cart,P,{nombre:f.nombre.value,distrito:f.distrito.value,pago:f.pago.value});
+  window.open(urlWhatsApp(WA,t),"_blank","noopener");
 });
 
 /* efectos */
