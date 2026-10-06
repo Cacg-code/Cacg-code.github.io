@@ -57,3 +57,14 @@
   addEventListener("scroll", prog, { passive: true }); prog();
   const u = S.usuario(); if (u) { const a = $("[data-login]"); a.textContent = "Mi aula"; }
 })();
+(function () {
+  const ops = document.getElementById("ops"), res = document.getElementById("reco-res"); if (!ops) return;
+  ops.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    ops.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+    const c = DATOS.CURSOS.find(x => x.id === Cat.recomienda({ interes: b.dataset.i }));
+    res.innerHTML = `<span class="ico" style="--c:${c.color};font-size:1.6rem">${String(c.ico).replace(/</g, "&lt;")}</span><div style="flex:1;min-width:180px"><b style="font:700 1.2rem var(--serif)">${c.nombre}</b><br><small style="color:var(--gris)">Te lo recomendamos para empezar.</small></div><button class="btn osc chico" data-curso="${c.id}">Ver y empezar</button>`;
+    res.classList.add("on");
+  });
+  res.addEventListener("click", e => { const b = e.target.closest("[data-curso]"); if (b) document.querySelector('#lista [data-curso="' + b.dataset.curso + '"]')?.click(); });
+})();

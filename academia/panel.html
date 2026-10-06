@@ -17,12 +17,14 @@
 <main class="w" style="padding-bottom:60px">
   <div class="saludo"><span class="kick">Panel de coordinación</span><h1>Cómo van tus alumnos</h1></div>
   <div class="herr"><select id="uni" aria-label="Universidad"></select><select id="cur" aria-label="Curso"></select><input id="bus" type="search" placeholder="Buscar alumno o código…" aria-label="Buscar"><button class="btn chico" id="csv">⬇ Exportar CSV</button></div>
+  <div style="margin:0 0 12px"><button class="btn chico" id="todos" type="button">📣 Copiar recordatorio para alumnos en riesgo</button></div>
   <div class="kpis" id="kpis"></div>
   <h2 class="sub-t">Avance promedio por curso</h2><div class="bloque"><div class="barras" id="barras"></div></div>
   <h2 class="sub-t">Alumnos</h2><div class="scroll-x"><table class="tabla res"><thead><tr><th>Alumno</th><th>Código</th><th>Curso</th><th>Avance</th><th>Nota</th><th>Última vez</th><th>Estado</th><th></th></tr></thead><tbody id="filas"></tbody></table></div>
   <p style="margin-top:22px;color:var(--gris);font-size:.86rem">Demo: los alumnos son de ejemplo (salvo la fila «Tú», que refleja tu avance real en el aula). En el sistema real, los datos vendrían de la base de la universidad.</p>
 </main>
 <div class="toast" id="toast" role="status"></div>
+<script src="tema.js"></script>
 <script src="datos.js"></script><script src="logica.js"></script><script src="store.js"></script><script src="panel.js"></script>
 </body>
 </html>

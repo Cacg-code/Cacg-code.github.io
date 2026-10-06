@@ -35,6 +35,13 @@
     const b = e.target.closest("[data-wa]"); if (!b) return; const a = alumnos.find(x => String(x.id) === b.dataset.wa), c = S.cursoPorId(a.curso);
     open("https://wa.me/?text=" + encodeURIComponent(`Hola ${a.nombre.split(" ")[0]}, te extrañamos en Cátedra. Llevas ${antes(a.ult)} días sin entrar a «${c.nombre}» y vas en ${a.pct} %. ¡Retoma hoy 15 minutos y sigue avanzando!`), "_blank", "noopener");
   });
+  $("#todos").onclick = () => {
+    const r = vista().filter(a => estado(a)[1] === "En riesgo");
+    if (!r.length) return toast("Nadie en riesgo con este filtro.");
+    const t = r.map(a => `• ${a.nombre} (${S.cursoPorId(a.curso).nombre}, ${antes(a.ult)} días sin entrar)`).join("\n");
+    const msg = `Recordatorio Cátedra — ${r.length} alumno(s) en riesgo:\n${t}`;
+    (navigator.clipboard ? navigator.clipboard.writeText(msg) : Promise.reject()).then(() => toast("Copiado: " + r.length + " alumnos en riesgo"), () => toast(r.length + " alumnos en riesgo"));
+  };
   $("#csv").onclick = () => {
     const f = [["Alumno", "Código", "Universidad", "Curso", "Avance %", "Nota", "Última actividad"], ...vista().map(a => [a.nombre, a.codigo, a.uni, S.cursoPorId(a.curso).nombre, a.pct, a.nota == null ? "" : a.nota, C.dia(a.ult)])];
     const l = document.createElement("a"); l.href = URL.createObjectURL(new Blob(["﻿" + C.csv(f)], { type: "text/csv;charset=utf-8" })); l.download = "catedra-avance.csv"; l.click(); toast("CSV descargado");

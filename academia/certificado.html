@@ -36,7 +36,7 @@ body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 </style>
 </head>
 <body>
-<div class="barra"><button class="btn" id="imp">⬇ Guardar como PDF</button><a class="btn lin" href="aula.html">← Volver al aula</a></div>
+<div class="barra"><button class="btn" id="imp">⬇ Guardar como PDF</button><a class="btn lin" href="aula.html">← Volver al aula</a><a class="btn lin" id="li" target="_blank" rel="noopener">in Añadir a LinkedIn</a><a class="btn lin" id="wa" target="_blank" rel="noopener">WhatsApp</a></div>
 <div class="estado" id="estado"></div>
 <div class="marco" id="marco"></div>
 <script src="datos.js"></script><script src="logica.js"></script><script src="qr.js"></script>
@@ -47,7 +47,7 @@ body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   const c = DATOS.CURSOS.find(x => x.id === q.get("c")), em = q.get("e") || "", nom = q.get("n") || "", f = q.get("f") || "", nt = +q.get("nt"), uni = q.get("u") || "";
   const st = $("#estado");
   const okFecha = /^\d{4}-\d{2}-\d{2}$/.test(f);
-  if (!c || !em || !nom || !okFecha || !(nt >= 11 && nt <= 20)) { st.className = "estado mal"; st.textContent = "✗ Certificado no válido o incompleto."; $("#marco").remove(); $("#imp").remove(); return; }
+  if (!c || !em || !nom || !okFecha || !(nt >= 11 && nt <= 20)) { st.className = "estado mal"; st.textContent = "✗ Certificado no válido o incompleto."; $("#marco").remove(); $("#imp").remove(); $("#li").remove(); $("#wa").remove(); return; }
   const codigo = Cat.codigoCert(em, c.id, f), meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
   const [a, m, d] = f.split("-"), fecha = `${+d} de ${meses[+m - 1]} de ${a}`;
   st.className = "estado ok"; st.textContent = "✓ Certificado válido · código " + codigo + " (demo: la verificación es local)";
@@ -56,6 +56,8 @@ body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   $("#marco").innerHTML = `<div class="borde"></div><div class="in"><div class="logo"><i>C</i>Cátedra</div><div class="t1">Certificado de aprobación</div><div class="tx" style="margin-top:2cqw">Se otorga a</div><div class="nom">${esc(nom)}</div><div class="tx">por aprobar con nota <b>${nt}/20</b> el curso</div><div class="cur">${esc(c.nombre)}</div><div class="tx">${c.horas} horas académicas · ${esc(c.prof)}${uni ? " · " + esc(uni) : ""}</div>
   <div class="pie"><div><b>${fecha}</b>Fecha de emisión<br>Código: <b style="display:inline">${codigo}</b></div><div class="firma"><div class="l">Cátedra</div>Dirección académica</div><div class="qr"><svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges"><path d="${p}" fill="#0E1A3A"/></svg></div></div></div><div class="sello"><span><b>${nt}</b>NOTA</span></div>`;
   $("#imp").onclick = () => print();
+    $("#li").href = "https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=" + encodeURIComponent(c.nombre + " · Cátedra") + "&organizationName=C%C3%A1tedra&issueYear=" + a + "&issueMonth=" + +m + "&certId=" + codigo + "&certUrl=" + encodeURIComponent(location.href);
+  $("#wa").href = "https://wa.me/?text=" + encodeURIComponent("¡Aprobé " + c.nombre + " con nota " + nt + "/20 en Cátedra! 🎓 Verifícalo: " + location.href);
   document.title = "Certificado " + c.nombre + " · " + nom;
 })();
 </script>

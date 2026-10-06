@@ -20,6 +20,10 @@
     guardaApunte: (em, key, t) => wr("ac_a_" + em + "_" + key, t),
     certificados(em) { const t = S.todo(em); return CURSOS.filter(c => t[c.id] && t[c.id].f && C.puedeCertificar(c, t[c.id])).map(c => ({ curso: c, f: t[c.id].f, n: t[c.id].n })); },
     reinicia(em) { Object.keys(localStorage).filter(k => k.startsWith("ac_") && k.includes(em)).forEach(k => localStorage.removeItem(k)); },
+    meta: em => rd("ac_meta_" + em, 3),
+    ponMeta: (em, n) => wr("ac_meta_" + em, n),
+    repaso: (em, id) => rd("ac_rep_" + em + "_" + id, {}),
+    ponRepaso: (em, id, v) => wr("ac_rep_" + em + "_" + id, v),
     cursoPorId: id => CURSOS.find(c => c.id === id)
   };
   r.Store = S;

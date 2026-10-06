@@ -34,6 +34,32 @@
     return n;
   };
   const csv = filas => filas.map(f => f.map(x => '"' + String(x).replace(/"/g, '""') + '"').join(",")).join("\n");
-  r.Cat = { clave, lecciones, resumen, nota, puedeCertificar, proxima, codigoCert, validaLogin, nombreDeCorreo, rachaDias, csv, dia };
+  const norm = s => String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const lunes = d => { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x; };
+  const heatmap = (fechas, semanas = 5, hoy = new Date()) => {
+    const set = new Set(fechas), ini = lunes(hoy); ini.setDate(ini.getDate() - 7 * (semanas - 1)); const out = [];
+    for (let i = 0; i < semanas * 7; i++) { const d = new Date(ini); d.setDate(ini.getDate() + i); out.push({ f: dia(d), on: set.has(dia(d)), futuro: d > hoy }); }
+    return out;
+  };
+  const diasSemana = (fechas, hoy = new Date()) => { const ini = lunes(hoy), set = new Set(fechas); let n = 0; for (let i = 0; i < 7; i++) { const d = new Date(ini); d.setDate(ini.getDate() + i); if (set.has(dia(d))) n++; } return n; };
+  const insignias = x => [
+    { id: "primera", nombre: "Primer paso", ico: "🌱", desc: "Ve tu primera lección", ok: x.hechas >= 1 },
+    { id: "diez", nombre: "En marcha", ico: "🚀", desc: "Completa 10 lecciones", ok: x.hechas >= 10 },
+    { id: "racha3", nombre: "Constante", ico: "🔥", desc: "3 días seguidos", ok: x.racha >= 3 },
+    { id: "meta", nombre: "Meta cumplida", ico: "🎯", desc: "Cumple tu meta semanal", ok: x.metaOk },
+    { id: "cert", nombre: "Certificado", ico: "🎓", desc: "Obtén tu primer certificado", ok: x.certs >= 1 },
+    { id: "perfecto", nombre: "Examen perfecto", ico: "💯", desc: "Saca 20 en un examen", ok: x.maxNota === 20 }
+  ];
+  const ics = (hora, hoy = new Date()) => {
+    const [h, m] = hora.split(":"), z = n => String(n).padStart(2, "0"), d = dia(hoy).replace(/-/g, "");
+    const fin = z(+h + Math.floor((+m + 30) / 60)) + z((+m + 30) % 60);
+    return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Catedra//ES", "BEGIN:VEVENT", "UID:estudio-" + d + h + m + "@catedra", "DTSTAMP:" + d + "T000000Z", "DTSTART:" + d + "T" + z(h) + z(m) + "00", "DTEND:" + d + "T" + fin + "00", "RRULE:FREQ=DAILY;COUNT=60", "SUMMARY:Estudiar 20 minutos en Cátedra", "DESCRIPTION:Tu racha te espera. Entra y mira una lección.", "BEGIN:VALARM", "TRIGGER:-PT5M", "ACTION:DISPLAY", "DESCRIPTION:Hora de estudiar", "END:VALARM", "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+  };
+  const recomienda = r => {
+    const mapa = { numeros: "calculo", datos: "estadistica", codigo: "python", negocio: "contabilidad", oficina: "excel", escribir: "tesis" };
+    return mapa[r.interes] || "excel";
+  };
+  const busca = (cursos, q) => { const n = norm(q).trim(); if (n.length < 2) return []; return cursos.flatMap(c => lecciones(c).filter(l => norm(l.t + " " + l.p.join(" ") + " " + c.nombre).includes(n)).map(l => ({ c, l }))).slice(0, 12); };
+  r.Cat = { clave, lecciones, resumen, nota, puedeCertificar, proxima, codigoCert, validaLogin, nombreDeCorreo, rachaDias, csv, dia, heatmap, diasSemana, insignias, ics, recomienda, busca, norm };
   if (typeof module !== "undefined") module.exports = r.Cat;
 })(typeof window !== "undefined" ? window : globalThis);
