@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cátedra · Academia para universitarios (demo)</title>
+<meta name="description" content="Demo: academia online para universidades con cursos, avance, examen final y certificado en PDF. Hecha por Carlo · Dev.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<div class="progreso" aria-hidden="true"></div>
+<header class="nav"><div class="w">
+  <a class="logo" href="./"><i>C</i>Cátedra</a>
+  <button class="burger" aria-label="Menú" aria-expanded="false">☰</button>
+  <nav id="menu">
+    <a href="#cursos">Cursos</a><a href="#como">Cómo funciona</a><a href="#unis">Universidades</a><a href="#planes">Precios</a><a href="panel.html">Panel coordinación</a>
+    <a class="btn chico" href="#" data-login>Entrar</a>
+  </nav>
+</div></header>
+
+<section class="hero" style="padding-bottom:clamp(80px,10vw,130px)">
+  <span class="glifo" style="left:4%;top:12%;--s:5rem">∫</span><span class="glifo" style="left:46%;top:6%;--s:3.4rem;--t:11s">σ</span>
+  <span class="glifo" style="left:30%;bottom:6%;--s:6rem;--t:12s">π</span><span class="glifo" style="right:6%;bottom:10%;--s:4rem">fx</span>
+  <div class="w">
+    <div>
+      <span class="kick">Academia para universitarios</span>
+      <h1>Aprueba tus cursos <em>a tu ritmo</em>, con un certificado que sí vale.</h1>
+      <p class="sub">Clases cortas, práctica y examen final para las materias que más se jalan. Tu universidad ve tu avance; tú descargas tu certificado en PDF.</p>
+      <div class="acc"><a class="btn" href="#" data-demo>Probar la demo gratis</a><a class="btn lin" href="#cursos">Ver los 6 cursos</a></div>
+      <div class="gar"><span>Sin tarjeta</span><span>Desde el celular</span><span>Certificado verificable</span></div>
+    </div>
+    <div class="tarjeta-h" aria-hidden="true">
+      <b style="font-family:var(--serif);font-size:1.15rem">Tu avance esta semana</b>
+      <div class="fila"><span class="ico" style="--c:#2563EB">∫</span><div style="flex:1"><b>Cálculo I</b><small>Módulo 2 · La derivada</small></div><div class="barra" style="max-width:90px"><i data-w="72%"></i></div></div>
+      <div class="fila"><span class="ico" style="--c:#7C3AED">&lt;/&gt;</span><div style="flex:1"><b>Python</b><small>Bucles for y while</small></div><div class="barra" style="max-width:90px"><i data-w="45%"></i></div></div>
+      <div class="fila"><span class="ico" style="--c:#16A34A">fx</span><div style="flex:1"><b>Excel</b><small>Certificado listo</small></div><div class="barra" style="max-width:90px"><i data-w="100%"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="w"><div class="cifras">
+  <div class="rv"><b data-n="6">0</b><span>cursos completos</span></div>
+  <div class="rv" style="--d:1"><b data-n="39">0</b><span>lecciones cortas</span></div>
+  <div class="rv" style="--d:2"><b data-n="30">0</b><span>preguntas de examen</span></div>
+  <div class="rv" style="--d:3"><b data-n="3">0</b><span>universidades en convenio</span></div>
+</div></div>
+
+<section id="cursos"><div class="w">
+  <div class="cab rv"><span class="kick">Catálogo</span><h2>Los cursos que más <em>se necesitan</em></h2><p>Elige por área. Cada curso tiene lecciones, apuntes, un examen final con nota vigesimal y certificado.</p></div>
+  <div class="filtro rv" id="filtro"></div>
+  <div class="cursos" id="lista"></div>
+</div></section>
+
+<section id="como" style="background:#fff"><div class="w">
+  <div class="cab rv"><span class="kick">Cómo funciona</span><h2>De la primera clase al <em>certificado</em></h2></div>
+  <div class="pasos">
+    <div class="paso rv"><h3>Entra con tu código</h3><p>Con tu correo y código de matrícula. Sin contraseñas que recordar.</p></div>
+    <div class="paso rv" style="--d:1"><h3>Mira y practica</h3><p>Lecciones de 10 a 20 minutos con puntos clave y tus propios apuntes.</p></div>
+    <div class="paso rv" style="--d:2"><h3>Rinde el examen</h3><p>5 preguntas con nota de 0 a 20. Apruebas desde 11 y puedes repetirlo.</p></div>
+    <div class="paso rv" style="--d:3"><h3>Descarga tu PDF</h3><p>Certificado con código y QR para que cualquiera verifique que es real.</p></div>
+  </div>
+</div></section>
+
+<section id="unis" class="oscuro"><div class="w uni">
+  <div class="rv">
+    <span class="kick">Para universidades</span><h2>Ve quién avanza y a quién <em>ayudar a tiempo</em></h2>
+    <ul class="lista"><li>Panel de coordinación con avance por alumno y por curso.</li><li>Alertas de quién lleva días sin entrar, con mensaje listo por WhatsApp.</li><li>Reportes en CSV para tu oficina de calidad.</li><li>Certificados con la identidad de tu institución.</li></ul>
+    <p style="margin-top:24px"><a class="btn" href="panel.html">Abrir el panel de ejemplo</a></p>
+  </div>
+  <div class="mini-panel rv" style="--d:2" aria-hidden="true">
+    <b style="font-family:var(--serif)">Universidad Nacional Andina · Ing. de Sistemas</b>
+    <div class="fila"><span>María Condori</span><div class="barra"><i data-w="92%"></i></div><span class="etq ok">92 %</span></div>
+    <div class="fila"><span>Jorge Huamán</span><div class="barra"><i data-w="64%"></i></div><span class="etq">64 %</span></div>
+    <div class="fila"><span>Lucía Ramos</span><div class="barra"><i data-w="31%"></i></div><span class="etq al">31 %</span></div>
+    <div class="fila"><span>Piero Salazar</span><div class="barra"><i data-w="8%"></i></div><span class="etq rj">En riesgo</span></div>
+  </div>
+</div></section>
+
+<section id="planes"><div class="w">
+  <div class="cab rv"><span class="kick">Precios</span><h2>Simple, <em>sin letra chica</em></h2></div>
+  <div class="planes">
+    <div class="plan rv"><h3>Por curso</h3><div class="pr">S/ 49<small> único</small></div><ul><li>Un curso a elección</li><li>Examen y certificado</li><li>Acceso por 6 meses</li></ul><a class="btn osc" href="#" data-demo>Probar gratis</a></div>
+    <div class="plan top rv" style="--d:1"><h3>Estudiante</h3><div class="pr">S/ 29<small> / mes</small></div><ul><li>Los 6 cursos</li><li>Certificados ilimitados</li><li>Pago con Yape o Plin</li><li>Cancelas cuando quieras</li></ul><a class="btn" href="#" data-demo>Probar gratis</a></div>
+    <div class="plan rv" style="--d:2"><h3>Universidad</h3><div class="pr">A medida</div><ul><li>Licencias por alumno</li><li>Panel de coordinación</li><li>Certificados con tu marca</li><li>Capacitación inicial</li></ul><a class="btn osc" href="#" data-wa>Pedir propuesta</a></div>
+  </div>
+</div></section>
+
+<section style="background:#fff"><div class="w faq" style="max-width:780px">
+  <div class="cab rv"><span class="kick">Dudas</span><h2>Preguntas frecuentes</h2></div>
+  <details class="rv"><summary>¿El certificado tiene valor?</summary><p>Es un certificado de la academia con código y QR verificable. La validez académica depende de cada universidad; por eso ofrecemos convenios.</p></details>
+  <details class="rv"><summary>¿Qué pasa si repruebo el examen?</summary><p>Puedes repetirlo las veces que quieras. Se guarda tu mejor nota.</p></details>
+  <details class="rv"><summary>¿Puedo estudiar desde el celular?</summary><p>Sí. Todo está pensado para pantallas pequeñas y conexiones lentas.</p></details>
+  <details class="rv"><summary>¿Cómo pago?</summary><p>Con Yape o Plin. Envías la captura por WhatsApp y activamos tu acceso el mismo día.</p></details>
+</div></section>
+
+<footer><div class="w"><span>© Cátedra · Demo de <b>Carlo · Dev</b>. Los cursos, universidades y alumnos son de ejemplo.</span><a href="https://cacg-code.github.io/" style="color:#fff">← Ver el portafolio</a></div></footer>
+
+<div class="fondo" id="fondo" role="dialog" aria-modal="true" aria-labelledby="mt"><form class="modal" id="form" novalidate>
+  <button type="button" class="x" aria-label="Cerrar">×</button>
+  <h2 id="mt" style="font-size:1.6rem">Entra a tu aula</h2><p style="color:var(--gris);margin-top:6px">Con tu correo y código de matrícula.</p>
+  <div class="campo"><label for="u">Universidad</label><select id="u"><option value="">Elige…</option></select><span class="err" data-e="uni"></span></div>
+  <div class="campo"><label for="em">Correo</label><input id="em" type="email" autocomplete="email" placeholder="tu.nombre@correo.com"><span class="err" data-e="email"></span></div>
+  <div class="campo"><label for="co">Código de matrícula</label><input id="co" inputmode="numeric" autocomplete="off" placeholder="20241234"><span class="err" data-e="codigo"></span></div>
+  <p class="nota-demo">Es una demo: no hay contraseñas ni servidor. Tu avance se guarda solo en este navegador.</p>
+  <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap"><button class="btn" type="submit">Entrar</button><button class="btn lin" type="button" id="rell">Usar cuenta demo</button></div>
+</form></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="datos.js"></script><script src="logica.js"></script><script src="store.js"></script><script src="app.js"></script>
+</body>
+</html>

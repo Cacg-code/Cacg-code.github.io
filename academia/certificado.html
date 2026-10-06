@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Certificado · Cátedra</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<style>
+:root{--tinta:#0E1A3A;--ambar:#FFB703;--gris:#5B6478;--serif:"Fraunces",Georgia,serif;--sans:"Plus Jakarta Sans",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:#E9E3D2;font-family:var(--sans);color:var(--tinta);display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px;min-height:100vh}
+.barra{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center}
+.btn{border:0;border-radius:99px;padding:12px 22px;font:700 .95rem var(--sans);background:var(--ambar);color:var(--tinta);cursor:pointer;text-decoration:none;min-height:46px;display:inline-flex;align-items:center}
+.btn.lin{background:transparent;border:2px solid var(--tinta)}
+.marco{width:min(1000px,100%);aspect-ratio:297/210;background:#fff;position:relative;padding:3.2%;box-shadow:0 30px 60px -30px rgba(14,26,58,.6);container-type:inline-size}
+.borde{position:absolute;inset:2.2%;border:3px solid var(--tinta);outline:1px solid var(--ambar);outline-offset:-9px}
+.in{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2% 5%}
+.logo{display:flex;align-items:center;gap:2cqw;font:800 3cqw var(--serif)}
+.logo i{width:4.6cqw;height:4.6cqw;border-radius:1.3cqw;background:var(--tinta);color:var(--ambar);display:grid;place-items:center;font:800 2.6cqw var(--serif);font-style:normal}
+.t1{font:700 1.5cqw var(--sans);letter-spacing:.35em;text-transform:uppercase;color:var(--gris);margin-top:3cqw}
+.nom{font:800 6.6cqw var(--serif);line-height:1.1;margin:1.4cqw 0;border-bottom:2px solid var(--ambar);padding:0 3cqw .6cqw}
+.tx{font-size:1.9cqw;color:var(--gris);max-width:70%}
+.cur{font:800 4cqw var(--serif);margin:1cqw 0;color:var(--tinta)}
+.pie{display:flex;justify-content:space-between;align-items:flex-end;width:100%;margin-top:3cqw;font-size:1.4cqw;color:var(--gris);gap:2cqw;text-align:left}
+.pie b{display:block;color:var(--tinta);font-size:1.7cqw}
+.firma{text-align:center;min-width:20cqw}.firma .l{font:italic 700 3cqw var(--serif);color:var(--tinta);border-bottom:1px solid var(--tinta);padding:0 2cqw}
+.qr{width:11cqw;height:11cqw}.qr svg{width:100%;height:100%;display:block}
+.sello{position:absolute;right:6%;top:9%;width:9cqw;height:9cqw;border-radius:50%;background:var(--ambar);display:grid;place-items:center;font:800 1.2cqw var(--sans);text-align:center;color:var(--tinta);transform:rotate(12deg);box-shadow:0 0 0 .5cqw #fff,0 0 0 .7cqw var(--ambar);line-height:1.2}
+.sello b{display:block;font:800 3cqw var(--serif)}
+.estado{background:#fff;border-radius:14px;padding:12px 18px;font-weight:700;text-align:center;max-width:720px}
+.estado.ok{color:#166534;background:#DCFCE7}.estado.mal{color:#991B1B;background:#FEE2E2}
+@media print{@page{size:A4 landscape;margin:0}body{background:#fff;padding:0;display:block}.barra,.estado{display:none}.marco{width:297mm;height:210mm;aspect-ratio:auto;box-shadow:none;padding:9mm}}
+body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+</style>
+</head>
+<body>
+<div class="barra"><button class="btn" id="imp">⬇ Guardar como PDF</button><a class="btn lin" href="aula.html">← Volver al aula</a></div>
+<div class="estado" id="estado"></div>
+<div class="marco" id="marco"></div>
+<script src="datos.js"></script><script src="logica.js"></script><script src="qr.js"></script>
+<script>
+(function () {
+  const q = new URLSearchParams(location.search), $ = s => document.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const c = DATOS.CURSOS.find(x => x.id === q.get("c")), em = q.get("e") || "", nom = q.get("n") || "", f = q.get("f") || "", nt = +q.get("nt"), uni = q.get("u") || "";
+  const st = $("#estado");
+  const okFecha = /^\d{4}-\d{2}-\d{2}$/.test(f);
+  if (!c || !em || !nom || !okFecha || !(nt >= 11 && nt <= 20)) { st.className = "estado mal"; st.textContent = "✗ Certificado no válido o incompleto."; $("#marco").remove(); $("#imp").remove(); return; }
+  const codigo = Cat.codigoCert(em, c.id, f), meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+  const [a, m, d] = f.split("-"), fecha = `${+d} de ${meses[+m - 1]} de ${a}`;
+  st.className = "estado ok"; st.textContent = "✓ Certificado válido · código " + codigo + " (demo: la verificación es local)";
+  const qr = qrcode(0, "M"); qr.addData(location.href); qr.make(); const n = qr.getModuleCount(); let p = "";
+  for (let r = 0; r < n; r++) for (let k = 0; k < n; k++) if (qr.isDark(r, k)) p += `M${k} ${r}h1v1h-1z`;
+  $("#marco").innerHTML = `<div class="borde"></div><div class="in"><div class="logo"><i>C</i>Cátedra</div><div class="t1">Certificado de aprobación</div><div class="tx" style="margin-top:2cqw">Se otorga a</div><div class="nom">${esc(nom)}</div><div class="tx">por aprobar con nota <b>${nt}/20</b> el curso</div><div class="cur">${esc(c.nombre)}</div><div class="tx">${c.horas} horas académicas · ${esc(c.prof)}${uni ? " · " + esc(uni) : ""}</div>
+  <div class="pie"><div><b>${fecha}</b>Fecha de emisión<br>Código: <b style="display:inline">${codigo}</b></div><div class="firma"><div class="l">Cátedra</div>Dirección académica</div><div class="qr"><svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges"><path d="${p}" fill="#0E1A3A"/></svg></div></div></div><div class="sello"><span><b>${nt}</b>NOTA</span></div>`;
+  $("#imp").onclick = () => print();
+  document.title = "Certificado " + c.nombre + " · " + nom;
+})();
+</script>
+</body>
+</html>
