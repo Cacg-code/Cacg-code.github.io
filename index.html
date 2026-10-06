@@ -130,7 +130,7 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;padding:.8rem 0;pointer-events
 .tabs button[aria-selected=true]::after{animation:prog var(--t,7s) linear forwards}
 .escena.pausa .tabs button[aria-selected=true]::after{animation-play-state:paused}
 @keyframes prog{to{transform:scaleX(1)}}
-@media(max-width:700px){.escena .cuadro{aspect-ratio:1/.9}.lap{width:92%;left:0;top:6%}.tel{width:34%;right:0}.escena .halo{inset:10% 0 20%}.tabs button{font-size:.82rem;padding:.5rem .85rem}}
+@media(max-width:700px){.escena .cuadro{aspect-ratio:1/.9}.lap{width:92%;left:0;top:6%}.tel{width:34%;right:0}.escena .halo{inset:10% 0 20%}.tabs{flex-wrap:nowrap;gap:.45rem}.tabs button{font-size:.82rem;padding:0;width:12px;height:12px;min-width:12px}.tabs button span{display:none}.tabs button[aria-selected=true]{width:auto;height:auto;padding:.5rem .95rem}.tabs button[aria-selected=true] span{display:inline}.filtro{flex-wrap:nowrap;overflow-x:auto;margin-left:-16px;margin-right:-16px;padding:0 16px .4rem;scrollbar-width:none}.filtro button{white-space:nowrap}}
 @media(prefers-reduced-motion:reduce){.escena .halo,.escena .flota,.dm.on .pant img{animation:none!important}}
 
 /* marquee */
@@ -149,8 +149,17 @@ section.s{padding:clamp(5rem,12vw,10rem) 0}
 .pr{position:relative;display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;padding:clamp(1.25rem,3vw,2.25rem);border-radius:32px;border:1px solid var(--line);background:linear-gradient(160deg,#ffffff0d,#ffffff03);overflow:hidden;--g:var(--v)}
 .pr::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:var(--g);filter:blur(120px);opacity:.22;right:-120px;top:-160px;pointer-events:none;transition:opacity .6s}
 .pr:hover::before{opacity:.4}
-.pr:nth-child(even){grid-template-columns:1.2fr .8fr}
-.pr:nth-child(even) .txt{order:2}
+.pr.alt{grid-template-columns:1.2fr .8fr}
+.pr.alt .txt{order:2}
+[hidden]{display:none!important}
+.filtro{display:flex;flex-wrap:wrap;gap:.5rem;margin:-1.5rem 0 2.2rem}
+.filtro button{font:inherit;font-weight:600;font-size:.92rem;color:var(--mute);background:#ffffff08;border:1px solid var(--line);border-radius:99px;padding:.55rem 1.05rem;cursor:pointer;transition:.3s;--g:#fff}
+.filtro button small{opacity:.6;margin-left:.2rem}
+.filtro button:hover{color:var(--ink)}
+.filtro button.on{color:var(--ink);border-color:var(--g);background:#ffffff14;box-shadow:0 0 18px -6px var(--g)}
+.cat{margin:clamp(.5rem,2vw,1.5rem) 0 -.5rem;padding-left:1rem;border-left:3px solid var(--g)}
+.cat h3{font-size:clamp(1.4rem,3vw,2rem);margin:0}
+.cat p{color:var(--mute);margin:.2rem 0 0}
 .pr .tipo{display:inline-flex;gap:.5rem;align-items:center;font-weight:600;font-size:.92rem;color:var(--g)}
 .pr .tipo::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--g);box-shadow:0 0 14px var(--g)}
 .pr h3{font-size:clamp(2.2rem,5vw,4rem);margin:.7rem 0 .9rem}
@@ -176,8 +185,8 @@ section.s{padding:clamp(5rem,12vw,10rem) 0}
 .movil{position:absolute;right:-1rem;bottom:-2rem;width:clamp(96px,17%,170px);border-radius:22px;border:5px solid #15151f;background:#fff;overflow:hidden;box-shadow:0 30px 60px -20px #000,0 0 0 1px var(--line2);transform:rotate(4deg);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .pr:hover .movil{transform:rotate(0) translateY(-8px)}
 .movil .lienzo{height:var(--h,300px)}
-.pr:nth-child(even) .movil{right:auto;left:-1rem;transform:rotate(-4deg)}
-@media(max-width:900px){.pr,.pr:nth-child(even){grid-template-columns:1fr}.pr:nth-child(even) .txt{order:0}.movil{display:none}}
+.pr.alt .movil{right:auto;left:-1rem;transform:rotate(-4deg)}
+@media(max-width:900px){.pr,.pr.alt{grid-template-columns:1fr}.pr.alt .txt{order:0}.movil{display:none}}
 
 /* servicios */
 .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
@@ -303,7 +312,7 @@ input,select,textarea{width:100%;min-width:0}
   .pr h3{font-size:2.3rem;margin:.5rem 0 .7rem}
   .pr .btns .btn{min-height:46px;padding:.5rem 1.1rem;font-size:.95rem}
   .pr .marco{display:none}
-  .movil,.pr:nth-child(even) .movil{display:block;position:relative;right:auto;left:auto;bottom:auto;width:min(290px,100%);margin:0 auto;transform:none;border-width:6px;border-radius:30px}
+  .movil,.pr.alt .movil{display:block;position:relative;right:auto;left:auto;bottom:auto;width:min(290px,100%);margin:0 auto;transform:none;border-width:6px;border-radius:30px}
   .pr:hover .movil{transform:none}
   .movil .lienzo{pointer-events:auto}
   .movil .cubre{display:grid}
@@ -338,16 +347,9 @@ input,select,textarea{width:100%;min-width:0}
       </div>
       <div class="escena" id="escena" aria-label="Las demos en computadora y en celular">
         <div class="halo" aria-hidden="true"></div>
-        <div class="cuadro"><div class="pila"><div class="flota">
-          <a class="dm" href="#p-landing" data-g="#FB923C" data-n="La Marea" aria-label="Ver la demo La Marea" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/landing</em></div><div class="pant"><img src="assets/landing-d.jpg" alt="La Marea en computadora" width="1180" height="740" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/landing-m.jpg" alt="La Marea en celular" width="390" height="844" decoding="async"></div></figure><span class="ver">Ver La Marea →</span></a>
-          <a class="dm" href="#p-tienda" data-g="#6366F1" data-n="Cumbre Café" aria-label="Ver la demo Cumbre Café" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/tienda</em></div><div class="pant"><img src="assets/tienda-d.jpg" alt="Cumbre Café en computadora" width="1180" height="740" loading="lazy" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/tienda-m.jpg" alt="Cumbre Café en celular" width="390" height="844" loading="lazy" decoding="async"></div></figure><span class="ver">Ver Cumbre Café →</span></a>
-          <a class="dm" href="#p-ferremax" data-g="#FB7A1C" data-n="FerreMax" aria-label="Ver la demo FerreMax" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/ferremax</em></div><div class="pant"><img src="assets/ferremax-d.jpg" alt="FerreMax en computadora" width="1180" height="740" loading="lazy" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/ferremax-m.jpg" alt="FerreMax en celular" width="390" height="844" loading="lazy" decoding="async"></div></figure><span class="ver">Ver FerreMax →</span></a>
-          <a class="dm" href="#p-spa" data-g="#D946A8" data-n="Áurea Spa" aria-label="Ver la demo Áurea Spa" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/spa</em></div><div class="pant"><img src="assets/spa-d.jpg" alt="Áurea Spa en computadora" width="1180" height="740" loading="lazy" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/spa-m.jpg" alt="Áurea Spa en celular" width="390" height="844" loading="lazy" decoding="async"></div></figure><span class="ver">Ver Áurea Spa →</span></a>
-          <a class="dm" href="#p-crm" data-g="#10B981" data-n="Hilo CRM" aria-label="Ver la demo Hilo CRM" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/crm</em></div><div class="pant"><img src="assets/crm-d.jpg" alt="Hilo CRM en computadora" width="1180" height="740" loading="lazy" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/crm-m.jpg" alt="Hilo CRM en celular" width="390" height="844" loading="lazy" decoding="async"></div></figure><span class="ver">Ver Hilo CRM →</span></a>
-          <a class="dm" href="#p-carnes" data-g="#C1121F" data-n="Brasa Noble" aria-label="Ver la demo Brasa Noble" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/carnes</em></div><div class="pant"><img src="assets/carnes-d.jpg" alt="Brasa Noble en computadora" width="1180" height="740" loading="lazy" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/carnes-m.jpg" alt="Brasa Noble en celular" width="390" height="844" loading="lazy" decoding="async"></div></figure><span class="ver">Ver Brasa Noble →</span></a>
-          <a class="dm" href="#p-cabana" data-g="#2C5241" data-n="Cabaña Pinar" aria-label="Ver la demo Cabaña Pinar" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>cacg-code.github.io/cabana</em></div><div class="pant"><img src="assets/cabana-d.jpg" alt="Cabaña Pinar en computadora" width="1180" height="740" loading="lazy" decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/cabana-m.jpg" alt="Cabaña Pinar en celular" width="390" height="844" loading="lazy" decoding="async"></div></figure><span class="ver">Ver Cabaña Pinar →</span></a>
+        <div class="cuadro"><div class="pila"><div class="flota" id="flota">
         </div></div></div>
-        <div class="tabs" role="tablist" aria-label="Elegir demo"><button type="button" role="tab" aria-selected="true">La Marea</button><button type="button" role="tab" aria-selected="false">Cumbre Café</button><button type="button" role="tab" aria-selected="false">FerreMax</button><button type="button" role="tab" aria-selected="false">Áurea Spa</button><button type="button" role="tab" aria-selected="false">Hilo CRM</button><button type="button" role="tab" aria-selected="false">Brasa Noble</button><button type="button" role="tab" aria-selected="false">Cabaña Pinar</button></div>
+        <div class="tabs" id="tabs" role="tablist" aria-label="Elegir demo"></div>
       </div>
     </div>
   </section>
@@ -360,6 +362,7 @@ input,select,textarea{width:100%;min-width:0}
   <section class="s" id="proyectos">
     <div class="wrap">
       <div class="cab rv"><h2>Pruébalas<br><span class="grad">tú mismo</span></h2><p><span data-cuenta="mayus">Seis</span> proyectos de ejemplo, funcionando. Toca la pantalla para usarlos como lo haría tu cliente.</p></div>
+      <div class="filtro" id="filtro" role="group" aria-label="Filtrar por necesidad"></div>
       <div class="proy" id="proy"></div>
     </div>
   </section>
@@ -426,36 +429,44 @@ const CONTACTO={
 };
 /* ================================== */
 const TECH={"html": ["HTML5", "html5", "E34F26"], "css": ["CSS3", "css", "4D9CF0"], "js": ["JavaScript", "javascript", "F7DF1E"], "react": ["React", "react", "61DAFB"], "vite": ["Vite", "vite", "A78BFA"], "wa": ["WhatsApp", "whatsapp", "25D366"]};
+const CATS=[
+ {id:"reservas",nombre:"Reservas y citas",frase:"Que tus clientes reserven o agenden a cualquier hora, sin que contestes cada mensaje.",g:"#C1121F"},
+ {id:"vender",nombre:"Vender online",frase:"Catálogo, carrito y pedido directo a tu WhatsApp, con pago por Yape.",g:"#6366F1"},
+ {id:"marca",nombre:"Presencia y marca",frase:"Una página que te hace ver profesional y que te encuentren en Google.",g:"#FB923C"},
+ {id:"gestion",nombre:"Gestión y formación",frase:"Sistemas para ordenar clientes, cobros y cursos.",g:"#10B981"}
+];
+/* Para subir una demo: añadir su entrada abajo con cat:"reservas|vender|marca|gestion". Con hero:N (1 = primera) sale también en el carrusel de portada (máx. 5). */
 const DEMOS=[
- {id:"landing",nombre:"La Marea",tipo:"Página para restaurante",g:"#FB923C",url:"landing/",ruta:"cacg-code.github.io/landing",
+ {id:"landing",cat:"marca",hero:2,nombre:"La Marea",tipo:"Página para restaurante",g:"#FB923C",url:"landing/",ruta:"cacg-code.github.io/landing",
   txt:"Una cevichería que se ve tan bien como sabe. Dice si está abierta ahora, muestra la carta con fotos y recibe reservas por WhatsApp.",
   tech:["html", "css", "js", "wa"],
   tags:["Abierto ahora en vivo","Carta con fotos","Reserva por WhatsApp","Móvil primero"]},
- {id:"tienda",nombre:"Cumbre Café",tipo:"Tienda online",g:"#6366F1",url:"tienda/",ruta:"cacg-code.github.io/tienda",
+ {id:"tienda",cat:"vender",hero:3,nombre:"Cumbre Café",tipo:"Tienda online",g:"#6366F1",url:"tienda/",ruta:"cacg-code.github.io/tienda",
   txt:"Una tienda de café con filtros, detalle de producto, carrito que recuerda lo elegido y pedido directo a WhatsApp con pago por Yape.",
   tech:["html", "css", "js", "wa"],
   tags:["Filtros y búsqueda","Detalle de producto","Carrito con envío gratis","Pedido por WhatsApp"]},
- {id:"ferremax",nombre:"FerreMax",tipo:"Tienda hecha en React",g:"#FB7A1C",url:"ferremax/",ruta:"cacg-code.github.io/ferremax",codigo:"https://github.com/carloAndr3-dev/ferremax-ecommerce",
+ {id:"ferremax",cat:"vender",nombre:"FerreMax",tipo:"Tienda hecha en React",g:"#FB7A1C",url:"ferremax/",ruta:"cacg-code.github.io/ferremax",codigo:"https://github.com/carloAndr3-dev/ferremax-ecommerce",
   txt:"Una ferretería online hecha con React: categorías con foto, filtros, detalle de producto, carrito con envío gratis y un pedido de prueba de principio a fin.",
   tech:["react", "vite", "js", "css"],
   tags:["Hecho con React","Detalle de producto","Carrito con envío gratis","Pedido de prueba"]},
- {id:"spa",nombre:"Áurea Spa",tipo:"Chatbot 24/7 para spa y estética",g:"#D946A8",url:"spa/",ruta:"cacg-code.github.io/spa",
+ {id:"spa",cat:"reservas",nombre:"Áurea Spa",tipo:"Chatbot 24/7 para spa y estética",g:"#D946A8",url:"spa/",ruta:"cacg-code.github.io/spa",
   txt:"Un asistente que atiende las 24 horas en un salón de belleza: responde precios y horarios, ofrece solo las horas libres, agenda la cita y avisa al salón por WhatsApp.",
   tech:["html", "css", "js", "wa"],
   tags:["Agenda con horarios libres","Responde 24/7","Aviso por WhatsApp","Panel del salón"]},
- {id:"crm",nombre:"Hilo CRM",tipo:"Sistema de clientes",g:"#10B981",url:"crm/",ruta:"cacg-code.github.io/crm",
+ {id:"crm",cat:"gestion",hero:5,nombre:"Hilo CRM",tipo:"Sistema de clientes",g:"#10B981",url:"crm/",ruta:"cacg-code.github.io/crm",
   txt:"Un sistema para que ningún cliente se te pierda: te dice a quién escribir hoy, lleva tus ventas por etapas, cotizaciones y cobros, y te explica qué está funcionando. Mensajes de WhatsApp ya redactados.",
   tech:["html", "css", "js"],
   tags:["A quién escribir hoy","Ventas y cotizaciones","Cobros","Reportes claros"]},
- {id:"carnes",nombre:"Brasa Noble",tipo:"Reservas para casa de carnes",g:"#C1121F",url:"carnes/",ruta:"cacg-code.github.io/carnes",
+ {id:"carnes",cat:"reservas",hero:1,nombre:"Brasa Noble",tipo:"Reservas para casa de carnes",g:"#C1121F",url:"carnes/",ruta:"cacg-code.github.io/carnes",
   txt:"Una parrilla premium donde lo importante es reservar: elige día, hora y personas, confirma por WhatsApp y descarga el recordatorio al calendario. La carta se abre aparte, con QR en computadora.",
   tech:["html", "css", "js", "wa"],
   tags:["Reserva en 3 pasos","Aviso por WhatsApp","Carta con QR","Animaciones modernas"]},
- {id:"cabana",nombre:"Cabaña Pinar",tipo:"Reservas con adelanto para alojamientos",g:"#2C5241",url:"cabana/",ruta:"cacg-code.github.io/cabana",
+ {id:"cabana",cat:"reservas",hero:4,nombre:"Cabaña Pinar",tipo:"Reservas con adelanto para alojamientos",g:"#2C5241",url:"cabana/",ruta:"cacg-code.github.io/cabana",
   txt:"Una cabaña de madera que se reserva sola: calendario con noches ocupadas, precio al instante, adelanto del 30 % por Yape o Plin y confirmación por WhatsApp. La anfitriona confirma los pagos desde su panel.",
   tech:["html", "css", "js", "wa"],
   tags:["Calendario de noches","Adelanto Yape/Plin","Panel de la anfitriona","Animaciones modernas"]}
 ];
+DEMOS.sort((a,b)=>CATS.findIndex(c=>c.id===a.cat)-CATS.findIndex(c=>c.id===b.cat));
 /* la cantidad de demos sale de DEMOS: al añadir una, todo se actualiza solo */
 const NUM=["Cero","Una","Dos","Tres","Cuatro","Cinco","Seis","Siete","Ocho","Nueve","Diez","Once","Doce"];
 document.querySelectorAll("[data-cuenta]").forEach(e=>e.textContent=NUM[DEMOS.length]||DEMOS.length);
@@ -466,8 +477,17 @@ const SALUDO="Hola Carlo,";
 
 document.querySelectorAll("[data-chat]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();window.abrirChat&&window.abrirChat()}));
 
+/* carrusel de portada: sale de DEMOS con hero */
+const HERO=DEMOS.filter(d=>d.hero).sort((a,b)=>a.hero-b.hero);
+$("#flota").innerHTML=HERO.map((d,i)=>`<a class="dm" href="#p-${d.id}" data-g="${d.g}" data-n="${d.nombre}" aria-label="Ver la demo ${d.nombre}" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>${d.ruta}</em></div><div class="pant"><img src="assets/${d.id}-d.jpg" alt="${d.nombre} en computadora" width="1180" height="740"${i?' loading="lazy"':""} decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/${d.id}-m.jpg" alt="${d.nombre} en celular" width="390" height="844"${i?' loading="lazy"':""} decoding="async"></div></figure><span class="ver">Ver ${d.nombre} →</span></a>`).join("");
+$("#tabs").innerHTML=HERO.map((d,i)=>`<button type="button" role="tab" aria-selected="${i==0}" aria-label="${d.nombre}"><span>${d.nombre}</span></button>`).join("");
+
+/* filtro por categoría */
+const usadas=CATS.filter(c=>DEMOS.some(d=>d.cat===c.id));
+$("#filtro").innerHTML=`<button type="button" class="on" data-c="todas">Todas <small>${DEMOS.length}</small></button>`+usadas.map(c=>`<button type="button" data-c="${c.id}" style="--g:${c.g}">${c.nombre} <small>${DEMOS.filter(d=>d.cat===c.id).length}</small></button>`).join("");
+
 /* proyectos */
-$("#proy").innerHTML=DEMOS.map((d,i)=>`<article class="pr rv" id="p-${d.id}" style="--g:${d.g}">
+$("#proy").innerHTML=DEMOS.map((d,i)=>{const c=CATS.find(x=>x.id===d.cat),pri=DEMOS.findIndex(x=>x.cat===d.cat)===i;return (pri?`<div class="cat rv" data-cat="${d.cat}" style="--g:${c.g}"><h3>${c.nombre}</h3><p>${c.frase}</p></div>`:"")+`<article class="pr rv" data-cat="${d.cat}" id="p-${d.id}" style="--g:${d.g}">
   <div class="txt"><span class="tipo">${d.tipo}</span><h3>${d.nombre}</h3><p>${d.txt}</p>
    <ul>${d.tags.map(t=>`<li>${t}</li>`).join("")}</ul>
    <div class="tech" aria-label="Tecnologías"><span>Hecho con</span>${d.tech.map(k=>`<b title="${TECH[k][0]}"><img src="https://cdn.simpleicons.org/${TECH[k][1]}/${TECH[k][2]}" alt="" width="16" height="16" loading="lazy">${TECH[k][0]}</b>`).join("")}</div>
@@ -476,7 +496,10 @@ $("#proy").innerHTML=DEMOS.map((d,i)=>`<article class="pr rv" id="p-${d.id}" sty
    <div class="marco"><div class="bar" aria-hidden="true"><span></span><span></span><span></span><em>${d.ruta}</em></div>
     <div class="lienzo" data-w="1280" data-h="800"><iframe title="Vista previa de ${d.nombre}" src="${d.url}" loading="lazy" tabindex="-1"></iframe><button class="cubre" aria-label="Activar la demo ${d.nombre} para usarla"><span>Toca para probarla</span></button></div></div>
    <div class="movil"><div class="lienzo" data-w="390" data-h="800"><iframe title="Vista móvil de ${d.nombre}" src="${d.url}" loading="lazy" tabindex="-1"></iframe><button class="cubre" aria-label="Activar la vista móvil de ${d.nombre} para usarla"><span>Toca para probarla</span></button></div></div>
-  </div></article>`).join("");
+  </div></article>`}).join("");
+function alterna(){let n=0;document.querySelectorAll("#proy .pr").forEach(a=>{if(a.hidden)return;a.classList.toggle("alt",n++%2==1)})}
+alterna();
+$("#filtro").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const c=b.dataset.c;document.querySelectorAll("#filtro button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll("#proy [data-cat]").forEach(a=>{a.hidden=!(c==="todas"||a.dataset.cat===c);a.classList.add("in")});alterna();escalar()});
 function escalar(){
   document.querySelectorAll(".lienzo[data-w]").forEach(l=>{
     const w=+l.dataset.w,h=+l.dataset.h,k=l.clientWidth/w,f=l.querySelector("iframe");
