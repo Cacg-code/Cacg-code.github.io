@@ -232,3 +232,34 @@ footer .w{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 @media(max-width:820px){.nav nav .tema{align-self:flex-start}}
 .cuenta{position:fixed;right:16px;bottom:16px;z-index:40}
 .cert-acc{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+/* ===== secciones alternas + más animación ===== */
+.alt{background:var(--papel)}
+:root[data-tema="oscuro"] .alt{background:#0D1530}
+:root[data-tema="oscuro"] .cita,:root[data-tema="oscuro"] .faq details{background:#131C34;border-color:#2C3A66}
+:root[data-tema="oscuro"] .cita p{color:#E8EDFB}
+:root[data-tema="oscuro"] .reco{background:#101B3A;border:1px solid #2C3A66}
+.rv{filter:blur(6px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1),filter .7s}
+.rv.in{filter:none}
+.cursos>.rv:nth-child(3n+2){transition-delay:.1s}.cursos>.rv:nth-child(3n){transition-delay:.2s}
+.curso,.cita,.plan,.logro,.kpi{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.curso:hover,.cita:hover,.plan:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 26px 50px -24px rgba(0,0,0,.45);border-color:var(--ambar)}
+.curso:hover .ico{animation:bote .6s}
+@keyframes bote{30%{transform:translateY(-8px) rotate(-8deg) scale(1.12)}60%{transform:translateY(0) rotate(5deg)}}
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-120%)}
+.btn:hover::after{transform:translateX(120%);transition:transform .7s}
+.btn:active{transform:scale(.96)}
+.hero .btn:not(.lin){animation:pulso 2.6s infinite}
+@keyframes pulso{0%{box-shadow:0 0 0 0 rgba(255,183,3,.55)}70%,100%{box-shadow:0 0 0 18px rgba(255,183,3,0)}}
+.estr{display:inline-block;animation:brilla 2.4s ease-in-out infinite}
+@keyframes brilla{50%{transform:scale(1.12);filter:brightness(1.3)}}
+.reco .ops button{animation:entra2 .5s both}.reco .ops button:nth-child(2){animation-delay:.06s}.reco .ops button:nth-child(3){animation-delay:.12s}.reco .ops button:nth-child(4){animation-delay:.18s}.reco .ops button:nth-child(5){animation-delay:.24s}.reco .ops button:nth-child(6){animation-delay:.3s}
+@keyframes entra2{from{opacity:0;transform:translateY(14px) scale(.9)}}
+.reco .res .ico{animation:bote 1s .3s}
+.heat i.on{animation:pop .5s both}
+.logro.ok span{animation:bote 1.2s 1}
+.nav{transition:box-shadow .3s,background .3s}
+@media(prefers-reduced-motion:reduce){.rv{filter:none}.btn::after,.hero .btn,.estr,.curso:hover .ico{animation:none}.curso:hover,.cita:hover,.plan:hover{transform:none}}
+:root[data-tema="oscuro"] .reco .res{background:#1B2A55;border:1px solid #3C4E8C;color:#fff}
+:root[data-tema="oscuro"] .reco .res small{color:#B6C3E6!important}
+:root[data-tema="oscuro"] .reco .res .btn{background:var(--ambar);color:#0E1A3A}
