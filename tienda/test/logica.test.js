@@ -68,3 +68,20 @@ test("mensajePedido: formato exacto y URL", () => {
   assert.equal(t, "Hola Cumbre Café,\nQuiero hacer este pedido:\n\n• 2 × *Machu Picchu* · Media (S/ 84.00)\n• 1 × *Cajamarca* · Grano entero (S/ 36.00)\n\n*Subtotal:* S/ 120.00\n*Envío:* Gratis\n*Total:* S/ 120.00\n\n*Nombre:* Ana\n*Distrito:* Surco\n*Pago:* Yape\n\n_Pedido desde la web_");
   assert.equal(L.urlWhatsApp("51999999999", "a b\n"), "https://wa.me/51999999999?text=a%20b%0A");
 });
+
+test("cotizarSuscripcion: 10% de descuento, tope de bolsas y envío", () => {
+  const q = L.cotizarSuscripcion(P[0], 2); // 2 × 42 = 84 → desc 8.40 → 75.60 + envío 12
+  assert.deepEqual(q, { bolsas: 2, normal: 84, desc: 8.4, env: 12, total: 87.6 });
+  assert.equal(L.cotizarSuscripcion(P[0], 3).env, 12); // 126 - 12.60 = 113.40 < 120 → aún cobra envío
+});
+
+test("cotizarSuscripcion: límites", () => {
+  assert.equal(L.cotizarSuscripcion(P[0], 0).bolsas, 1);
+  assert.equal(L.cotizarSuscripcion(P[0], 99).bolsas, L.MAX_BOLSAS);
+  assert.equal(L.cotizarSuscripcion(P[4], 4).env, 0); // 208 - 20.80 ≥ 120
+});
+
+test("mensajeSuscripcion: formato", () => {
+  const t = L.mensajeSuscripcion(P[4], { molienda: "Fina", bolsas: 4, frecuencia: "quin", nombre: " Ana ", distrito: "Surco", pago: "Yape" });
+  assert.equal(t, "Hola Cumbre Café,\nQuiero suscribirme:\n\n• 4 × *Amazonas Nativo* (250 g) · Fina\n• *Frecuencia:* Cada 2 semanas\n• *Precio por entrega:* S/ 187.20 (10% de descuento, envío gratis)\n\n*Nombre:* Ana\n*Distrito:* Surco\n*Pago:* Yape\n\n_Suscripción desde la web_");
+});
