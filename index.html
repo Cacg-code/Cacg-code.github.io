@@ -472,7 +472,11 @@ const DEMOS=[
  {id:"academia",cat:"gestion",nombre:"Cátedra",tipo:"Academia online para universitarios",g:"#FFB703",url:"academia/",ruta:"cacg-code.github.io/academia",
   txt:"Una academia para estudiantes: entran con su código de matrícula, ven lecciones cortas, rinden un examen con nota sobre 20 y descargan un certificado en PDF con QR verificable. La universidad ve el avance de cada alumno y quién está en riesgo.",
   tech:["html", "css", "js", "wa"],
-  tags:["Login con código","Examen y certificado PDF","Avance por alumno","Panel de coordinación"]}
+  tags:["Login con código","Examen y certificado PDF","Avance por alumno","Panel de coordinación"]},
+ {id:"estudio",cat:"marca",nombre:"Atelier Norte",tipo:"Estudio de fotografía y marca",g:"#C8553D",url:"estudio/",ruta:"cacg-code.github.io/estudio",
+  txt:"Presencia y marca para un estudio creativo: portafolio con filtros y visor, paquetes que abren WhatsApp con el mensaje armado, un generador que muestra cómo se vería tu marca y un link en bio para el celular.",
+  tech:["html","css","js","wa"],
+  tags:["Portafolio con visor","Generador de marca","Kit de colores","Link en bio"]}
 ];
 DEMOS.sort((a,b)=>CATS.findIndex(c=>c.id===a.cat)-CATS.findIndex(c=>c.id===b.cat));
 /* la cantidad de demos sale de DEMOS: al añadir una, todo se actualiza solo */

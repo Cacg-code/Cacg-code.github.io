@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atelier Norte · Fotografía y marca</title>
+<meta name="description" content="Demo de presencia y marca: estudio creativo con portafolio, paquetes, kit de marca y generador de identidad. Hecho por Carlo · Dev.">
+<meta name="theme-color" content="#C8553D">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<div id="prog"></div>
+<header class="nav"><div class="w">
+  <a class="logo" href="#"><i>A</i>Atelier Norte</a>
+  <button class="burger" id="bg" aria-label="Menú" aria-expanded="false">☰</button>
+  <nav id="nv"><a href="#obra">Portafolio</a><a href="#paquetes">Paquetes</a><a href="#marca">Tu marca</a><a href="#proceso">Proceso</a><a href="#sobre">Sobre mí</a><a class="btn chico" href="#contacto">Cotizar</a></nav>
+</div></header>
+
+<section class="hero"><div class="sol" style="width:320px;height:320px;background:var(--terra);left:-80px;top:40px"></div><div class="sol" style="width:260px;height:260px;background:var(--oliva);right:0;bottom:0"></div>
+  <div class="w">
+    <div>
+      <span class="kick">Estudio de fotografía y marca · Lima</span>
+      <h1>Una marca que se <em id="pal">ve</em>, se recuerda y vende.</h1>
+      <p class="sub">Fotografía, identidad visual y contenido para negocios que quieren dejar de parecer uno más. Del logo al feed, todo con una misma voz.</p>
+      <div class="acc"><a class="btn" href="#contacto">Quiero mi sesión</a><a class="btn lin" href="#obra">Ver el portafolio</a></div>
+      <div class="sellos"><span>+120 marcas</span><span>Entrega en 7 días</span><span>Derechos incluidos</span></div>
+    </div>
+    <div class="pila" id="pila" aria-hidden="true"></div>
+  </div>
+</section>
+<div class="cinta" aria-hidden="true"><div id="cinta"></div></div>
+
+<section id="obra"><div class="w">
+  <div class="cab rv"><span class="kick">Portafolio</span><h2>Trabajos que <em>cuentan una historia</em></h2><p>Filtra por tipo de proyecto y toca una imagen para verla grande. Usa las flechas del teclado para recorrerlas.</p></div>
+  <div class="filtro rv" id="filtro"></div>
+  <div class="galeria" id="galeria"></div>
+</div></section>
+
+<section id="paquetes" style="background:var(--arena)"><div class="w">
+  <div class="cab rv"><span class="kick">Paquetes</span><h2>Elige hasta dónde <em>quieres llegar</em></h2><p>Precios de ejemplo. Al elegir uno, tu mensaje de WhatsApp sale armado.</p></div>
+  <div class="paquetes">
+    <article class="paq rv"><span class="ic">📸</span><h3>Sesión</h3><div class="pr">S/ 450 <small>/ sesión</small></div><ul><li>1 hora de fotos en locación</li><li>25 fotos editadas</li><li>Galería privada para descargar</li><li>Entrega en 5 días</li></ul><button class="btn lin" data-p="Sesión">Elegir Sesión</button></article>
+    <article class="paq top rv" style="--d:1"><span class="tag">Más pedido</span><span class="ic">🎨</span><h3>Marca completa</h3><div class="pr">S/ 1 800 <small>/ proyecto</small></div><ul><li>Logo + paleta + tipografías</li><li>Manual de marca en PDF</li><li>Sesión de producto o equipo</li><li>12 plantillas para redes</li></ul><button class="btn" data-p="Marca completa" style="background:var(--terra);border-color:var(--terra)">Elegir Marca completa</button></article>
+    <article class="paq rv" style="--d:2"><span class="ic">📅</span><h3>Contenido mensual</h3><div class="pr">S/ 950 <small>/ mes</small></div><ul><li>1 sesión al mes</li><li>12 piezas para el feed</li><li>4 reels cortos</li><li>Reporte de resultados</li></ul><button class="btn lin" data-p="Contenido mensual">Elegir Contenido</button></article>
+  </div>
+</div></section>
+
+<section id="marca"><div class="w">
+  <div class="cab rv"><span class="kick">Prueba tu marca</span><h2>Mira cómo <em>se vería</em> tu negocio</h2><p>Escribe el nombre, elige un color y un estilo. Es un adelanto de lo que armamos juntos.</p></div>
+  <div class="gen rv">
+    <div>
+      <label for="gn">Nombre de tu negocio</label><input type="text" id="gn" value="Café Aurora" maxlength="24" autocomplete="off">
+      <label>Color principal</label><div class="sw" id="sw"></div>
+      <label>Estilo de letra</label><div class="fnt" id="fnt"></div>
+      <div class="acc" style="margin-top:26px"><button class="btn" id="gw" style="background:var(--terra);border-color:var(--terra)">Quiero esta marca</button></div>
+    </div>
+    <div class="vista" id="vista"><div class="lg"><i id="vi">C</i><b id="vn">Café Aurora</b></div><div class="tarj" id="vt"><small>Tarjeta de presentación</small><h3 id="vt2" style="margin:4px 0">Café Aurora</h3><small>hola@tumarca.pe · @tumarca</small></div><div class="pal" id="vp"></div><span class="chip" id="vc">Reserva tu mesa</span></div>
+  </div>
+</div></section>
+
+<section style="background:var(--papel)"><div class="w">
+  <div class="cab rv"><span class="kick">Kit de marca</span><h2>Así entregamos <em>tu identidad</em></h2><p>Toca un color para copiar su código. Cada cliente recibe esto en un manual listo para usar.</p></div>
+  <div class="kit" id="kit"></div>
+  <div class="tipos rv"><div class="tipo"><div class="aa" style="font-family:var(--serif);font-weight:800">Aa</div><b>Fraunces</b><br><small>Títulos · elegante y cálida</small></div><div class="tipo"><div class="aa" style="font-family:var(--sans);font-weight:800">Aa</div><b>Plus Jakarta Sans</b><br><small>Textos · clara en pantalla y celular</small></div></div>
+</div></section>
+
+<section id="proceso"><div class="w">
+  <div class="cab rv"><span class="kick">Proceso</span><h2>De la idea a <em>tu feed</em> en 4 pasos</h2></div>
+  <div class="linea">
+    <div class="pa rv"><h3>Conversamos</h3><p>Me cuentas de tu negocio, tu público y lo que quieres lograr.</p></div>
+    <div class="pa rv" style="--d:1"><h3>Diseñamos</h3><p>Propuesta de estilo, paleta y guion de la sesión para aprobar.</p></div>
+    <div class="pa rv" style="--d:2"><h3>Producimos</h3><p>Sesión de fotos y video con luz natural y dirección guiada.</p></div>
+    <div class="pa rv" style="--d:3"><h3>Entregamos</h3><p>Galería, manual y plantillas listas para publicar.</p></div>
+  </div>
+</div></section>
+
+<section id="sobre" style="background:var(--arena)"><div class="w sobre">
+  <div class="retrato rv" id="retrato" aria-hidden="true"></div>
+  <div class="rv" style="--d:1"><span class="kick">Sobre mí</span><h2>Soy Valeria, <em>y miro</em> lo que otros pasan por alto.</h2>
+    <p style="margin-top:18px;color:var(--gris)">Llevo 8 años ayudando a negocios locales a verse como lo que son: <b>únicos</b>. Combino fotografía, diseño y estrategia para que tu marca se reconozca en una sola mirada, en la tienda y en el celular.</p>
+    <div class="cifras"><div><b data-c="120">0</b><span>marcas atendidas</span></div><div><b data-c="8">0</b><span>años de oficio</span></div><div><b data-c="98">0</b><span>% de clientes que repiten</span></div></div>
+    <div class="acc" style="margin-top:28px"><a class="btn" href="#contacto">Hablemos</a><a class="btn lin" href="#bio">Mi link en bio</a></div>
+  </div>
+</div></section>
+
+<section><div class="w">
+  <div class="cab rv"><span class="kick">Testimonios</span><h2>Lo que dicen <em>mis clientes</em></h2></div>
+  <div class="cit">
+    <div class="ct rv"><span class="st">★★★★★</span><p>«Mis ventas por Instagram subieron desde que cambié las fotos. Se nota la diferencia al primer vistazo.»</p><div class="qn"><i style="background:#C8553D">M</i><div><b>Mariana Flores</b><small>Pastelería Dulce Vida</small></div></div></div>
+    <div class="ct rv" style="--d:1"><span class="st">★★★★★</span><p>«Pasamos de un logo hecho en el apuro a una marca con manual. Hasta el equipo se siente más orgulloso.»</p><div class="qn"><i style="background:#5B6B4A">R</i><div><b>Ricardo Paz</b><small>Taller Hierro &amp; Madera</small></div></div></div>
+    <div class="ct rv" style="--d:2"><span class="st">★★★★★</span><p>«Muy ordenada y puntual. La sesión fue cómoda y me dieron el contenido listo para publicar un mes entero.»</p><div class="qn"><i style="background:#2F5D8A">C</i><div><b>Camila Rojas</b><small>Nutrición Equilibra</small></div></div></div>
+  </div>
+  <p style="text-align:center;color:var(--gris);font-size:.8rem;margin-top:16px">Testimonios y marcas ficticios, de demostración.</p>
+</div></section>
+
+<section id="bio" style="background:var(--papel)"><div class="w bio">
+  <div class="rv"><span class="kick">Presencia digital</span><h2>Un solo link para <em>todo lo que haces</em></h2><p style="margin:16px 0 24px;color:var(--gris);max-width:30em">Además de tu marca, armo tu «link en bio»: una página corta con tus botones de WhatsApp, catálogo, ubicación y redes. Se ve así en el celular de tus clientes.</p><a class="btn" href="#contacto">Quiero mi link en bio</a></div>
+  <div class="cel rv" style="--d:1"><div class="av">A</div><b>Atelier Norte</b><small style="color:var(--gris)">Fotografía y marca · Lima</small><a href="#contacto">💬 Escríbeme por WhatsApp</a><a href="#paquetes">📦 Ver paquetes y precios</a><a href="#obra">🖼 Portafolio</a><a href="#contacto">📍 Estudio en Miraflores</a></div>
+</div></section>
+
+<section><div class="w faq" style="max-width:800px">
+  <div class="cab rv"><span class="kick">Preguntas</span><h2>Lo que <em>suelen preguntar</em></h2></div>
+  <details class="rv"><summary>¿Cuánto tarda una sesión?</summary><p>Entre 1 y 3 horas según el paquete. Antes hacemos una llamada corta para planear luz, ropa y lugares.</p></details>
+  <details class="rv"><summary>¿Puedo usar las fotos como quiera?</summary><p>Sí. Los derechos de uso comercial están incluidos en todos los paquetes, sin pagos extra.</p></details>
+  <details class="rv"><summary>¿Trabajas fuera de Lima?</summary><p>Sí, con un costo de movilidad. También hacemos sesiones remotas de producto: me envías las piezas y las fotografío.</p></details>
+  <details class="rv"><summary>¿Cómo pago?</summary><p>Reservas con el 50 % por Yape, Plin o transferencia y el resto al entregar la galería.</p></details>
+</div></section>
+
+<section id="contacto" style="background:var(--tinta);color:var(--hueso)"><div class="w cont">
+  <div class="rv"><span class="kick">Contacto</span><h2 style="color:#fff">Cuéntame de <em>tu proyecto</em></h2><p style="margin-top:16px;color:#CFC4B6">Te respondo el mismo día por WhatsApp con una propuesta y fecha disponible.</p><p style="margin-top:22px;color:#CFC4B6">📍 Miraflores, Lima<br>🕘 Lun a sáb · 9:00 a 19:00<br>✉ hola@ateliernorte.pe</p></div>
+  <form id="f" class="rv" style="--d:1" novalidate>
+    <label>Nombre<input id="fn" autocomplete="name" placeholder="Tu nombre"><span class="mini" id="en"></span></label>
+    <label>Tu negocio<input id="fb" placeholder="Ej. Café Aurora"></label>
+    <label>¿Qué necesitas?<select id="fs"><option>Sesión de fotos</option><option>Marca completa</option><option>Contenido mensual</option><option>Link en bio</option></select></label>
+    <label>Cuéntame un poco<textarea id="fm" rows="3" placeholder="Fecha, lugar, estilo que te gusta…"></textarea></label>
+    <button class="btn" style="background:var(--terra);border-color:var(--terra)" type="submit">Enviar por WhatsApp</button>
+  </form>
+</div></section>
+
+<footer><div class="w"><span>© Atelier Norte · Demo de <b style="color:#fff">Carlo · Dev</b>. Estudio, clientes y precios son de ejemplo.</span><a href="https://cacg-code.github.io/" style="color:#fff">← Ver más demos</a></div></footer>
+
+<div class="lb" id="lb" role="dialog" aria-label="Imagen ampliada"><button class="x" aria-label="Cerrar">✕</button><button class="p" aria-label="Anterior">‹</button><figure><div id="lbi"></div><figcaption id="lbc"></figcaption></figure><button class="n" aria-label="Siguiente">›</button></div>
+<a class="wa" href="#contacto" aria-label="WhatsApp">💬</a>
+<div class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
