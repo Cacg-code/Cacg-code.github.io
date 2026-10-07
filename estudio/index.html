@@ -11,11 +11,12 @@
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+<div id="cortina"><b>Atelier <em>Norte</em></b><i></i></div><div id="luz"></div>
 <div id="prog"></div>
 <header class="nav"><div class="w">
   <a class="logo" href="#"><i>A</i>Atelier Norte</a>
   <button class="burger" id="bg" aria-label="Menú" aria-expanded="false">☰</button>
-  <nav id="nv"><a href="#obra">Portafolio</a><a href="#paquetes">Paquetes</a><a href="#marca">Tu marca</a><a href="#proceso">Proceso</a><a href="#sobre">Sobre mí</a><a class="btn chico" href="#contacto">Cotizar</a></nav>
+  <nav id="nv"><a href="#obra">Portafolio</a><a href="#paquetes">Paquetes</a><a href="#marca">Tu marca</a><a href="#proceso">Proceso</a><a href="#sobre">Sobre mí</a><button class="tm" id="tm" aria-label="Cambiar a tema oscuro" title="Tema">🌙</button><a class="btn chico" href="#cotizador">Cotizar</a></nav>
 </div></header>
 
 <section class="hero"><div class="sol" style="width:320px;height:320px;background:var(--terra);left:-80px;top:40px"></div><div class="sol" style="width:260px;height:260px;background:var(--oliva);right:0;bottom:0"></div>
@@ -27,7 +28,7 @@
       <div class="acc"><a class="btn" href="#contacto">Quiero mi sesión</a><a class="btn lin" href="#obra">Ver el portafolio</a></div>
       <div class="sellos"><span>+120 marcas</span><span>Entrega en 7 días</span><span>Derechos incluidos</span></div>
     </div>
-    <div class="pila" id="pila" aria-hidden="true"></div>
+    <div class="pila" id="pila" aria-hidden="true"></div><a class="sello" href="#reserva" aria-label="Reserva tu sesión"><svg viewBox="0 0 120 120"><defs><path id="cir" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/></defs><text><textPath href="#cir">RESERVA TU SESIÓN ✦ RESERVA TU SESIÓN ✦</textPath></text></svg><b>→</b></a>
   </div>
 </section>
 <div class="cinta" aria-hidden="true"><div id="cinta"></div></div>
@@ -36,6 +37,12 @@
   <div class="cab rv"><span class="kick">Portafolio</span><h2>Trabajos que <em>cuentan una historia</em></h2><p>Filtra por tipo de proyecto y toca una imagen para verla grande. Usa las flechas del teclado para recorrerlas.</p></div>
   <div class="filtro rv" id="filtro"></div>
   <div class="galeria" id="galeria"></div>
+</div></section>
+
+
+<section id="edicion" style="background:var(--papel)"><div class="w ed">
+  <div class="rv"><span class="kick">Edición</span><h2>De una foto común a <em>una foto que vende</em></h2><p style="margin:16px 0 22px;color:var(--gris);max-width:28em">Luz, color y composición cuidados. Arrastra la barra para comparar el antes y el después de una sesión de producto.</p><ul class="lista"><li>Corrección de color y luz</li><li>Fondos limpios y consistentes</li><li>Formatos listos para feed, stories y web</li></ul></div>
+  <div class="ad rv" id="ad" style="--d:1"><div class="d" id="ad-d"></div><div class="a" id="ad-a"></div><span class="et e1">Antes</span><span class="et e2">Después</span><i class="mango"><b>⇆</b></i><input type="range" min="0" max="100" value="50" id="ad-r" aria-label="Comparar antes y después"></div>
 </div></section>
 
 <section id="paquetes" style="background:var(--arena)"><div class="w">
@@ -47,6 +54,19 @@
   </div>
 </div></section>
 
+
+<section id="cotizador"><div class="w">
+  <div class="cab rv"><span class="kick">Cotizador</span><h2>Arma tu <em>presupuesto</em> en segundos</h2><p>Marca lo que necesitas. Con 3 servicios o más tienes 10 % de descuento.</p></div>
+  <div class="cot rv"><div class="srv" id="srv"></div>
+    <aside class="tot"><small>Tu estimado</small><div class="monto">S/ <b id="cm">0</b></div><p id="cd" class="desc"></p><ul id="cl"></ul><label class="sw2"><input type="checkbox" id="cu"> <span>Entrega urgente en 48 h <em>(+20 %)</em></span></label><button class="btn" id="cb" style="background:var(--terra);border-color:var(--terra);width:100%">Pedir esta cotización</button></aside></div>
+</div></section>
+
+<section id="reserva" style="background:var(--arena)"><div class="w">
+  <div class="cab rv"><span class="kick">Reserva</span><h2>Elige <em>tu fecha</em></h2><p>Los días en terracota están disponibles. Escoge día y hora y te confirmo por WhatsApp.</p></div>
+  <div class="res rv"><div class="cal"><div class="cal-h"><button id="cp" aria-label="Mes anterior">‹</button><b id="cmes"></b><button id="cn" aria-label="Mes siguiente">›</button></div><div class="cal-g" id="cg"></div></div>
+    <div class="hor"><small>Fecha elegida</small><h3 id="rf">Toca un día disponible</h3><div class="slots" id="rs"></div><button class="btn" id="rb" disabled style="background:var(--terra);border-color:var(--terra)">Reservar por WhatsApp</button></div></div>
+</div></section>
+
 <section id="marca"><div class="w">
   <div class="cab rv"><span class="kick">Prueba tu marca</span><h2>Mira cómo <em>se vería</em> tu negocio</h2><p>Escribe el nombre, elige un color y un estilo. Es un adelanto de lo que armamos juntos.</p></div>
   <div class="gen rv">
@@ -54,7 +74,7 @@
       <label for="gn">Nombre de tu negocio</label><input type="text" id="gn" value="Café Aurora" maxlength="24" autocomplete="off">
       <label>Color principal</label><div class="sw" id="sw"></div>
       <label>Estilo de letra</label><div class="fnt" id="fnt"></div>
-      <div class="acc" style="margin-top:26px"><button class="btn" id="gw" style="background:var(--terra);border-color:var(--terra)">Quiero esta marca</button></div>
+      <div class="acc" style="margin-top:26px"><button class="btn" id="gw" style="background:var(--terra);border-color:var(--terra)">Quiero esta marca</button><button class="btn lin" id="gd" style="color:#fff;border-color:#6B5E52">⬇ Descargar logo</button></div>
     </div>
     <div class="vista" id="vista"><div class="lg"><i id="vi">C</i><b id="vn">Café Aurora</b></div><div class="tarj" id="vt"><small>Tarjeta de presentación</small><h3 id="vt2" style="margin:4px 0">Café Aurora</h3><small>hola@tumarca.pe · @tumarca</small></div><div class="pal" id="vp"></div><span class="chip" id="vc">Reserva tu mesa</span></div>
   </div>

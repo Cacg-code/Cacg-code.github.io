@@ -107,4 +107,94 @@
     toast("¡Gracias! Abriendo WhatsApp…");
   };
   $("#fn").oninput = () => { $("#en").textContent = ""; $("#fn").classList.remove("err"); };
+
+  /* ================= ronda 2 ================= */
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fino = matchMedia("(pointer:fine)").matches;
+
+  /* cortina de entrada */
+  const cor = $("#cortina"); const quita = () => { cor.classList.add("fuera"); setTimeout(() => cor.remove(), 1400); };
+  setTimeout(quita, reduce ? 0 : 1100);
+
+  /* tema oscuro */
+  const R = document.documentElement;
+  const tema = t => { if (t === "oscuro") R.setAttribute("data-tema", "oscuro"); else R.removeAttribute("data-tema"); $("#tm").textContent = t === "oscuro" ? "☀️" : "🌙"; $("#tm").setAttribute("aria-label", t === "oscuro" ? "Cambiar a tema claro" : "Cambiar a tema oscuro"); $("meta[name=theme-color]").content = t === "oscuro" ? "#16120F" : "#C8553D"; };
+  let t0 = "claro"; try { t0 = localStorage.getItem("an-tema") || (matchMedia("(prefers-color-scheme: dark)").matches ? "oscuro" : "claro"); } catch (e) {}
+  tema(t0);
+  $("#tm").onclick = () => { const n = R.hasAttribute("data-tema") ? "claro" : "oscuro"; tema(n); try { localStorage.setItem("an-tema", n); } catch (e) {} };
+
+  /* títulos por palabras */
+  $$(".cab h2").forEach(h => {
+    let i = 0; const nodes = [...h.childNodes]; h.innerHTML = "";
+    nodes.forEach(n => {
+      if (n.nodeType === 3) n.textContent.split(/(\s+)/).forEach(w => { if (!w.trim()) { h.append(" "); return; } const s = document.createElement("span"); s.className = "wd"; s.style.setProperty("--i", i++); s.textContent = w; h.append(s); });
+      else { const s = document.createElement("span"); s.className = "wd"; s.style.setProperty("--i", i++); s.append(n); h.append(s); }
+    });
+  });
+
+  /* luz que sigue al cursor + parallax del hero */
+  if (fino && !reduce) {
+    const luz = $("#luz"), pila = $("#pila"), hero = $(".hero");
+    addEventListener("pointermove", e => { document.body.classList.add("mouse"); luz.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; }, { passive: true });
+    hero.addEventListener("pointermove", e => { const r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; pila.style.transform = `translate(${x * -26}px,${y * -20}px)`; $$(".sol", hero).forEach((s, n) => s.style.transform = `translate(${x * (n ? 40 : -40)}px,${y * 30}px)`); });
+    hero.addEventListener("pointerleave", () => { pila.style.transform = ""; $$(".sol", hero).forEach(s => s.style.transform = ""); });
+    /* inclinación de tarjetas y botones magnéticos */
+    const tilt = el => { el.addEventListener("pointermove", e => { const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; el.style.transition = "transform .1s"; el.style.transform = `perspective(700px) rotateY(${x * 9}deg) rotateX(${-y * 9}deg) translateY(-6px)`; }); el.addEventListener("pointerleave", () => { el.style.transition = "transform .5s"; el.style.transform = ""; }); };
+    $$(".paq,.ct,.tot").forEach(tilt);
+    $$(".btn").forEach(b => { b.addEventListener("pointermove", e => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .22}px,${(e.clientY - r.top - r.height / 2) * .3}px)`; }); b.addEventListener("pointerleave", () => b.style.transform = ""); });
+  }
+
+  /* antes / después */
+  $("#ad-d").innerHTML = arte(4, "producto"); $("#ad-a").innerHTML = arte(4, "producto");
+  const ad = $("#ad"), adr = $("#ad-r"), setAd = () => ad.style.setProperty("--p", adr.value + "%");
+  adr.oninput = setAd; setAd();
+  let adAnim = false;
+  if ("IntersectionObserver" in window && !reduce) new IntersectionObserver((es, o) => { if (es[0].isIntersecting && !adAnim) { adAnim = true; let t = 0; const f = () => { t += .035; adr.value = 50 + Math.sin(t) * 34 * Math.max(0, 1 - t / 6); setAd(); if (t < 6.3) requestAnimationFrame(f); else { adr.value = 50; setAd(); } }; f(); o.disconnect(); } }, { threshold: .6 }).observe(ad);
+
+  /* cotizador */
+  const SRV = [["Sesión de fotos", "25 fotos editadas", 450], ["Logo y paleta", "Identidad base", 800], ["Manual de marca", "PDF de uso", 400], ["Plantillas para redes", "12 diseños", 350], ["Reels cortos", "4 piezas", 500], ["Link en bio", "Página lista", 250]];
+  $("#srv").innerHTML = SRV.map((s, i) => `<label><input type="checkbox" data-i="${i}"><span class="ck">✓</span><span><b>${s[0]}</b><small>${s[1]}</small></span><span class="pz">S/ ${s[2]}</span></label>`).join("");
+  let shown = 0;
+  function cot() {
+    const sel = $$("#srv input:checked").map(x => SRV[+x.dataset.i]), sub = sel.reduce((a, s) => a + s[2], 0);
+    const dsc = sel.length >= 3 ? Math.round(sub * .1) : 0, urg = $("#cu").checked ? Math.round((sub - dsc) * .2) : 0, tot = sub - dsc + urg;
+    $("#cl").innerHTML = sel.map(s => `<li><span>${s[0]}</span><span>S/ ${s[2]}</span></li>`).join("") + (urg ? `<li><span>Urgente 48 h</span><span>+ S/ ${urg}</span></li>` : "");
+    $("#cd").textContent = dsc ? `Ahorras S/ ${dsc} con tu combo` : (sel.length ? "Suma 1 servicio más y ahorras 10 %" : "Elige al menos un servicio");
+    const a = shown, b = tot, t1 = performance.now(); shown = b;
+    const paso = t => { const k = Math.min((t - t1) / 500, 1); $("#cm").textContent = Math.round(a + (b - a) * (1 - Math.pow(1 - k, 3))).toLocaleString("es-PE"); if (k < 1) requestAnimationFrame(paso); }; requestAnimationFrame(paso);
+    cot.sel = sel; cot.tot = tot; cot.urg = urg;
+  }
+  $("#srv").onchange = cot; $("#cu").onchange = cot; cot();
+  $("#cb").onclick = () => { if (!cot.sel.length) { toast("Elige al menos un servicio"); return; } wa(`Hola Atelier Norte, quiero cotizar: ${cot.sel.map(s => s[0]).join(", ")}${cot.urg ? " (entrega urgente)" : ""}. Estimado: S/ ${cot.tot}.`); };
+
+  /* reserva con calendario */
+  const hoy = new Date(); hoy.setHours(0, 0, 0, 0); let mes = new Date(hoy.getFullYear(), hoy.getMonth(), 1), dia = null, hora = null;
+  const HORAS = ["10:00", "12:30", "15:00", "17:30"];
+  const libre = d => d > hoy && d.getDay() !== 0 && (d.getDate() * 7 + d.getMonth()) % 5 !== 0;
+  function pintaCal() {
+    $("#cmes").textContent = mes.toLocaleDateString("es-PE", { month: "long", year: "numeric" });
+    const ini = (mes.getDay() + 6) % 7, n = new Date(mes.getFullYear(), mes.getMonth() + 1, 0).getDate();
+    let h = ["L", "M", "X", "J", "V", "S", "D"].map(x => `<span>${x}</span>`).join("") + "<i></i>".repeat(ini);
+    for (let d = 1; d <= n; d++) { const f = new Date(mes.getFullYear(), mes.getMonth(), d), ok = libre(f), s = dia && +dia === +f; h += `<button class="${ok ? "ok" : ""}${s ? " sel" : ""}" ${ok ? "" : "disabled"} data-d="${d}" aria-label="${f.toLocaleDateString("es-PE", { day: "numeric", month: "long" })}${ok ? "" : " no disponible"}">${d}</button>`; }
+    $("#cg").innerHTML = h; $("#cp").disabled = mes <= new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+  }
+  function pintaRes() {
+    $("#rf").textContent = dia ? dia.toLocaleDateString("es-PE", { weekday: "long", day: "numeric", month: "long" }) : "Toca un día disponible";
+    $("#rs").innerHTML = dia ? HORAS.map(x => `<button class="${x === hora ? "on" : ""}" data-h="${x}">${x}</button>`).join("") : "";
+    $("#rb").disabled = !(dia && hora);
+  }
+  $("#cp").onclick = () => { mes = new Date(mes.getFullYear(), mes.getMonth() - 1, 1); pintaCal(); };
+  $("#cn").onclick = () => { mes = new Date(mes.getFullYear(), mes.getMonth() + 1, 1); pintaCal(); };
+  $("#cg").onclick = e => { const b = e.target.closest("button.ok"); if (!b) return; dia = new Date(mes.getFullYear(), mes.getMonth(), +b.dataset.d); hora = null; pintaCal(); pintaRes(); };
+  $("#rs").onclick = e => { const b = e.target.closest("button"); if (!b) return; hora = b.dataset.h; pintaRes(); };
+  $("#rb").onclick = () => wa(`Hola Atelier Norte, quiero reservar una sesión el ${dia.toLocaleDateString("es-PE", { weekday: "long", day: "numeric", month: "long" })} a las ${hora}.`);
+  pintaCal(); pintaRes();
+
+  /* descargar logo del generador */
+  $("#gd").onclick = () => {
+    const nom = ($("#gn").value.trim() || "Tu marca").slice(0, 24), [p, s, d] = COL[gc], fam = ["Georgia,serif", "Arial,sans-serif", "'Brush Script MT',cursive"][gf];
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="${s}"/><rect x="90" y="215" width="200" height="200" rx="64" fill="${p}"/><text x="190" y="352" font-size="120" font-weight="800" text-anchor="middle" fill="#fff" font-family="${fam}">${esc(nom[0].toUpperCase())}</text><text x="330" y="345" font-size="96" font-weight="800" fill="${d}" font-family="${fam}">${esc(nom)}</text><rect x="90" y="520" width="1020" height="14" rx="7" fill="${p}"/></svg>`;
+    const img = new Image(); img.onload = () => { const c = document.createElement("canvas"); c.width = 1200; c.height = 630; c.getContext("2d").drawImage(img, 0, 0); const a = document.createElement("a"); a.download = "logo-" + nom.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\W+/g, "-") + ".png"; a.href = c.toDataURL("image/png"); a.click(); toast("Logo descargado"); };
+    img.onerror = () => toast("No se pudo crear la imagen"); img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  };
 })();
