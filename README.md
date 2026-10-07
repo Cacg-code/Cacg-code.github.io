@@ -1,116 +1,100 @@
 <div align="center">
 
-<a href="https://cacg-code.github.io/">
-  <img src="assets/readme/banner.svg" alt="Carlo · Dev — Desarrollo web Full Stack" width="100%">
-</a>
+<a href="https://cacg-code.github.io/"><img src="assets/readme/hero.png" alt="Carlo · Dev — Desarrollo web Full Stack en Lima, Perú" width="100%"></a>
 
 <br>
 
-<a href="https://cacg-code.github.io/">
-  <img src="assets/readme/boton.svg" alt="Ver el portafolio en vivo" width="440">
-</a>
+<a href="https://cacg-code.github.io/"><img src="assets/readme/boton.svg" alt="Ver el portafolio en vivo" width="480"></a>
 
 <br><br>
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Carlo%20Chiuyare-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlo-andre-chiuyare-guillen-916944224)
-[![GitHub](https://img.shields.io/badge/GitHub-Cacg--code-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Cacg-code)
-[![WhatsApp](https://img.shields.io/badge/WhatsApp-Escr%C3%ADbeme-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina%20web.)
-[![Correo](https://img.shields.io/badge/Correo-chiuyareguillendev@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:chiuyareguillendev@gmail.com)
+<a href="https://www.linkedin.com/in/carlo-andre-chiuyare-guillen-916944224"><img src="assets/readme/red-linkedin.png" alt="LinkedIn" width="24%"></a>
+<a href="https://github.com/Cacg-code"><img src="assets/readme/red-github.png" alt="GitHub" width="24%"></a>
+<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina%20web."><img src="assets/readme/red-whatsapp.png" alt="WhatsApp" width="24%"></a>
+<a href="mailto:chiuyareguillendev@gmail.com"><img src="assets/readme/red-gmail.png" alt="Correo" width="24%"></a>
 
-![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+<br><br>
 
-**👉 [cacg-code.github.io](https://cacg-code.github.io/) 👈**
+<img src="assets/readme/marquee.svg" alt="React, JavaScript, Node.js, HTML, CSS, Vite" width="100%">
 
-*10 demos que puedes abrir, tocar y probar. Sin registrarte.*
+<br><br>
+
+<a href="#quién-soy"><img src="assets/readme/nav-quien.png" alt="Quién soy" height="34"></a> <a href="#demos"><img src="assets/readme/nav-demos.png" alt="Demos" height="34"></a> <a href="#servicios"><img src="assets/readme/nav-servicios.png" alt="Servicios" height="34"></a> <a href="#cómo-trabajo"><img src="assets/readme/nav-proceso.png" alt="Cómo trabajo" height="34"></a> <a href="#contacto"><img src="assets/readme/nav-contacto.png" alt="Contacto" height="34"></a>
 
 </div>
 
-<p align="center">
-  <a href="#-quién-soy"><b>Quién soy</b></a> ·
-  <a href="#-las-10-demos"><b>Demos</b></a> ·
-  <a href="#-qué-puedo-hacer-por-tu-negocio"><b>Servicios</b></a> ·
-  <a href="#-cómo-trabajo"><b>Cómo trabajo</b></a> ·
-  <a href="#-hablemos"><b>Contacto</b></a>
-</p>
+<br>
 
----
-
-## 👋 Quién soy
-
-Soy **Carlo Andre Chiuyare Guillen**, desarrollador **Full Stack** de Lima, Perú.
-
-- 💼 **Practicante Full Stack Developer en [BellUX Innovation](https://www.linkedin.com/in/carlo-andre-chiuyare-guillen-916944224)** (remoto), donde trabajo en productos propios de la empresa.
-- 🎓 **Estudiante de Ingeniería de Sistemas**, 10.º ciclo.
-- 🛠️ Creo **páginas web, tiendas online, chatbots y sistemas a medida** para negocios locales: que se vean bien, carguen rápido y *te traigan clientes por WhatsApp*.
-- 📱 Todo se diseña **primero para celular**, porque ahí te buscan tus clientes.
-
-> Este repositorio es el código de mi portafolio. Cada carpeta es una demo funcional de un negocio inventado, para que veas cómo quedaría el tuyo.
-
-## 🎬 Las 10 demos
-
-Cada demo es una página real, hecha desde cero. Ábrelas desde tu celular o computadora.
-
-| | Demo | Qué resuelve |
-|---|---|---|
-| <img src="assets/carnes-d.jpg" width="220" alt="Brasa Noble"> | **[Brasa Noble](https://cacg-code.github.io/carnes/)**<br>Casa de carnes | Reserva en 3 pasos, aviso por WhatsApp y carta con QR. |
-| <img src="assets/landing-d.jpg" width="220" alt="La Marea"> | **[La Marea](https://cacg-code.github.io/landing/)**<br>Restaurante | Dice si está abierto ahora, carta con fotos y reservas por WhatsApp. |
-| <img src="assets/tienda-d.jpg" width="220" alt="Cumbre Café"> | **[Cumbre Café](https://cacg-code.github.io/tienda/)**<br>Tienda online | Filtros, carrito que recuerda y pedido directo a WhatsApp con Yape. |
-| <img src="assets/cabana-d.jpg" width="220" alt="Cabaña Pinar"> | **[Cabaña Pinar](https://cacg-code.github.io/cabana/)**<br>Alojamiento | Calendario de noches, adelanto por Yape/Plin y panel de la anfitriona. |
-| <img src="assets/crm-d.jpg" width="220" alt="Hilo CRM"> | **[Hilo CRM](https://cacg-code.github.io/crm/)**<br>Sistema de clientes | Te dice a quién escribir hoy; ventas, cotizaciones y cobros. |
-| <img src="assets/ferremax-d.jpg" width="220" alt="FerreMax"> | **[FerreMax](https://cacg-code.github.io/ferremax/)**<br>Tienda en React | Categorías, detalle de producto y carrito con envío gratis. |
-| <img src="assets/spa-d.jpg" width="220" alt="Áurea Spa"> | **[Áurea Spa](https://cacg-code.github.io/spa/)**<br>Chatbot 24/7 | Agenda citas con horas libres y avisa al salón por WhatsApp. |
-| <img src="assets/evento-d.jpg" width="220" alt="Jolgorio"> | **[Jolgorio](https://cacg-code.github.io/evento/)**<br>Eventos | Cotizador en vivo, reserva con adelanto e invitación con RSVP. |
-| 🎓 | **[Cátedra](https://cacg-code.github.io/academia/)**<br>Academia online | Login por matrícula, examen, certificado PDF con QR y panel de avance. |
-| 📸 | **[Atelier Norte](https://cacg-code.github.io/estudio/)**<br>Estudio creativo | Portafolio con visor, paquetes por WhatsApp y link en bio. |
-
-## 💡 Qué puedo hacer por tu negocio
-
-| | |
-|---|---|
-| 🌐 **Página web** | Presencia profesional con tu carta, servicios y botón de WhatsApp. |
-| 🛒 **Tienda online** | Catálogo, carrito y pedidos directos a tu WhatsApp, sin comisiones por venta. |
-| 📅 **Reservas y citas** | Calendario, horarios libres y avisos automáticos. |
-| 🤖 **Chatbot** | Atiende preguntas frecuentes y agenda citas las 24 horas. |
-| 🗂️ **Sistemas a medida** | CRM, paneles y herramientas para ordenar clientes y cobros. |
-
-## 🤝 Cómo trabajo
-
-1. **Conversamos** por WhatsApp sobre tu negocio y lo que necesitas.
-2. **Te muestro** un diseño antes de seguir, para que lo apruebes.
-3. **Empiezas con el 50 %** y pagas el resto al recibir tu página. Sin sorpresas.
-4. **Tu página es 100 % tuya**: lo que vendes se queda contigo, sin porcentajes.
-
-## 🧱 Cómo está hecho
-
-Sitio estático, **un archivo por página**, sin build ni dependencias: HTML, CSS y JavaScript puro. Las demos se publican con GitHub Pages desde `main`. FerreMax es la excepción: es una app **React + Vite** (aquí va la versión compilada).
-
-```
-/            Portafolio principal
-/carnes      Brasa Noble        /landing   La Marea
-/tienda      Cumbre Café        /cabana    Cabaña Pinar
-/crm         Hilo CRM           /ferremax  FerreMax (React)
-/spa         Áurea Spa          /evento    Jolgorio
-/academia    Cátedra            /estudio   Atelier Norte
-```
-
-Para probarlo en tu PC: clona el repo y sirve la carpeta (`python -m http.server 8000`), luego abre `http://localhost:8000`.
-
-## 📬 Hablemos
-
-¿Quieres una página como alguna de estas para tu negocio?
+<h2 align="center">Quién soy</h2>
 
 <div align="center">
 
-[![Escríbeme por WhatsApp](https://img.shields.io/badge/Escr%C3%ADbeme%20por%20WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina%20web.)
-[![Conecta en LinkedIn](https://img.shields.io/badge/Conecta%20en%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlo-andre-chiuyare-guillen-916944224)
+**Carlo Andre Chiuyare Guillen** · desarrollador Full Stack · Lima, Perú
 
 </div>
 
+- 💼 **Practicante Full Stack Developer en BellUX Innovation** (remoto): trabajo en productos propios de la empresa.
+- 🎓 **Estudiante de Ingeniería de Sistemas**, 10.º ciclo.
+- 🛠️ Hago **páginas web, tiendas online, chatbots y sistemas a medida** para negocios locales: que se vean bien, carguen rápido y **te traigan clientes por WhatsApp**.
+- 📱 Todo se diseña **primero para celular**, porque ahí te buscan tus clientes.
+
+<img src="assets/readme/stats.png" alt="10 demos en vivo, atención 24/7, 0 % de comisión, diseñado primero para celular" width="100%">
+
+<br>
+
+<h2 align="center">Demos</h2>
+
+<p align="center"><i>Cada una es una página real, hecha desde cero para un negocio inventado. Toca una para abrirla.</i></p>
+
+<table>
+<tr>
+<td width="50%"><a href="https://cacg-code.github.io/carnes/"><img src="assets/readme/demo-carnes.png" alt="Brasa Noble: abrir demo" width="100%"></a></td>
+<td width="50%"><a href="https://cacg-code.github.io/landing/"><img src="assets/readme/demo-landing.png" alt="La Marea: abrir demo" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%"><a href="https://cacg-code.github.io/tienda/"><img src="assets/readme/demo-tienda.png" alt="Cumbre Café: abrir demo" width="100%"></a></td>
+<td width="50%"><a href="https://cacg-code.github.io/cabana/"><img src="assets/readme/demo-cabana.png" alt="Cabaña Pinar: abrir demo" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%"><a href="https://cacg-code.github.io/crm/"><img src="assets/readme/demo-crm.png" alt="Hilo CRM: abrir demo" width="100%"></a></td>
+<td width="50%"><a href="https://cacg-code.github.io/ferremax/"><img src="assets/readme/demo-ferremax.png" alt="FerreMax: abrir demo" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%"><a href="https://cacg-code.github.io/spa/"><img src="assets/readme/demo-spa.png" alt="Áurea Spa: abrir demo" width="100%"></a></td>
+<td width="50%"><a href="https://cacg-code.github.io/evento/"><img src="assets/readme/demo-evento.png" alt="Jolgorio: abrir demo" width="100%"></a></td>
+</tr>
+<tr>
+<td width="50%"><a href="https://cacg-code.github.io/academia/"><img src="assets/readme/demo-academia.png" alt="Cátedra: abrir demo" width="100%"></a></td>
+<td width="50%"><a href="https://cacg-code.github.io/estudio/"><img src="assets/readme/demo-estudio.png" alt="Atelier Norte: abrir demo" width="100%"></a></td>
+</tr>
+</table>
+
+<br>
+
+<h2 align="center">Servicios</h2>
+
+<img src="assets/readme/servicios.png" alt="Página web, tienda online, reservas y citas, chatbot 24/7 y sistemas a medida" width="100%">
+
+<br>
+
+<h2 align="center">Cómo trabajo</h2>
+
+<img src="assets/readme/proceso.png" alt="1 Conversamos, 2 Te muestro, 3 Empiezas con 50 %, 4 Es 100 % tuya" width="100%">
+
+<br>
+
+<h2 align="center">Contacto</h2>
+
+<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina%20web."><img src="assets/readme/cta.png" alt="¿Hacemos algo así para tu negocio? Hablemos por WhatsApp" width="100%"></a>
+
+<br>
+
 ---
 
-<sub>**© 2026 Carlo Andre Chiuyare Guillen. Todos los derechos reservados.** Ver [LICENSE](LICENSE). Desarrollo con apoyo de IA (Claude), bajo dirección y revisión del autor. Los negocios, teléfonos y datos de las demos son ficticios. Fotos: Unsplash.</sub>
+<div align="center">
+
+<sub>**© 2026 Carlo Andre Chiuyare Guillen. Todos los derechos reservados.**<br>
+El código, el diseño, los textos y las imágenes de este repositorio **no pueden copiarse, descargarse para reutilizarse, modificarse ni redistribuirse** sin autorización escrita del autor. Ver [LICENSE](LICENSE).<br>
+Desarrollo con apoyo de IA (Claude), bajo dirección y revisión del autor. Los negocios, teléfonos y datos de las demos son ficticios. Fotos: Unsplash.</sub>
+
+</div>

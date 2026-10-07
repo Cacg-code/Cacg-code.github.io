@@ -1,14 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="560" height="96" viewBox="0 0 560 96" role="img" aria-label="Ver el portafolio en vivo">
-  <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#7C5CFF"/><stop offset="1" stop-color="#F472B6"/></linearGradient></defs>
-  <style>.t{font-family:Segoe UI,Helvetica,Arial,sans-serif;font-weight:800}
-  .pulse{transform-origin:280px 46px;animation:p 2.2s ease-in-out infinite}
-  @keyframes p{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
-  .glow{animation:gl 2.2s ease-in-out infinite}@keyframes gl{0%,100%{opacity:.25}50%{opacity:.6}}
-  .arrow{animation:a 1.2s ease-in-out infinite}@keyframes a{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}</style>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="100" viewBox="0 0 600 100" role="img" aria-label="Ver el portafolio en vivo">
+  <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#7C5CFF"/><stop offset=".6" stop-color="#C45CE0"/><stop offset="1" stop-color="#F472B6"/></linearGradient>
+  <linearGradient id="s" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <clipPath id="c"><rect x="10" y="10" width="580" height="78" rx="39"/></clipPath></defs>
+  <style>.t{font-family:'Segoe UI',Helvetica,Arial,sans-serif;font-weight:800}
+  .pulse{transform-origin:300px 49px;animation:p 2.4s ease-in-out infinite}@keyframes p{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+  .glow{animation:gl 2.4s ease-in-out infinite}@keyframes gl{0%,100%{opacity:.2}50%{opacity:.55}}
+  .sh{animation:sh 3s ease-in-out infinite}@keyframes sh{0%{transform:translateX(-200px)}60%,100%{transform:translateX(700px)}}
+  .ar{animation:a 1.2s ease-in-out infinite}@keyframes a{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}</style>
   <g class="pulse">
-    <rect class="glow" x="6" y="8" width="548" height="84" rx="42" fill="#7C5CFF"/>
-    <rect x="10" y="8" width="540" height="76" rx="38" fill="url(#g)"/>
-    <text class="t" x="270" y="58" font-size="30" fill="#fff" text-anchor="middle">VER EL PORTAFOLIO EN VIVO</text>
-    <text class="t arrow" x="480" y="58" font-size="30" fill="#fff">→</text>
+    <rect class="glow" x="4" y="14" width="592" height="80" rx="40" fill="#7C5CFF"/>
+    <rect x="10" y="10" width="580" height="78" rx="39" fill="url(#g)"/>
+    <g clip-path="url(#c)"><rect class="sh" x="0" y="10" width="120" height="78" fill="url(#s)" transform="skewX(-20)"/></g>
+    <text class="t" x="52" y="62" font-size="29" fill="#fff" textLength="440" lengthAdjust="spacingAndGlyphs">VER EL PORTAFOLIO EN VIVO</text>
+    <text class="t ar" x="518" y="62" font-size="32" fill="#fff">→</text>
   </g>
 </svg>
