@@ -189,10 +189,10 @@ body.mouse #luz{opacity:1}
 .sw2 em{color:#F2C9A8}
 /* reserva */
 .res{display:grid;grid-template-columns:1.1fr 1fr;gap:24px}
-.cal,.hor{background:var(--papel);border-radius:26px;padding:24px;box-shadow:var(--sombra)}
+.cal,.hor{min-width:0;background:var(--papel);border-radius:26px;padding:24px;box-shadow:var(--sombra)}
 .cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.cal-h b{font:800 1.3rem var(--serif);text-transform:capitalize}
 .cal-h button{width:44px;height:44px;border-radius:50%;border:2px solid var(--tinta);background:none;cursor:pointer;font-size:1.2rem;transition:.3s;color:inherit}.cal-h button:hover{background:var(--tinta);color:var(--hueso)}
-.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center}
+.cal-g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;text-align:center}
 .cal-g span{font-size:.72rem;font-weight:700;color:var(--gris);padding:4px 0}
 .cal-g button{aspect-ratio:1;border:0;border-radius:50%;background:transparent;font:600 .95rem var(--sans);color:var(--gris);opacity:.45;cursor:default;min-height:38px}
 .cal-g button.ok{opacity:1;cursor:pointer;color:var(--terra);background:#FBE9E3;font-weight:800;transition:.25s}
