@@ -64,6 +64,7 @@
   const NIVELES = ["Aspirante", "Aprendiz", "Estudiante", "Avanzado", "Destacado", "Maestro"];
   const nivel = v => { const n = Math.min(NIVELES.length - 1, Math.floor(Math.sqrt(v / 25))), ini = n * n * 25, fin = (n + 1) * (n + 1) * 25; return { n: n + 1, nombre: NIVELES[n], ini, fin, pct: n === NIVELES.length - 1 ? 100 : Math.round((v - ini) / (fin - ini) * 100) }; };
   const ranking = (rivales, yo) => [...rivales, yo].sort((a, b) => b.xp - a.xp).map((x, i) => ({ ...x, pos: i + 1 }));
-  r.Cat = { xp, nivel, ranking, clave, lecciones, resumen, nota, puedeCertificar, proxima, codigoCert, validaLogin, nombreDeCorreo, rachaDias, csv, dia, heatmap, diasSemana, insignias, ics, recomienda, busca, norm };
+  const rutaProgreso = (ruta, cursos, todo) => { const cs = ruta.cursos.map(id => cursos.find(c => c.id === id)); const hechos = cs.filter(c => puedeCertificar(c, todo[c.id])).length; const pct = Math.round(cs.reduce((s, c) => s + resumen(c, todo[c.id]).pct, 0) / cs.length); return { hechos, total: cs.length, pct, completa: hechos === cs.length, sig: cs.find(c => !puedeCertificar(c, todo[c.id])) || null }; };
+  r.Cat = { rutaProgreso, xp, nivel, ranking, clave, lecciones, resumen, nota, puedeCertificar, proxima, codigoCert, validaLogin, nombreDeCorreo, rachaDias, csv, dia, heatmap, diasSemana, insignias, ics, recomienda, busca, norm };
   if (typeof module !== "undefined") module.exports = r.Cat;
 })(typeof window !== "undefined" ? window : globalThis);

@@ -1,7 +1,7 @@
 /* Cátedra — aula del alumno. © Carlo · Dev */
 (function () {
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const { CURSOS } = DATOS, C = Cat, S = Store, u = S.usuario();
+  const { CURSOS, RUTAS } = DATOS, C = Cat, S = Store, u = S.usuario();
   if (!u) { location.replace("./"); return; }
   const em = u.email, app = $("#app");
   $("#yo-n").textContent = u.nombre; $("#yo-u").textContent = u.uni; $("#yo-a").textContent = u.nombre[0];
@@ -42,6 +42,7 @@
       <div class="bloque" style="margin:0"><b>Logros</b> <small style="color:var(--gris)">${ins6.filter(x => x.ok).length}/${ins6.length}</small>
         <div class="logros">${ins6.map(x => `<div class="logro ${x.ok ? "ok" : ""}" title="${x.desc}"><span>${x.ico}</span><b>${x.nombre}</b><small>${x.ok ? "¡Lo lograste!" : x.desc}</small></div>`).join("")}</div></div>
     </div>
+    <h2 class="sub-t">Rutas de aprendizaje</h2><div class="rutas">${RUTAS.map(r => { const g = C.rutaProgreso(r, CURSOS, todo); return `<div class="ruta ${g.completa ? "ok" : ""}"><span class="ri">${r.ico}</span><b>${r.nombre}</b><small>${r.desc}</small><div class="pasos">${r.cursos.map(id => { const k = S.cursoPorId(id), hecho = C.puedeCertificar(k, todo[id]); return `<a href="#/curso/${id}" class="${hecho ? "hecho" : ""}" title="${k.nombre}">${hecho ? "✓" : esc(k.ico)}</a>`; }).join("<i></i>")}</div><div class="barra"><i style="--w:${g.pct}%"></i></div><small>${g.completa ? "🏅 ¡Ruta completada!" : `${g.hechos}/${g.total} cursos · sigue con <b>${g.sig.nombre}</b>`}</small></div>`; }).join("")}</div>
     <h2 class="sub-t">Mis cursos</h2><div class="grid2">${ins.map(c => { const r = C.resumen(c, todo[c.id]), cert = certs.some(x => x.curso.id === c.id); return `<a class="mi-curso" href="#/curso/${c.id}" style="--c:${c.color}">${anillo(r.pct, c.color)}<div class="tx"><b>${c.nombre}</b><br><small>${r.hechas}/${r.total} lecciones · ${c.prof}</small></div>${cert ? `<span class="etq ok">Certificado</span>` : r.pct === 100 ? `<span class="etq al">Examen</span>` : ""}</a>`; }).join("") || `<p class="vacio">Aún no tienes cursos.</p>`}</div>
     ${certs.length ? `<h2 class="sub-t">Mis certificados</h2><div class="grid2">${certs.map(x => `<a class="mi-curso" href="${url(x)}" target="_blank" rel="noopener"><span class="ico" style="--c:${x.curso.color}">🎓</span><div class="tx"><b>${x.curso.nombre}</b><br><small>Nota ${x.n}/20 · ${x.f}</small></div><span class="etq ok">Ver PDF</span></a>`).join("")}</div>` : ""}
     ${otros.length ? `<h2 class="sub-t">Explorar más cursos</h2><div class="grid2">${otros.map(c => `<div class="mi-curso"><span class="ico" style="--c:${c.color}">${esc(c.ico)}</span><div class="tx"><b>${c.nombre}</b><br><small>${C.lecciones(c).length} lecciones · ${c.horas} h</small></div><button class="btn chico" data-ins="${c.id}">Inscribirme</button></div>`).join("")}</div>` : ""}
@@ -111,21 +112,45 @@
   }
 
   function examen(c, p) {
-    const cen = $("#centro"), resp = []; let i = 0;
+    const cen = $("#centro"); clearInterval(timer);
+    cen.innerHTML = `<div class="preg resul"><span class="kick">Evaluación · ${esc(c.nombre)}</span><h3 style="font-family:var(--serif);font-size:1.6rem;margin:6px 0 16px">¿Cómo quieres practicar?</h3>
+    <div class="modos"><button class="modo" id="ex-real"><span>⏱</span><b>Examen final</b><small>${c.examen.length} preguntas · 5 minutos · cuenta para tu certificado</small></button><button class="modo" id="ex-sim"><span>🧪</span><b>Simulacro</b><small>Sin cronómetro ni nota. Ves la explicación de cada respuesta al instante.</small></button></div></div>`;
+    $("#ex-real").onclick = () => examenReal(c, p); $("#ex-sim").onclick = () => simulacro(c);
+  }
+  function simulacro(c) {
+    const cen = $("#centro"); let i = 0, ok = 0, vista = false;
     const pinta = () => {
       const q = c.examen[i];
-      cen.innerHTML = `<div class="preg"><span class="kick">Examen final · pregunta ${i + 1} de ${c.examen.length}</span><div class="barra" style="margin:6px 0 14px"><i style="--w:${i / c.examen.length * 100}%;transition:none"></i></div><h3>${esc(q.q)}</h3>${q.o.map((o, j) => `<button class="opc ${resp[i] === j ? "sel" : ""}" data-j="${j}">${String.fromCharCode(65 + j)}. ${esc(o)}</button>`).join("")}<div class="acciones">${i > 0 ? `<button class="btn lin" id="at">← Anterior</button>` : ""}<button class="btn" id="av" ${resp[i] == null ? "disabled" : ""}>${i === c.examen.length - 1 ? "Terminar examen" : "Siguiente →"}</button></div></div>`;
+      cen.innerHTML = `<div class="preg"><span class="kick">Simulacro · pregunta ${i + 1} de ${c.examen.length} · aciertos ${ok}</span><div class="barra" style="margin:6px 0 14px"><i style="--w:${i / c.examen.length * 100}%;transition:none"></i></div><h3>${esc(q.q)}</h3>${q.o.map((o, j) => `<button class="opc" data-j="${j}">${String.fromCharCode(65 + j)}. ${esc(o)}</button>`).join("")}<div id="expl"></div></div>`;
+      vista = false;
+      $$(".opc", cen).forEach(b => b.onclick = () => {
+        if (vista) return; vista = true; const j = +b.dataset.j, bien = j === q.c; if (bien) ok++;
+        $$(".opc", cen).forEach((x, k) => { x.classList.toggle("bien", k === q.c); x.classList.toggle("mal", k === j && !bien); x.disabled = true; });
+        $("#expl").innerHTML = `<div class="explica ${bien ? "ok" : "no"}"><b>${bien ? "¡Correcto!" : "Casi"}</b><p>${esc(q.e)}</p></div><div class="acciones"><button class="btn" id="sg">${i < c.examen.length - 1 ? "Siguiente →" : "Ver resultado"}</button></div>`;
+        $("#sg").onclick = () => { if (i < c.examen.length - 1) { i++; pinta(); } else { cen.innerHTML = `<div class="preg resul"><span class="kick">Simulacro terminado</span><div class="gran">${ok}<small style="font-size:1.4rem;color:var(--gris)">/${c.examen.length}</small></div><p style="color:var(--gris);margin:8px 0 18px">${ok === c.examen.length ? "¡Perfecto! Estás listo para el examen final." : ok >= 3 ? "Vas muy bien. Repite el simulacro y rinde el examen final." : "Repasa las lecciones y las tarjetas, y vuelve a intentarlo."}</p><div class="acciones" style="justify-content:center"><button class="btn" id="again">Repetir simulacro</button><button class="btn lin" id="real">Ir al examen final</button></div></div>`; if (ok === c.examen.length) confeti(); $("#again").onclick = () => simulacro(c); $("#real").onclick = () => examenReal(c, S.prog(em, c.id)); } };
+      });
+    };
+    pinta();
+  }
+  function examenReal(c, p) {
+    const cen = $("#centro"), resp = []; let i = 0, iniciado = false, resta = 300;
+    const crono = () => { const e = $("#crono"); if (e) { e.textContent = "⏱ " + Math.floor(resta / 60) + ":" + String(resta % 60).padStart(2, "0"); e.classList.toggle("urge", resta <= 60); } };
+    const pinta = () => {
+      if (!iniciado) { iniciado = true; resta = 300; clearInterval(timer); timer = setInterval(() => { resta--; crono(); if (resta <= 0) { clearInterval(timer); toast("Se acabó el tiempo"); fin(); } }, 1000); }
+      const q = c.examen[i];
+      cen.innerHTML = `<div class="preg"><span class="kick">Examen final · pregunta ${i + 1} de ${c.examen.length} <span id="crono" class="crono"></span></span><div class="barra" style="margin:6px 0 14px"><i style="--w:${i / c.examen.length * 100}%;transition:none"></i></div><h3>${esc(q.q)}</h3>${q.o.map((o, j) => `<button class="opc ${resp[i] === j ? "sel" : ""}" data-j="${j}">${String.fromCharCode(65 + j)}. ${esc(o)}</button>`).join("")}<div class="acciones">${i > 0 ? `<button class="btn lin" id="at">← Anterior</button>` : ""}<button class="btn" id="av" ${resp[i] == null ? "disabled" : ""}>${i === c.examen.length - 1 ? "Terminar examen" : "Siguiente →"}</button></div></div>`;
       $$(".opc", cen).forEach(b => b.onclick = () => { resp[i] = +b.dataset.j; pinta(); });
       if ($("#at")) $("#at").onclick = () => { i--; pinta(); };
       $("#av").onclick = () => { if (i < c.examen.length - 1) { i++; pinta(); } else fin(); };
     };
     const fin = () => {
+      clearInterval(timer);
       const r = C.nota(resp, c.examen); S.nota(em, c.id, r.nota);
       const q = S.prog(em, c.id), cert = C.puedeCertificar(c, q); if (r.aprobado) confeti();
       cen.innerHTML = `<div class="preg resul"><span class="kick">${r.aprobado ? "¡Aprobado!" : "Aún no alcanza"}</span><div class="gran" style="color:${r.aprobado ? "var(--ok)" : "var(--mal)"}">${r.nota}<small style="font-size:1.4rem;color:var(--gris)">/20</small></div><p style="color:var(--gris);margin:8px 0 18px">${r.ok} de ${r.total} respuestas correctas. ${r.aprobado ? "Tu certificado está listo." : "Necesitas 11 o más. Repasa las lecciones y vuelve a intentarlo."}</p>
-      <div style="text-align:left;margin:18px 0">${c.examen.map((p, k) => `<p style="margin:8px 0;font-size:.92rem">${resp[k] === p.c ? "✅" : "❌"} ${esc(p.q)}${resp[k] === p.c ? "" : `<br><small style="color:var(--gris)">Correcta: ${esc(p.o[p.c])}</small>`}</p>`).join("")}</div>
+      <div style="text-align:left;margin:18px 0">${c.examen.map((p, k) => `<p style="margin:8px 0;font-size:.92rem">${resp[k] === p.c ? "✅" : "❌"} ${esc(p.q)}${resp[k] === p.c ? "" : `<br><small style="color:var(--gris)">Correcta: ${esc(p.o[p.c])}. ${esc(p.e)}</small>`}</p>`).join("")}</div>
       <div class="acciones" style="justify-content:center">${cert ? `<a class="btn" target="_blank" rel="noopener" href="${url({ curso: c, f: q.f, n: q.n })}">🎓 Descargar certificado PDF</a>` : ""}<button class="btn lin" id="re">Repetir examen</button><a class="btn lin" href="#/">Mis cursos</a></div></div>`;
-      $("#re").onclick = () => { resp.length = 0; i = 0; pinta(); };
+      $("#re").onclick = () => { resp.length = 0; i = 0; iniciado = false; pinta(); };
     };
     if (p.n != null && C.puedeCertificar(c, p)) { cen.innerHTML = `<div class="preg resul"><span class="kick">Curso aprobado</span><div class="gran" style="color:var(--ok)">${p.n}<small style="font-size:1.4rem;color:var(--gris)">/20</small></div><p style="color:var(--gris);margin:8px 0 18px">Ya tienes tu certificado. Puedes rendir de nuevo para subir la nota.</p><div class="acciones" style="justify-content:center"><a class="btn" target="_blank" rel="noopener" href="${url({ curso: c, f: p.f, n: p.n })}">🎓 Descargar certificado PDF</a><button class="btn lin" id="ri">Rendir otra vez</button></div></div>`; $("#ri").onclick = pinta; } else pinta();
   }
