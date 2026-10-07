@@ -28,9 +28,12 @@
     document.querySelectorAll("[data-c]").forEach(e => cuenta(e, +e.dataset.c));
     $("#barras").innerHTML = CURSOS.map(c => { const g = v.filter(a => a.curso === c.id), p = g.length ? Math.round(g.reduce((s, a) => s + a.pct, 0) / g.length) : 0; return `<div class="fila"><span>${c.nombre}</span><div class="barra"><i style="--w:0%" data-w="${p}%"></i></div><b>${g.length ? p + " %" : "—"}</b></div>`; }).join("");
     setTimeout(() => document.querySelectorAll("#barras i").forEach(i => i.style.setProperty("--w", i.dataset.w)), 40);
+    const rs = v.filter(a => estado(a)[1] === "En riesgo").sort((x, y) => antes(y.ult) - antes(x.ult)).slice(0, 6);
+    $("#riesgos").innerHTML = rs.length ? rs.map((a, n) => `<div class="riesgo" style="--i:${n}"><span class="av2">${esc(a.nombre[0])}</span><div><b>${esc(a.nombre)}</b><small>${esc(S.cursoPorId(a.curso).nombre)} · ${a.pct} % de avance</small></div><span class="dias">${antes(a.ult)} días</span><button class="btn chico" data-rw="${a.id}">Recordar</button></div>`).join("") : `<div class="vacio sano">🎉 Nadie en riesgo con este filtro.</div>`;
     $("#filas").innerHTML = v.map(a => { const [cl, tx] = estado(a), c = S.cursoPorId(a.curso), d = antes(a.ult); return `<tr><td data-l="Alumno"><b>${esc(a.nombre)}</b></td><td data-l="Código">${a.codigo}</td><td data-l="Curso">${c.nombre}</td><td data-l="Avance" style="min-width:130px"><div style="display:flex;align-items:center;gap:8px"><div class="barra"><i style="--w:${a.pct}%"></i></div><small>${a.pct} %</small></div></td><td data-l="Nota">${a.nota != null ? a.nota : "—"}</td><td data-l="Última vez">${d <= 0 ? "Hoy" : d === 1 ? "Ayer" : "hace " + d + " días"}</td><td data-l="Estado"><span class="${cl}">${tx}</span></td><td>${tx === "En riesgo" ? `<button class="btn chico lin" data-wa="${a.id}">Recordar</button>` : ""}</td></tr>`; }).join("") || `<tr><td colspan="8" class="vacio">Sin resultados.</td></tr>`;
   };
   ["change", "input"].forEach(ev => [fU, fC, $("#bus")].forEach(e => e.addEventListener(ev, pinta)));
+  $("#riesgos").addEventListener("click", e => { const b = e.target.closest("[data-rw]"); if (!b) return; const f = $("#filas [data-wa=\"" + b.dataset.rw + "\"]"); if (f) f.click(); });
   $("#filas").addEventListener("click", e => {
     const b = e.target.closest("[data-wa]"); if (!b) return; const a = alumnos.find(x => String(x.id) === b.dataset.wa), c = S.cursoPorId(a.curso);
     open("https://wa.me/?text=" + encodeURIComponent(`Hola ${a.nombre.split(" ")[0]}, te extrañamos en Cátedra. Llevas ${antes(a.ult)} días sin entrar a «${c.nombre}» y vas en ${a.pct} %. ¡Retoma hoy 15 minutos y sigue avanzando!`), "_blank", "noopener");
@@ -48,3 +51,4 @@
   };
   pinta();
 })();
+NavSec.build(document.querySelector("main"), document.getElementById("subnav"));

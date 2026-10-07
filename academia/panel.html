@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#FFB703"><link rel="apple-touch-icon" href="icono.svg">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#FFB703"><link rel="apple-touch-icon" href="icono-192.png">
 <title>Panel de coordinación · Cátedra</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,16 +17,32 @@
 </div></header>
 <main class="w" style="padding-bottom:60px">
   <div class="saludo"><span class="kick">Panel de coordinación</span><h1>Cómo van tus alumnos</h1></div>
-  <div class="herr"><select id="uni" aria-label="Universidad"></select><select id="cur" aria-label="Curso"></select><input id="bus" type="search" placeholder="Buscar alumno o código…" aria-label="Buscar"><button class="btn chico" id="csv">⬇ Exportar CSV</button></div>
-  <div style="margin:0 0 12px"><button class="btn chico" id="todos" type="button">📣 Copiar recordatorio para alumnos en riesgo</button></div>
-  <div class="kpis" id="kpis"></div>
-  <h2 class="sub-t">Avance promedio por curso</h2><div class="bloque"><div class="barras" id="barras"></div></div>
-  <h2 class="sub-t">Alumnos</h2><div class="scroll-x"><table class="tabla res"><thead><tr><th>Alumno</th><th>Código</th><th>Curso</th><th>Avance</th><th>Nota</th><th>Última vez</th><th>Estado</th><th></th></tr></thead><tbody id="filas"></tbody></table></div>
+  <nav class="subnav" id="subnav" aria-label="Secciones"></nav>
+  <section class="sec" id="s-filtros" data-t="Filtros" data-i="🎛">
+    <div class="sec-h"><span class="num">01</span><div><h2>Filtros y acciones</h2><p>Elige universidad y curso; todo el panel se actualiza.</p></div></div>
+    <div class="herr"><select id="uni" aria-label="Universidad"></select><select id="cur" aria-label="Curso"></select><input id="bus" type="search" placeholder="Buscar alumno o código…" aria-label="Buscar"><button class="btn chico" id="csv">⬇ Exportar CSV</button><button class="btn chico lin" id="todos" type="button">📣 Copiar lista en riesgo</button></div>
+  </section>
+  <section class="sec" id="s-resumen" data-t="Resumen" data-i="📈">
+    <div class="sec-h"><span class="num">02</span><div><h2>Resumen general</h2><p>Indicadores clave del grupo seleccionado.</p></div></div>
+    <div class="kpis" id="kpis"></div>
+  </section>
+  <section class="sec" id="s-cursos" data-t="Por curso" data-i="📚">
+    <div class="sec-h"><span class="num">03</span><div><h2>Avance por curso</h2><p>Promedio de avance de los alumnos en cada curso.</p></div></div>
+    <div class="bloque"><div class="barras" id="barras"></div></div>
+  </section>
+  <section class="sec" id="s-atencion" data-t="Atención" data-i="🚨">
+    <div class="sec-h"><span class="num">04</span><div><h2>Atención prioritaria</h2><p>Alumnos con 7 o más días sin entrar. Un mensaje a tiempo evita la deserción.</p></div></div>
+    <div class="riesgos" id="riesgos"></div>
+  </section>
+  <section class="sec" id="s-alumnos" data-t="Alumnos" data-i="👥">
+    <div class="sec-h"><span class="num">05</span><div><h2>Lista de alumnos</h2><p>Avance, nota y estado de cada inscripción.</p></div></div>
+    <div class="scroll-x"><table class="tabla res"><thead><tr><th>Alumno</th><th>Código</th><th>Curso</th><th>Avance</th><th>Nota</th><th>Última vez</th><th>Estado</th><th></th></tr></thead><tbody id="filas"></tbody></table></div>
+  </section>
   <p style="margin-top:22px;color:var(--gris);font-size:.86rem">Demo: los alumnos son de ejemplo (salvo la fila «Tú», que refleja tu avance real en el aula). En el sistema real, los datos vendrían de la base de la universidad.</p>
 </main>
 <div class="toast" id="toast" role="status"></div>
 <script src="tema.js"></script>
-<script src="datos.js"></script><script src="logica.js"></script><script src="store.js"></script><script src="panel.js"></script>
+<script src="datos.js"></script><script src="logica.js"></script><script src="store.js"></script><script src="nav-sec.js"></script><script src="panel.js"></script>
 <script src="pwa.js"></script>
 </body>
 </html>
