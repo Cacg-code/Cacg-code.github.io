@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carlo · Dev — Mi ruta de aprendizaje</title>
+<meta name="description" content="Cómo voy aprendiendo: de páginas web a chatbots de WhatsApp y a ofrecer estos servicios a negocios. Cursos gratis hechos por un estudiante con IA.">
+<meta property="og:title" content="Carlo · Dev — Mi ruta de aprendizaje">
+<meta property="og:description" content="Web desde cero, chatbots de WhatsApp y servicios para negocios: el camino paso a paso.">
+<meta property="og:image" content="https://cacg-code.github.io/assets/portada-og.jpg">
+<!-- © 2026 Carlo Andre Chiuyare Guillen. Todos los derechos reservados. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2307070D'/%3E%3Cpath d='M12 11l-5 5 5 5M20 11l5 5-5 5' stroke='%23A78BFA' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070D;--ink:#F4F4FA;--mute:#A4A4C0;--line:#ffffff1f;--v:#A78BFA;--v2:#7C5CFF;--c:#5EEAD4;--p:#F472B6}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+.o1{width:480px;height:480px;left:-160px;top:-120px;background:#7C5CFF;opacity:.38}
+.o2{width:420px;height:420px;right:-140px;top:50vh;background:#F472B6;opacity:.22}
+main{position:relative;z-index:1;padding:48px 0 30px}
+.back{display:inline-block;color:var(--mute);font-size:.9rem;margin-bottom:34px}.back:hover{color:#fff}
+.k{font-size:.8rem;font-weight:700;letter-spacing:.18em;color:var(--v);text-transform:uppercase}
+h1{font-size:clamp(2.2rem,6.4vw,4rem);line-height:1.02;font-weight:800;letter-spacing:-.035em;margin:10px 0 16px;background:linear-gradient(100deg,#fff,#C4B5FD 50%,#F472B6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(1.05rem,2.3vw,1.25rem);color:#CFCFE6;max-width:60ch}
+.ruta{list-style:none;margin:44px 0 36px;position:relative;display:grid;gap:22px}
+.ruta::before{content:"";position:absolute;left:23px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--v),var(--p),var(--c));opacity:.5}
+.paso{position:relative;display:grid;grid-template-columns:48px 1fr;gap:18px}
+.num{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:1.15rem;color:#fff;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 0 6px var(--bg),0 10px 26px -8px var(--a);z-index:1}
+.caja{padding:22px 22px 24px;border-radius:22px;background:linear-gradient(160deg,#171728,#0d0d18);border:1px solid var(--line);border-top:3px solid var(--a)}
+.caja h2{font-size:1.5rem;letter-spacing:-.02em;margin-bottom:6px}
+.caja p{color:#C9C9E0;font-size:.98rem;max-width:62ch}
+.caja ul{margin:10px 0 0 1.1rem;color:var(--mute);font-size:.93rem}
+.enl{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.enl a{padding:10px 18px;border-radius:99px;font-weight:700;font-size:.9rem;background:var(--a);color:#fff;transition:transform .2s,filter .2s}
+.enl a.s{background:#ffffff12;border:1px solid var(--line)}
+.enl a:hover{transform:translateY(-2px);filter:brightness(1.12)}
+.nota{padding:18px 20px;border-radius:18px;background:#ffffff0a;border:1px solid var(--line);color:var(--mute);font-size:.92rem}
+.nota b{color:#fff}
+footer{position:relative;z-index:1;padding:30px 20px 50px;text-align:center;color:var(--mute);font-size:.82rem}
+footer a{color:var(--v);text-decoration:underline}
+@media(max-width:560px){.paso{grid-template-columns:40px 1fr;gap:12px}.num{width:40px;height:40px;font-size:1rem}.ruta::before{left:19px}.caja{padding:18px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<main><div class="wrap">
+  <a class="back" href="../">← Volver al portafolio</a>
+  <div class="k">Mi ruta de aprendizaje</div>
+  <h1>De la primera página web a vender chatbots</h1>
+  <p class="lead">Soy estudiante de Ingeniería de Sistemas. Esta es la ruta que sigo, con los materiales gratis que armé con ayuda de IA y comparto con la comunidad de developers.</p>
+
+  <ol class="ruta">
+    <li class="paso" style="--a:#7C5CFF;--b:#A78BFA">
+      <span class="num">1</span>
+      <div class="caja">
+        <h2>Web desde cero</h2>
+        <p>Base de todo: HTML, CSS, JavaScript y buenas prácticas, con ejercicios que se comprueban en la misma página.</p>
+        <ul><li>Lecciones con cuaderno de notas y repaso espaciado</li><li>Enlaces a la documentación oficial</li></ul>
+        <div class="enl"><a href="https://cacg-code.github.io/web-desde-cero/">Ir al curso →</a><a class="s" href="https://github.com/Cacg-code/web-desde-cero" target="_blank" rel="noopener">Código</a></div>
+      </div>
+    </li>
+    <li class="paso" style="--a:#1FAF55;--b:#25D366">
+      <span class="num">2</span>
+      <div class="caja">
+        <h2>Chatbots de WhatsApp desde cero</h2>
+        <p>Cómo funciona un bot, la API de WhatsApp, flujos de pedido y un proyecto completo de minimarket, con simulador para probarlo sin cuenta de Meta.</p>
+        <ul><li>28 lecciones y un proyecto</li><li>Simulador interactivo con guía</li><li>Página de “Lo que aprendí” con mis errores reales</li></ul>
+        <div class="enl"><a href="https://cacg-code.github.io/chatbots-whatsapp-desde-cero/">Ir al curso →</a><a class="s" href="https://cacg-code.github.io/chatbots-whatsapp-desde-cero/simulador/">Probar el simulador</a></div>
+      </div>
+    </li>
+    <li class="paso" style="--a:#F472B6;--b:#FBBF24">
+      <span class="num">3</span>
+      <div class="caja">
+        <h2>Servicios para negocios</h2>
+        <p>Lo aprendido aplicado a negocios locales: páginas, tiendas, reservas y chatbots que traen clientes a tu WhatsApp. Las demos están en vivo para que las pruebes.</p>
+        <div class="enl"><a href="../#proyectos">Ver las demos</a><a class="s" href="../#servicios">Ver servicios</a><a class="s" href="../yo/">Sobre mí</a></div>
+      </div>
+    </li>
+  </ol>
+
+  <p class="nota"><b>Transparencia:</b> los cursos son material de estudio hecho por un estudiante con apoyo de IA. Son gratis, no dan certificado y pueden tener errores; si encuentras uno, avísame en el repositorio.</p>
+</div></main>
+<footer>© 2026 Carlo Andre Chiuyare Guillen · <a href="../">Carlo · Dev</a></footer>
+</body>
+</html>
