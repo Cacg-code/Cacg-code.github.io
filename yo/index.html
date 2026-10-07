@@ -89,9 +89,37 @@ h2{font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.08;letter-spacing:-.03em;mar
 footer{position:relative;z-index:1;padding:30px 20px 50px;text-align:center;color:var(--mute);font-size:.82rem}
 footer a{color:var(--v);text-decoration:underline}
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.rv.on{opacity:1;transform:none}
-@media(max-width:860px){.hero{grid-template-columns:1fr;text-align:center;padding-top:40px}.hero .foto{order:-1;width:min(86%,340px)}.lead,.redes{margin-inline:auto}.chips{justify-content:center}.grid3,.serv,.pasos{grid-template-columns:1fr 1fr}.tag{display:none}.av{left:29%;width:42%}.mano{left:-40%}.globo{left:-60%;top:4%}}
+
+h1{background-size:220% 100%;animation:brilla 7s ease-in-out infinite alternate}
+@keyframes brilla{to{background-position:100% 0}}
+.hero>div:first-child>*{opacity:0;transform:translateY(18px);animation:ent .8s cubic-bezier(.2,.7,.2,1) forwards}
+.hero>div:first-child>*:nth-child(2){animation-delay:.1s}.hero>div:first-child>*:nth-child(3){animation-delay:.25s}.hero>div:first-child>*:nth-child(4){animation-delay:.4s}.hero>div:first-child>*:nth-child(5){animation-delay:.55s}
+h1{animation:ent .8s cubic-bezier(.2,.7,.2,1) .1s forwards,brilla 7s ease-in-out infinite alternate}
+@keyframes ent{to{opacity:1;transform:none}}
+.rol{display:block;font-size:clamp(1rem,2.4vw,1.3rem);font-weight:700;color:var(--c);margin:-4px 0 14px;min-height:1.5em}
+.rol::after{content:"";display:inline-block;width:3px;height:1em;background:var(--c);margin-left:3px;vertical-align:-2px;animation:parp 1s steps(1) infinite}
+@keyframes parp{50%{opacity:0}}
+.chips span{animation:bobc 4s ease-in-out infinite}.chips span:nth-child(2){animation-delay:-1s}.chips span:nth-child(3){animation-delay:-2s}.chips span:nth-child(4){animation-delay:-3s}
+@keyframes bobc{50%{transform:translateY(-4px);border-color:var(--v)}}
+.foto{transition:transform .2s ease-out;transform:perspective(900px) rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg))}
+.cnt{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 70px}
+.cn{padding:18px 12px;border-radius:18px;background:#ffffff0a;border:1px solid var(--line);text-align:center;transition:transform .3s,border-color .3s}
+.cn:hover{transform:translateY(-5px);border-color:var(--v)}
+.cn b{display:block;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;letter-spacing:-.03em;background:linear-gradient(120deg,var(--c),var(--v),var(--p));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cn span{font-size:.85rem;color:var(--mute)}
+.card::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(340px circle at var(--mx,50%) var(--my,0%),#ffffff1c,transparent 60%);opacity:0;transition:opacity .3s}
+.card:hover::before{opacity:1}
+.sv{transition:transform .3s,box-shadow .3s}.sv:hover{transform:translateY(-6px);box-shadow:0 20px 40px -20px var(--c)}
+.sv b{display:inline-block;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}.sv:hover b{transform:scale(1.35) rotate(-10deg)}
+.pasos{position:relative}
+.paso{transition:transform .3s,border-color .3s}.paso:hover{transform:translateY(-5px);border-color:var(--v)}
+.paso::before{transition:transform .4s}.paso:hover::before{transform:scale(1.15) translateX(6px)}
+.cta{background-size:200% 100%;animation:brilla 8s ease-in-out infinite alternate}
+.cta .btn{animation:bp2 2.4s ease-in-out infinite}
+@keyframes bp2{50%{transform:scale(1.04);box-shadow:0 18px 50px #fff4}}
+@media(max-width:860px){.hero{grid-template-columns:1fr;text-align:center;padding-top:40px}.hero .foto{order:-1;width:min(86%,340px)}.lead,.redes{margin-inline:auto}.chips{justify-content:center}.grid3,.serv,.pasos{grid-template-columns:1fr 1fr}.tag{display:none}.foto{transform:none!important}.cnt{gap:8px}.cn{padding:12px 6px}.av{left:29%;width:42%}.mano{left:-40%}.globo{left:-60%;top:4%}}
 @media(max-width:560px){.grid3,.serv,.pasos{grid-template-columns:1fr}.redes{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.hero>div:first-child>*,h1{opacity:1!important;transform:none!important}}
 </style>
 </head>
 <body>
@@ -102,6 +130,7 @@ footer a{color:var(--v);text-decoration:underline}
   <div>
     <div class="eye"><i></i>HOLA, SOY</div>
     <h1>Carlo André<br>Chiuyare Guillen</h1>
+    <span class="rol" id="rol" aria-hidden="true"></span>
     <p class="lead">Desarrollador <b>Full Stack</b> en Lima. Practicante en <b>BellUX Innovation</b> y estudiante de Ingeniería de Sistemas (10.º ciclo). Hago páginas, tiendas, chatbots y sistemas que <b>traen clientes a tu WhatsApp</b>.</p>
     <div class="chips"><span>React</span><span>Node.js</span><span>JavaScript</span><span>Móvil primero</span></div>
     <nav class="redes" aria-label="Mis redes">
@@ -118,6 +147,8 @@ footer a{color:var(--v);text-decoration:underline}
     <div class="tag t2"><span>✦</span><div><small>Mi enfoque</small>Clientes por WhatsApp</div></div>
   </div>
 </header>
+
+<div class="cnt rv"><div class="cn"><b data-n="10">0</b><span>demos en vivo</span></div><div class="cn"><b data-n="28" data-s="+">0</b><span>lecciones gratis</span></div><div class="cn"><b data-n="24" data-s="/7">0</b><span>chatbots que atienden</span></div></div>
 
 <section id="demos">
   <div class="rv"><div class="k">Para que lo pruebes</div><h2>Algunas de mis demos</h2></div>
@@ -163,6 +194,15 @@ footer a{color:var(--v);text-decoration:underline}
 <script>
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}}),{threshold:.15});
 document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%3)*80+'ms';io.observe(el)});
+
+const red=matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.querySelectorAll('.card').forEach(c=>c.addEventListener('pointermove',e=>{const b=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-b.left+'px');c.style.setProperty('--my',e.clientY-b.top+'px')}));
+const f=document.querySelector('.foto');
+if(!red&&matchMedia('(hover:hover)').matches){document.addEventListener('pointermove',e=>{f.style.setProperty('--ry',((e.clientX/innerWidth-.5)*10)+'deg');f.style.setProperty('--rx',(-(e.clientY/innerHeight-.5)*8)+'deg')})}
+const cio=new IntersectionObserver(es=>es.forEach(x=>{if(!x.isIntersecting)return;cio.unobserve(x.target);x.target.querySelectorAll('[data-n]').forEach(el=>{const n=+el.dataset.n,s=el.dataset.s||'';if(red){el.textContent=n+s;return}let t0;const st=t=>{t0=t0||t;const k=Math.min(1,(t-t0)/1400);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+(k==1?s:'');if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st)})}),{threshold:.4});
+document.querySelectorAll('.cnt').forEach(c=>cio.observe(c));
+const roles=['Desarrollador Full Stack','Páginas web para negocios','Chatbots de WhatsApp','Tiendas y reservas online'],r=document.getElementById('rol');
+if(red){r.textContent=roles[0]}else{let i=0,j=0,del=false;(function t(){const w=roles[i];j+=del?-1:1;r.textContent=w.slice(0,j);let d=del?35:70;if(!del&&j==w.length){del=true;d=1600}else if(del&&j==0){del=false;i=(i+1)%roles.length;d=300}setTimeout(t,d)})()}
 </script>
 </body>
 </html>
