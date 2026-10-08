@@ -48,6 +48,18 @@
 
 <br><br>
 
+<h2>Precios</h2>
+
+| Paquete | Desde |
+|:-:|:-:|
+| **Básico** | S/ 450 |
+| **Profesional** | S/ 1,100 |
+| **Completo** | S/ 1,800 |
+
+<sub>Mantenimiento opcional desde S/ 40 al mes. <b>INFO REFERENCIAL:</b> el precio final depende del alcance. <a href="https://cacg-code.github.io/#precios">Ver detalle</a>.<br>🎁 <b>Piloto gratis para 3 negocios</b>: una página sencilla a cambio de tu testimonio y permiso para mostrarla.</sub>
+
+<br><br>
+
 <a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina%20web."><img src="assets/readme/cta.png" alt="¿Hacemos algo así para tu negocio? Hablemos por WhatsApp" width="100%"></a>
 
 </div>
