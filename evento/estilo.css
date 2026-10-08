@@ -179,3 +179,4 @@ footer a{color:var(--ac)}
 @media(max-width:760px){.t-boda .deco::before,.t-boda .deco::after{opacity:.55}.hero .acc .btn{width:100%;max-width:300px}}
 .demo a.home{border:0;background:rgba(255,255,255,.14)}
 @media(max-width:760px){.demo a.home{padding:.45rem .6rem}}
+@media(max-width:760px){.demo{max-width:calc(100vw - 16px);overflow-x:auto;scrollbar-width:none}.demo::-webkit-scrollbar{display:none}.demo>*{flex:none}.si-no{position:relative}}

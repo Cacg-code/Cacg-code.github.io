@@ -423,3 +423,4 @@ footer a{color:#fff}footer p+p{margin-top:.4rem}
 .pg-fila.ok{opacity:.75}
 .etq.pg-ven{color:#fff;background:#d6304b}.etq.pg-pro{color:#a8620a;background:#FFF0D1}.etq.pg-ok{color:#1f7a55;background:#DDF6EC}
 @media(max-width:820px){.pg-res{grid-template-columns:1fr 1fr}.pg-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.kpis>*,.kpi{min-width:0}}

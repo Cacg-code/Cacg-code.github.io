@@ -278,3 +278,5 @@ body.mouse #luz{opacity:1}
 @media(max-width:900px){.tipsg{grid-template-columns:1fr}.igs{width:100%;margin:0;gap:14px}.pv{top:72px}.pzb{padding:0 16px;font-size:.82rem}}
 [data-tema=oscuro] .resumen{color:#F5EFE6}[data-tema=oscuro] .mdb input[type=text],[data-tema=oscuro] .mdb select{background:#16120F}
 [data-tema=oscuro] .pzb{background:#F5EFE6;color:#16120F}
+
+@media(max-width:380px){.linea{grid-template-columns:1fr}}
