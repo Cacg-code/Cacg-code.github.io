@@ -64,7 +64,19 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;padding:.8rem 0;pointer-events
 .nav ul{display:flex;gap:.2rem;list-style:none;padding:0}
 .nav ul a{text-decoration:none;color:var(--mute);font-weight:500;padding:.5rem .9rem;border-radius:99px;transition:color .2s,background .2s}
 .nav ul a:hover{color:var(--ink);background:#ffffff12}
-@media(max-width:760px){.nav{flex-wrap:wrap;row-gap:.35rem;border-radius:26px;padding:.5rem .6rem .45rem 1rem}.nav nav{order:3;flex:0 0 100%;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}.nav nav::-webkit-scrollbar{display:none}.nav ul a{display:block;white-space:nowrap;padding:.4rem .75rem;font-size:.88rem}.nav ul{padding-right:1.5rem}}
+.burger{display:none}
+@media(max-width:760px){
+.nav{position:relative;padding:.5rem .5rem .5rem 1rem;gap:.5rem}
+.nav>.btn{margin-left:auto}
+.burger{display:grid;place-items:center;flex:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#ffffff10;color:var(--ink);cursor:pointer;padding:0}
+.burger svg{width:20px;height:20px;transition:transform .25s}
+.nav.open .burger svg{transform:rotate(90deg)}
+.burger .x{display:none}.nav.open .burger .x{display:block}.nav.open .burger .h{display:none}
+.nav nav{position:absolute;top:calc(100% + .5rem);left:0;right:0;padding:.6rem;border:1px solid var(--line);border-radius:24px;background:rgba(13,13,23,.98);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .2s,transform .2s,visibility .2s}
+.nav.open nav{opacity:1;visibility:visible;transform:none}
+.nav ul{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.nav ul a{display:block;text-align:center;padding:.85rem .5rem;font-size:.95rem;color:var(--ink);background:#ffffff0d;border:1px solid #ffffff10}
+}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:50px;padding:.7rem 1.5rem;border-radius:999px;font:inherit;font-weight:700;text-decoration:none;border:0;cursor:pointer;color:#0A0A12;background:var(--ink);position:relative;transition:transform .25s,box-shadow .25s;isolation:isolate}
 .btn::before{content:"";position:absolute;inset:-2px;border-radius:inherit;background:linear-gradient(100deg,var(--v),var(--p),var(--o));z-index:-1;opacity:0;transition:opacity .3s;filter:blur(14px)}
@@ -304,7 +316,7 @@ html.chat-open,html.chat-open body{overflow:hidden;overscroll-behavior:none}
 .movil .cubre{display:none}
 input,select,textarea{width:100%;min-width:0}
 @media(max-width:700px){
-  .hero{min-height:auto;padding:9rem 0 2.2rem}
+  .hero{min-height:auto;padding:6.5rem 0 2.2rem}
   .hero .fila{margin-top:1.6rem}
   .acciones .btn{flex:1 1 auto}
   .marq{margin-top:1.5rem}
@@ -333,8 +345,9 @@ input,select,textarea{width:100%;min-width:0}
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#14142a" stroke="#ffffff30"/><path d="M12 11l-5 5 5 5M20 11l5 5-5 5" stroke="#A78BFA" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span data-c="nombre">Carlo · Dev</span>
     </a>
-    <nav aria-label="Principal"><ul><li><a href="#proyectos">Proyectos</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#proceso">Proceso</a></li><li><a href="#precios">Precios</a></li><li><a href="ruta/">Mi ruta</a></li><li><a href="yo/">Sobre mí</a></li></ul></nav>
+    <nav id="menu" aria-label="Principal"><ul><li><a href="#proyectos">Proyectos</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#proceso">Proceso</a></li><li><a href="#precios">Precios</a></li><li><a href="ruta/">Mi ruta</a></li><li><a href="yo/">Sobre mí</a></li></ul></nav>
     <a class="btn sm" data-chat href="#">Cotizar</a>
+    <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><svg class="h" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
 </header>
 
@@ -738,5 +751,6 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
 })();
 
 </script>
+<script>(function(){var n=document.querySelector('.nav'),b=n&&n.querySelector('.burger');if(!b)return;function t(o){n.classList.toggle('open',o);b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú')}b.addEventListener('click',function(e){e.stopPropagation();t(!n.classList.contains('open'))});n.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){t(false)})});document.addEventListener('click',function(e){if(!n.contains(e.target))t(false)});document.addEventListener('keydown',function(e){if(e.key==='Escape')t(false)})})();</script>
 </body>
 </html>
