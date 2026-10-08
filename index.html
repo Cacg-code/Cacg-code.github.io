@@ -17,9 +17,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#07070D">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2307070D'/%3E%3Cpath d='M12 11l-5 5 5 5M20 11l5 5-5 5' stroke='%23A78BFA' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="assets/carnes-d.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet"></noscript>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Carlo · Dev","founder":{"@type":"Person","name":"Carlo Andre Chiuyare Guillen","email":"chiuyareguillendev@gmail.com"},"email":"chiuyareguillendev@gmail.com","description":"Diseño y desarrollo de páginas web, tiendas online y sistemas a medida para negocios locales.","areaServed":"Lima, Perú","url":"https://cacg-code.github.io/"}
 </script>
@@ -526,7 +528,7 @@ document.querySelectorAll("[data-chat]").forEach(a=>a.addEventListener("click",e
 
 /* carrusel de portada: sale de DEMOS con hero */
 const HERO=DEMOS.filter(d=>d.hero).sort((a,b)=>a.hero-b.hero);
-$("#flota").innerHTML=HERO.map((d,i)=>`<a class="dm" href="#p-${d.id}" data-g="${d.g}" data-n="${d.nombre}" aria-label="Ver la demo ${d.nombre}" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>${d.ruta}</em></div><div class="pant"><img src="assets/${d.id}-d.jpg" alt="${d.nombre} en computadora" width="1180" height="740"${i?' loading="lazy"':""} decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/${d.id}-m.jpg" alt="${d.nombre} en celular" width="390" height="844"${i?' loading="lazy"':""} decoding="async"></div></figure><span class="ver">Ver ${d.nombre} →</span></a>`).join("");
+$("#flota").innerHTML=HERO.map((d,i)=>`<a class="dm" href="#p-${d.id}" data-g="${d.g}" data-n="${d.nombre}" aria-label="Ver la demo ${d.nombre}" tabindex="-1"><figure class="lap"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><em>${d.ruta}</em></div><div class="pant"><img src="assets/${d.id}-d.webp" alt="${d.nombre} en computadora" width="1180" height="740"${i?' loading="lazy"':' fetchpriority="high"'} decoding="async"></div></figure><figure class="tel"><div class="pant"><img src="assets/${d.id}-m.webp" alt="${d.nombre} en celular" width="390" height="844"${i?' loading="lazy"':""} decoding="async"></div></figure><span class="ver">Ver ${d.nombre} →</span></a>`).join("");
 $("#tabs").innerHTML=HERO.map((d,i)=>`<button type="button" role="tab" aria-selected="${i==0}" aria-label="${d.nombre}"><span>${d.nombre}</span></button>`).join("");
 
 /* filtro por categoría */
