@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="190" viewBox="0 0 1000 190" role="img" aria-label="Precios en soles, referenciales y sin IGV. Empiezas con el 50 % y el resto al entregar. Piloto gratis para 3 negocios."><style>.t{font-family:Segoe UI,Helvetica,Arial,sans-serif}
+.fl{animation:fl 5s ease-in-out infinite}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.ck{opacity:0;animation:ck 7s infinite}@keyframes ck{0%{opacity:0;transform:translateX(-10px)}8%,88%{opacity:1;transform:translateX(0)}96%,100%{opacity:0}}
+.sh{animation:sh 3.6s linear infinite}@keyframes sh{0%{transform:translateX(-340px) skewX(-20deg)}100%{transform:translateX(420px) skewX(-20deg)}}
+.pr{animation:pr 3s ease-in-out infinite}@keyframes pr{0%,100%{opacity:.85}50%{opacity:1}}
+.bd{stroke-dasharray:10 8;animation:bd 2s linear infinite}@keyframes bd{to{stroke-dashoffset:-18}}
+.pu{transform-box:fill-box;transform-origin:center;animation:pu 1.8s ease-in-out infinite}@keyframes pu{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.18) rotate(-8deg)}}</style><rect width="1000" height="190" rx="22" fill="#0e1020"/>
+<g class="t"><text x="40" y="52" font-size="18" font-weight="800" fill="#fff">📌 Cómo se paga</text>
+<text x="40" y="84" font-size="14" fill="#cbd5e1">• Empiezas con el <tspan font-weight="800" fill="#a78bfa">50 %</tspan> y el resto al entregar.</text>
+<text x="40" y="108" font-size="14" fill="#cbd5e1">• Dominio ~S/ 65 al año, a tu nombre. Alojamiento puede ser gratis.</text>
+<text x="40" y="132" font-size="14" fill="#cbd5e1">• Mantenimiento opcional desde <tspan font-weight="800" fill="#38bdf8">S/ 40 al mes</tspan>.</text>
+<text x="40" y="162" font-size="12" fill="#9aa1c4">INFO REFERENCIAL: precios sin IGV; la cotización final llega por escrito, sin costo.</text>
+<g class="fl"><rect class="bd" x="520" y="26" width="440" height="138" rx="20" fill="#fbbf24" fill-opacity=".08" stroke="#fbbf24" stroke-width="2"/>
+<g class="pu"><text x="556" y="86" font-size="38">🎁</text></g>
+<text x="612" y="68" font-size="19" font-weight="800" fill="#fde68a">Piloto gratis · 3 negocios</text>
+<text x="612" y="94" font-size="13.5" fill="#e5e7eb">Una página sencilla sin costo, a cambio</text>
+<text x="612" y="114" font-size="13.5" fill="#e5e7eb">de tu testimonio y permiso para mostrarla.</text>
+<rect x="612" y="124" width="150" height="28" rx="14" fill="#fbbf24"/><text x="687" y="143" text-anchor="middle" font-size="13" font-weight="800" fill="#422006">Quiero el piloto →</text></g></g></svg>

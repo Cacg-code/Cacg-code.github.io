@@ -50,13 +50,15 @@
 
 <h2>Precios</h2>
 
-| Paquete | Desde |
-|:-:|:-:|
-| **Básico** | S/ 450 |
-| **Profesional** | S/ 1,100 |
-| **Completo** | S/ 1,800 |
+<p align="center">
+<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20el%20paquete%20B%C3%A1sico."><img src="assets/readme/precio-1.svg" alt="Paquete Básico" width="32%"></a>
+<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20el%20paquete%20Profesional."><img src="assets/readme/precio-2.svg" alt="Paquete Profesional" width="32%"></a>
+<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20el%20paquete%20Completo."><img src="assets/readme/precio-3.svg" alt="Paquete Completo" width="32%"></a>
+</p>
 
-<sub>Mantenimiento opcional desde S/ 40 al mes. <b>INFO REFERENCIAL:</b> el precio final depende del alcance. <a href="https://cacg-code.github.io/#precios">Ver detalle</a>.<br>🎁 <b>Piloto gratis para 3 negocios</b>: una página sencilla a cambio de tu testimonio y permiso para mostrarla.</sub>
+<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20quiero%20el%20piloto%20gratis."><img src="assets/readme/precio-notas.svg" alt="Cómo se paga y piloto gratis para 3 negocios" width="100%"></a>
+
+<sub>Toca un paquete para pedirlo por WhatsApp · <a href="https://cacg-code.github.io/#precios">ver detalle en el portafolio</a></sub>
 
 <br><br>
 
