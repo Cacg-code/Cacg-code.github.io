@@ -331,7 +331,7 @@ input,select,textarea{width:100%;min-width:0}
       <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#14142a" stroke="#ffffff30"/><path d="M12 11l-5 5 5 5M20 11l5 5-5 5" stroke="#A78BFA" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span data-c="nombre">Carlo · Dev</span>
     </a>
-    <nav aria-label="Principal"><ul><li><a href="#proyectos">Proyectos</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#proceso">Proceso</a></li><li><a href="ruta/">Mi ruta</a></li><li><a href="yo/">Sobre mí</a></li></ul></nav>
+    <nav aria-label="Principal"><ul><li><a href="#proyectos">Proyectos</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#proceso">Proceso</a></li><li><a href="#precios">Precios</a></li><li><a href="ruta/">Mi ruta</a></li><li><a href="yo/">Sobre mí</a></li></ul></nav>
     <a class="btn sm" data-chat href="#">Cotizar</a>
   </div>
 </header>
@@ -399,6 +399,41 @@ input,select,textarea{width:100%;min-width:0}
         <li class="rv" style="--dl:.16s"><h3>Construyo</h3><p>Desarrollo con apoyo de IA y reviso cada detalle yo mismo. Ves avances y pides cambios antes de la entrega.</p></li>
         <li class="rv" style="--dl:.24s"><h3>Publicamos</h3><p>Dejo la página en línea, te explico cómo cambiar lo básico y sigo disponible.</p></li>
       </ol>
+    </div>
+  </section>
+
+  <section class="s" id="precios">
+    <style>
+      .tarifas{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem}
+      .tf{display:flex;flex-direction:column;padding:1.6rem;border-radius:22px;border:1px solid var(--line);background:#ffffff06}
+      .tf.dest{border-color:var(--v);background:linear-gradient(180deg,#a78bfa14,#ffffff06)}
+      .tf h3{font-size:1.5rem;margin-bottom:.3rem}
+      .tf .precio{font-family:var(--f-d);font-weight:800;font-size:2.2rem;letter-spacing:-.03em;margin:.4rem 0 .2rem}
+      .tf .precio small{font-size:.95rem;color:var(--mute);font-weight:500}
+      .tf ul{list-style:none;padding:0;margin:1rem 0 1.4rem;display:grid;gap:.5rem;color:var(--mute);font-size:.98rem}
+      .tf li::before{content:"✓";color:var(--c);margin-right:.5rem;font-weight:700}
+      .tf .btn{margin-top:auto}
+      .nota{margin-top:1.4rem;color:var(--mute);font-size:.92rem;max-width:70ch}
+      .piloto{margin-top:1.6rem;padding:1.4rem 1.6rem;border-radius:22px;border:1px dashed var(--o);background:#fbbf2410;display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
+      .piloto p{max-width:60ch;color:var(--ink)}
+      @media(max-width:900px){.tarifas{grid-template-columns:1fr}}
+    </style>
+    <div class="wrap">
+      <div class="cab rv"><h2>Precios<br><span class="grad">claros</span></h2><p>Tres paquetes de referencia. Tu cotización final llega por escrito, sin costo.</p></div>
+      <div class="tarifas">
+        <article class="tf rv"><h3>Básico</h3><p>Una página que te encuentren y te escriban.</p><div class="precio"><small>desde</small> S/ 450</div>
+          <ul><li>1 página: servicios, horarios y mapa</li><li>Botón de WhatsApp y SEO local</li><li>Perfecta en celular</li><li>Publicada en línea</li></ul>
+          <a class="btn o" href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20me%20interesa%20el%20paquete%20B%C3%A1sico%20%28landing%29." target="_blank" rel="noopener">Pedir el Básico</a></article>
+        <article class="tf dest rv" style="--dl:.08s"><h3>Profesional</h3><p>Web completa o catálogo con pedido por WhatsApp.</p><div class="precio"><small>desde</small> S/ 1,100</div>
+          <ul><li>4–5 secciones o catálogo con carrito</li><li>Pedido directo a tu WhatsApp</li><li>Diseño a tu marca</li><li>1 mes de soporte</li></ul>
+          <a class="btn v" href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20me%20interesa%20el%20paquete%20Profesional." target="_blank" rel="noopener">Pedir el Profesional</a></article>
+        <article class="tf rv" style="--dl:.16s"><h3>Completo</h3><p>Reservas, tienda o chatbot con panel.</p><div class="precio"><small>desde</small> S/ 1,800</div>
+          <ul><li>Reservas, citas o tienda con panel</li><li>Chatbot de reglas 24/7 (opcional)</li><li>Avisos por WhatsApp</li><li>Capacitación incluida</li></ul>
+          <a class="btn o" href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20me%20interesa%20el%20paquete%20Completo." target="_blank" rel="noopener">Pedir el Completo</a></article>
+      </div>
+      <p class="nota">Precios en soles, referenciales y sin IGV; dependen del alcance. Empiezas con el 50% y el resto al entregar. El alojamiento puede ser gratuito; el dominio (~S/ 65 al año) va a tu nombre. Mantenimiento opcional desde S/ 40 al mes.</p>
+      <div class="piloto rv"><p><strong>Piloto gratis para 3 negocios.</strong> Hago una página sencilla sin costo a cambio de tu testimonio y permiso para mostrar el resultado. Cupos limitados.</p>
+        <a class="btn v" href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20quiero%20el%20piloto%20gratis%20para%20mi%20negocio." target="_blank" rel="noopener">Quiero el piloto</a></div>
     </div>
   </section>
 
@@ -602,7 +637,7 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
     await bot(`<a href="#proyectos" data-ir="1">Mira las ${DEMOS.length} demos aquí</a>: ${DEMOS.map(d=>`<strong>${d.nombre}</strong>`).join(", ").replace(/, ([^,]*)$/," y $1")}. Puedes usarlas como lo haría tu cliente.`);
     chips([["Quiero algo así",inicioCot],["Otra duda",menu]])}
   async function precios(){add("u","¿Cuánto cuesta?");
-    await bot("Depende de lo que necesites: una página sencilla no cuesta lo mismo que una tienda con carrito. Carlo te responde con **precio y plazo por escrito** en tu cotización, sin costo. Para empezar se paga el **50%** y el resto al entregar.");
+    await bot("Referencia: **Básico desde S/ 450** (una página), **Profesional desde S/ 1,100** (web o catálogo) y **Completo desde S/ 1,800** (reservas, tienda o chatbot). Carlo te da **precio y plazo por escrito** en tu cotización, sin costo. Hay un **piloto gratis** para 3 negocios. Para empezar se paga el **50%** y el resto al entregar.");
     chips([["Quiero mi cotización",inicioCot],["Otra duda",menu]])}
   async function proceso(){add("u","¿Cómo trabajas?");
     await bot("Cuatro pasos: **1)** conversamos sobre tu negocio, **2)** recibes cotización y plazo por escrito, **3)** construyo y ves avances, **4)** publicamos y te explico cómo cambiar lo básico.");
