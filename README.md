@@ -17,10 +17,9 @@
 
 <br><br>
 
-<a href="https://www.linkedin.com/in/carlo-andre-chiuyare-guillen-916944224"><img src="assets/readme/btn-linkedin.svg" alt="LinkedIn" width="23%"></a>
-<a href="https://github.com/Cacg-code"><img src="assets/readme/btn-github.svg" alt="GitHub" width="23%"></a>
-<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina%20web."><img src="assets/readme/btn-whatsapp.svg" alt="WhatsApp" width="23%"></a>
-<a href="mailto:chiuyareguillendev@gmail.com"><img src="assets/readme/btn-gmail.svg" alt="Correo" width="23%"></a>
+<a href="https://www.linkedin.com/in/carlo-andre-chiuyare-guillen-916944224"><picture><source media="(max-width: 600px)" srcset="assets/readme/m-redes-m.svg"><img src="assets/readme/m-redes-d.svg" alt="LinkedIn, GitHub, WhatsApp y correo" width="92%"></picture></a>
+
+<sub><a href="https://www.linkedin.com/in/carlo-andre-chiuyare-guillen-916944224">LinkedIn</a> · <a href="https://github.com/Cacg-code">GitHub</a> · <a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20una%20p%C3%A1gina%20web.">WhatsApp</a> · <a href="mailto:chiuyareguillendev@gmail.com">Correo</a></sub>
 
 <br><br>
 
@@ -51,10 +50,10 @@
 <h2>Precios</h2>
 
 <p align="center">
-<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20el%20paquete%20B%C3%A1sico."><img src="assets/readme/precio-1.svg" alt="Paquete Básico" width="32%"></a>
-<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20el%20paquete%20Profesional."><img src="assets/readme/precio-2.svg" alt="Paquete Profesional" width="32%"></a>
-<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20el%20paquete%20Completo."><img src="assets/readme/precio-3.svg" alt="Paquete Completo" width="32%"></a>
+<a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20el%20paquete%20B%C3%A1sico."><picture><source media="(max-width: 600px)" srcset="assets/readme/m-precios-m.svg"><img src="assets/readme/m-precios-d.svg" alt="Paquetes Básico, Profesional y Completo" width="100%"></picture></a>
 </p>
+
+<p align="center"><sub>Quiero el paquete: <a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20el%20paquete%20B%C3%A1sico.">Básico</a> · <a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20el%20paquete%20Profesional.">Profesional</a> · <a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20vi%20tu%20portafolio%20y%20quiero%20el%20paquete%20Completo.">Completo</a></sub></p>
 
 <a href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20quiero%20el%20piloto%20gratis."><img src="assets/readme/precio-notas.svg" alt="Cómo se paga y piloto gratis para 3 negocios" width="100%"></a>
 
