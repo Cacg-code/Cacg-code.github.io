@@ -64,7 +64,7 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;padding:.8rem 0;pointer-events
 .nav ul{display:flex;gap:.2rem;list-style:none;padding:0}
 .nav ul a{text-decoration:none;color:var(--mute);font-weight:500;padding:.5rem .9rem;border-radius:99px;transition:color .2s,background .2s}
 .nav ul a:hover{color:var(--ink);background:#ffffff12}
-@media(max-width:760px){.nav ul{display:none}}
+@media(max-width:760px){.nav{flex-wrap:wrap;row-gap:.35rem;border-radius:26px;padding:.5rem .6rem .45rem 1rem}.nav nav{order:3;flex:0 0 100%;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}.nav nav::-webkit-scrollbar{display:none}.nav ul a{display:block;white-space:nowrap;padding:.4rem .75rem;font-size:.88rem}.nav ul{padding-right:1.5rem}}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:50px;padding:.7rem 1.5rem;border-radius:999px;font:inherit;font-weight:700;text-decoration:none;border:0;cursor:pointer;color:#0A0A12;background:var(--ink);position:relative;transition:transform .25s,box-shadow .25s;isolation:isolate}
 .btn::before{content:"";position:absolute;inset:-2px;border-radius:inherit;background:linear-gradient(100deg,var(--v),var(--p),var(--o));z-index:-1;opacity:0;transition:opacity .3s;filter:blur(14px)}
@@ -304,7 +304,7 @@ html.chat-open,html.chat-open body{overflow:hidden;overscroll-behavior:none}
 .movil .cubre{display:none}
 input,select,textarea{width:100%;min-width:0}
 @media(max-width:700px){
-  .hero{min-height:auto;padding:6.5rem 0 2.2rem}
+  .hero{min-height:auto;padding:9rem 0 2.2rem}
   .hero .fila{margin-top:1.6rem}
   .acciones .btn{flex:1 1 auto}
   .marq{margin-top:1.5rem}
