@@ -526,7 +526,11 @@ const DEMOS=[
  {id:"estudio",cat:"marca",nombre:"Atelier Norte",tipo:"Estudio de fotografía y marca",g:"#C8553D",url:"estudio/",ruta:"cacg-code.github.io/estudio",
   txt:"Presencia y marca para un estudio creativo: portafolio con filtros y visor, paquetes que abren WhatsApp con el mensaje armado, un generador que muestra cómo se vería tu marca y un link en bio para el celular.",
   tech:["html","css","js","wa"],
-  tags:["Personaliza con tu negocio","Quiz de paquete y cotizador","Reserva con calendario","Feed de Instagram y tips"]}
+  tags:["Personaliza con tu negocio","Quiz de paquete y cotizador","Reserva con calendario","Feed de Instagram y tips"]},
+ {id:"profe-carlo",cat:"gestion",nombre:"Profe Carlo",tipo:"Clases particulares de matemáticas",g:"#2436FF",url:"/profe-carlo/",ruta:"cacg-code.github.io/profe-carlo",codigo:"https://github.com/Cacg-code/profe-carlo",
+  txt:"Mi propio servicio de clases, en uso real: mini clase con un sólido en 3D que se gira con el dedo, temas por grado y un test de ingreso gratis que cambia en cada intento, explica cada error y guarda el resultado en una hoja de Google con aviso por correo.",
+  tech:["html","css","js","wa"],
+  tags:["Test por grado con revisión de errores","Resultados en Google Sheets","Mini clase en 3D","Contacto directo por WhatsApp"]}
 ];
 DEMOS.sort((a,b)=>CATS.findIndex(c=>c.id===a.cat)-CATS.findIndex(c=>c.id===b.cat));
 /* la cantidad de demos sale de DEMOS: al añadir una, todo se actualiza solo */
