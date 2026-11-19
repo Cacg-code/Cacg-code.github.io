@@ -446,9 +446,9 @@ input,select,textarea{width:100%;min-width:0}
           <ul><li>Reservas, citas o tienda con panel</li><li>Chatbot de reglas 24/7 (opcional)</li><li>Avisos por WhatsApp</li><li>Capacitación incluida</li></ul>
           <a class="btn o" href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20me%20interesa%20el%20paquete%20Completo." target="_blank" rel="noopener">Pedir el Completo</a></article>
       </div>
-      <p class="nota">Precios en soles, referenciales y sin IGV; dependen del alcance. Empiezas con el 50% y el resto al entregar. El alojamiento puede ser gratuito; el dominio (~S/ 65 al año) va a tu nombre. Mantenimiento opcional desde S/ 40 al mes.</p>
-      <div class="piloto rv"><p><strong>Piloto gratis para 3 negocios.</strong> Hago una página sencilla sin costo a cambio de tu testimonio y permiso para mostrar el resultado. Cupos limitados.</p>
-        <a class="btn v" href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20quiero%20el%20piloto%20gratis%20para%20mi%20negocio." target="_blank" rel="noopener">Quiero el piloto</a></div>
+      <p class="nota">Precios en soles, referenciales y sin IGV; dependen del alcance. Empiezas con el 50% y el resto al entregar. El alojamiento puede ser gratuito; el dominio (~S/ 65 al año) va a tu nombre. Mantenimiento opcional: S/ 50 al mes (alojamiento, copia de seguridad y hasta 3 cambios) o Plus S/ 90 (cambios cada semana, chatbot activo y reporte mensual). El primer mes de mantenimiento va gratis.</p>
+      <div class="piloto rv"><p><strong>Piloto a S/ 100 para 3 negocios.</strong> Una página sencilla a precio de lanzamiento, a cambio de tu testimonio y permiso para mostrar el resultado. Cupos limitados. ¿Necesitas algo rápido después? La versión Express sale desde S/ 250.</p>
+        <a class="btn v" href="https://wa.me/51991053535?text=Hola%20Carlo%2C%20quiero%20el%20piloto%20de%20S%2F%20100%20para%20mi%20negocio." target="_blank" rel="noopener">Quiero el piloto</a></div>
     </div>
   </section>
 
@@ -656,7 +656,7 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
     await bot(`<a href="#proyectos" data-ir="1">Mira las ${DEMOS.length} demos aquí</a>: ${DEMOS.map(d=>`<strong>${d.nombre}</strong>`).join(", ").replace(/, ([^,]*)$/," y $1")}. Puedes usarlas como lo haría tu cliente.`);
     chips([["Quiero algo así",inicioCot],["Otra duda",menu]])}
   async function precios(){add("u","¿Cuánto cuesta?");
-    await bot("Referencia: **Básico desde S/ 450** (una página), **Profesional desde S/ 1,100** (web o catálogo) y **Completo desde S/ 1,800** (reservas, tienda o chatbot). Carlo te da **precio y plazo por escrito** en tu cotización, sin costo. Hay un **piloto gratis** para 3 negocios. Para empezar se paga el **50%** y el resto al entregar.");
+    await bot("Referencia: **Básico desde S/ 450** (una página), **Profesional desde S/ 1,100** (web o catálogo) y **Completo desde S/ 1,800** (reservas, tienda o chatbot). Carlo te da **precio y plazo por escrito** en tu cotización, sin costo. Hay un **piloto a S/ 100** para 3 negocios y una versión **Express desde S/ 250**. Para empezar se paga el **50%** y el resto al entregar.");
     chips([["Quiero mi cotización",inicioCot],["Otra duda",menu]])}
   async function proceso(){add("u","¿Cómo trabajas?");
     await bot("Cuatro pasos: **1)** conversamos sobre tu negocio, **2)** recibes cotización y plazo por escrito, **3)** construyo y ves avances, **4)** publicamos y te explico cómo cambiar lo básico.");
@@ -718,7 +718,7 @@ document.querySelectorAll(".bx").forEach(b=>b.addEventListener("pointermove",e=>
     [/(demo|ejemplo|portafolio|trabajos|proyectos)/i,()=>demos()],
     [/(pago|pagar|adelanto|yape|transferencia|factura)/i,async()=>{await bot("Se paga el **50% para empezar** y el resto al entregar. Los medios de pago se coordinan por WhatsApp.");chips([["Quiero cotizar",inicioCot],["Otra duda",menu]])}],
     [/(dominio|hosting|publicar|alojamiento)/i,async()=>{await bot("Sí, te dejo la página publicada y te explico lo del dominio y el hosting. Los costos se detallan en la cotización.");chips([["Quiero cotizar",inicioCot],["Otra duda",menu]])}],
-    [/(mantenimiento|cambios|actualiz|soporte)/i,async()=>{await bot("Después de entregar sigo disponible para cambios y mejoras. Se acuerda según lo que necesites.");chips([["Quiero cotizar",inicioCot],["Otra duda",menu]])}],
+    [/(mantenimiento|cambios|actualiz|soporte)/i,async()=>{await bot("Después de entregar sigo disponible para cambios y mejoras. Mantenimiento: **S/ 50 al mes** (alojamiento, copia de seguridad y hasta 3 cambios) o **Plus S/ 90** (cambios cada semana, chatbot activo y reporte). El **primer mes va gratis**.");chips([["Quiero cotizar",inicioCot],["Otra duda",menu]])}],
     [/(\bia\b|inteligencia|robot|\bbot\b|chatgpt|claude)/i,()=>ia()],
     [/(cotiz|presupuesto|quiero una|necesito|contratar)/i,()=>inicioCot()],
     [/(whatsapp|contacto|hablar|llamar|persona|carlo)/i,async()=>{await bot("Claro, te paso con Carlo.");chips([["Abrir WhatsApp",handoff,"wa"],["Seguir aquí",menu]])}],
